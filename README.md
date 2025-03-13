@@ -1,3 +1,3 @@
 # vitalfit-bot
 
-## Tutorial: https://www.youtube.com/watch?v=LLW0RdJF6J0
+## Tutorial: https://bot-whatsapp.netlify.app/docs/
