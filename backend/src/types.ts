@@ -16,3 +16,8 @@ export interface Usuario {
 export interface Horario {
   [key: tiempo]: string[];
 }
+
+export interface Reserva {
+  hora: string;
+  usuario: string; 
+}
