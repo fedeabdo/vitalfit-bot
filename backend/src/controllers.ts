@@ -147,16 +147,12 @@ export class ReservaController {
 
   // Agregar reserva
   static addReserva(req: Request<{}, {}, Reserva>, res: Response): void {
-    console.log(req.body);
     const { hora, usuario } = req.body;
-
-    console.log(hora)
 
     if (!ReservaController.reservas[hora]) {
       res.status(400).json({ error: 'Horario de reserva invalido' });
     }
 
-    // Optional: prevent double booking
     const usuarioYaReservado = Object.values(ReservaController.reservas)
     .flat()
     .some(r => r.usuario === usuario);
@@ -169,13 +165,42 @@ export class ReservaController {
     res.status(201).json({ message: 'Reserva agregada ', hora, usuario });
   }
 
-  // Clear all reservations daily at 22:00
+  //Borrar reserva
+  static deleteReserva(req: Request<{}, {}, Reserva>, res: Response): void {
+    const { hora, usuario } = req.body;
+
+    if (!ReservaController.reservas[hora]) {
+      res.status(400).json({ error: 'Horario de reserva invalido' });
+    }
+
+    const usuarioYaReservado = Object.values(ReservaController.reservas)
+    .flat()
+    .some(r => r.usuario === usuario);
+  
+    if (usuarioYaReservado) {
+      const index = ReservaController.reservas[hora].findIndex(r => 
+        r.hora === hora && r.usuario === usuario
+      );
+
+      if (index !== -1) {
+        ReservaController.reservas[hora].splice(index, 1);
+      } else {
+        res.status(400).json({ error: 'El usuario no tiene una reserva' });
+      }
+    }
+    
+    res.status(204).json({ message: 'Reserva agregada ', hora, usuario });
+  }
+
+  // Borrar todas las reservas a las 22:00 CRON
   static configurarReseteoDiario() {
     cron.schedule('0 22 * * *', () => {
       console.log('Reseteando reservas a las 22:00...');
       ReservaController.inicializarHorariosDiarios();
     });
   }
+
+
 }
 
 // Initialize once at server startup

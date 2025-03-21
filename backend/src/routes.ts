@@ -10,6 +10,7 @@ router.get('/horarios', HorariosController.getHorarios);
 
 router.get('/reserva', ReservaController.getReservas);
 router.post('/reserva', ReservaController.addReserva);
+router.delete('/reserva',ReservaController.deleteReserva);
 
 
 export default router;
