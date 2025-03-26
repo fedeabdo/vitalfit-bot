@@ -7,6 +7,8 @@ router.get('/usuarios', UsuariosController.getUsuarios);
 router.post('/usuarios', UsuariosController.addUsuario);
 
 router.get('/horarios', HorariosController.getHorarios);
+router.post('/horarios', HorariosController.addHorario);
+router.delete('/horarios', HorariosController.deleteHorario);
 
 router.get('/reserva', ReservaController.getReservas);
 router.post('/reserva', ReservaController.addReserva);

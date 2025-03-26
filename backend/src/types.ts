@@ -1,4 +1,4 @@
-type Dia = 
+export type Dia = 
   | "Lunes" 
   | "Martes" 
   | "Miércoles" 
@@ -7,7 +7,7 @@ type Dia =
   | "Sábado" 
   | "Domingo";
 
-type tiempo = `${Dia}-${string}`;
+export type tiempo = `${Dia}-${string}`;
 
 export interface Usuario {
     nombre: string;

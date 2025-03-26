@@ -14,11 +14,17 @@
 #### body: {"nombre": "ejemplo", "ci": 1234567}
 ### GET: /horarios
 #### devuelve todos los horarios prioritarios y los usuarios anotados a ellos
+### POST: /horarios
+#### agrega un nuevo horario prioritario, con usuarios incluidos opcionalmente
+#### body: {"Lunes-5:00": "" } o {"Lunes-5:00": ["Franco Gargaglioni", "Federico Abdo"]}
+### DELETE: /horarios
+#### borra un horario prioritario existente
+#### body: {"horario":"Lunes-8:00"}
 ### GET: /reservas
 #### devuelve todas las reservas de el dia actual
 ### POST: /reservas
 #### agrega una reserva a un horario especifico
 #### body: {"hora": "20:30", "usuario": "Franco Gargaglioni"}
 ### DELETE: /reservas
-#### Borra una reserva de un usuario especifico
+#### borra una reserva de un usuario especifico
 #### body: {"hora": "20:30", "usuario": "Franco Gargaglioni"}
