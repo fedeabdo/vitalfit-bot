@@ -4,9 +4,11 @@ import path from 'path';
 import cron from 'node-cron';
 import { Reserva } from '../types';
 import { Horario} from '../types'
+import { UsuariosController } from './UsuariosController';
 
 export class ReservaController {
     private static reservas: Record<string, Reserva[]> = {};
+    static readonly MAX_RESERVAS_POR_HORARIO = 9;
   
     //ToDo acoplamiento cambiar esto
     private static readonly DATA_PATH_HORARIOS = path.join(__dirname, '../data/HorariosPrioritarios.json');
@@ -48,18 +50,23 @@ export class ReservaController {
     }
   
     // Agregar reserva
-    static addReserva(req: Request<{}, {}, Reserva>, res: Response): void {
+    static async addReserva(req: Request<{}, {}, Reserva>, res: Response): Promise<void> {
       const hora  = req.body.hora;
       const usuario = req.body.usuario;
 
-      console.log(usuario);
+      if (!(await UsuariosController.usuarioExiste(usuario))){
+        res.status(403).json({ error: `El usuario ${usuario} no existe` });
+        return;
+      }
   
       if (!ReservaController.reservas[hora]) {
         res.status(400).json({ error: 'Horario de reserva invalido' });
+        return;
       }
       
       if (!usuario){
         res.status(400).json({ error: 'Usuario invalido' });
+        return;
       }
 
       const usuarioYaReservado = Object.values(ReservaController.reservas)
@@ -68,7 +75,14 @@ export class ReservaController {
     
       if (usuarioYaReservado) {
         res.status(409).json({ error: 'El usuario ya tiene una reserva en otro horario' });
+        return;
       }
+
+      if (ReservaController.reservas[hora].length >= (ReservaController.MAX_RESERVAS_POR_HORARIO)) {
+        res.status(403).json({ error: `Este horario ya esta lleno (maximo ${ReservaController.MAX_RESERVAS_POR_HORARIO} reservas)` });
+        return;
+      }
+
   
       ReservaController.reservas[hora].push({ hora, usuario });
       res.status(201).json({ message: 'Reserva agregada ', hora, usuario });
@@ -80,6 +94,7 @@ export class ReservaController {
   
       if (!ReservaController.reservas[hora]) {
         res.status(400).json({ error: 'Horario de reserva invalido' });
+        return;
       }
   
       const usuarioYaReservado = Object.values(ReservaController.reservas)
@@ -95,6 +110,7 @@ export class ReservaController {
           ReservaController.reservas[hora].splice(index, 1);
         } else {
           res.status(400).json({ error: 'El usuario no tiene una reserva' });
+          return;
         }
       }
       
@@ -108,6 +124,7 @@ export class ReservaController {
         ReservaController.inicializarHorariosDiarios();
       });
     }
+
   
   
   }

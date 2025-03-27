@@ -16,6 +16,7 @@ export class UsuariosController {
       res.json(usuarios);
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch Usuarios' });
+      return;
     }
   }
 
@@ -35,6 +36,7 @@ export class UsuariosController {
       res.status(201).json(newUsuario);
     } catch (error) {
       res.status(500).json({ error: 'Failed to create Usuario' });
+      return;
     }
   }
 
@@ -51,13 +53,23 @@ export class UsuariosController {
       const filteredUsuarios = Usuarios.filter(u => u.nombre !== nombreUsuario);
       if (Usuarios.length === filteredUsuarios.length) {
         res.status(404).json({ error: `Usuario ${nombreUsuario} no encontrado`});
+        return;
       }
 
       await fs.writeFile(UsuariosController.DATA_PATH, JSON.stringify(filteredUsuarios, null, 2));
       res.sendStatus(204);
     } catch (error) {
       res.status(500).json({ error: 'Error al borrar usuario' });
+      return;
     }
+  }
+
+  // Checkea si el usuario existe
+  static  async usuarioExiste(usuario : string) {
+    const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
+    let Usuarios: Usuario[] = JSON.parse(data);
+    const filteredUsuarios = Usuarios.filter(u => u.nombre !== usuario);
+    return Usuarios.length != filteredUsuarios.length;
   }
 
     // Updatear usuario

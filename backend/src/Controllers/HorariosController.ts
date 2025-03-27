@@ -15,7 +15,8 @@ export class HorariosController {
             const horarios: Horario[] = JSON.parse(data);
             res.json(horarios);
         } catch (error) {
-            res.status(500).json({ error: 'Failed to fetch Usuarios' });
+            res.status(500).json({ error: 'Error al imprimir usuarios' });
+            return;
         }
     }
 
@@ -60,6 +61,7 @@ export class HorariosController {
         res.status(201).json(horario);
       } catch (error) {
           res.status(500).json({ error: 'Error al agregar un nuevo horario' });
+          return;
       }
   }
 
@@ -93,6 +95,7 @@ export class HorariosController {
       res.sendStatus(204);
     } catch (error) {
       res.status(500).json({ error: 'Error al borrar horario' });
+      return;
     }
   }
 
