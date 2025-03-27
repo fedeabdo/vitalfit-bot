@@ -15,6 +15,7 @@
 ### DELETE: /usuarios
 #### borra un usuario
 #### body: {"nombre": "Franco Gargaglioni"}
+## Horarios:
 ### GET: /horarios
 #### devuelve todos los horarios prioritarios y los usuarios anotados a ellos
 ### POST: /horarios
@@ -23,6 +24,7 @@
 ### DELETE: /horarios
 #### borra un horario prioritario existente
 #### body: {"horario":"Lunes-8:00"}
+## Reservas:
 ### GET: /reservas
 #### devuelve todas las reservas de el dia actual
 ### POST: /reservas
