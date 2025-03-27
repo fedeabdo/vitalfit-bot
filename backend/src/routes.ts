@@ -1,18 +1,21 @@
 import { Router } from 'express';
-import { HorariosController, ReservaController, UsuariosController,  } from './controllers';
+import {UsuariosController} from './Controllers/UsuariosController';
+import {HorariosController} from './Controllers/HorariosController';
+import {ReservaController} from './Controllers/ReservasController';
 
 const router = Router();
 
 router.get('/usuarios', UsuariosController.getUsuarios);
 router.post('/usuarios', UsuariosController.addUsuario);
+router.delete('/usuarios', UsuariosController.deleteUsuario);
 
 router.get('/horarios', HorariosController.getHorarios);
 router.post('/horarios', HorariosController.addHorario);
 router.delete('/horarios', HorariosController.deleteHorario);
 
-router.get('/reserva', ReservaController.getReservas);
-router.post('/reserva', ReservaController.addReserva);
-router.delete('/reserva',ReservaController.deleteReserva);
+router.get('/reservas', ReservaController.getReservas);
+router.post('/reservas', ReservaController.addReserva);
+router.delete('/reservas', ReservaController.deleteReserva);
 
 
 export default router;

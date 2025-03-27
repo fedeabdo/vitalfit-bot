@@ -12,6 +12,9 @@
 ### POST: /usuarios
 #### agrega un usuario
 #### body: {"nombre": "ejemplo", "ci": 1234567}
+### DELETE: /usuarios
+#### borra un usuario
+#### body: {"nombre": "Franco Gargaglioni"}
 ### GET: /horarios
 #### devuelve todos los horarios prioritarios y los usuarios anotados a ellos
 ### POST: /horarios
