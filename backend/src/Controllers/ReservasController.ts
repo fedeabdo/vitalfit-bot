@@ -84,6 +84,13 @@ export class ReservaController {
         return;
       }
 
+   
+
+      if (ReservaController.esPrevioAHoraActual(hora)){
+        res.status(403).json({ error: `No se pueden reservar horarios previos a la hora actual` });
+        return;
+      }
+
       // calculo de usuario prioritario (se podría mover a otra funcion, pero coso)
 
       const dia =  new Date();
@@ -167,6 +174,15 @@ export class ReservaController {
       return minutosAReserva - minutosActuales;
     }
 
+    static esPrevioAHoraActual(tiempoStr: string): boolean {
+      const [hora, minuto] = tiempoStr.split(":").map(Number);
+      const ahora = new Date();
+    
+      const minutosAhora = ahora.getHours() * 60 + ahora.getMinutes();
+      const minutosTarget = hora * 60 + minuto;
+    
+      return minutosTarget < minutosAhora;
+    }
   
   
   }
