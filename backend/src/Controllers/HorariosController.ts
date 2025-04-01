@@ -99,4 +99,18 @@ export class HorariosController {
     }
   }
 
+  static async usuarioPrioritario(usuario: string, dia: string) : Promise<boolean> {
+    try {
+      const data = await fs.readFile(HorariosController.DATA_PATH_HORARIOS, 'utf-8');
+      const horarios: Horario = JSON.parse(data);
+      
+      return Object.entries(horarios).some(
+        ([key, value]: [string, string[]]) =>
+          key.toLowerCase().startsWith(dia) && value.includes(usuario)
+      );
+    } catch (error) {
+      throw error;
+    }
+  }
+
 }

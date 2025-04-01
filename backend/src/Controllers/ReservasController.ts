@@ -5,6 +5,7 @@ import cron from 'node-cron';
 import { Reserva } from '../types';
 import { Horario} from '../types'
 import { UsuariosController } from './UsuariosController';
+import { HorariosController } from './HorariosController';
 
 export class ReservaController {
     private static reservas: Record<string, Reserva[]> = {};
@@ -74,7 +75,7 @@ export class ReservaController {
       .some(r => r.usuario === usuario);
     
       if (usuarioYaReservado) {
-        res.status(409).json({ error: 'El usuario ya tiene una reserva en otro horario' });
+        res.status(409).json({ error: 'El usuario ya tiene una reserva' });
         return;
       }
 
@@ -83,9 +84,37 @@ export class ReservaController {
         return;
       }
 
-  
-      ReservaController.reservas[hora].push({ hora, usuario });
-      res.status(201).json({ message: 'Reserva agregada ', hora, usuario });
+      // calculo de usuario prioritario (se podría mover a otra funcion, pero coso)
+
+      const dia =  new Date();
+      const diaActual = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(dia);
+      const horarioAChequear = diaActual + "-" + hora;
+
+      const horarioPrioritario = await ReservaController.chequeoHorarioPrioritario(usuario, horarioAChequear);
+
+      if (horarioPrioritario) { 
+        ReservaController.reservas[hora].push({ hora, usuario });
+        res.status(201).json({ message: 'Reserva agregada ', hora, usuario });
+        return;
+      } else {
+        const diffHoraEnMin = ReservaController.calcularDiffHorarioEnMin(hora);
+        // si diff <= 240 min aka 4hs
+        if (diffHoraEnMin <= 240){
+          // Chequear con nando
+          if (ReservaController.reservas[hora].length >= (ReservaController.MAX_RESERVAS_POR_HORARIO - 3)) {
+            res.status(403).json({ error: `Este horario ya esta lleno (maximo ${ReservaController.MAX_RESERVAS_POR_HORARIO} reservas)` });
+            return;
+          }
+          ReservaController.reservas[hora].push({ hora, usuario });
+          res.status(201).json({ message: 'Reserva agregada ', hora, usuario });
+          return;
+        } else {
+          res.status(403).json({ error: `Usuario no prioritario, debe esperar para reservar (4 horas antes o menos)` });
+          return;
+        }
+      }
+
+
     }
   
     //Borrar reserva
@@ -123,6 +152,19 @@ export class ReservaController {
         console.log('Reseteando reservas a las 22:00...');
         ReservaController.inicializarHorariosDiarios();
       });
+    }
+
+    static async chequeoHorarioPrioritario(usuario: string, dia:string): Promise<boolean>{
+      return await HorariosController.usuarioPrioritario(usuario, dia);
+    }
+
+    static calcularDiffHorarioEnMin(horaReq: string){
+      const [hora, minuto] = horaReq.split(":").map(Number);
+      const ahora = new Date();
+      const minutosActuales = ahora.getHours() * 60 + ahora.getMinutes();
+      const minutosAReserva = hora * 60 + minuto;
+
+      return minutosAReserva - minutosActuales;
     }
 
   
