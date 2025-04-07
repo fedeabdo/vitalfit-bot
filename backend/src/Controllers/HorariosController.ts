@@ -37,25 +37,25 @@ export class HorariosController {
         }
 
         const key = keys[0];
-        const usuario:string[] = raw[key];
+        const usuarios:string[] = raw[key];
 
         if (!HorariosController.isTiempo(key)) {
           throw new Error(`Formato de horario invalido: ${key}`);
         }
 
-        if (usuario.length != 0)  {
-          if (!Array.isArray(usuario) || !usuario.every(v => typeof v === "string")) {
+        if (usuarios.length != 0)  {
+          if (!Array.isArray(usuarios) || !usuarios.every(v => typeof v === "string")) {
             throw new Error(`Valor invalido de usuario para horario ${key}, expected string[]`);
           }
         }
 
         const horario: Horario = {
-          [key]: usuario
+          [key]: usuarios
         };
 
         const data = await fs.readFile(HorariosController.DATA_PATH_HORARIOS, 'utf-8');
         const horarios: Horario = JSON.parse(data);
-        horarios[key]= usuario;
+        horarios[key]= usuarios;
 
         await fs.writeFile(HorariosController.DATA_PATH_HORARIOS, JSON.stringify(horarios, null, 2));
         res.status(201).json(horario);

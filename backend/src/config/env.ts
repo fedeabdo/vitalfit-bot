@@ -12,7 +12,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 // Validate and export
 export const config: Environment = {
-  PORT: Number(process.env.PORT) || 5000,
+  PORT: Number(process.env.PORT) || 5100,
   NODE_ENV: (process.env.NODE_ENV as Environment['NODE_ENV']) || 'development',
   IS_PRODUCTION: (process.env.NODE_ENV === 'production')
 };

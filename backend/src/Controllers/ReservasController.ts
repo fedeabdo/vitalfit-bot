@@ -31,18 +31,56 @@ export class ReservaController {
         }
       
         return Array.from(uniqueHours);
-    } catch (error) {
-        throw error
+      } catch (error) {
+          throw error
+      }
     }
+
+    private static async  getHorariosDispniblesMañana() {
+      try {
+        const data = await fs.readFile(ReservaController.DATA_PATH_HORARIOS, 'utf-8');
+        const horarios: Horario[] = JSON.parse(data);
+        const uniqueHours = new Set<string>();
+        const fechaManana = new Date();
+        fechaManana.setDate(fechaManana.getDate() + 1);  // Add 1 day to current date
+        const diaManana = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(fechaManana);
+  
+        for (const key in horarios) {
+          if (key.toLowerCase().includes(diaManana)) {
+            const parts = key.split('-');
+            if (parts.length === 2) {
+              uniqueHours.add(parts[1]); // e.g., "800", "900"
+            }
+          }
+        }
+      
+        return Array.from(uniqueHours);
+      } catch (error) {
+          throw error
+      }
     }
   
     static async inicializarHorariosDiarios(): Promise<void> {
       console.log("INICIALIZANDO HORARIOS");
-      const horas: string[] = await this.getHorariosDispniblesHoy();
-      ReservaController.reservas = {};
-      horas.forEach(hour => {
-        ReservaController.reservas[hour] = [];
-      });
+
+      const now = new Date();
+      const horaActual = now.getHours();
+      const minutosActuales = now.getMinutes();
+
+      if  (horaActual > 20 || (horaActual === 20 && minutosActuales >= 30)){
+        const horas: string[] = await this.getHorariosDispniblesMañana();
+        ReservaController.reservas = {};
+        horas.forEach(hour => {
+          ReservaController.reservas[hour] = [];
+        });
+
+      } else {
+        const horas: string[] = await this.getHorariosDispniblesHoy();
+        ReservaController.reservas = {};
+        horas.forEach(hour => {
+          ReservaController.reservas[hour] = [];
+        });
+      }
     }
   
     // Impimir reservas
@@ -54,6 +92,8 @@ export class ReservaController {
     static async addReserva(req: Request<{}, {}, Reserva>, res: Response): Promise<void> {
       const hora  = req.body.hora;
       const usuario = req.body.usuario;
+
+      console.log(req.body);
 
       if (!(await UsuariosController.usuarioExiste(usuario))){
         res.status(403).json({ error: `El usuario ${usuario} no existe` });
@@ -153,10 +193,10 @@ export class ReservaController {
       res.status(204).json({ message: 'Reserva agregada ', hora, usuario });
     }
   
-    // Borrar todas las reservas a las 22:00 CRON
+    // Borrar todas las reservas a las 20:30 CRON
     static configurarReseteoDiario() {
-      cron.schedule('0 22 * * *', () => {
-        console.log('Reseteando reservas a las 22:00...');
+      cron.schedule('30 20 * * *', () => {
+        console.log('Reseteando reservas a las 20:30...');
         ReservaController.inicializarHorariosDiarios();
       });
     }
