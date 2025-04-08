@@ -2,6 +2,7 @@ import styles from '../css/Horarios.module.css'
 
 import { useLoaderData } from 'react-router-dom';
 import { HorarioJson } from '../types/types';
+import Font from 'react-font'
 
 import List from '../components/List';
 
@@ -12,7 +13,9 @@ export default function Horarios(){
     return (
         <div className={styles.fullPage}>
             <div className={styles.container}>
-                <h2>HORARIOS</h2>
+                <Font family='Bungee Inline'>
+                    <h2>Horarios</h2>
+                </Font>
                 <List<HorarioJson>
                 renderItem={(horario: HorarioJson) => (
                     <div>

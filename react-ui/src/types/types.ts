@@ -26,3 +26,8 @@ export interface HorarioJson {
   diaHora: string;
   usuarios: string[];
 }
+
+export type HoraUsuarios = {
+  hora: string;
+  usuarios: string[];
+};

@@ -1,6 +1,8 @@
 import React from 'react';
-import { Reserva, HorarioJson} from '../types/types';
+import { Reserva, HorarioJson, HoraUsuarios} from '../types/types';
 import styles from '../css/List.module.css';
+
+import Font from 'react-font'
 
 interface ListProps<T> {
   data: T[];
@@ -16,33 +18,34 @@ function List<T>({ data, renderItem }: ListProps<T>) {
   }
 
   return (
-    <ul className={styles.list}>
-      {data.map((item, index) => (
-        <li key={index} className={styles.listItem}>
-          {renderItem(item)}
-        </li>
-      ))}
-    </ul>
+    <Font family='Lexend'>
+      <ul className={styles.list}>
+        {data.map((item, index) => (
+            <li key={index} className={styles.listItem}>
+              {renderItem(item)}
+            </li>
+        ))}
+      </ul>
+    </Font>
   );
 }
 
 export default List;
-export const reservasLoader = async (): Promise<Reserva[]> => {
-    const response = await fetch('http://localhost:5100/api/reservas');
-    const data: ReservasAPIResponse = await response.json();
+export const reservasLoader = async (): Promise<HoraUsuarios[]> => {
+  const response = await fetch('http://localhost:5100/api/reservas');
+  const data: ReservasAPIResponse = await response.json();
 
-    const reservas: Reserva[] = Object.entries(data).flatMap(
-      ([hora, reservasPorHora]) =>
-        reservasPorHora.length > 0
-          ? reservasPorHora.map((r: any) => ({
-              hora,
-              usuario: r.usuario
-            }))
-          : [{ hora, usuario: 'No hay reservas' }]
-    );
 
-    return reservas;
-}
+  const reservas: HoraUsuarios[] = Object.entries(data).map(([hora, reservasPorHora]) => {
+    const usuarios = reservasPorHora.map((reserva: Reserva) => reserva.usuario);
+    return {
+      hora,
+      usuarios: usuarios.length > 0 ? usuarios : ["No hay reservas"]
+    };
+  });
+
+  return reservas;
+};
 
 
 export const usuariosLoader = async () => {
