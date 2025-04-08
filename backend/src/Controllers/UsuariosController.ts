@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import fs from 'fs/promises';
 import path from 'path';
-import {Usuario} from '../types'
+import { Usuario } from '../types'
 
 
 export class UsuariosController {
@@ -31,7 +31,7 @@ export class UsuariosController {
       const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
       const Usuarios: Usuario[] = JSON.parse(data);
       Usuarios.push(newUsuario);
-    
+
       await fs.writeFile(UsuariosController.DATA_PATH, JSON.stringify(Usuarios, null, 2));
       res.status(201).json(newUsuario);
     } catch (error) {
@@ -41,18 +41,18 @@ export class UsuariosController {
   }
 
   // Borrar Usuario
-  static async deleteUsuario(req: Request<{nombre:string}, {}>, res: Response): Promise<void> {
+  static async deleteUsuario(req: Request<{ nombre: string }, {}>, res: Response): Promise<void> {
     try {
 
-        //ToDo cambiar por CI
+      //ToDo cambiar por CI
       const nombreUsuario = req.body.nombre;
 
       const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
       let Usuarios: Usuario[] = JSON.parse(data);
-      
+
       const filteredUsuarios = Usuarios.filter(u => u.nombre !== nombreUsuario);
       if (Usuarios.length === filteredUsuarios.length) {
-        res.status(404).json({ error: `Usuario ${nombreUsuario} no encontrado`});
+        res.status(404).json({ error: `Usuario ${nombreUsuario} no encontrado` });
         return;
       }
 
@@ -65,14 +65,14 @@ export class UsuariosController {
   }
 
   // Checkea si el usuario existe
-  static  async usuarioExiste(usuario : string) {
+  static async usuarioExiste(usuario: string) {
     const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
     let Usuarios: Usuario[] = JSON.parse(data);
     const filteredUsuarios = Usuarios.filter(u => u.nombre !== usuario);
     return Usuarios.length != filteredUsuarios.length;
   }
 
-    // Updatear usuario
+  // Updatear usuario
   // static async updateUsuario(req: Request, res: Response) {
   //   try {
   //       //ToDo cambiar por CI
@@ -81,7 +81,7 @@ export class UsuariosController {
 
   //     const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
   //     let Usuarios: Usuario[] = JSON.parse(data);
-      
+
   //     const UsuarioIndex = Usuarios.findIndex(u => u.nombre === nombreUsuario);
   //     if (UsuarioIndex === -1) {
   //       res.status(404).json({ error: `Usuario ${nombreUsuario} no encontrado` });

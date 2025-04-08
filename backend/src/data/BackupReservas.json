@@ -1,0 +1,29 @@
+{
+  "7:00": [],
+  "8:00": [],
+  "9:00": [],
+  "10:00": [],
+  "16:30": [],
+  "17:30": [],
+  "18:30": [],
+  "19:30": [
+    {
+      "hora": "19:30",
+      "usuario": "Gonzalo Vallarino"
+    }
+  ],
+  "20:30": [
+    {
+      "hora": "20:30",
+      "usuario": "Natalia García"
+    },
+    {
+      "hora": "20:30",
+      "usuario": "Lorena Hernández"
+    },
+    {
+      "hora": "20:30",
+      "usuario": "Pablo Hernández"
+    }
+  ]
+}
