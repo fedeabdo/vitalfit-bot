@@ -5,7 +5,7 @@
     padding: 0 1rem;
     border-bottom: 4px solid rgb(1, 1, 0);
     height: 200px;
-    background-image: url("../public/Banner.png");
+    background-image: url("/Banner.png");
     background-repeat: no-repeat;
     background-size: contain;
     align-items: flex-end;
@@ -14,17 +14,20 @@
   .navbar button {
     flex: 1;
     height: 20%;
-    background-color: rgb(245, 137, 6,0.2);
+    background-color: #fbb80052;
+    background-image: linear-gradient(to right, #fbb80052 50%, #FBB900 50%);
+    background-size: 200%;
+    transition: 1ms ease-in;
     border: none;
     color: black;
     font-weight: bold;
     font-size: 1.1rem;
     cursor: pointer;
-    border-radius: 0;
-    transition: background-color 0.2s ease;
+    border-radius: 2px;
+    transition: 0.2s ease;
     text-transform: uppercase;
   }
   
   .navbar button:hover {
-    background-color: rgb(220, 120, 0);
+    background-position: right;
   }

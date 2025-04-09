@@ -2,27 +2,27 @@
     max-width: 900px;
     margin:   auto;
     padding: 24px;
-    background-color: #f5f5f5;
+    background-color: #8B9AA5;
     border-radius: 12px;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
   }
   
   .container h2 {
     text-align: center;
-  
+    background-color: transparent ;
     margin-bottom: 1rem;
     font-size: 2rem;
     font-weight: 900;
     color: black;
     text-transform: uppercase;
-    border-bottom: 2px solid rgb(245, 137, 6);
+    border-bottom: 2px solid #FBB900;
     padding-bottom: 0.5rem;
   }
 
   .fullPage{
     padding: 45px;
     height: 100%;
-    background-color: bisque;
+    background-color:  rgba(225, 223, 223, 0.573);
   }
 
   .userList {
@@ -52,13 +52,13 @@
     margin-top: 0.5rem;
     display: flex;
     gap: 6px;
-    margin-left: 12px; /* ⏩ nudge to the right */
+    margin-left: 12px
   }
   
   .iconButton {
     background: none;
     border: none;
-    font-size: 0.8rem; /* ⬇ smaller size */
+    font-size: 0.8rem;
     cursor: pointer;
     padding: 2px;
     transition: transform 0.2s ease;

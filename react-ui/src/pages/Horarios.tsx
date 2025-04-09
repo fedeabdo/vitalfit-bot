@@ -19,7 +19,7 @@ export default function Horarios(){
                 <List<HorarioJson>
                 renderItem={(horario: HorarioJson) => (
                     <div>
-                    <strong>{horario.diaHora}</strong> - {horario.usuarios}
+                    <strong>{horario.diaHora}</strong> - {horario.usuarios.join(', ')}
                     </div>
                 )}
                 data={horarios}

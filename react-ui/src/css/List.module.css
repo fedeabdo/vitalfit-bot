@@ -2,7 +2,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  border: 2px solid rgb(245, 137, 6);
+  border: 2px solid #FBB900;
   border-radius: 12px;
   overflow-y: scroll;
   max-height: 60vh;
