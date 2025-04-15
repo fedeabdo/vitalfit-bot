@@ -68,3 +68,7 @@
     transform: scale(1.2);
     color: #f57c00;
   }
+
+  .iconButtonAdd{
+    margin-left: 0.5rem;
+  }

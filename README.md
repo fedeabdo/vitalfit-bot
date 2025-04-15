@@ -21,6 +21,9 @@
 ### POST: /horarios
 #### agrega un nuevo horario prioritario, con usuarios incluidos opcionalmente
 #### body: {"Lunes-5:00": "" } o {"Lunes-5:00": ["Franco Gargaglioni", "Federico Abdo"]}
+### PUT: /horarios
+#### modifica un horario existente
+#### body: {"Lunes-5:00": ["Franco Gargaglioni" , "Federico Abdo"]} 
 ### DELETE: /horarios
 #### borra un horario prioritario existente
 #### body: {"horario":"Lunes-8:00"}

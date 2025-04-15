@@ -28,6 +28,11 @@ export class UsuariosController {
         ci: req.body.ci
       };
 
+      if (UsuariosController.usuarioExiste(newUsuario.nombre)) {
+        res.status(403).json({ error: 'Usuario ya existe' });
+        return; 
+      }
+
       const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
       const Usuarios: Usuario[] = JSON.parse(data);
       Usuarios.push(newUsuario);
@@ -64,6 +69,31 @@ export class UsuariosController {
     }
   }
 
+  //Developer fn
+  static async removeDuplicateUsuarios(req: Request, res: Response) {
+    try {
+      const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
+      const usuarios: Usuario[] = JSON.parse(data);
+  
+      const uniqueUsuarios = Array.from(
+        new Map(usuarios.map((u) => [u.nombre, u])).values()
+      );
+  
+      await fs.writeFile(
+        UsuariosController.DATA_PATH,
+        JSON.stringify(uniqueUsuarios, null, 2)
+      );
+  
+      res.status(200).json({
+        message: `Removed duplicates. ${usuarios.length - uniqueUsuarios.length} duplicates deleted.`,
+        total: uniqueUsuarios.length,
+      });
+    } catch (error) {
+      console.error("Error removing duplicates:", error);
+      res.status(500).json({ error: 'Failed to remove duplicate usuarios' });
+    }
+  }
+  
   // Checkea si el usuario existe
   static async usuarioExiste(usuario: string) {
     const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');

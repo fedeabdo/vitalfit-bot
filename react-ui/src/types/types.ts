@@ -31,3 +31,20 @@ export type HoraUsuarios = {
   hora: string;
   usuarios: string[];
 };
+
+
+export interface ApiSuccessResponse {
+  success: boolean;
+  message: string;
+  data?: any;
+}
+
+export interface ApiErrorResponse {
+  error: string;
+  statusCode: number;
+  message: string;
+}
+
+export interface UpdateHorarioPayload {
+  [key: tiempo]: string[];
+}

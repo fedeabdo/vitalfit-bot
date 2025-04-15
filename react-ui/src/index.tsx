@@ -1,33 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import App from './App';
 import Home from './pages/Home';
 import Horarios from './pages/Horarios';
 import Usuarios from './pages/Usuarios';
-import { horariosLoader, reservasLoader, usuariosLoader } from './components/List';
 
-// Create the router using createBrowserRouter
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      staleTime: 5 * 60 * 1000,
+    },
+    mutations: {
+      retry: 0,
+    },
+  },
+});
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <Home />, loader: reservasLoader },
-      { path: "horarios", element: <Horarios />, loader: horariosLoader },
-      { path: "usuarios", element: <Usuarios />, loader: usuariosLoader },
-    ]
-  }
+      {
+        index: true,
+        element: <Home />, // 🔥 Removed the loader here
+      },
+      {
+        path: "horarios",
+        element: <Horarios />,
+      },
+      {
+        path: "usuarios",
+        element: <Usuarios />,
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-//reportWebVitals();

@@ -3,6 +3,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { tiempo, Dia } from '../types';
 import { Horario } from '../types'
+import { UsuariosController } from './UsuariosController';
 
 export class HorariosController {
   private static readonly DATA_PATH_HORARIOS = path.join(__dirname, '../data/HorariosPrioritarios.json');
@@ -21,7 +22,7 @@ export class HorariosController {
   }
 
   static isTiempo(key: string): key is tiempo {
-    const dias: Dia[] = [ "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" ];
+    const dias: Dia[] = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
     return dias.some(dia => key.startsWith(`${dia}-`));
   }
 
@@ -33,29 +34,82 @@ export class HorariosController {
       const keys = Object.keys(raw);
 
       if (keys.length !== 1) {
-        throw new Error("Solo se permite agregar una hora a la vez.");
+        res.status(400).json({ error: 'No se puede agregar mas de un horario a la vez' });
+        return;
       }
 
-      const key = keys[ 0 ];
-      const usuarios: string[] = raw[ key ];
+      const key = keys[0];
+      const usuarios: string[] = raw[key];
 
       if (!HorariosController.isTiempo(key)) {
-        throw new Error(`Formato de horario invalido: ${key}`);
+        res.status(400).json({ error: 'Formato de horario invalido' });
+        return;
       }
 
       if (usuarios.length != 0) {
         if (!Array.isArray(usuarios) || !usuarios.every(v => typeof v === "string")) {
-          throw new Error(`Valor invalido de usuario para horario ${key}, expected string[]`);
+          res.status(400).json({ error: 'Valor invalido de usuario' });
+          return;
         }
       }
 
       const horario: Horario = {
-        [ key ]: usuarios
+        [key]: usuarios
       };
 
       const data = await fs.readFile(HorariosController.DATA_PATH_HORARIOS, 'utf-8');
       const horarios: Horario = JSON.parse(data);
-      horarios[ key ] = usuarios;
+      horarios[key] = usuarios;
+
+      await fs.writeFile(HorariosController.DATA_PATH_HORARIOS, JSON.stringify(horarios, null, 2));
+      res.status(201).json(horario);
+    } catch (error) {
+      res.status(500).json({ error: 'Error al agregar un nuevo horario' });
+      return;
+    }
+  }
+
+  // Update horario
+  static async updateHorario(req: Request, res: Response) {
+    try {
+
+      const raw = req.body;
+      const keys = Object.keys(raw);
+
+      if (keys.length !== 1) {
+        res.status(400).json({ error: 'No se puede modificar mas de un horario a la vez' });
+        return;
+      }
+
+      const key = keys[0];
+      const usuarios: string[] = raw[key];
+
+      if (!HorariosController.isTiempo(key)) {
+        res.status(400).json({ error: 'Formato de horario invalido' });
+        return;
+      }
+
+      if (usuarios.length != 0) {
+        if (!Array.isArray(usuarios) || !usuarios.every(v => typeof v === "string")) {
+          res.status(400).json({ error: 'Valor invalido de usuario' });
+          return;
+        }
+      }
+
+      usuarios.map((usuario) => {
+        if (!UsuariosController.usuarioExiste(usuario)){
+          res.status(400).json({ error: `Usuario: ${usuario} no existe en la base de datos` });
+          return;
+        }
+      })
+
+      const horario: Horario = {
+        [key]: usuarios
+      };
+
+      const data = await fs.readFile(HorariosController.DATA_PATH_HORARIOS, 'utf-8');
+      const horarios: Horario = JSON.parse(data);
+      horarios[key] = usuarios;
 
       await fs.writeFile(HorariosController.DATA_PATH_HORARIOS, JSON.stringify(horarios, null, 2));
       res.status(201).json(horario);
@@ -85,7 +139,7 @@ export class HorariosController {
         return;
       }
 
-      delete horarios[ horarioABorrar ];
+      delete horarios[horarioABorrar];
 
 
       await fs.writeFile(HorariosController.DATA_PATH_HORARIOS, JSON.stringify(horarios, null, 2));
@@ -105,7 +159,7 @@ export class HorariosController {
       const horarios: Horario = JSON.parse(data);
 
       return Object.entries(horarios).some(
-        ([ key, value ]: [ string, string[] ]) =>
+        ([key, value]: [string, string[]]) =>
           key.toLowerCase().startsWith(dia) && value.includes(usuario)
       );
     } catch (error) {

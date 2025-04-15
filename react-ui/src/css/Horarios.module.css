@@ -24,5 +24,15 @@
     padding-bottom: 0.5rem;
   }
 
+  .iconButton{
+    background-color: transparent;
+    border: none;
+  }
+
+  .iconButton:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+
 
   

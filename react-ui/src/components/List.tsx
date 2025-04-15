@@ -1,16 +1,14 @@
+import { QueryClient } from '@tanstack/react-query';
+import { fetchReservas } from '../hooks/api'
+import { HoraUsuarios, Reserva, HorarioJson } from '../types/types';
 import React from 'react';
-import { Reserva, HorarioJson, HoraUsuarios} from '../types/types';
 import styles from '../css/List.module.css';
-
-import Font from 'react-font'
+import Font from 'react-font';
 
 interface ListProps<T> {
   data: T[];
   renderItem: (item: T) => React.ReactNode;
 }
-
-type ReservasAPIResponse = Record<string, Reserva[]>;
-
 
 function List<T>({ data, renderItem }: ListProps<T>) {
   if (!data || data.length === 0) {
@@ -21,9 +19,9 @@ function List<T>({ data, renderItem }: ListProps<T>) {
     <Font family='Lexend'>
       <ul className={styles.list}>
         {data.map((item, index) => (
-            <li key={index} className={styles.listItem}>
-              {renderItem(item)}
-            </li>
+          <li key={index} className={styles.listItem}>
+            {renderItem(item)}
+          </li>
         ))}
       </ul>
     </Font>
@@ -31,42 +29,31 @@ function List<T>({ data, renderItem }: ListProps<T>) {
 }
 
 export default List;
-export const reservasLoader = async (): Promise<HoraUsuarios[]> => {
-  const response = await fetch('http://localhost:5100/api/reservas');
-  const data: ReservasAPIResponse = await response.json();
 
-
-  const reservas: HoraUsuarios[] = Object.entries(data).map(([hora, reservasPorHora]) => {
-    const usuarios = reservasPorHora.map((reserva: Reserva) => reserva.usuario);
-    return {
-      hora,
-      usuarios: usuarios.length > 0 ? usuarios : ["No hay reservas"]
-    };
+// Update the reservasLoader to use fetchReservas.
+export const reservasLoader = (queryClient: QueryClient) => async () => {
+  return queryClient.ensureQueryData({
+    queryKey: ['reservas'],
+    queryFn: fetchReservas,
+    staleTime: 5 * 60 * 1000, // 5 minutes cache
   });
-
-  return reservas;
 };
 
-
 export const usuariosLoader = async () => {
-    const response = await fetch('http://localhost:5100/api/usuarios');
-
-    if (!response.ok) {
-        throw new Response("Failed to fetch usuarios", { status: response.status });
-    }
-
-    const users = await response.json();
-    return users;
-}
+  const response = await fetch('http://localhost:5100/api/usuarios');
+  if (!response.ok) {
+    throw new Response("Failed to fetch usuarios", { status: response.status });
+  }
+  const users = await response.json();
+  return users;
+};
 
 export const horariosLoader = async (): Promise<HorarioJson[]> => {
   const response = await fetch('http://localhost:5100/api/horarios');
   const data: Record<string, string[]> = await response.json();
 
   return Object.entries(data).map(([diaHora, usuarios]) => ({
-    diaHora, 
-    usuarios: usuarios.length > 0 
-      ? usuarios 
-      : ["No hay usuarios"]
+    diaHora,
+    usuarios: usuarios.length > 0 ? usuarios : ["No hay usuarios"],
   }));
 };
