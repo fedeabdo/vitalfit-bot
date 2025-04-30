@@ -28,7 +28,9 @@ export class UsuariosController {
         ci: req.body.ci
       };
 
-      if (UsuariosController.usuarioExiste(newUsuario.nombre)) {
+      let usarioYaExiste = await UsuariosController.usuarioExiste(newUsuario.nombre);
+
+      if (usarioYaExiste) {
         res.status(403).json({ error: 'Usuario ya existe' });
         return; 
       }
@@ -95,7 +97,7 @@ export class UsuariosController {
   }
   
   // Checkea si el usuario existe
-  static async usuarioExiste(usuario: string) {
+  static async usuarioExiste(usuario: string) : Promise<boolean> {
     const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
     let Usuarios: Usuario[] = JSON.parse(data);
     const filteredUsuarios = Usuarios.filter(u => u.nombre !== usuario);

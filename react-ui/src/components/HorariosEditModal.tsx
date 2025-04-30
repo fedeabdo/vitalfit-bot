@@ -51,68 +51,62 @@ const HorariosEditModal = ({ data, onClose, onSelect }: HorariosEditModalProps) 
 
   return (
     <div className={styles.modalOverlay}>
-      <div className={styles.modalWrapper}>
-        <div className={styles.modalContent}>
-          <button onClick={onClose} className={styles.closeButton}>×</button>
-
-          <Font  family='Bungee Inline'>
-            <h1>Modifica el horario: </h1>
-            <h2>{data.diaHora}</h2>
-          </Font>
-
-          {errorMsg && <p className={styles.errorText}>{errorMsg}</p>}
-
-          <ul className={styles.userList}>
-            {usuarios.map((usuario, index) => (
-              <motion.li
-                key={index}
-                className={styles.modalUserItem}
-                onClick={() => handleRemoveUser(usuario)}
-                title="Haz clic para eliminar"
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "#FBB900"
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20
-                }}
+      <div className={styles.container}>
+        <Font family="Bungee Inline">
+          <h1>Modifica el horario:</h1>
+          <h2>{data.diaHora}</h2>
+        </Font>
+        <div className={styles.modalWrapper}>
+          <div className={styles.modalContent}>
+            <button onClick={onClose} className={styles.closeButton}>×</button>
+            {errorMsg && <p className={styles.errorText}>{errorMsg}</p>}
+            <ul className={styles.userList}>
+              {usuarios.map((usuario, index) => (
+                <motion.li
+                  key={index}
+                  className={styles.modalUserItem}
+                  onClick={() => handleRemoveUser(usuario)}
+                  title="Haz clic para eliminar"
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: "#FBB900",
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20,
+                  }}
+                >
+                  <Font family="Lexend">
+                    {usuario} <p className={styles.crossAfterName}>[x]</p>
+                  </Font>
+                </motion.li>
+              ))}
+            </ul>
+            <div className={styles.modalButtonContainer}>
+              <button
+                onClick={() => setIsUserModalOpen(true)}
+                className={styles.modalButtonEdit}
               >
-                <Font family='Lexend'>
-                  {usuario} <p className={styles.crossAfterName}>[x]</p>
-                </Font>
-              </motion.li>
-            ))}
-          </ul>
-          <div className={styles.modalButtonContainer}>
-            <button
-              onClick={() => setIsUserModalOpen(true)}
-              className={styles.modalButtonEdit}
-            >
-              <Font family='Lexend'>
-                Añadir Usuario
-              </Font>
-            </button>
-
-            <button
-              onClick={handleSave}
-              className={styles.modalButtonEdit}
-              disabled={isMutating}
-            >
-              <Font family='Lexend'>
-                Guardar cambios
-              </Font>
-            </button>
+                <Font family="Lexend">Añadir Usuario</Font>
+              </button>
+              <button
+                onClick={handleSave}
+                className={styles.modalButtonEdit}
+                disabled={isMutating}
+              >
+                <Font family="Lexend">Guardar cambios</Font>
+              </button>
+            </div>
+            {isUserModalOpen && (
+              <UsuarioSelectModal
+                hora={data.diaHora}
+                onClose={() => setIsUserModalOpen(false)}
+                onSelect={handleAddUser}
+                existingUsuarios={usuarios}
+              />
+            )}
           </div>
-          {isUserModalOpen && (
-            <UsuarioSelectModal
-              hora={data.diaHora}
-              onClose={() => setIsUserModalOpen(false)}
-              onSelect={handleAddUser}
-              existingUsuarios={usuarios}
-            />
-          )}
         </div>
       </div>
     </div>

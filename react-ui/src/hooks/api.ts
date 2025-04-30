@@ -14,16 +14,21 @@ export async function fetchReservas() {
 }
 
 export const fetchUsuarios = async () => {
-    const response = await fetch("http://localhost:5100/api/usuarios");
+  const response = await fetch("http://localhost:5100/api/usuarios");
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch usuarios");
-    }
+  if (!response.ok) {
+    throw new Error("Failed to fetch usuarios");
+  }
   
-    const data = await response.json();
-    return data;
-  };
+  const data = await response.json();
 
+  if (Array.isArray(data) && typeof data[0] === 'object' && 'nombre' in data[0]) {
+    return data.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' }));
+  }
+
+
+  throw new Error("Unexpected data format");
+};
 
 export const fetchHorarios = async (): Promise<HorarioJson[]> => {
   const response = await fetch('http://localhost:5100/api/horarios');

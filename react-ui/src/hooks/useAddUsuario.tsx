@@ -5,7 +5,7 @@ interface AddUsuarioPayload {
   ci: string;
 }
 
-export const useAddReserva = () => {
+export const useAddUsuario = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -40,6 +40,7 @@ export const useAddReserva = () => {
       }
     },
     onSuccess: () => {
+      console.log("Usuario added successfully");
       queryClient.invalidateQueries({ queryKey: ['usuarios'] });
     },
     retry: false,

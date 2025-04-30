@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchUsuarios } from "../hooks/api"; 
 import { useAddReserva } from "../hooks/useAddReserva"; 
-import styles from "../css/ModalReservas.module.css"; 
+import styles from "../css/ModalUsuarios.module.css"; 
 import {useState} from "react";
 
 import Font from 'react-font';
@@ -38,33 +38,38 @@ const UserSelectModal = ({ hora, onClose, onSelect, existingUsuarios }: UserSele
 
   return (
     <div className={styles.modalOverlay}>
-      {errorMsg && <p className={styles.errorText}>{errorMsg}</p>}
-      <div className={styles.modalWrapper}>
-        <div className={styles.modalContent}>
-          <button onClick={onClose} className={styles.closeButton}>
-            ×
-          </button>
-          <Font family='Bungee Inline'>
-            <h2 >Reserva a un usuario:</h2>
-          </Font>
-          <ul className={styles.userList}>
-            {usuarios
-            ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
-            .map((usuario) => (
-                <li key={usuario.nombre} className={styles.modalUserItem}>
-                <button
-                  onClick={() => handleUserSelect(usuario.nombre)}
-                  className={styles.modalUserItemButton}
-                  disabled={isMutating || existingUsuarios.includes(usuario.nombre)}
-                >
-                  {usuario.nombre}
-                </button>
-                </li>
-            ))}
-          </ul>
+      <div className={styles.fullPage}>
+        <div className={styles.container}>
+            <Font family='Bungee Inline'>
+              <h2 >Reserva a un usuario:</h2>
+            </Font>
+        <div className={styles.modalWrapper}>
+          <div className={styles.modalContent}>
+            <button onClick={onClose} className={styles.closeButton}>
+              ×
+            </button>
+
+            <ul className={styles.userList}>
+              {usuarios
+              ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
+              .map((usuario) => (
+                  <li key={usuario.nombre} className={styles.modalUserItem}>
+                  <button
+                    onClick={() => handleUserSelect(usuario.nombre)}
+                    className={styles.modalUserItemButton}
+                    disabled={isMutating || existingUsuarios.includes(usuario.nombre)}
+                  >
+                    {usuario.nombre}
+                  </button>
+                  </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+    {errorMsg && <p className={styles.errorText}>{errorMsg}</p>}
+  </div>
   );
 };
 

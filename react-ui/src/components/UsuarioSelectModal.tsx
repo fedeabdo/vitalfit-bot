@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchUsuarios } from "../hooks/api";
-import styles from "../css/ModalReservas.module.css";
+import styles from "../css/ModalUsuarios.module.css";
 import { useState } from "react";
 import Font from "react-font";
 import { Usuario } from "../types/types";
@@ -37,36 +37,40 @@ const UsuarioSelectorModal = ({
 
   return (
     <div className={styles.modalOverlay}>
-      <div className={styles.modalWrapper}>
-        <div className={styles.modalContent}>
-          <button onClick={onClose} className={styles.closeButton}>×</button>
+      <div className={styles.fullPage}>
+        <div className={styles.container}>
           <Font family="Bungee Inline">
-            <h2>Selecciona un usuario:</h2>
-          </Font>
+              <h2>Selecciona un usuario:</h2>
+            </Font>
+        <div className={styles.modalWrapper}>
+          <div className={styles.modalContent}>
+            <button onClick={onClose} className={styles.closeButton}>×</button>
 
-          {errorMsg && <p className={styles.errorText}>{errorMsg}</p>}
+            {errorMsg && <p className={styles.errorText}>{errorMsg}</p>}
 
-          <ul className={styles.userList}>
-            {filteredUsuarios?.length ? (
-              filteredUsuarios
-                .sort((a, b) => a.nombre.localeCompare(b.nombre))
-                .map((usuario) => (
-                  <li key={usuario.nombre} className={styles.modalUserItem}>
-                    <button
-                      onClick={() => handleUserClick(usuario.nombre)}
-                      className={styles.modalUserItemButton}
-                    >
-                      {usuario.nombre}
-                    </button>
-                  </li>
-                ))
-            ) : (
-              <li>No hay usuarios disponibles para agregar.</li>
-            )}
-          </ul>
+            <ul className={styles.userList}>
+              {filteredUsuarios?.length ? (
+                filteredUsuarios
+                  .sort((a, b) => a.nombre.localeCompare(b.nombre))
+                  .map((usuario) => (
+                    <li key={usuario.nombre} className={styles.modalUserItem}>
+                      <button
+                        onClick={() => handleUserClick(usuario.nombre)}
+                        className={styles.modalUserItemButton}
+                      >
+                        {usuario.nombre}
+                      </button>
+                    </li>
+                  ))
+              ) : (
+                <li>No hay usuarios disponibles para agregar.</li>
+              )}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+  </div>
   );
 };
 

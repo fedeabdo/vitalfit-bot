@@ -8,9 +8,10 @@ import Font from 'react-font';
 interface ListProps<T> {
   data: T[];
   renderItem: (item: T) => React.ReactNode;
+  onClick?: (item: T) => void;
 }
 
-function List<T>({ data, renderItem }: ListProps<T>) {
+function List<T>({ data, renderItem, onClick }: ListProps<T>) {
   if (!data || data.length === 0) {
     return <div className={styles.empty}>No data available.</div>;
   }
@@ -19,7 +20,7 @@ function List<T>({ data, renderItem }: ListProps<T>) {
     <Font family='Lexend'>
       <ul className={styles.list}>
         {data.map((item, index) => (
-          <li key={index} className={styles.listItem}>
+          <li key={index} onClick={() => onClick?.(item)} className={styles.listItem}>
             {renderItem(item)}
           </li>
         ))}

@@ -48,3 +48,7 @@ export interface ApiErrorResponse {
 export interface UpdateHorarioPayload {
   [key: tiempo]: string[];
 }
+
+export interface DeleteHorarioPayload {
+  horario : tiempo;
+}

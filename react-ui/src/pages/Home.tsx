@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { HoraUsuarios } from "../types/types";
 import styles from "../css/Home.module.css";
 import { FaPlus, FaTrashAlt } from "react-icons/fa";
@@ -12,12 +12,16 @@ import { useAddReserva } from "../hooks/useAddReserva";
 import List from "../components/List";
 import { fetchReservas } from "../hooks/api";
 import UserSelectModal from "../components/AgregarUsuarioReservaModal";
+import ConfirmModal from '../components/ConfirmModal';
 
 export default function Home() {
   const [selectedUsuario, setSelectedUsuario] = useState<string | null>(null);
   const [modalHora, setModalHora] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [usuarioToDelete, setUsuarioToDelete] = useState<string | null>(null);
 
+  const queryClient = useQueryClient();
   const {
     data: reservas,
     isLoading,
@@ -45,15 +49,40 @@ export default function Home() {
     setIsModalOpen(false); 
   };
 
+  const handleCancelDelete = (nombre: string) => {
+    setIsConfirmModalOpen(false);
+    setUsuarioToDelete(null);
+  };
+
+  const handleConfirmDelete = (nombreHora: string) => {
+    let nombre = nombreHora.split("-")[0];
+    let hora = nombreHora.split("-")[1];
+    console.log("nombre", nombre);
+    console.log("hora", hora);
+    deleteReserva(
+          { hora, nombre },
+          {
+            onSuccess: () => {
+              queryClient.invalidateQueries({ queryKey: ["reservas"] });
+              setIsConfirmModalOpen(false);
+            },
+            onError: (error) => {
+              console.error("Error al eliminar usuario:", error);
+            },
+          }
+        );
+  };
+
   const handleDeleteClick = (hora: string, nombre: string) => {
-    deleteReserva({ hora, nombre });
+    setUsuarioToDelete(nombre + "-" + hora);
+    setIsConfirmModalOpen(true);
   };
 
   const handleSelectUsuario = (usuario: string) => {
     if (modalHora) {
       addReserva({ hora: modalHora, usuario });
-      setModalHora(null); // Reset modalHora after selecting a user
-      setIsModalOpen(false); // Close the modal
+      setModalHora(null);
+      setIsModalOpen(false); 
     }
   };
 
@@ -146,6 +175,15 @@ export default function Home() {
             ?.usuarios.map((usuario) => usuario.nombre) || []}
         />
       )}
+
+            {isConfirmModalOpen && (
+            <ConfirmModal
+                textoAConfirmar={`¿Está seguro de que desea eliminar la reserva ${usuarioToDelete}?`}
+                onSelect={handleConfirmDelete}
+                onClose={handleCancelDelete}
+                value={usuarioToDelete}
+            />
+            )}
     </div>
   );
 }

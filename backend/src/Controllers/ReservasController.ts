@@ -56,7 +56,7 @@ export class ReservaController {
     }
 
     if (ReservaController.esPrevioAHoraActual(hora)) {
-      res.status(403).json({ error: `No se pueden reservar horarios previos a la hora actual` });
+      res.status(403).json({ error: `No se puede hacer reservas previas a la hora actual` });
       return;
     }
 
