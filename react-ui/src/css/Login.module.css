@@ -1,0 +1,109 @@
+.logincontainer {
+    background-color: #8B9AA5;
+    border-radius: 5px;
+    width: min(90%, 400px); /* Responsive width with max of 400px */
+    min-height: 300px; /* Minimum height */
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+    /* Centering in viewport */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* Flex layout for better spacing */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.formgroup {
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.formgroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.formgroup input {
+    width: 100%; /* Full width of container */
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+button[type="submit"] {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    width: 60%; /* Slightly wider */
+    min-width: 120px; /* Prevent becoming too narrow */
+    max-width: 200px; /* Prevent becoming too wide */
+    padding: 0.75rem;
+    margin: 1rem auto; /* Center button */
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    transform: scale(1.05);
+}
+
+button[type="submit"]:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.errormessage {
+    color: #dc3545 !important;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+
+.errorclose {
+    color: inherit !important;
+    margin-left: 1rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    float: right;
+  }
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .logincontainer {
+        width: 90%;
+        padding: 1.5rem;
+        min-height: auto;
+    }
+    
+    .formgroup input {
+        padding: 0.6rem;
+    }
+    
+    button[type="submit"] {
+        width: 70%;
+        padding: 0.6rem;
+    }
+}

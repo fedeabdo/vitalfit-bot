@@ -1,21 +1,33 @@
-import express from "express";
-import cors from "cors";
-import dataRoutes from './routes';
+import dotenv from "dotenv";
+dotenv.config();
 
-import { config } from './config/env';
+import express from "express";
+import routes from "./routes";
+import cors from 'cors';
+
 
 const app = express();
+const PORT = process.env.PORT || 5100;
 
-app.use(express.json())
-app.use(cors())
+// Configure CORS
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
 
-const PORT = config.PORT || 3000;
+app.use(cors(corsOptions));
 
-app.use('/data', express.static('src/data'));
+// Middleware
+app.use(express.json());
 
-// API routes
-app.use('/api', dataRoutes);
+// Routes
+app.use("/api", routes);
 
+app.options('*', cors(corsOptions));
+
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
