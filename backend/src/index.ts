@@ -1,21 +1,20 @@
-import express from "express";
-import cors from "cors";
-import dataRoutes from './routes';
+import dotenv from "dotenv";
+dotenv.config();
 
-import { config } from './config/env';
+import express from "express";
+import routes from "./routes";
+
 
 const app = express();
+const PORT = process.env.PORT || 5100;
 
-app.use(express.json())
-app.use(cors())
+// Middleware
+app.use(express.json());
 
-const PORT = config.PORT || 3000;
+// Routes
+app.use("/api", routes);
 
-app.use('/data', express.static('src/data'));
-
-// API routes
-app.use('/api', dataRoutes);
-
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });

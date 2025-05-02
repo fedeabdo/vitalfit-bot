@@ -13,7 +13,11 @@ export class UsuariosController {
     try {
       const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
       const usuarios: Usuario[] = JSON.parse(data);
-      res.json(usuarios);
+      const usuariosRes = usuarios.map(usuario => ({
+        nombre: usuario.nombre,
+        ci: " "
+      }));
+      res.json(usuariosRes);
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch Usuarios' });
       return;

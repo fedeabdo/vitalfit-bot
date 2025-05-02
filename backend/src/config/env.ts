@@ -5,6 +5,7 @@ type Environment = {
   PORT: number;
   NODE_ENV: 'development' | 'production';
   IS_PRODUCTION: boolean;
+  JWT_SECRET: string;
 };
 
 // Load environment variables
@@ -14,5 +15,6 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 export const config: Environment = {
   PORT: Number(process.env.PORT) || 5100,
   NODE_ENV: (process.env.NODE_ENV as Environment['NODE_ENV']) || 'development',
-  IS_PRODUCTION: (process.env.NODE_ENV === 'production')
+  IS_PRODUCTION: (process.env.NODE_ENV === 'production'),
+  JWT_SECRET: process.env.JWT_SECRET
 };
