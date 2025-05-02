@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { fetchWithAuth } from './fetchWithAuth';
 
 interface AddUsuarioPayload {
   nombre: string;
@@ -15,7 +16,7 @@ export const useAddUsuario = () => {
       const timeout = setTimeout(() => controller.abort(), 5000); // optional timeout
     
       try {
-        const response = await fetch("http://localhost:5100/api/usuarios", {
+        const response = await fetchWithAuth("http://localhost:5100/api/usuarios", {
           method: "POST",
           body: JSON.stringify({ nombre, ci }),
           headers: {

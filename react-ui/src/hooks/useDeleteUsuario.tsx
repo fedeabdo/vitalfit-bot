@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { fetchWithAuth } from './fetchWithAuth';
 
 interface DeleteUsuarioPayload {
   nombre: string;
@@ -9,7 +10,7 @@ export const useDeleteUsuario = () => {
 
   return useMutation({
     mutationFn: async ({ nombre }: DeleteUsuarioPayload) => {
-      const response = await fetch(`http://localhost:5100/api/usuarios`, {
+      const response = await fetchWithAuth(`http://localhost:5100/api/usuarios`, {
         method: 'DELETE',
         body: JSON.stringify({ nombre }),
         headers: {

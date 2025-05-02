@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Reserva } from "../types/types";
+import { fetchWithAuth } from './fetchWithAuth';
 
 interface DeleteReservaVars {
   hora: string;
@@ -13,7 +14,7 @@ export const useDeleteReserva = () => {
     mutationFn: async ({ hora, nombre }: DeleteReservaVars) => {
       const reserva: Reserva = { hora, usuario: nombre };
     
-      const response = await fetch("http://localhost:5100/api/reservas", {
+      const response = await fetchWithAuth("http://localhost:5100/api/reservas", {
         method: "DELETE",
         body: JSON.stringify(reserva),
         headers: {

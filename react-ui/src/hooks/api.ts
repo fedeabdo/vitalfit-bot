@@ -1,9 +1,10 @@
 import { Reserva, HorarioJson } from "../types/types";
+import { fetchWithAuth } from "./fetchWithAuth";
 
 type ReservasAPIResponse = Record<string, Reserva[]>;
 
 export async function fetchReservas() {
-  const res = await fetch('http://localhost:5100/api/reservas');
+  const res = await fetchWithAuth('http://localhost:5100/api/reservas');
   if (!res.ok) throw new Error('Failed to fetch');
   const data: ReservasAPIResponse = await res.json();
 
@@ -14,7 +15,7 @@ export async function fetchReservas() {
 }
 
 export const fetchUsuarios = async () => {
-  const response = await fetch("http://localhost:5100/api/usuarios");
+  const response = await fetchWithAuth("http://localhost:5100/api/usuarios");
 
   if (!response.ok) {
     throw new Error("Failed to fetch usuarios");
@@ -31,7 +32,7 @@ export const fetchUsuarios = async () => {
 };
 
 export const fetchHorarios = async (): Promise<HorarioJson[]> => {
-  const response = await fetch('http://localhost:5100/api/horarios');
+  const response = await fetchWithAuth('http://localhost:5100/api/horarios');
   const data: Record<string, string[]> = await response.json();
 
   return Object.entries(data).map(([diaHora, usuarios]) => ({

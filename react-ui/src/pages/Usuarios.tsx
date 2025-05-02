@@ -104,7 +104,7 @@ export default function Usuarios() {
           onClick={(usuario) => handleUsuarioClick(usuario.nombre)}
           renderItem={(usuario: Usuario) => (
             <div className={styles.userItem}>
-              <strong>{usuario.nombre}</strong> - {usuario.ci}
+              <strong>{usuario.nombre}</strong>
               <motion.div
                 className={styles.iconButtons}
                 initial={false}
