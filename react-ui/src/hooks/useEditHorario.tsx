@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {UpdateHorarioPayload} from '../types/types'
+import { fetchWithAuth } from './fetchWithAuth';
 
 
 export const useEditHorario = () => {
@@ -11,7 +12,7 @@ export const useEditHorario = () => {
       const timeout = setTimeout(() => controller.abort(), 5000);
 
       try {
-        const response = await fetch("http://localhost:5100/api/horarios", {
+        const response = await fetchWithAuth("http://localhost:5100/api/horarios", {
           method: "PUT",
           body: JSON.stringify(horario),
           headers: {

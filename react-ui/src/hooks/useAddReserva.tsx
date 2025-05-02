@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { fetchWithAuth } from './fetchWithAuth';
 
 interface AddReservaPayload {
   hora: string;
@@ -14,7 +15,7 @@ export const useAddReserva = () => {
       const timeout = setTimeout(() => controller.abort(), 5000);
 
       try {
-        const response = await fetch("http://localhost:5100/api/reservas", {
+        const response = await fetchWithAuth("http://localhost:5100/api/reservas", {
           method: "POST",
           body: JSON.stringify({ hora, usuario }),
           headers: {

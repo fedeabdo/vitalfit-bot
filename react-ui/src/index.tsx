@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AuthProvider } from './context/AuthContext'; // Import your AuthProvider
+import { ProtectedRoute } from './components/ProtectedRoute'; // Import ProtectedRoute component
 
 import App from './App';
 import Home from './pages/Home';
 import Horarios from './pages/Horarios';
 import Usuarios from './pages/Usuarios';
+import {Login} from './pages/Login';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,23 +29,41 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        path: "login", 
+        element: <Login />   
+      },
+      {
         index: true,
-        element: <Home />, // 🔥 Removed the loader here
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "horarios",
-        element: <Horarios />,
+        element: (
+          <ProtectedRoute>
+            <Horarios />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "usuarios",
-        element: <Usuarios />,
+        element: (
+          <ProtectedRoute>
+            <Usuarios />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <QueryClientProvider client={queryClient}>
+  <QueryClientProvider client={queryClient}>
+    <AuthProvider>
       <RouterProvider router={router} />
-    </QueryClientProvider>
+    </AuthProvider>
+  </QueryClientProvider>
 );

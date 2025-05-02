@@ -4,11 +4,19 @@ import { AuthController } from "./Controllers/AuthController";
 import { UsuariosController } from "./Controllers/UsuariosController";
 import { HorariosController } from "./Controllers/HorariosController";
 import { ReservaController } from "./Controllers/ReservasController";
+import { Request, Response } from 'express';
+
 
 const router = express.Router();
 
 // Public routes (no authentication required)
 router.post('/login', AuthController.login);
+router.options(
+    '/login', 
+    (req: Request, res: Response) => {
+      res.sendStatus(200);
+    }
+  );
 router.get("/createPassword", AuthController.createPassword);
 
 // Protected routes (authentication required)

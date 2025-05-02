@@ -4,9 +4,7 @@ import { verifyToken } from "../config/jwt";
 export const authenticateJWT = (req: Request, res: Response, next: NextFunction): void => {
 
   if (req.originalUrl === "/api/login" || req.originalUrl === "/api/createPassword") {
-    console.log("Skipping authentication for:", req.originalUrl);
     next();
-    console.log("Passed control to the next middleware/route handler");
     return;
   }
 
