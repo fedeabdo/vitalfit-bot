@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import fs from 'fs/promises';
 import path from 'path';
-import { Usuario } from '../types'
-
+import { Usuario } from '../types';
 
 export class UsuariosController {
   // Ruta para el archivo
@@ -14,13 +13,27 @@ export class UsuariosController {
       const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
       const usuarios: Usuario[] = JSON.parse(data);
       const usuariosRes = usuarios.map(usuario => ({
-        nombre: usuario.nombre,
-        ci: " "
-      }));
+              nombre: usuario.nombre,
+              ci: usuario.ci,
+            }));
       res.json(usuariosRes);
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch Usuarios' });
       return;
+    }
+  }
+
+  // Obtener nombre por cédula
+  static async getNombreByCedula(cedula: string): Promise<string | null> {
+    try {
+      const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
+      const usuarios: Usuario[] = JSON.parse(data);
+
+      const usuario = usuarios.find(u => u.ci === cedula);
+      return usuario ? usuario.nombre : null;
+    } catch (error) {
+      console.error("Error fetching nombre by cedula:", error);
+      throw new Error("Error fetching nombre by cedula");
     }
   }
 
@@ -32,18 +45,18 @@ export class UsuariosController {
         ci: req.body.ci
       };
 
-      let usarioYaExiste = await UsuariosController.usuarioExiste(newUsuario.nombre);
+      const usuarioYaExiste = await UsuariosController.usuarioExiste(newUsuario.ci);
 
-      if (usarioYaExiste) {
+      if (usuarioYaExiste) {
         res.status(403).json({ error: 'Usuario ya existe' });
         return; 
       }
 
       const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
-      const Usuarios: Usuario[] = JSON.parse(data);
-      Usuarios.push(newUsuario);
+      const usuarios: Usuario[] = JSON.parse(data);
+      usuarios.push(newUsuario);
 
-      await fs.writeFile(UsuariosController.DATA_PATH, JSON.stringify(Usuarios, null, 2));
+      await fs.writeFile(UsuariosController.DATA_PATH, JSON.stringify(usuarios, null, 2));
       res.status(201).json(newUsuario);
     } catch (error) {
       res.status(500).json({ error: 'Failed to create Usuario' });
@@ -52,18 +65,16 @@ export class UsuariosController {
   }
 
   // Borrar Usuario
-  static async deleteUsuario(req: Request<{ nombre: string }, {}>, res: Response): Promise<void> {
+  static async deleteUsuario(req: Request<{ ci: string }, {}>, res: Response): Promise<void> {
     try {
-
-      //ToDo cambiar por CI
-      const nombreUsuario = req.body.nombre;
+      const cedula = req.body.ci;
 
       const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
-      let Usuarios: Usuario[] = JSON.parse(data);
+      const usuarios: Usuario[] = JSON.parse(data);
 
-      const filteredUsuarios = Usuarios.filter(u => u.nombre !== nombreUsuario);
-      if (Usuarios.length === filteredUsuarios.length) {
-        res.status(404).json({ error: `Usuario ${nombreUsuario} no encontrado` });
+      const filteredUsuarios = usuarios.filter(u => u.ci !== cedula);
+      if (usuarios.length === filteredUsuarios.length) {
+        res.status(404).json({ error: `Usuario con cédula ${cedula} no encontrado` });
         return;
       }
 
@@ -75,14 +86,14 @@ export class UsuariosController {
     }
   }
 
-  //Developer fn
+  // Developer function: Remove duplicate usuarios
   static async removeDuplicateUsuarios(req: Request, res: Response) {
     try {
       const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
       const usuarios: Usuario[] = JSON.parse(data);
   
       const uniqueUsuarios = Array.from(
-        new Map(usuarios.map((u) => [u.nombre, u])).values()
+        new Map(usuarios.map((u) => [u.ci, u])).values()
       );
   
       await fs.writeFile(
@@ -101,33 +112,9 @@ export class UsuariosController {
   }
   
   // Checkea si el usuario existe
-  static async usuarioExiste(usuario: string) : Promise<boolean> {
+  static async usuarioExiste(cedula: string) : Promise<boolean> {
     const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
-    let Usuarios: Usuario[] = JSON.parse(data);
-    const filteredUsuarios = Usuarios.filter(u => u.nombre !== usuario);
-    return Usuarios.length != filteredUsuarios.length;
+    const usuarios: Usuario[] = JSON.parse(data);
+    return usuarios.some(u => u.ci === cedula);
   }
-
-  // Updatear usuario
-  // static async updateUsuario(req: Request, res: Response) {
-  //   try {
-  //       //ToDo cambiar por CI
-  //     const nombreUsuario = req.body.nombre;
-  //     const updatedData = req.body;
-
-  //     const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
-  //     let Usuarios: Usuario[] = JSON.parse(data);
-
-  //     const UsuarioIndex = Usuarios.findIndex(u => u.nombre === nombreUsuario);
-  //     if (UsuarioIndex === -1) {
-  //       res.status(404).json({ error: `Usuario ${nombreUsuario} no encontrado` });
-  //     }
-
-  //     Usuarios[UsuarioIndex] = { ...Usuarios[UsuarioIndex], ...updatedData };
-  //     await fs.writeFile(UsuariosController.DATA_PATH, JSON.stringify(Usuarios, null, 2));
-  //     res.json(Usuarios[UsuarioIndex]);
-  //   } catch (error) {
-  //     res.status(500).json({ error: 'Error al actualizar usuario' });
-  //   }
-  // }
-} 
+}
