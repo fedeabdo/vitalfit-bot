@@ -2,8 +2,7 @@ import { Request, Response } from 'express';
 import fs from 'fs/promises';
 import path from 'path';
 import cron from 'node-cron';
-import { Reserva } from '../types';
-import { Horario } from '../types'
+import { Reserva, Horario, ReservaRequest, Usuario } from '../types';
 import { UsuariosController } from './UsuariosController';
 import { HorariosController } from './HorariosController';
 
@@ -20,49 +19,49 @@ export class ReservaController {
   }
 
   // Agregar reserva
-  static async addReserva(req: Request<{}, {}, Reserva>, res: Response) {
-    console.log("POST /reserva received:", req.body);
+  static async addReserva(req: Request<{}, {}, ReservaRequest>, res: Response) {
     const hora = req.body.hora;
-    const usuario = req.body.usuario;
+    const cedula = req.body.cedula;
 
-    if (!(await UsuariosController.usuarioExiste(usuario))) {
-      res.status(403).json({ error: `El usuario ${usuario} no existe` });
+    if (!(await UsuariosController.usuarioExiste(cedula))) {
+      res.status(403).json({ error: `El usuario con cédula ${cedula} no existe` });
+      return;
+    }
+    
+    const usuario = await UsuariosController.getNombreByCedula(cedula);
+
+    if (!usuario) {
+      res.status(500).json({ error: `No se pudo encontrar el nombre del usuario con cédula ${cedula}` });
       return;
     }
 
     if (!ReservaController.reservas[hora]) {
-      res.status(400).json({ error: 'Horario de reserva invalido' });
-      return;
-    }
-
-    if (!usuario) {
-      res.status(400).json({ error: 'Usuario invalido' });
+      res.status(400).json({ error: 'Horario de reserva inválido' });
       return;
     }
 
     const usuarioYaReservado = Object.values(ReservaController.reservas)
       .flat()
-      .some(r => r.usuario === usuario);
+      .some((r) => r.usuario === usuario);
 
     if (usuarioYaReservado) {
       res.status(409).json({ error: 'El usuario ya tiene una reserva' });
       return;
     }
-    
 
-    if (ReservaController.reservas[hora].length >= (ReservaController.MAX_RESERVAS_POR_HORARIO)) {
-      res.status(403).json({ error: `Este horario ya esta lleno (maximo ${ReservaController.MAX_RESERVAS_POR_HORARIO} reservas)` });
+    if (ReservaController.reservas[hora].length >= ReservaController.MAX_RESERVAS_POR_HORARIO) {
+      res.status(403).json({ error: `Este horario ya está lleno (máximo ${ReservaController.MAX_RESERVAS_POR_HORARIO} reservas)` });
       return;
     }
+
 
     if (ReservaController.esPrevioAHoraActual(hora)) {
-      res.status(403).json({ error: `No se puede hacer reservas previas a la hora actual` });
+      res.status(403).json({ error: 'No se puede hacer reservas previas a la hora actual' });
       return;
     }
 
-    //Aca la magia
+    // Aca la magia
     await ReservaController.calculoHorarioPrioritario(hora, usuario, res);
-
   }
 
   //Borrar reserva

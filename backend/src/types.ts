@@ -21,3 +21,8 @@ export interface Reserva {
   hora: string;
   usuario: string; 
 }
+
+export interface ReservaRequest{
+  hora: string;
+  cedula: string;
+}
