@@ -7,5 +7,18 @@
   "17:30": [],
   "18:30": [],
   "19:30": [],
-  "20:30": []
+  "20:30": [
+    {
+      "hora": "20:30",
+      "usuario": "Gonzalo Marmissolle"
+    },
+    {
+      "hora": "20:30",
+      "usuario": "Franco Gargaglioni"
+    },
+    {
+      "hora": "20:30",
+      "usuario": "Eugenia Moreira"
+    }
+  ]
 }

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import fs from 'fs/promises';
 import path from 'path';
 import cron from 'node-cron';
-import { Reserva, Horario, ReservaRequest, Usuario } from '../types';
+import { Reserva, Horario, ReservaRequest, ReservaRequestByName, Usuario } from '../types';
 import { UsuariosController } from './UsuariosController';
 import { HorariosController } from './HorariosController';
 
@@ -19,19 +19,32 @@ export class ReservaController {
   }
 
   // Agregar reserva
-  static async addReserva(req: Request<{}, {}, ReservaRequest>, res: Response) {
+  static async addReserva(req: Request<{}, {}, ReservaRequest | ReservaRequestByName>, res: Response) {
     const hora = req.body.hora;
-    const cedula = req.body.cedula;
+    const cedula = 'cedula' in req.body ? req.body.cedula : undefined;
+    const nombre = 'usuario' in req.body ? req.body.usuario : undefined;
 
-    if (!(await UsuariosController.usuarioExiste(cedula))) {
-      res.status(403).json({ error: `El usuario con cédula ${cedula} no existe` });
-      return;
-    }
-    
-    const usuario = await UsuariosController.getNombreByCedula(cedula);
+    let usuario: string | undefined;
 
-    if (!usuario) {
-      res.status(500).json({ error: `No se pudo encontrar el nombre del usuario con cédula ${cedula}` });
+    if (cedula) {
+      if (!(await UsuariosController.usuarioExiste(cedula))) {
+        res.status(403).json({ error: `El usuario con cédula ${cedula} no existe` });
+        return;
+      }
+      usuario = await UsuariosController.getNombreByCedula(cedula);
+
+      if (!usuario) {
+        res.status(500).json({ error: `No se pudo encontrar el nombre del usuario con cédula ${cedula}` });
+        return;
+      }
+    } else if (nombre) {
+      if (!(await UsuariosController.usuarioExisteByName(nombre))) {
+        res.status(403).json({ error: `El usuario con nombre ${nombre} no existe` });
+        return;
+      }
+      usuario = nombre;
+    } else {
+      res.status(400).json({ error: 'Debe proporcionar cédula o nombre para la reserva' });
       return;
     }
 

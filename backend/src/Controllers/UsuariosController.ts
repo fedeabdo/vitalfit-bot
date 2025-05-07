@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import fs from 'fs/promises';
 import path from 'path';
 import { Usuario } from '../types';
+import { HorariosController } from './HorariosController';
 
 export class UsuariosController {
   // Ruta para el archivo
@@ -14,7 +15,7 @@ export class UsuariosController {
       const usuarios: Usuario[] = JSON.parse(data);
       const usuariosRes = usuarios.map(usuario => ({
               nombre: usuario.nombre,
-              ci: usuario.ci,
+              ci:" ",
             }));
       res.json(usuariosRes);
     } catch (error) {
@@ -65,20 +66,25 @@ export class UsuariosController {
   }
 
   // Borrar Usuario
-  static async deleteUsuario(req: Request<{ ci: string }, {}>, res: Response): Promise<void> {
+  static async deleteUsuario(req: Request<{ nombre: string }, {}>, res: Response): Promise<void> {
     try {
-      const cedula = req.body.ci;
+      const nombre = req.body.nombre;
 
       const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
       const usuarios: Usuario[] = JSON.parse(data);
 
-      const filteredUsuarios = usuarios.filter(u => u.ci !== cedula);
-      if (usuarios.length === filteredUsuarios.length) {
-        res.status(404).json({ error: `Usuario con cédula ${cedula} no encontrado` });
+      const usuarioToDelete = usuarios.find(u => u.nombre === nombre);
+      if (!usuarioToDelete) {
+        res.status(404).json({ error: `Usuario con nombre ${nombre} no encontrado` });
         return;
       }
 
+const filteredUsuarios = usuarios.filter(u => u.nombre !== nombre);
       await fs.writeFile(UsuariosController.DATA_PATH, JSON.stringify(filteredUsuarios, null, 2));
+
+      // Remove user from HorariosPrioritarios
+      await HorariosController.removeUserFromHorariosPrioritarios(usuarioToDelete.nombre);
+
       res.sendStatus(204);
     } catch (error) {
       res.status(500).json({ error: 'Error al borrar usuario' });
@@ -116,5 +122,12 @@ export class UsuariosController {
     const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
     const usuarios: Usuario[] = JSON.parse(data);
     return usuarios.some(u => u.ci === cedula);
+  }
+
+  // Checkea si el usuario existe por nombre
+  static async usuarioExisteByName(nombre: string): Promise<boolean> {
+    const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
+    const usuarios: Usuario[] = JSON.parse(data);
+    return usuarios.some(u => u.nombre === nombre);
   }
 }

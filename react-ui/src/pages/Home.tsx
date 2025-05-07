@@ -57,8 +57,6 @@ export default function Home() {
   const handleConfirmDelete = (nombreHora: string) => {
     let nombre = nombreHora.split("-")[0];
     let hora = nombreHora.split("-")[1];
-    console.log("nombre", nombre);
-    console.log("hora", hora);
     deleteReserva(
           { hora, nombre },
           {
@@ -80,7 +78,6 @@ export default function Home() {
 
   const handleSelectUsuario = (usuario: string) => {
     if (modalHora) {
-      addReserva({ hora: modalHora, usuario });
       setModalHora(null);
       setIsModalOpen(false); 
     }

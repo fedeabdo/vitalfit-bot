@@ -167,4 +167,17 @@ export class HorariosController {
     }
   }
 
+// Remove user from HorariosPrioritarios
+  static async removeUserFromHorariosPrioritarios(nombre: string): Promise<void> {
+    const dataPath = path.join(__dirname, '../data/HorariosPrioritarios.json');
+    const data = await fs.readFile(dataPath, 'utf-8');
+    const horarios = JSON.parse(data);
+
+    for (const key in horarios) {
+      horarios[key] = horarios[key].filter((user: string) => user !== nombre);
+    }
+
+    await fs.writeFile(dataPath, JSON.stringify(horarios, null, 2));
+  }
+
 }

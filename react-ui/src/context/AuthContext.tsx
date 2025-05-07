@@ -3,6 +3,7 @@ import { createContext, useContext, ReactNode, useState, useEffect } from 'react
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  isLoading: boolean;
   login: (token: string) => void;
   logout: () => void;
 }
@@ -11,10 +12,15 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
-    setIsAuthenticated(!!token);
+    if (token) {
+      // Optionally validate the token here (e.g., decode and check expiration)
+      setIsAuthenticated(true);
+    }
+    setIsLoading(false);
   }, []);
 
   const login = (token: string) => {
@@ -28,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, isLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
