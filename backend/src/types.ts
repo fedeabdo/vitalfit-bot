@@ -22,7 +22,12 @@ export interface Reserva {
   usuario: string; 
 }
 
-export interface ReservaRequest{
+export interface ReservaRequest {
   hora: string;
   cedula: string;
+}
+
+export interface ReservaRequestByName {
+  hora: string;
+  usuario: string;
 }
