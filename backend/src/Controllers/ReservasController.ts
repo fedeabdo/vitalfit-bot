@@ -78,33 +78,53 @@ export class ReservaController {
   }
 
   //Borrar reserva
-  static deleteReserva(req: Request<{}, {}, Reserva>, res: Response): void {
-    const { hora, usuario } = req.body;
+  static async deleteReserva(req: Request<{}, {}, { hora: string; usuario?: string; cedula?: string }>, res: Response): Promise<void> {
+    const { hora, usuario: usuarioInput, cedula } = req.body;
 
-    if (!ReservaController.reservas[hora]) {
-      res.status(400).json({ error: 'Horario de reserva invalido' });
-      return;
-    }
+    let usuario: string | undefined;
 
-    const usuarioYaReservado = Object.values(ReservaController.reservas)
-      .flat()
-      .some(r => r.usuario === usuario);
+    // Determine the user based on cedula or usuario
+    if (cedula) {
+        if (!(await UsuariosController.usuarioExiste(cedula))) {
+            res.status(403).json({ error: `El usuario con cédula ${cedula} no existe` });
+            return;
+        }
+        usuario = await UsuariosController.getNombreByCedula(cedula);
 
-    if (usuarioYaReservado) {
-      const index = ReservaController.reservas[hora].findIndex(r =>
-        r.hora === hora && r.usuario === usuario
-      );
-
-      if (index !== -1) {
-        ReservaController.borrarReserva(hora, usuario, index);
-      } else {
-        res.status(400).json({ error: 'El usuario no tiene una reserva' });
+        if (!usuario) {
+            res.status(500).json({ error: `No se pudo encontrar el nombre del usuario con cédula ${cedula}` });
+            return;
+        }
+    } else if (usuarioInput) {
+        if (!(await UsuariosController.usuarioExisteByName(usuarioInput))) {
+            res.status(403).json({ error: `El usuario con nombre ${usuarioInput} no existe` });
+            return;
+        }
+        usuario = usuarioInput;
+    } else {
+        res.status(400).json({ error: 'Debe proporcionar cédula o nombre para borrar la reserva' });
         return;
-      }
     }
 
-    res.status(204).json({ message: 'Reserva eliminada ', hora, usuario });
-  }
+    // Validate the hour
+    if (!ReservaController.reservas[hora]) {
+        res.status(400).json({ error: 'Horario de reserva inválido' });
+        return;
+    }
+
+    // Check if the user has a reservation at the given hour
+    const index = ReservaController.reservas[hora].findIndex((r) => r.usuario === usuario);
+
+    if (index === -1) {
+        res.status(404).json({ error: 'El usuario no tiene una reserva en este horario' });
+        return;
+    }
+
+    // Delete the reservation
+    await ReservaController.borrarReserva(hora, usuario, index);
+
+    res.status(204).json({ message: 'Reserva eliminada', hora, usuario });
+}
 
   // Reset reservas manual sin backup
   static resetReservas(req: Request<{}, {}, Reserva>, res: Response){
@@ -186,6 +206,65 @@ export class ReservaController {
       return res.status(500).json({ error: 'Error interno del servidor' });
     }
   }
+
+    // Actualizar reserva
+    static async updateReserva(req: Request<{}, {}, { hora: string; cedula: string }>, res: Response) {
+      const { hora, cedula } = req.body;
+  
+      // Validate the user exists
+      if (!(await UsuariosController.usuarioExiste(cedula))) {
+          res.status(403).json({ error: `El usuario con cédula ${cedula} no existe` });
+          return;
+      }
+  
+      const usuario = await UsuariosController.getNombreByCedula(cedula);
+      if (!usuario) {
+          res.status(500).json({ error: `No se pudo encontrar el nombre del usuario con cédula ${cedula}` });
+          return;
+      }
+  
+      // Validate the hour
+      if (!ReservaController.reservas[hora]) {
+          res.status(400).json({ error: 'El horario de reserva es inválido' });
+          return;
+      }
+  
+      // Check if the new time slot is full
+      if (ReservaController.reservas[hora].length >= ReservaController.MAX_RESERVAS_POR_HORARIO) {
+          res.status(403).json({ error: `El horario ${hora} ya está lleno (máximo ${ReservaController.MAX_RESERVAS_POR_HORARIO} reservas)` });
+          return;
+      }
+  
+      // Check if the new time is prior to the current time
+      if (ReservaController.esPrevioAHoraActual(hora)) {
+          res.status(403).json({ error: 'No se puede hacer reservas previas a la hora actual' });
+          return;
+      }
+  
+      // Check if the user already has a reservation
+      const usuarioYaReservado = Object.values(ReservaController.reservas)
+          .flat()
+          .some((r) => r.usuario === usuario);
+  
+      if (!usuarioYaReservado) {
+          res.status(404).json({ error: 'El usuario no tiene una reserva existente para cambiar' });
+          return;
+      }
+  
+          // Delete the existing reservation
+      for (const [horaExistente, reservas] of Object.entries(ReservaController.reservas)) {
+          const index = reservas.findIndex((r) => r.usuario === usuario);
+          if (index !== -1) {
+              await ReservaController.borrarReserva(horaExistente, usuario, index);
+              break;
+          }
+      }
+  
+      // Add the new reservation
+      await ReservaController.agregarReserva(hora, usuario);
+      res.status(201).json({ message: 'Reserva actualizada', hora, usuario });
+      return;
+    }
   
   private static async getHorariosDispniblesHoy() {
     try {
@@ -297,6 +376,7 @@ export class ReservaController {
       await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2))
     }
   }
+
 }
 
 // Inicializa reservas diarias y configura el reseteo en startup

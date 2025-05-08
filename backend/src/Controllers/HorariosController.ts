@@ -16,7 +16,31 @@ export class HorariosController {
       const horarios: Horario[] = JSON.parse(data);
       res.json(horarios);
     } catch (error) {
-      res.status(500).json({ error: 'Error al imprimir usuarios' });
+      res.status(500).json({ error: 'Error al imprimir horarios' });
+      return;
+    }
+  }
+
+  static async getHorariosHoy(req: Request, res: Response) {
+    try {
+      const data = await fs.readFile(HorariosController.DATA_PATH_HORARIOS, 'utf-8');
+      const horarios: Horario[] = JSON.parse(data);
+      const uniqueHours = new Set<string>();
+      const diaActual = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(new Date());
+
+      for (const key in horarios) {
+        if (key.toLowerCase().includes(diaActual)) {
+          const parts = key.split('-');
+          if (parts.length === 2) {
+            uniqueHours.add(parts[1]); 
+          }
+        }
+      }
+
+      res.status(201).json(Array.from(uniqueHours));
+      return;
+    } catch (error) {
+      res.status(500).json({ error: 'Error al imprimir horarios de hoy' });
       return;
     }
   }

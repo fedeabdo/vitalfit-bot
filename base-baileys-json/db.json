@@ -1,0 +1,50 @@
+[
+  {
+    "ref": "f38c1ef5-3fc4-44d5-a981-bdde532fc507",
+    "keyword": "22fee25cab8d39a177372d8d21e7a34c",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59899680147",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_7b25568a-0a31-4f51-8972-e763ab7e8d4a",
+    "keyword": "key_29fc524d-1ed2-4d3a-9745-a0913e2f633e",
+    "answer": "Los horarios disponibles para hoy son:",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "a85008a1f29d0a943396f1351ec48c21",
+    "from": "59899680147"
+  },
+  {
+    "ref": "4daa541c-97ea-458d-a1ce-66a7674eabc0",
+    "keyword": null,
+    "answer": "- 7:00\n- 8:00\n- 9:00\n- 10:00\n- 16:30\n- 17:30\n- 18:30\n- 19:30\n- 20:30",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899680147",
+    "refSerialize": "898e0d1642e1cb24112872c2ed064f56"
+  },
+  {
+    "ref": "0b8221b9-e148-40e3-92f2-0a9da249e8cf",
+    "keyword": "a85008a1f29d0a943396f1351ec48c21",
+    "answer": "👍👏👏👏",
+    "options": {},
+    "from": "59899680147",
+    "refSerialize": "a7f9f1b743cfaadcd1bd881dd71c6c71"
+  }
+]
