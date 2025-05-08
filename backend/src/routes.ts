@@ -31,6 +31,7 @@ router.get('/usuarios/removeDuplicates', UsuariosController.removeDuplicateUsuar
 
 // Horarios routes
 router.get('/horarios', HorariosController.getHorarios);
+router.get('/horariosHoy', HorariosController.getHorariosHoy);
 router.post('/horarios', HorariosController.addHorario);
 router.delete('/horarios', HorariosController.deleteHorario);
 router.put('/horarios', HorariosController.updateHorario);
@@ -38,6 +39,7 @@ router.put('/horarios', HorariosController.updateHorario);
 // Reservas routes
 router.get('/reservas', ReservaController.getReservas);
 router.post('/reservas', ReservaController.addReserva);
+router.put('/reservas', ReservaController.updateReserva);
 router.delete('/reservas', ReservaController.deleteReserva);
 // Development-only route
 router.get('/reservas/reset', ReservaController.resetReservas);
