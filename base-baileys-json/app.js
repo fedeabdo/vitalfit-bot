@@ -50,7 +50,7 @@ apiClient.interceptors.request.use(async (config) => {
 
 // EL orden es importante
 const flowAyudaCambio = addKeyword(['AYUDA CAMBIO', 'ayuda cambio', 'Ayuda cambio', 'Ayuda Cambio'])	
-    .addAnswer(`Para hacer una cambio de reserva escribe la palabra RESERVA seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).
+    .addAnswer(`Para hacer una cambio de reserva escribe la palabra CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).
         Por ejemplo: CAMBIO 20:30 12345678.`
 , null, async (ctx, { flowDynamic }) => {       
     });
@@ -109,7 +109,8 @@ const flowReserva = addKeyword(['RESERVA', 'reserva', 'Reserva'])
             await flowDynamic(`✅ Reserva procesada para las ${hora} con el número ${cedula}: ${response.data.message}`);
         } catch (error) {
             console.log(error);
-            await flowDynamic('❌ Hubo un error al procesar tu reserva. Verificá que la hora y cédula sean correctas.');
+            const errorMessage = extractErrorMessage(error);
+            await flowDynamic(errorMessage);
         }
     });
 
@@ -134,7 +135,8 @@ const flowCambio = addKeyword(['CAMBIO', 'Cambio']
             await flowDynamic(`✅ Cambio procesado para las ${hora} con el número ${cedula}: ${response.data.message}`);
         } catch (error) {
             console.log(error);
-            await flowDynamic('❌ Hubo un error al procesar tu cambio. Verificá que la hora y cédula sean correctas.');
+            const errorMessage = extractErrorMessage(error);
+            await flowDynamic(errorMessage);
         }
     }
 )
@@ -159,7 +161,8 @@ const flowBorrar = addKeyword(['BORRAR', 'borrar', 'Borrar'])
             await flowDynamic(`✅ Borrado procesado para las ${hora} con el número ${cedula}`);
         } catch (error) {
             console.log(error);
-            await flowDynamic('❌ Hubo un error al procesar tu borrado. Verificá que la hora y cédula sean correctas.');
+            const errorMessage = extractErrorMessage(error);
+            await flowDynamic(errorMessage);
         }
     }
 )
@@ -180,6 +183,13 @@ const validateReservaMessage = (message) => {
 
     // If all checks pass, return null (no errors)
     return null;
+};
+
+const extractErrorMessage = (error) => {
+    if (error.response && error.response.data && error.response.data.error) {
+        return error.response.data.error; // Extract the error message from the response body
+    }
+    return '❌ Ocurrió un error inesperado.'; // Default message for unexpected errors
 };
 
 

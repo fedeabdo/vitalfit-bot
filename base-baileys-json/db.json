@@ -1,16 +1,16 @@
 [
   {
-    "ref": "f38c1ef5-3fc4-44d5-a981-bdde532fc507",
-    "keyword": "22fee25cab8d39a177372d8d21e7a34c",
-    "answer": "Horarios",
+    "ref": "ac5c1c71-1907-4bf2-a710-4e51bc409763",
+    "keyword": "f9779a3df628eb9a98c527879b5ddd31",
+    "answer": "borrar 19:30 22",
     "options": {},
-    "from": "59899680147",
-    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+    "from": "59898926360",
+    "refSerialize": "fcfbc39393a2c61408ffcf99cd2c67c2"
   },
   {
-    "ref": "ans_7b25568a-0a31-4f51-8972-e763ab7e8d4a",
-    "keyword": "key_29fc524d-1ed2-4d3a-9745-a0913e2f633e",
-    "answer": "Los horarios disponibles para hoy son:",
+    "ref": "ans_2275b594-30f2-4160-8f01-2db1a6f39ee9",
+    "keyword": "key_47033a4c-6059-4f77-805c-4e057853b210",
+    "answer": "Estamos procesando tu borrado 😔",
     "options": {
       "media": null,
       "buttons": [],
@@ -23,28 +23,300 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "a85008a1f29d0a943396f1351ec48c21",
-    "from": "59899680147"
+    "refSerialize": "37f9407df24139ae245b71ba2a59ad29",
+    "from": "59898926360"
   },
   {
-    "ref": "4daa541c-97ea-458d-a1ce-66a7674eabc0",
+    "ref": "5f4f1049-5f99-4b91-8689-97a97207692f",
     "keyword": null,
-    "answer": "- 7:00\n- 8:00\n- 9:00\n- 10:00\n- 16:30\n- 17:30\n- 18:30\n- 19:30\n- 20:30",
+    "answer": "El usuario con cédula 22 no existe",
     "options": {
       "media": null,
       "buttons": [],
       "capture": false,
       "delay": 0
     },
-    "from": "59899680147",
-    "refSerialize": "898e0d1642e1cb24112872c2ed064f56"
+    "from": "59898926360",
+    "refSerialize": "8c52325251af4b83b2f47deb88bfb299"
   },
   {
-    "ref": "0b8221b9-e148-40e3-92f2-0a9da249e8cf",
-    "keyword": "a85008a1f29d0a943396f1351ec48c21",
-    "answer": "👍👏👏👏",
+    "ref": "108d587a-f793-481c-8f88-e0d19e3fca9a",
+    "keyword": "37f9407df24139ae245b71ba2a59ad29",
+    "answer": "borrar 19:30 52079281",
     "options": {},
-    "from": "59899680147",
-    "refSerialize": "a7f9f1b743cfaadcd1bd881dd71c6c71"
+    "from": "59898926360",
+    "refSerialize": "5a12661ec69cf06f8587a97c5c95710f"
+  },
+  {
+    "ref": "ans_2275b594-30f2-4160-8f01-2db1a6f39ee9",
+    "keyword": "key_47033a4c-6059-4f77-805c-4e057853b210",
+    "answer": "Estamos procesando tu borrado 😔",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "37f9407df24139ae245b71ba2a59ad29",
+    "from": "59898926360"
+  },
+  {
+    "ref": "6cd5d9e8-8e16-4fa1-a667-2deb60f7b0d3",
+    "keyword": null,
+    "answer": "✅ Borrado procesado para las 19:30 con el número 52079281",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898926360",
+    "refSerialize": "86d2f03f1b89f828f6124b811ec8ead7"
+  },
+  {
+    "ref": "e67a4f13-4b5b-4380-bb36-c46eb4cf20af",
+    "keyword": "37f9407df24139ae245b71ba2a59ad29",
+    "answer": "Cambio 19:30 52079281",
+    "options": {},
+    "from": "59898926360",
+    "refSerialize": "44b17bec3844ff07328c79c3753c6d02"
+  },
+  {
+    "ref": "ans_69837f41-6bd7-4083-b1a5-67d11745e621",
+    "keyword": "key_39a8998a-4953-4481-aea2-f3582eb4ef90",
+    "answer": "Estamos procesando tu cambio de reserva ⏳.",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "b06489b9899e0e43e0ad4cc746782e3a",
+    "from": "59898926360"
+  },
+  {
+    "ref": "3da948dd-2688-4df6-b929-5b9f4883cc90",
+    "keyword": null,
+    "answer": "El usuario no tiene una reserva existente para cambiar",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898926360",
+    "refSerialize": "df4df3675947e3020f85b8c89ea273c9"
+  },
+  {
+    "ref": "8ea786ba-f8c8-47fb-ac2f-42953fd2ec80",
+    "keyword": "b06489b9899e0e43e0ad4cc746782e3a",
+    "answer": "Reserva 19:30 52079281",
+    "options": {},
+    "from": "59898926360",
+    "refSerialize": "1d26676cc6f191f70a3932378cec3186"
+  },
+  {
+    "ref": "ans_999d87f2-be7b-4559-ae0b-323e32e9cc0d",
+    "keyword": "key_30f4ca54-af24-4037-be3c-c46771234a81",
+    "answer": "Estamos procesando tu reserva. 💪",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "8c18838d645900d9f26b2a731f4fdf35",
+    "from": "59898926360"
+  },
+  {
+    "ref": "8e00a3f5-730a-485f-9692-989974fc8b1b",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 19:30 con el número 52079281: Reserva agregada",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898926360",
+    "refSerialize": "0019f73a855aeabb89feaa6d49406b10"
+  },
+  {
+    "ref": "3b266bcf-9308-4f5d-bcc7-a0b09dd3bb03",
+    "keyword": "8c18838d645900d9f26b2a731f4fdf35",
+    "answer": "Cambio 20:30 52079281",
+    "options": {},
+    "from": "59898926360",
+    "refSerialize": "ce624f44e778fb98d03fa71b8f7375cc"
+  },
+  {
+    "ref": "ans_69837f41-6bd7-4083-b1a5-67d11745e621",
+    "keyword": "key_39a8998a-4953-4481-aea2-f3582eb4ef90",
+    "answer": "Estamos procesando tu cambio de reserva ⏳.",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "b06489b9899e0e43e0ad4cc746782e3a",
+    "from": "59898926360"
+  },
+  {
+    "ref": "a9d5da39-e377-4c22-8657-b665031fcdd7",
+    "keyword": null,
+    "answer": "✅ Cambio procesado para las 20:30 con el número 52079281: Reserva actualizada",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898926360",
+    "refSerialize": "322bdf3380c41f8dda891c571c2932a9"
+  },
+  {
+    "ref": "e87e8a87-3968-4094-80ea-c74824659046",
+    "keyword": "b06489b9899e0e43e0ad4cc746782e3a",
+    "answer": "Reserva 19:30 52079281",
+    "options": {},
+    "from": "59898926360",
+    "refSerialize": "1d26676cc6f191f70a3932378cec3186"
+  },
+  {
+    "ref": "ans_999d87f2-be7b-4559-ae0b-323e32e9cc0d",
+    "keyword": "key_30f4ca54-af24-4037-be3c-c46771234a81",
+    "answer": "Estamos procesando tu reserva. 💪",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "8c18838d645900d9f26b2a731f4fdf35",
+    "from": "59898926360"
+  },
+  {
+    "ref": "1a891ed9-d185-4236-a226-0d3af2dfaa7d",
+    "keyword": null,
+    "answer": "El usuario ya tiene una reserva",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898926360",
+    "refSerialize": "132c8ba569fd9ecca72e84e009413dee"
+  },
+  {
+    "ref": "d229a282-363e-4561-a5aa-610fb937f5fa",
+    "keyword": "8c18838d645900d9f26b2a731f4fdf35",
+    "answer": "Reserva 18:30 52079281",
+    "options": {},
+    "from": "59898926360",
+    "refSerialize": "bdd0b94b30ef91f21ef52776992678af"
+  },
+  {
+    "ref": "ans_999d87f2-be7b-4559-ae0b-323e32e9cc0d",
+    "keyword": "key_30f4ca54-af24-4037-be3c-c46771234a81",
+    "answer": "Estamos procesando tu reserva. 💪",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "8c18838d645900d9f26b2a731f4fdf35",
+    "from": "59898926360"
+  },
+  {
+    "ref": "67210b91-45d7-4449-a869-b711eb8540eb",
+    "keyword": null,
+    "answer": "El usuario ya tiene una reserva",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898926360",
+    "refSerialize": "132c8ba569fd9ecca72e84e009413dee"
+  },
+  {
+    "ref": "64f195e6-6dde-4c25-8eb6-a40fee3568d3",
+    "keyword": "8c18838d645900d9f26b2a731f4fdf35",
+    "answer": "Cambio 08:00 52079281",
+    "options": {},
+    "from": "59898926360",
+    "refSerialize": "22fc9a101deceb0667c400e40033e77e"
+  },
+  {
+    "ref": "ans_69837f41-6bd7-4083-b1a5-67d11745e621",
+    "keyword": "key_39a8998a-4953-4481-aea2-f3582eb4ef90",
+    "answer": "Estamos procesando tu cambio de reserva ⏳.",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "b06489b9899e0e43e0ad4cc746782e3a",
+    "from": "59898926360"
+  },
+  {
+    "ref": "65ebd600-7a0b-42e7-9d48-b781044f5f04",
+    "keyword": null,
+    "answer": "El horario de reserva es inválido",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898926360",
+    "refSerialize": "bc6342f579ab76e7a75def305dca536e"
   }
 ]
