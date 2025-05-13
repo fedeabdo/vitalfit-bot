@@ -1,12 +1,14 @@
 import { Request, Response } from 'express';
 import fs from 'fs/promises';
 import path from 'path';
-import { tiempo, Dia } from '../types';
+import { tiempo, Dia, Reserva } from '../types';
 import { Horario } from '../types'
 import { UsuariosController } from './UsuariosController';
+import { ReservaController } from './ReservasController';
 
 export class HorariosController {
   private static readonly DATA_PATH_HORARIOS = path.join(__dirname, '../data/HorariosPrioritarios.json');
+  private static readonly DATA_PATH_RESERVAS_BACKUP = path.join(__dirname, '../data/BackupReservas.json');
 
 
   // Imprimir Horarios
@@ -23,25 +25,33 @@ export class HorariosController {
 
   static async getHorariosHoy(req: Request, res: Response) {
     try {
-      const data = await fs.readFile(HorariosController.DATA_PATH_HORARIOS, 'utf-8');
-      const horarios: Horario[] = JSON.parse(data);
-      const uniqueHours = new Set<string>();
-      const diaActual = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(new Date());
+        const data = await fs.readFile(HorariosController.DATA_PATH_HORARIOS, 'utf-8');
+        const horarios: Horario[] = JSON.parse(data);
+        const diaActual = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(new Date());
 
-      for (const key in horarios) {
-        if (key.toLowerCase().includes(diaActual)) {
-          const parts = key.split('-');
-          if (parts.length === 2) {
-            uniqueHours.add(parts[1]); 
-          }
-        }
-      }
+        // Read BackupReservas.json to get reservation data
+        const backupData = await fs.readFile(HorariosController.DATA_PATH_RESERVAS_BACKUP, 'utf-8');
+        const backupReservas: Record<string, Reserva[]> = JSON.parse(backupData);
 
-      res.status(201).json(Array.from(uniqueHours));
-      return;
+        const result = Object.keys(horarios)
+            .filter(key => key.toLowerCase().includes(diaActual))
+            .map(key => {
+                const parts = key.split('-');
+                if (parts.length === 2) {
+                    const hora = parts[1];
+                    const reservas = backupReservas[hora] || [];
+                    return {
+                        hora,
+                        disponibilidad: reservas.length <= 5
+                    };
+                }
+                return null;
+            })
+            .filter(Boolean); // Remove null values
+
+        res.status(201).json(result);
     } catch (error) {
-      res.status(500).json({ error: 'Error al imprimir horarios de hoy' });
-      return;
+        res.status(500).json({ error: 'Error al imprimir horarios de hoy' });
     }
   }
 

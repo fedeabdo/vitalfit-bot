@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 const { createBot, createProvider, createFlow, addKeyword } = require('@bot-whatsapp/bot')
 
 const QRPortalWeb = require('@bot-whatsapp/portal')
@@ -14,7 +17,7 @@ let tokenExpiry = null;
 // Function to fetch a new JWT token from the backend
 const fetchAuthToken = async () => {
     try {
-        const response = await axios.post('http://localhost:5100/api/login', {
+        const response = await axios.post(`${process.env.BASE_URL}/login`, {
             username: 'test',
             password: 'testing123',
         });
@@ -48,6 +51,32 @@ apiClient.interceptors.request.use(async (config) => {
     return Promise.reject(error);
 });
 
+// Rate limiting
+const rateLimit = {};
+const RATE_LIMIT_WINDOW = 1000; // 1 second
+const MAX_REQUESTS_PER_WINDOW = 3;
+
+const isRateLimited = (userId) => {
+    const currentTime = Date.now();
+
+    if (!rateLimit[userId]) {
+        rateLimit[userId] = [];
+    }
+
+    // Filter out timestamps older than the rate limit window
+    rateLimit[userId] = rateLimit[userId].filter(timestamp => currentTime - timestamp < RATE_LIMIT_WINDOW);
+
+    // Check if the user has exceeded the max requests
+    if (rateLimit[userId].length >= MAX_REQUESTS_PER_WINDOW) {
+        return true;
+    }
+
+    // Add the current timestamp to the user's request log
+    rateLimit[userId].push(currentTime);
+    return false;
+};
+
+
 // EL orden es importante
 const flowAyudaCambio = addKeyword(['AYUDA CAMBIO', 'ayuda cambio', 'Ayuda cambio', 'Ayuda Cambio'])	
     .addAnswer(`Para hacer una cambio de reserva escribe la palabra CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).
@@ -75,18 +104,18 @@ const flowAyuda = addKeyword(['AYUDA', 'HOLA', 'ayuda', 'Hola'])
 , null, async (ctx, { flowDynamic }) => {       
     });
 
-const flowHorarios = addKeyword(['HORARIOS', 'horarios', 'Horarios'])	
+const flowHorarios = addKeyword(['HORARIOS', 'horarios', 'Horarios'])
     .addAnswer(`Los horarios disponibles para hoy son:`, null, async (ctx, { flowDynamic }) => {
         try {
-            const response = await apiClient.get('http://localhost:5100/api/horariosHoy');
+            const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
             const horarios = response.data
-                .map((hora) => `- ${hora}`)
+                .map(({ hora, disponibilidad }) => `🕒 - ${hora}: ${disponibilidad ? '✅ Disponible' : '❌ No disponible'}`)
                 .join('\n');
             await flowDynamic(horarios);
         } catch (error) {
             console.error('❌ Error fetching horarios:', error.message);
             await flowDynamic('❌ Hubo un error al obtener los horarios disponibles.');
-        }       
+        }
     });
 
 const flowReserva = addKeyword(['RESERVA', 'reserva', 'Reserva'])
@@ -101,11 +130,21 @@ const flowReserva = addKeyword(['RESERVA', 'reserva', 'Reserva'])
         }
 
         // Extract data from the message
-        const [_, hora, cedula] = userMessage.match(/reserva\s+(\d{1,2}:\d{2})\s+(\d+)/i);
+        const match = userMessage.match(/reserva\s+(\d{1,2}:\d{2})\s+(\d+)/i);
+        if (!match) {
+            await flowDynamic('❌ El mensaje no tiene el formato esperado. Por favor, usa: RESERVA <hora> <cédula>.');
+            return;
+        }
+
+        const [_, hora, cedula] = match;
+        if (!hora || !cedula) {
+            await flowDynamic('❌ Faltan datos en el mensaje. Asegúrate de incluir la hora y la cédula.');
+            return;
+        }
 
         // Make an API request with the extracted data
         try {
-            const response = await apiClient.post('http://localhost:5100/api/reservas', { "hora": hora, "cedula": cedula });
+            const response = await apiClient.post(`${process.env.BASE_URL}/reservas`, { "hora": hora, "cedula": cedula });
             await flowDynamic(`✅ Reserva procesada para las ${hora} con el número ${cedula}: ${response.data.message}`);
         } catch (error) {
             console.log(error);
@@ -127,11 +166,21 @@ const flowCambio = addKeyword(['CAMBIO', 'Cambio']
         }
 
         // Extract data from the message
-        const [_, hora, cedula] = userMessage.match(/cambio\s+(\d{1,2}:\d{2})\s+(\d+)/i);
+        const match = userMessage.match(/cambio\s+(\d{1,2}:\d{2})\s+(\d+)/i);
+        if (!match) {
+            await flowDynamic('❌ El mensaje no tiene el formato esperado. Por favor, usa: CAMBIO <hora> <cédula>.');
+            return;
+        }
+
+        const [_, hora, cedula] = match;
+        if (!hora || !cedula) {
+            await flowDynamic('❌ Faltan datos en el mensaje. Asegúrate de incluir la hora y la cédula.');
+            return;
+        }
 
         // Make an API request with the extracted data
         try {
-            const response = await apiClient.put('http://localhost:5100/api/reservas', { "hora": hora, "cedula": cedula });
+            const response = await apiClient.put(`${process.env.BASE_URL}/reservas`, { "hora": hora, "cedula": cedula });
             await flowDynamic(`✅ Cambio procesado para las ${hora} con el número ${cedula}: ${response.data.message}`);
         } catch (error) {
             console.log(error);
@@ -153,11 +202,21 @@ const flowBorrar = addKeyword(['BORRAR', 'borrar', 'Borrar'])
         }
 
         // Extract data from the message
-        const [_, hora, cedula] = userMessage.match(/borrar\s+(\d{1,2}:\d{2})\s+(\d+)/i);
+        const match = userMessage.match(/borrar\s+(\d{1,2}:\d{2})\s+(\d+)/i);
+        if (!match) {
+            await flowDynamic('❌ El mensaje no tiene el formato esperado. Por favor, usa: BORRAR <hora> <cédula>.');
+            return;
+        }
+
+        const [_, hora, cedula] = match;
+        if (!hora || !cedula) {
+            await flowDynamic('❌ Faltan datos en el mensaje. Asegúrate de incluir la hora y la cédula.');
+            return;
+        }
 
         try {
             // Make an API request with the extracted data
-            const response = await apiClient.delete('http://localhost:5100/api/reservas', { data: { "hora": hora, "cedula": cedula } });
+            const response = await apiClient.delete(`${process.env.BASE_URL}/reservas`, { data: { "hora": hora, "cedula": cedula } });
             await flowDynamic(`✅ Borrado procesado para las ${hora} con el número ${cedula}`);
         } catch (error) {
             console.log(error);
@@ -168,6 +227,9 @@ const flowBorrar = addKeyword(['BORRAR', 'borrar', 'Borrar'])
 )
 
 const validateReservaMessage = (message) => {
+    if (!message || message.trim() === '') {
+        return '❌ El mensaje no puede estar vacío. Por favor, incluye una hora y una cédula.';
+    }
 
     // Check if the message contains a valid time in 24-hour format
     const timeRegex = /\b([01]?[0-9]|2[0-3]):[0-5][0-9]\b/;
@@ -178,7 +240,7 @@ const validateReservaMessage = (message) => {
     // Check if the message ends with a valid number (no special characters)
     const numberRegex = /\b\d+$/;
     if (!numberRegex.test(message)) {
-        return '❌ La cedula debe escribirse en un formato valido (sin caracteres especiales, todo junto).';
+        return '❌ La cédula debe escribirse en un formato válido (sin caracteres especiales, todo junto).';
     }
 
     // If all checks pass, return null (no errors)
@@ -194,19 +256,66 @@ const extractErrorMessage = (error) => {
 
 
 
+const applyRateLimitMiddleware = (flow) => {
+    if (!flow || typeof flow.addAnswer !== 'function') {
+        console.error('❌ Invalid flow passed to applyRateLimitMiddleware:', flow);
+        throw new Error('Invalid flow object. The flow must have an addAnswer method.');
+    }
+
+    // Wrap the original addAnswer method to include rate-limiting logic
+    const originalAddAnswer = flow.addAnswer.bind(flow);
+    flow.addAnswer = (answer, options, callback) => {
+        const wrappedCallback = async (ctx, { flowDynamic }, next) => {
+            const userId = ctx.from; // Assuming `ctx.from` contains the user ID
+
+            if (isRateLimited(userId)) {
+                await flowDynamic('❌ Estás enviando demasiados mensajes. Por favor, espera un momento antes de intentarlo de nuevo.');
+                return;
+            }
+
+            if (callback) {
+                await callback(ctx, { flowDynamic }, next);
+            }
+        };
+
+        return originalAddAnswer(answer, options, wrappedCallback);
+    };
+
+    return flow;
+};
+
+// Wrap all flows with the rate limit middleware
+const flowAyudaCambioWithRateLimit = applyRateLimitMiddleware(flowAyudaCambio);
+const flowAyudaReservaWithRateLimit = applyRateLimitMiddleware(flowAyudaReserva);
+const flowAyudaBorrarWithRateLimit = applyRateLimitMiddleware(flowAyudaBorrar);
+const flowAyudaWithRateLimit = applyRateLimitMiddleware(flowAyuda);
+const flowHorariosWithRateLimit = applyRateLimitMiddleware(flowHorarios);
+const flowReservaWithRateLimit = applyRateLimitMiddleware(flowReserva);
+const flowCambioWithRateLimit = applyRateLimitMiddleware(flowCambio);
+const flowBorrarWithRateLimit = applyRateLimitMiddleware(flowBorrar);
+
 const main = async () => {
-    const adapterDB = new JsonFileAdapter()
-    const adapterFlow = createFlow([flowAyudaCambio, flowAyudaReserva, flowAyudaBorrar, flowAyuda, flowHorarios, flowReserva, flowCambio, flowBorrar ])
-    const adapterProvider = createProvider(BaileysProvider)
+    const adapterDB = new JsonFileAdapter();
+    const adapterFlow = createFlow([
+        flowAyudaCambioWithRateLimit,
+        flowAyudaReservaWithRateLimit,
+        flowAyudaBorrarWithRateLimit,
+        flowAyudaWithRateLimit,
+        flowHorariosWithRateLimit,
+        flowReservaWithRateLimit,
+        flowCambioWithRateLimit,
+        flowBorrarWithRateLimit
+    ]);
+    const adapterProvider = createProvider(BaileysProvider);
 
     createBot({
         flow: adapterFlow,
         provider: adapterProvider,
         database: adapterDB,
-    })
+    });
 
-    QRPortalWeb()
-}
+    QRPortalWeb();
+};
 
 // Fetch the initial token when the bot starts
 fetchAuthToken();
