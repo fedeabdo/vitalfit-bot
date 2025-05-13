@@ -5,6 +5,11 @@ import cron from 'node-cron';
 import { Reserva, Horario, ReservaRequest, ReservaRequestByName, Usuario } from '../types';
 import { UsuariosController } from './UsuariosController';
 import { HorariosController } from './HorariosController';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+import { parse } from 'json2csv';
+
+dotenv.config();
 
 export class ReservaController {
   private static reservas: Record<string, Reserva[]> = {};
@@ -61,12 +66,6 @@ export class ReservaController {
       res.status(409).json({ error: 'El usuario ya tiene una reserva' });
       return;
     }
-
-    if (ReservaController.reservas[hora].length >= ReservaController.MAX_RESERVAS_POR_HORARIO) {
-      res.status(403).json({ error: `Este horario ya está lleno (máximo ${ReservaController.MAX_RESERVAS_POR_HORARIO} reservas)` });
-      return;
-    }
-
 
     if (ReservaController.esPrevioAHoraActual(hora)) {
       res.status(403).json({ error: 'No se puede hacer reservas previas a la hora actual' });
@@ -181,7 +180,7 @@ export class ReservaController {
   
       const horarioAChequear = `${dia}-${hora}`;
       const esPrioritario = await ReservaController.chequeoHorarioPrioritario(usuario, horarioAChequear);
-  
+
       if (esPrioritario) {
         ReservaController.agregarReserva(hora, usuario);
         return res.status(201).json({ message: 'Reserva agregada (prioritario)', hora, usuario });
@@ -322,6 +321,66 @@ export class ReservaController {
     await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2));
   }
 
+  // Function to format backup data into a comprehensible CSV
+  private static formatBackupDataToCSV(backupReservas: Record<string, Reserva[]>): string {
+    // Extract keys (time slots)
+    const timeSlots = Object.keys(backupReservas);
+
+    // Create rows for the CSV
+    const rows: Record<string, string>[] = [];
+    const maxUsers = Math.max(...Object.values(backupReservas).map(users => users.length));
+
+    for (let i = 0; i < maxUsers; i++) {
+        const row: Record<string, string> = {};
+        timeSlots.forEach(slot => {
+            row[slot] = backupReservas[slot][i]?.usuario || ''; // Add user or empty string if no user
+        });
+        rows.push(row);
+    }
+
+    // Convert rows to CSV
+    return parse(rows, { fields: timeSlots });
+}
+
+  // Function to send email with backup data
+  private static async sendBackupEmail(backupReservas: Record<string, Reserva[]>): Promise<void> {
+    try {
+        // Format backup data into a comprehensible CSV
+        const csvData = this.formatBackupDataToCSV(backupReservas);
+
+        // Create transporter
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.zoho.com',
+            port: 465, // Use 587 for TLS
+            secure: true, // Use true for SSL, false for TLS
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
+            },
+        });
+
+        // Email options
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_RECIPIENT, // Recipient email from .env
+            subject: 'Backup de Reservas Diarias',
+            text: 'Adjunto encontrarás el backup de reservas diarias.',
+            attachments: [
+                {
+                    filename: `BackupReservas_${new Date().toISOString().split('T')[0]}.csv`,
+                    content: csvData,
+                },
+            ],
+        };
+
+        // Send email
+        await transporter.sendMail(mailOptions);
+        console.log('✅ Backup email sent successfully');
+    } catch (error) {
+        console.error('❌ Error sending backup email:', error);
+    }
+}
+
   static async inicializarHorariosDiarios(): Promise<void> {
     console.log("INICIALIZANDO HORARIOS");
 
@@ -330,25 +389,28 @@ export class ReservaController {
     const minutosActuales = now.getMinutes();
 
     if (horaActual > 20 || (horaActual === 20 && minutosActuales >= 30)) {
-      const horas: string[] = await this.getHorariosDispniblesMañana();
-      ReservaController.reservas = {};
-      horas.forEach(hour => {
-        ReservaController.reservas[hour] = [];
-      });
-      await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2))
-    } else {
-      const data = await fs.readFile(ReservaController.DATA_PATH_RESERVAS, 'utf-8');
-      const backupReservas: Record<string, Reserva[]> = JSON.parse(data);
-      if (Object.keys(backupReservas).length === 0 && backupReservas.constructor === Object) {
-        const horas: string[] = await this.getHorariosDispniblesHoy();
+        const horas: string[] = await this.getHorariosDispniblesMañana();
         ReservaController.reservas = {};
         horas.forEach(hour => {
-          ReservaController.reservas[hour] = [];
+            ReservaController.reservas[hour] = [];
         });
         await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2))
-      } else {
-        ReservaController.reservas = backupReservas;
-      }
+    } else {
+        const data = await fs.readFile(ReservaController.DATA_PATH_RESERVAS, 'utf-8');
+        const backupReservas: Record<string, Reserva[]> = JSON.parse(data);
+        if (Object.keys(backupReservas).length === 0 && backupReservas.constructor === Object) {
+            const horas: string[] = await this.getHorariosDispniblesHoy();
+            ReservaController.reservas = {};
+            horas.forEach(hour => {
+                ReservaController.reservas[hour] = [];
+            });
+            await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2))
+        } else {
+            ReservaController.reservas = backupReservas;
+
+            // Send backup email
+            await this.sendBackupEmail(backupReservas);
+        }
     }
   }
 
