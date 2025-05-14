@@ -10,6 +10,10 @@ import { Request, Response } from 'express';
 const router = express.Router();
 
 // Public routes (no authentication required)
+
+router.get('/health', (req: Request, res: Response) => {
+  res.sendStatus(200);
+});
 router.post('/login', AuthController.login);
 router.options(
     '/login', 

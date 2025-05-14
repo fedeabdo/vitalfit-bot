@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+
 dotenv.config();
 
 const { createBot, createProvider, createFlow, addKeyword } = require('@bot-whatsapp/bot')
@@ -18,8 +19,8 @@ let tokenExpiry = null;
 const fetchAuthToken = async () => {
     try {
         const response = await axios.post(`${process.env.BASE_URL}/login`, {
-            username: 'test',
-            password: 'testing123',
+            username: process.env.USERNAME,
+            password: process.env.PASSWORD,
         });
         authToken = response.data.token;
         const decodedToken = jwt.decode(authToken);
@@ -313,7 +314,6 @@ const main = async () => {
         provider: adapterProvider,
         database: adapterDB,
     });
-
     QRPortalWeb();
 };
 
