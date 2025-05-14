@@ -4,41 +4,7 @@
   "10:00": [],
   "16:30": [],
   "17:30": [],
-  "18:30": [
-    {
-      "hora": "18:30",
-      "usuario": "Andres Delfino"
-    }
-  ],
+  "18:30": [],
   "19:30": [],
-  "20:30": [
-    {
-      "hora": "20:30",
-      "usuario": "Braian Texeira"
-    },
-    {
-      "hora": "20:30",
-      "usuario": "Emanuel Berón"
-    },
-    {
-      "hora": "20:30",
-      "usuario": "Marelen Cabrera"
-    },
-    {
-      "hora": "20:30",
-      "usuario": "Marcos Zinnato"
-    },
-    {
-      "hora": "20:30",
-      "usuario": "Agustín ibero"
-    },
-    {
-      "hora": "20:30",
-      "usuario": "Adriana Longo"
-    },
-    {
-      "hora": "20:30",
-      "usuario": "Natalia García"
-    }
-  ]
+  "20:30": []
 }

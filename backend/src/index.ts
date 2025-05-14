@@ -7,7 +7,7 @@ import cors from 'cors';
 
 
 const app = express();
-const PORT = process.env.PORT || 5100;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 5100;
 
 // Configure CORS
 const corsOptions = {
@@ -28,6 +28,7 @@ app.use("/api", routes);
 app.options('*', cors(corsOptions));
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
