@@ -22,6 +22,10 @@ export interface Reserva {
   usuario: string; 
 }
 
+export interface DeleteReserva {
+  usuario: string; 
+}
+
 export interface HorarioJson {
   diaHora: string;
   usuarios: string[];

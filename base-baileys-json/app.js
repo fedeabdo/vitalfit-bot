@@ -18,6 +18,7 @@ let tokenExpiry = null;
 // Function to fetch a new JWT token from the backend
 const fetchAuthToken = async () => {
     try {
+        console.log('🔄 Fetching new token at: ' + `${process.env.BASE_URL}/login`);
         const response = await axios.post(`${process.env.BASE_URL}/login`, {
             username: process.env.USERNAME,
             password: process.env.PASSWORD,
@@ -93,8 +94,8 @@ const flowAyudaReserva = addKeyword(['AYUDA RESERVA', 'ayuda reserva', 'Ayuda re
     });
 
 const flowAyudaBorrar = addKeyword(['AYUDA BORRAR', 'ayuda borrar', 'Ayuda borrar', 'Ayuda Borrar'])
-    .addAnswer(`Para hacer una borrado de reserva escribe la palabra BORRAR seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).
-        Por ejemplo: BORRAR 20:30 12345678.`
+    .addAnswer(`Para hacer una borrado de reserva escribe la palabra BORRAR seguido de tu cédula (sin puntos ni guiones).
+        Por ejemplo: BORRAR 12345678.`
 , null, async (ctx, { flowDynamic }) => {       
     });
 
@@ -195,37 +196,49 @@ const flowBorrar = addKeyword(['BORRAR', 'borrar', 'Borrar'])
     .addAnswer('Estamos procesando tu borrado 😔', null, async (ctx, { flowDynamic }) =>  {
         const userMessage = ctx.body;
 
-        // Validate the user's message
-        const validationError = validateReservaMessage(userMessage);
+        // Validate the user's message (must be "BORRAR <cédula>")
+        const validationError = validateDeleteCedulaMessage(userMessage);
         if (validationError) {
             await flowDynamic(validationError);
             return;
         }
 
-        // Extract data from the message
-        const match = userMessage.match(/borrar\s+(\d{1,2}:\d{2})\s+(\d+)/i);
+        // Extract cédula from the message
+        const match = userMessage.match(/^borrar\s+(\d{6,})$/i);
         if (!match) {
-            await flowDynamic('❌ El mensaje no tiene el formato esperado. Por favor, usa: BORRAR <hora> <cédula>.');
+            await flowDynamic('❌ El mensaje no tiene el formato esperado. Por favor, usa: BORRAR <cédula>.');
             return;
         }
 
-        const [_, hora, cedula] = match;
-        if (!hora || !cedula) {
-            await flowDynamic('❌ Faltan datos en el mensaje. Asegúrate de incluir la hora y la cédula.');
+        const [, cedula] = match;
+        if (!cedula) {
+            await flowDynamic('❌ Faltan datos en el mensaje. Asegúrate de incluir la cédula.');
             return;
         }
 
         try {
-            // Make an API request with the extracted data
-            const response = await apiClient.delete(`${process.env.BASE_URL}/reservas`, { data: { "hora": hora, "cedula": cedula } });
-            await flowDynamic(`✅ Borrado procesado para las ${hora} con el número ${cedula}`);
+            // Make an API request with only the cédula
+            const response = await apiClient.delete(`${process.env.BASE_URL}/reservas`, { data: { cedula } });
+            await flowDynamic(`✅ Borrado procesado para el número ${cedula}`);
         } catch (error) {
             console.log(error);
             const errorMessage = extractErrorMessage(error);
             await flowDynamic(errorMessage);
         }
     }
-)
+);
+
+// New validation function for cédula only
+const validateDeleteCedulaMessage = (message) => {
+    if (!message || message.trim() === '') {
+        return '❌ El mensaje no puede estar vacío. Por favor, incluye la cédula.';
+    }
+    // Only allow "BORRAR <cédula>" format, where cédula is at least 6 digits
+    if (!/^borrar\s+\d{6,}$/i.test(message.trim())) {
+        return '❌ El mensaje debe tener el formato: BORRAR <cédula> (sin caracteres especiales, todo junto).';
+    }
+    return null;
+};
 
 const validateReservaMessage = (message) => {
     if (!message || message.trim() === '') {
