@@ -1,7 +1,23 @@
 [
   {
-    "ref": "ans_41804755-d74a-4c19-8fab-2365ddc84794",
-    "keyword": "key_96dc7afe-7f75-443f-abbb-2388b8b0141b",
+    "ref": "7ec96780-ef1d-4902-8061-e8c51dd2d676",
+    "keyword": "78d0dd094351d0e09e8041c070247f5d",
+    "answer": "Pruebo algo?",
+    "options": {},
+    "from": "59899680147",
+    "refSerialize": "3ee39ac291bfc105b3b8a68a00ade90f"
+  },
+  {
+    "ref": "194aa33b-3571-4872-a3d3-16fb9b26a457",
+    "keyword": "3ee39ac291bfc105b3b8a68a00ade90f",
+    "answer": "RESERVA 20:30 52328363",
+    "options": {},
+    "from": "59899680147",
+    "refSerialize": "0312a727a0f30b84c75244c8590765e4"
+  },
+  {
+    "ref": "ans_4cb5f730-75a0-454d-a03c-f43910068cdf",
+    "keyword": "key_8af4d4d7-c954-4671-8f65-938014b2aaf6",
     "answer": "Estamos procesando tu reserva. 💪",
     "options": {
       "media": null,
@@ -15,13 +31,13 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "5f8a4c8f29d0992f4422ab610d1ef9dd",
+    "refSerialize": "920055a969b4c829f6cf0d431365d707",
     "from": "59899680147"
   },
   {
-    "ref": "6aac199a-6db1-40d4-92ab-d11b628af4e2",
+    "ref": "bf3081a8-2e72-4abe-af9b-33cb8afcd2ae",
     "keyword": null,
-    "answer": "❌ El mensaje no tiene el formato esperado. Por favor, usa: RESERVA <hora> <cédula>.",
+    "answer": "Usuario no prioritario, debe esperar para reservar (4 horas antes o menos)",
     "options": {
       "media": null,
       "buttons": [],
@@ -29,27 +45,19 @@
       "delay": 0
     },
     "from": "59899680147",
-    "refSerialize": "19c44aee079f26d2a3385558e0338f41"
+    "refSerialize": "8d4ad7bfe5160552abb7893fc02021f2"
   },
   {
-    "ref": "b15f1843-75b6-4c73-97bc-b58eae141209",
-    "keyword": "5f8a4c8f29d0992f4422ab610d1ef9dd",
-    "answer": "👍",
+    "ref": "57e25ff0-cbcc-4200-955e-92d4050fc362",
+    "keyword": "920055a969b4c829f6cf0d431365d707",
+    "answer": "RESERVA 19:30 52328363",
     "options": {},
     "from": "59899680147",
-    "refSerialize": "c661747a60f0bf20206ccb6f063dae00"
+    "refSerialize": "7755ec7017b34f96686e1b176eaced8c"
   },
   {
-    "ref": "49e6e423-ff1c-45ab-8280-dbe19f09c27a",
-    "keyword": "c661747a60f0bf20206ccb6f063dae00",
-    "answer": "RESERVA 20:30",
-    "options": {},
-    "from": "59899680147",
-    "refSerialize": "9683ea65b608ad8ca873e1ad951b9f79"
-  },
-  {
-    "ref": "ans_41804755-d74a-4c19-8fab-2365ddc84794",
-    "keyword": "key_96dc7afe-7f75-443f-abbb-2388b8b0141b",
+    "ref": "ans_4cb5f730-75a0-454d-a03c-f43910068cdf",
+    "keyword": "key_8af4d4d7-c954-4671-8f65-938014b2aaf6",
     "answer": "Estamos procesando tu reserva. 💪",
     "options": {
       "media": null,
@@ -63,13 +71,13 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "5f8a4c8f29d0992f4422ab610d1ef9dd",
+    "refSerialize": "920055a969b4c829f6cf0d431365d707",
     "from": "59899680147"
   },
   {
-    "ref": "4943e8e3-cbd7-47da-b946-f42061bfe3cb",
+    "ref": "04a25f09-0cd5-4f67-91cd-9ec8127334ce",
     "keyword": null,
-    "answer": "❌ El mensaje no tiene el formato esperado. Por favor, usa: RESERVA <hora> <cédula>.",
+    "answer": "✅ Reserva procesada para las 19:30 con el número 52328363: Reserva agregada",
     "options": {
       "media": null,
       "buttons": [],
@@ -77,19 +85,75 @@
       "delay": 0
     },
     "from": "59899680147",
-    "refSerialize": "19c44aee079f26d2a3385558e0338f41"
+    "refSerialize": "1dc10bbe2155b6d161d6e6fda5c4a493"
   },
   {
-    "ref": "5a609ef5-429f-4924-9bd1-703463e288a0",
-    "keyword": "5f8a4c8f29d0992f4422ab610d1ef9dd",
-    "answer": "RESERVA 52079281",
+    "ref": "d1be056c-4d38-49b4-9bf5-da91e3813c17",
+    "keyword": "920055a969b4c829f6cf0d431365d707",
+    "answer": "CAMBIO 20:30 52328363",
     "options": {},
     "from": "59899680147",
-    "refSerialize": "d777eb5091725e6dc5ddc19871360ad5"
+    "refSerialize": "28223c23f91cb247a551670a2524e6f3"
   },
   {
-    "ref": "ans_41804755-d74a-4c19-8fab-2365ddc84794",
-    "keyword": "key_96dc7afe-7f75-443f-abbb-2388b8b0141b",
+    "ref": "ans_23573cf4-e940-426f-b31c-d821f9f45eac",
+    "keyword": "key_fe339be1-db02-40cd-85f3-d22be7c220ed",
+    "answer": "Estamos procesando tu cambio de reserva ⏳.",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "8b2702f38e787499a8159aae76c28654",
+    "from": "59899680147"
+  },
+  {
+    "ref": "38c63af0-1304-41fc-a47a-4fb1a32bf683",
+    "keyword": null,
+    "answer": "✅ Cambio procesado para las 20:30 con el número 52328363: Reserva actualizada",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899680147",
+    "refSerialize": "2d7c2e2888d4d0d41cb92224c504702f"
+  },
+  {
+    "ref": "2e6d99cc-cb16-4877-be1f-9fffbe341e35",
+    "keyword": "8b2702f38e787499a8159aae76c28654",
+    "answer": "_event_media__4320bb35-f19e-403c-9d01-c1e122aa7b73",
+    "options": {},
+    "from": "59899680147",
+    "refSerialize": "26036a79b16b1299ef9304bf7ae3ac65"
+  },
+  {
+    "ref": "c0d49900-09b9-4b23-b8b5-2801aed38de4",
+    "keyword": "26036a79b16b1299ef9304bf7ae3ac65",
+    "answer": "_event_media__b9ef19f8-094e-46bf-b813-db38e9ede4e8",
+    "options": {},
+    "from": "59899680147",
+    "refSerialize": "235953ca3ff4ff812dabe1082c3a531c"
+  },
+  {
+    "ref": "3fe36e53-4968-437d-827c-6fb178b9ea8c",
+    "keyword": "235953ca3ff4ff812dabe1082c3a531c",
+    "answer": "RESERVA 19:30 52328363",
+    "options": {},
+    "from": "59899680147",
+    "refSerialize": "7755ec7017b34f96686e1b176eaced8c"
+  },
+  {
+    "ref": "ans_4cb5f730-75a0-454d-a03c-f43910068cdf",
+    "keyword": "key_8af4d4d7-c954-4671-8f65-938014b2aaf6",
     "answer": "Estamos procesando tu reserva. 💪",
     "options": {
       "media": null,
@@ -103,13 +167,13 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "5f8a4c8f29d0992f4422ab610d1ef9dd",
+    "refSerialize": "920055a969b4c829f6cf0d431365d707",
     "from": "59899680147"
   },
   {
-    "ref": "7130ef40-26b7-4416-8e4b-ebeca4be1cac",
+    "ref": "a20ad9ce-c8c5-4c5a-af6a-7c96b1658905",
     "keyword": null,
-    "answer": "❌ Debes incluir una hora válida en formato 24 horas (por ejemplo, 20:30).",
+    "answer": "✅ Reserva procesada para las 19:30 con el número 52328363: Reserva agregada",
     "options": {
       "media": null,
       "buttons": [],
@@ -117,6 +181,134 @@
       "delay": 0
     },
     "from": "59899680147",
-    "refSerialize": "09c0a48b1dee4cff5e8bc14492ecc3e9"
+    "refSerialize": "1dc10bbe2155b6d161d6e6fda5c4a493"
+  },
+  {
+    "ref": "45c99aaf-86d0-4d0e-b9a2-e4c7d0a9dbe5",
+    "keyword": "920055a969b4c829f6cf0d431365d707",
+    "answer": "CAMBIO 20:30 52328363",
+    "options": {},
+    "from": "59899680147",
+    "refSerialize": "28223c23f91cb247a551670a2524e6f3"
+  },
+  {
+    "ref": "ans_23573cf4-e940-426f-b31c-d821f9f45eac",
+    "keyword": "key_fe339be1-db02-40cd-85f3-d22be7c220ed",
+    "answer": "Estamos procesando tu cambio de reserva ⏳.",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "8b2702f38e787499a8159aae76c28654",
+    "from": "59899680147"
+  },
+  {
+    "ref": "5fd82d1d-7c1d-4f87-b193-1fa78d61862c",
+    "keyword": null,
+    "answer": "Usuario no prioritario, debe esperar para reservar (4 horas antes o menos)",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899680147",
+    "refSerialize": "8d4ad7bfe5160552abb7893fc02021f2"
+  },
+  {
+    "ref": "364f4a81-0e84-44de-9b45-c2d517aaa23c",
+    "keyword": "8b2702f38e787499a8159aae76c28654",
+    "answer": "RESERVA 19:30 52328363",
+    "options": {},
+    "from": "59899680147",
+    "refSerialize": "7755ec7017b34f96686e1b176eaced8c"
+  },
+  {
+    "ref": "ans_4cb5f730-75a0-454d-a03c-f43910068cdf",
+    "keyword": "key_8af4d4d7-c954-4671-8f65-938014b2aaf6",
+    "answer": "Estamos procesando tu reserva. 💪",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "920055a969b4c829f6cf0d431365d707",
+    "from": "59899680147"
+  },
+  {
+    "ref": "317b30ef-b531-4089-88de-f8d88e2986a7",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 19:30 con el número 52328363: Reserva agregada",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899680147",
+    "refSerialize": "1dc10bbe2155b6d161d6e6fda5c4a493"
+  },
+  {
+    "ref": "ac8d97e2-9aa4-4fa8-b570-4f4e11c0ad1d",
+    "keyword": "920055a969b4c829f6cf0d431365d707",
+    "answer": "CAMBIO 20:30 52328363",
+    "options": {},
+    "from": "59899680147",
+    "refSerialize": "28223c23f91cb247a551670a2524e6f3"
+  },
+  {
+    "ref": "ans_23573cf4-e940-426f-b31c-d821f9f45eac",
+    "keyword": "key_fe339be1-db02-40cd-85f3-d22be7c220ed",
+    "answer": "Estamos procesando tu cambio de reserva ⏳.",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "8b2702f38e787499a8159aae76c28654",
+    "from": "59899680147"
+  },
+  {
+    "ref": "29d3aa5a-a34d-4762-813c-18526941e5e7",
+    "keyword": null,
+    "answer": "Usuario no prioritario, debe esperar para reservar (4 horas antes o menos)",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899680147",
+    "refSerialize": "8d4ad7bfe5160552abb7893fc02021f2"
+  },
+  {
+    "ref": "12e22a96-4b20-48d4-89b6-e9c552c54701",
+    "keyword": "8b2702f38e787499a8159aae76c28654",
+    "answer": "😊",
+    "options": {},
+    "from": "59899680147",
+    "refSerialize": "340a073b1f70e96893c825cd3a69009e"
   }
 ]
