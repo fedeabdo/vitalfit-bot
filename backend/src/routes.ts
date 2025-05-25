@@ -45,6 +45,7 @@ router.get('/reservas', ReservaController.getReservas);
 router.post('/reservas', ReservaController.addReserva);
 router.put('/reservas', ReservaController.updateReserva);
 router.delete('/reservas', ReservaController.deleteReserva);
+router.get('/reservas/consulta/:cedula', ReservaController.buscarHoraPorCedula);
 // Development-only route
 router.get('/reservas/reset', ReservaController.resetReservas);
 

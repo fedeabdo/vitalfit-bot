@@ -1,11 +1,97 @@
 {
-  "7:00": [],
   "8:00": [],
   "9:00": [],
   "10:00": [],
-  "16:30": [],
-  "17:30": [],
-  "18:30": [],
+  "16:30": [
+    {
+      "hora": "16:30",
+      "usuario": "Facundo Andrioli"
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Cecilia Ogara"
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Claudia Reyes"
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Maximiliano Nogueira"
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Tomás Garula"
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Andrea Dominzain"
+    }
+  ],
+  "17:30": [
+    {
+      "hora": "17:30",
+      "usuario": "Silvina Vilches"
+    },
+    {
+      "hora": "17:30",
+      "usuario": "Romina Sosa"
+    },
+    {
+      "hora": "17:30",
+      "usuario": "Mauricio Chirino"
+    },
+    {
+      "hora": "17:30",
+      "usuario": "Nicolas Navascues"
+    },
+    {
+      "hora": "17:30",
+      "usuario": "Andres Saavedra"
+    },
+    {
+      "hora": "17:30",
+      "usuario": "Ramiro Hernandez"
+    },
+    {
+      "hora": "17:30",
+      "usuario": "Federico Abdo"
+    },
+    {
+      "hora": "17:30",
+      "usuario": "Carina Pacheco"
+    }
+  ],
+  "18:30": [
+    {
+      "hora": "18:30",
+      "usuario": "Guillermo Suárez"
+    },
+    {
+      "hora": "18:30",
+      "usuario": "Braian Texeira"
+    },
+    {
+      "hora": "18:30",
+      "usuario": "Marelen Cabrera"
+    },
+    {
+      "hora": "18:30",
+      "usuario": "Emanuel Berón"
+    },
+    {
+      "hora": "18:30",
+      "usuario": "Joaquín Sanabria"
+    },
+    {
+      "hora": "18:30",
+      "usuario": "Marcelo Lozano"
+    },
+    {
+      "hora": "18:30",
+      "usuario": "Karina Casavieja"
+    }
+  ],
   "19:30": [],
   "20:30": []
 }

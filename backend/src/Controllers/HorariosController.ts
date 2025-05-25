@@ -25,9 +25,15 @@ export class HorariosController {
 
   static async getHorariosHoy(req: Request, res: Response) {
     try {
+        const now = new Date();
+        // If it's 20:30 or later, use tomorrow's day
+        if (now.getHours() > 20 || (now.getHours() === 20 && now.getMinutes() >= 30)) {
+            now.setDate(now.getDate() + 1);
+        }
+        const diaActual = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(now).toLowerCase();
+
         const data = await fs.readFile(HorariosController.DATA_PATH_HORARIOS, 'utf-8');
         const horarios: Horario[] = JSON.parse(data);
-        const diaActual = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(new Date());
 
         // Read BackupReservas.json to get reservation data
         const backupData = await fs.readFile(HorariosController.DATA_PATH_RESERVAS_BACKUP, 'utf-8');
@@ -47,11 +53,18 @@ export class HorariosController {
                 }
                 return null;
             })
-            .filter(Boolean); // Remove null values
+            .filter(Boolean);
+
+        if (result.length === 0) {
+            res.status(401).json({ message: "No hay horarios disponibles para hoy 😔" });
+            return;
+        }
 
         res.status(201).json(result);
+        return;
     } catch (error) {
         res.status(500).json({ error: 'Error al imprimir horarios de hoy' });
+        return
     }
   }
 
@@ -189,12 +202,14 @@ export class HorariosController {
 
   static async usuarioPrioritario(usuario: string, dia: string): Promise<boolean> {
     try {
+      const normalize = (str: string) => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
       const data = await fs.readFile(HorariosController.DATA_PATH_HORARIOS, 'utf-8');
       const horarios: Horario = JSON.parse(data);
 
       return Object.entries(horarios).some(
         ([key, value]: [string, string[]]) =>
-          key.toLowerCase().startsWith(dia) && value.includes(usuario)
+          key.toLowerCase().startsWith(dia) &&
+          value.some(u => normalize(u).toLowerCase() === normalize(usuario).toLowerCase())
       );
     } catch (error) {
       throw error;
@@ -214,4 +229,8 @@ export class HorariosController {
     await fs.writeFile(dataPath, JSON.stringify(horarios, null, 2));
   }
 
+}
+
+function removeDiacritics(str: string): string {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
