@@ -72,14 +72,11 @@ const isRateLimited = (userId) => {
 };
 
 const flowHola = addKeyword(['HOLA', 'Hola', 'hola'])
-    .addAnswer(`🙌 Hola! Enviando mensajes a este número podés hacer una reserva, 
-    borrar una reserva o cambiar una reserva. Para más información enviá la palabra: AYUDA.`, null, async (ctx, { flowDynamic }) => {
+    .addAnswer(`🙌 Hola! Mi nombre es Horacio 🕛. Enviando mensajes a este número puedes hacer una reserva, borrar una reserva o cambiar una reserva. Para más información envía la palabra: AYUDA`, null, async (ctx, { flowDynamic }) => {
     });
 
 const flowAyuda = addKeyword(['AYUDA', 'ayuda'])
-    .addAnswer(` 
-
-🕙 RESERVA
+.addAnswer(`🕙 RESERVA
 Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).
 Ejemplo: RESERVA 20:30 12345678.
 
@@ -88,13 +85,14 @@ Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y t
 Ejemplo: CAMBIO 20:30 12345678.
 
 ❌ BORRAR RESERVA
-Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).Ejemplo: BORRAR 12345678.
+Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).
+Ejemplo: BORRAR 12345678.
 
 📋 HORARIOS
 Escribe HORARIOS para ver la disponibilidad de los horarios del día.
 
 ❓ CONSULTA
-Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tenés una reserva.
+Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.
 Ejemplo: CONSULTA 12345678.`
 , null, async (ctx, { flowDynamic }) => {       
     });
@@ -127,13 +125,13 @@ const flowConsulta = addKeyword(['CONSULTA', 'consulta', 'Consulta'])
 
         const match = userMessage.match(/^consulta\s+(\d{6,})$/i);
         if (!match) {
-            await flowDynamic('Mensaje incompleto. Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tenés una reserva.\nEjemplo: CONSULTA 12345678.');
+            await flowDynamic('Mensaje incompleto. Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678.');
             return;
         }
 
         const [, cedula] = match;
         if (!cedula) {
-            await flowDynamic('Mensaje incompleto. Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tenés una reserva.\nEjemplo: CONSULTA 12345678.');
+            await flowDynamic('Mensaje incompleto. Escribí CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678.');
             return;
         }
 
@@ -141,7 +139,7 @@ const flowConsulta = addKeyword(['CONSULTA', 'consulta', 'Consulta'])
             // Use cedula as a URL param
             const response = await apiClient.get(`${process.env.BASE_URL}/reservas/consulta/${cedula}`);
             if (response.data && response.data.hora) {
-                await flowDynamic(`✅ Tenés una reserva registrada para el horario: ${response.data.hora}.`);
+                await flowDynamic(`✅ Tienes una reserva registrada para el horario: ${response.data.hora}.`);
             } else if (response.data && response.data.message) {
                 await flowDynamic(response.data.message);
             } else {
@@ -160,19 +158,22 @@ const flowReserva = addKeyword(['RESERVA', 'reserva', 'Reserva'])
 
         const validationError = validateReservaMessage(userMessage);
         if (validationError) {
-            await flowDynamic("❌ El mensaje no tiene el formato esperado. Por favor, usa: RESERVA <hora> <cédula>.");
+            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).
+Ejemplo: RESERVA 20:30 12345678.`);
             return;
         }
 
         const match = userMessage.match(/reserva\s+(\d{1,2}:\d{2})\s+(\d+)/i);
         if (!match) {
-            await flowDynamic('❌ El mensaje no tiene el formato esperado. Por favor, usa: RESERVA <hora> <cédula>.');
+            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).
+Ejemplo: RESERVA 20:30 12345678.`);
             return;
         }
 
         const [_, hora, cedula] = match;
         if (!hora || !cedula) {
-            await flowDynamic('❌ El mensaje no tiene el formato esperado. Por favor, usa: RESERVA <hora> <cédula>.');
+            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).
+Ejemplo: RESERVA 20:30 12345678.`);
             return;
         }
 
@@ -202,7 +203,6 @@ const flowReserva = addKeyword(['RESERVA', 'reserva', 'Reserva'])
                 }
                 return;
             }
-
             await flowDynamic(errorMessage);
         }
     });
@@ -214,19 +214,22 @@ const flowCambio = addKeyword(['CAMBIO', 'Cambio']
 
         const validationError = validateReservaMessage(userMessage);
         if (validationError) {
-            await flowDynamic("❌ El mensaje no tiene el formato esperado. Por favor, usa: CAMBIO <hora> <cédula>.");
+            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).
+Ejemplo: CAMBIO 20:30 12345678.`);
             return;
         }
 
         const match = userMessage.match(/cambio\s+(\d{1,2}:\d{2})\s+(\d+)/i);
         if (!match) {
-            await flowDynamic('❌ El mensaje no tiene el formato esperado. Por favor, usa: CAMBIO <hora> <cédula>.');
+            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).
+Ejemplo: CAMBIO 20:30 12345678.`);
             return;
         }
 
         const [_, hora, cedula] = match;
         if (!hora || !cedula) {
-            await flowDynamic('❌ El mensaje no tiene el formato esperado. Por favor, usa: CAMBIO <hora> <cédula>.');
+            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).
+Ejemplo: CAMBIO 20:30 12345678.`);
             return;
         }
 
@@ -239,7 +242,8 @@ const flowCambio = addKeyword(['CAMBIO', 'Cambio']
 
             if (
                 errorMessage.includes('Este horario ya está lleno') ||
-                errorMessage.includes('El horario') && errorMessage.includes('ya está lleno')
+                errorMessage.includes('El horario') && errorMessage.includes('ya está lleno') ||
+                errorMessage.includes('El horario de reserva es inválido')
             ) {
                 await flowDynamic(errorMessage);
 
@@ -266,19 +270,22 @@ const flowBorrar = addKeyword(['BORRAR', 'borrar', 'Borrar'])
 
         const validationError = validateDeleteCedulaMessage(userMessage);
         if (validationError) {
-            await flowDynamic("❌ El mensaje no tiene el formato esperado. Por favor, usa: BORRAR <cédula>.");
+            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).
+Ejemplo: BORRAR 12345678.`);
             return;
         }
 
         const match = userMessage.match(/^borrar\s+(\d{6,})$/i);
         if (!match) {
-            await flowDynamic('❌ El mensaje no tiene el formato esperado. Por favor, usa: BORRAR <cédula>.');
+            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).
+Ejemplo: BORRAR 12345678.`);
             return;
         }
 
         const [, cedula] = match;
         if (!cedula) {
-            await flowDynamic('❌ El mensaje no tiene el formato esperado. Por favor, usa: BORRAR <cédula>.');
+            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).
+Ejemplo: BORRAR 12345678.`);
             return;
         }
 
@@ -305,13 +312,14 @@ Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y t
 Ejemplo: CAMBIO 20:30 12345678.
 
 ❌ BORRAR RESERVA
-Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).Ejemplo: BORRAR 12345678.
+Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).
+Ejemplo: BORRAR 12345678.
 
 📋 HORARIOS
 Escribe HORARIOS para ver la disponibilidad de los horarios del día.
 
 ❓ CONSULTA
-Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tenés una reserva.
+Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.
 Ejemplo: CONSULTA 12345678 `, null, async (ctx, { flowDynamic }) =>  {    
     });
 
@@ -327,10 +335,10 @@ const validateDeleteCedulaMessage = (message) => {
 
 const validateConsultaMessage = (message) => {
     if (!message || message.trim() === '') {
-        return 'Mensaje incompleto. Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tenés una reserva.\nEjemplo: CONSULTA 12345678.';
+        return 'Mensaje incompleto. Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678.';
     }
     if (!/^consulta\s+\d{6,}$/i.test(message.trim())) {
-        return 'Mensaje incompleto. Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tenés una reserva.\nEjemplo: CONSULTA 12345678.';
+        return 'Mensaje incompleto. Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678.';
     }
     return null;
 };
@@ -358,8 +366,8 @@ const extractErrorMessage = (error) => {
             typeof error.response.data.error === 'string' &&
             error.response.data.error.includes('El usuario ya tiene una reserva')
         ) {
-            return `Ya tenés una reserva hecha para hoy.
-                Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tenés una reserva.
+            return `Ya tienes una reserva hecha para hoy.
+                Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.
                 Ejemplo: CONSULTA 12345678.`;
         }
         if (typeof error.response.data.error === 'string') {
@@ -433,6 +441,10 @@ const main = async () => {
 };
 
 // Fetch the initial token when the bot starts
-fetchAuthToken();
+fetchAuthToken().catch((err) => {
+    console.error('❌ Unhandled error in fetchAuthToken:', err);
+});
 
-main()
+main().catch((err) => {
+    console.error('❌ Unhandled error in main:', err);
+});

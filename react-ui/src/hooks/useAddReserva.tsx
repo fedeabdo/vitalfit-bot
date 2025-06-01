@@ -15,7 +15,7 @@ export const useAddReserva = () => {
       const timeout = setTimeout(() => controller.abort(), 5000);
 
       try {
-        const response = await fetchWithAuth("http://localhost:5100/api/reservas", {
+        const response = await fetchWithAuth("http://5.161.43.130:5100/api/reservas", {
           method: "POST",
           body: JSON.stringify({ hora, usuario }),
           headers: {

@@ -14,7 +14,7 @@ export const useDeleteReserva = () => {
     mutationFn: async ({ hora, nombre }: DeleteReservaVars) => {
       const reserva: DeleteReserva = { usuario: nombre };
     
-      const response = await fetchWithAuth("http://localhost:5100/api/reservas", {
+      const response = await fetchWithAuth("http://5.161.43.130:5100/api/reservas", {
         method: "DELETE",
         body: JSON.stringify(reserva),
         headers: {

@@ -21,7 +21,7 @@ export const Login = () => {
     setError('');
   
     try {
-      const response = await fetchWithAuth('http://localhost:5100/api/login', {
+      const response = await fetchWithAuth('http://static.130.43.161.5.clients.your-server.de:5100/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,6 +34,7 @@ export const Login = () => {
       navigate('/');
   
     } catch (err) {
+      console.log('Login error:', err);
       let errorMessage = 'Credenciales Invalidas';
       
       if (err instanceof Error) {
