@@ -16,7 +16,7 @@ export const useAddUsuario = () => {
       const timeout = setTimeout(() => controller.abort(), 5000); // optional timeout
     
       try {
-        const response = await fetchWithAuth("http://localhost:5100/api/usuarios", {
+        const response = await fetchWithAuth("http://5.161.43.130:5100/api/usuarios", {
           method: "POST",
           body: JSON.stringify({ nombre, ci }),
           headers: {

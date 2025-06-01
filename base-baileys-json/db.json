@@ -1,15 +1,127 @@
 [
   {
-    "ref": "306a8045-1a04-4d76-9a97-847d48537089",
-    "keyword": "2bfe4671e8b6b65ca98c14bddc309108",
+    "ref": "436286a6-c806-40cb-9bea-290131a99d0c",
+    "keyword": "dd81d4662df5a4a2510f86ddaa99c0c8",
+    "answer": "Reserva 17:30 52413851",
+    "options": {},
+    "from": "59899882323",
+    "refSerialize": "aa5a3698323e3e58820db581cc53c1a2"
+  },
+  {
+    "ref": "ans_8d3be010-4b61-4c4e-914d-6dc3d23b2648",
+    "keyword": "key_405f9bdd-2422-4f10-b9e6-0e7553b2cf8c",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "176a11039874018cf8290b9fefebf7e5",
+    "from": "59899882323"
+  },
+  {
+    "ref": "d7864ad2-fae5-4434-b86f-ba740cecb4dd",
+    "keyword": null,
+    "answer": "Horario de reserva inválido",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899882323",
+    "refSerialize": "4bff28b5a6b58574c767722a5b15c4b5"
+  },
+  {
+    "ref": "f2a4525b-28a5-4024-8e80-607f1b9736bd",
+    "keyword": "176a11039874018cf8290b9fefebf7e5",
+    "answer": "Reserva 17:30 52413851",
+    "options": {},
+    "from": "59899882323",
+    "refSerialize": "aa5a3698323e3e58820db581cc53c1a2"
+  },
+  {
+    "ref": "ans_8d3be010-4b61-4c4e-914d-6dc3d23b2648",
+    "keyword": "key_405f9bdd-2422-4f10-b9e6-0e7553b2cf8c",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "176a11039874018cf8290b9fefebf7e5",
+    "from": "59899882323"
+  },
+  {
+    "ref": "1f01ae9e-f0a7-4280-b91c-d85d778e439d",
+    "keyword": null,
+    "answer": "Horario de reserva inválido",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899882323",
+    "refSerialize": "4bff28b5a6b58574c767722a5b15c4b5"
+  },
+  {
+    "ref": "ans_8d3be010-4b61-4c4e-914d-6dc3d23b2648",
+    "keyword": "key_405f9bdd-2422-4f10-b9e6-0e7553b2cf8c",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "176a11039874018cf8290b9fefebf7e5",
+    "from": "59892427767"
+  },
+  {
+    "ref": "be4e7705-55ec-4253-bd52-4d1aca6ad93f",
+    "keyword": null,
+    "answer": "Horario de reserva inválido",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59892427767",
+    "refSerialize": "4bff28b5a6b58574c767722a5b15c4b5"
+  },
+  {
+    "ref": "5d54a99e-84a1-4733-8e7a-ef903ed5071a",
+    "keyword": "176a11039874018cf8290b9fefebf7e5",
     "answer": "Horarios",
     "options": {},
-    "from": "59898926360",
+    "from": "59899882323",
     "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
   },
   {
-    "ref": "ans_6e79a098-7d73-4bce-b70f-b7dc26dbd77d",
-    "keyword": "key_97948bf6-90b4-4b2e-8394-be00471fc26e",
+    "ref": "ans_a07995f7-3d3d-45ce-ac63-377e7fbe2f9f",
+    "keyword": "key_d2f3c836-9e73-48da-bd9c-1e0aa9ecdb73",
     "answer": "Verificando horarios...",
     "options": {
       "media": null,
@@ -23,34 +135,34 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "b3fac10428bc6f2aa4927552164101be",
-    "from": "59898926360"
+    "refSerialize": "88a4962e6fbe5ec7f54836633c31b5b5",
+    "from": "59899882323"
   },
   {
-    "ref": "1cb20ba9-af7b-403f-9a16-16c4b89366ab",
+    "ref": "a6f09829-12fa-43d8-8db7-5dfc0e028aff",
     "keyword": null,
-    "answer": "Los horarios disponibles para hoy son:\n🕒 - 8:00: ✅ Disponible\n🕒 - 9:00: ✅ Disponible\n🕒 - 10:00: ✅ Disponible\n🕒 - 16:30: ❌ No disponible\n🕒 - 17:30: ❌ No disponible\n🕒 - 18:30: ❌ No disponible\n🕒 - 19:30: ✅ Disponible\n🕒 - 20:30: ✅ Disponible",
+    "answer": "No hay horarios disponibles para hoy 😔",
     "options": {
       "media": null,
       "buttons": [],
       "capture": false,
       "delay": 0
     },
-    "from": "59898926360",
-    "refSerialize": "a0fc8de34dcace1f6ecf79cd0223bb08"
+    "from": "59899882323",
+    "refSerialize": "e8e46ff9599262b7ee282b36648aab8d"
   },
   {
-    "ref": "2f3875f4-f18d-4c39-a499-40f6bfc48c56",
-    "keyword": "b3fac10428bc6f2aa4927552164101be",
-    "answer": "Claroooo",
+    "ref": "289a77c2-91d6-4e17-8dfc-3d52e9d59919",
+    "keyword": "176a11039874018cf8290b9fefebf7e5",
+    "answer": "reserva 09:00 47570793",
     "options": {},
-    "from": "59898926360",
-    "refSerialize": "267eecb724cb6b2f73771dff3ddac7c1"
+    "from": "59892427767",
+    "refSerialize": "b540235f6c72e5447ce7d49a392b1864"
   },
   {
-    "ref": "ans_697414d9-e7c7-4d12-99f4-6b8196e638b1",
-    "keyword": "key_16f8e8d2-9eca-4ee6-882b-f56c36ab8b1d",
-    "answer": "😬 No es posible procesar tu mensaje. Prueba con alguno de los siguientes:\n\n🕙 RESERVA\nEscribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678.\n\n🔁 CAMBIO DE RESERVA\nEscribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: CAMBIO 20:30 12345678.\n\n❌ BORRAR RESERVA\nEscribe BORRAR seguido de tu cédula (sin puntos ni guiones).Ejemplo: BORRAR 12345678.\n\n📋 HORARIOS\nEscribe HORARIOS para ver la disponibilidad de los horarios del día.\n\n❓ CONSULTA\nEscribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tenés una reserva.\nEjemplo: CONSULTA 12345678 ",
+    "ref": "ans_8d3be010-4b61-4c4e-914d-6dc3d23b2648",
+    "keyword": "key_405f9bdd-2422-4f10-b9e6-0e7553b2cf8c",
+    "answer": "Estamos procesando tu reserva ⏳",
     "options": {
       "media": null,
       "buttons": [],
@@ -63,7 +175,20 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "92bb34115266d9007bff2eb1bd3a5422",
-    "from": "59898926360"
+    "refSerialize": "176a11039874018cf8290b9fefebf7e5",
+    "from": "59892427767"
+  },
+  {
+    "ref": "a9ff774e-59d8-41f8-9cbe-3afa10addb41",
+    "keyword": null,
+    "answer": "Horario de reserva inválido",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59892427767",
+    "refSerialize": "4bff28b5a6b58574c767722a5b15c4b5"
   }
 ]

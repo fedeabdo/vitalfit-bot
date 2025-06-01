@@ -58,12 +58,16 @@ export class ReservaController {
       return;
     }
 
-    const usuarioYaReservado = Object.values(ReservaController.reservas)
-      .flat()
-      .some((r) => r.usuario === usuario);
+    let horaReservada: string | undefined = undefined;
+    for (const [horaKey, reservas] of Object.entries(ReservaController.reservas)) {
+      if (reservas.some((r) => r.usuario === usuario)) {
+        horaReservada = horaKey;
+        break;
+      }
+    }
 
-    if (usuarioYaReservado) {
-      res.status(409).json({ error: 'El usuario ya tiene una reserva' });
+    if (horaReservada) {
+      res.status(409).json({ error: `El usuario ya tiene una reserva para el horario: ${horaReservada}` });
       return;
     }
 
@@ -73,7 +77,7 @@ export class ReservaController {
     }
 
     if (ReservaController.esPrevioAHoraActual(hora)) {
-      res.status(403).json({ error: 'No se puede hacer reservas previas a la hora actual' });
+      res.status(403).json({ error: 'No se puede hacer reservas previas a la hora actual, recuerda que los horarios de mañana se habilitan a partir de las 20:30' });
       return;
     }
 
@@ -166,19 +170,20 @@ export class ReservaController {
     return minutosAReserva - minutosActuales;
   }
 
-  static esPrevioAHoraActual(tiempoStr: string): boolean {
+static esPrevioAHoraActual(tiempoStr: string): boolean {
     const [hora, minuto] = tiempoStr.split(":").map(Number);
     const ahora = new Date();
 
-    if (ahora.getHours()  > 20 || (ahora.getHours() === 20 && ahora.getHours() >= 30)) {
-      return false;
+    // After 20:30, allow all reservations (for tomorrow)
+    if (ahora.getHours() > 20 || (ahora.getHours() === 20 && ahora.getMinutes() >= 30)) {
+        return false;
     }
 
-    const minutosAhora = ahora.getHours() * 60 + ahora.getHours();
+    const minutosAhora = ahora.getHours() * 60 + ahora.getMinutes();
     const minutosTarget = hora * 60 + minuto;
 
     return minutosTarget < minutosAhora;
-  }
+}
 
   static async calculoHorarioPrioritario(hora: string, usuario: string, res: Response) {
     try {

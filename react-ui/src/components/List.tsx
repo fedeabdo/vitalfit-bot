@@ -41,7 +41,7 @@ export const reservasLoader = (queryClient: QueryClient) => async () => {
 };
 
 export const usuariosLoader = async () => {
-  const response = await fetch('http://localhost:5100/api/usuarios');
+  const response = await fetch('http://5.161.43.130:5100/api/usuarios');
   if (!response.ok) {
     throw new Response("Failed to fetch usuarios", { status: response.status });
   }
@@ -50,7 +50,7 @@ export const usuariosLoader = async () => {
 };
 
 export const horariosLoader = async (): Promise<HorarioJson[]> => {
-  const response = await fetch('http://localhost:5100/api/horarios');
+  const response = await fetch('http://5.161.43.130:5100/api/horarios');
   const data: Record<string, string[]> = await response.json();
 
   return Object.entries(data).map(([diaHora, usuarios]) => ({
