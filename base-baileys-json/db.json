@@ -1,15 +1,15 @@
 [
   {
-    "ref": "436286a6-c806-40cb-9bea-290131a99d0c",
-    "keyword": "dd81d4662df5a4a2510f86ddaa99c0c8",
-    "answer": "Reserva 17:30 52413851",
+    "ref": "81f04103-fc80-458a-bd2b-5264332f9889",
+    "keyword": "f3039481a8a6de924482c143a3dadf49",
+    "answer": "Reserva 18:30 52079281",
     "options": {},
-    "from": "59899882323",
-    "refSerialize": "aa5a3698323e3e58820db581cc53c1a2"
+    "from": "59899485333",
+    "refSerialize": "bdd0b94b30ef91f21ef52776992678af"
   },
   {
-    "ref": "ans_8d3be010-4b61-4c4e-914d-6dc3d23b2648",
-    "keyword": "key_405f9bdd-2422-4f10-b9e6-0e7553b2cf8c",
+    "ref": "ans_df527ad6-b2de-4b3f-9e92-f0f9f4976128",
+    "keyword": "key_559fb0c1-f7c7-48e4-b350-275891380201",
     "answer": "Estamos procesando tu reserva ⏳",
     "options": {
       "media": null,
@@ -23,34 +23,34 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "176a11039874018cf8290b9fefebf7e5",
-    "from": "59899882323"
+    "refSerialize": "312ce38f4120458e74c0a381d1876336",
+    "from": "59899485333"
   },
   {
-    "ref": "d7864ad2-fae5-4434-b86f-ba740cecb4dd",
+    "ref": "c37884ca-e75d-4089-bac4-924028749da4",
     "keyword": null,
-    "answer": "Horario de reserva inválido",
+    "answer": "Ya tienes una reserva para el horario: 20:30",
     "options": {
       "media": null,
       "buttons": [],
       "capture": false,
       "delay": 0
     },
-    "from": "59899882323",
-    "refSerialize": "4bff28b5a6b58574c767722a5b15c4b5"
+    "from": "59899485333",
+    "refSerialize": "9994c9985c34660a2aa0a2b4dccd5653"
   },
   {
-    "ref": "f2a4525b-28a5-4024-8e80-607f1b9736bd",
-    "keyword": "176a11039874018cf8290b9fefebf7e5",
-    "answer": "Reserva 17:30 52413851",
+    "ref": "69cd9132-e9ac-4264-8709-6b0a295148d9",
+    "keyword": "312ce38f4120458e74c0a381d1876336",
+    "answer": "Borrar 52079281",
     "options": {},
-    "from": "59899882323",
-    "refSerialize": "aa5a3698323e3e58820db581cc53c1a2"
+    "from": "59899485333",
+    "refSerialize": "afd762e1974b5b7b6dfc361a9db0ad9f"
   },
   {
-    "ref": "ans_8d3be010-4b61-4c4e-914d-6dc3d23b2648",
-    "keyword": "key_405f9bdd-2422-4f10-b9e6-0e7553b2cf8c",
-    "answer": "Estamos procesando tu reserva ⏳",
+    "ref": "ans_7ae814d1-d3cc-48b1-b399-48ed5963c3f6",
+    "keyword": "key_fc742331-45ef-4ddb-a461-544c8b0c72d0",
+    "answer": "Estamos procesando tu borrado 😔",
     "options": {
       "media": null,
       "buttons": [],
@@ -63,25 +63,41 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "176a11039874018cf8290b9fefebf7e5",
-    "from": "59899882323"
+    "refSerialize": "3b15130c6785c2797dd85f781dfb9b17",
+    "from": "59899485333"
   },
   {
-    "ref": "1f01ae9e-f0a7-4280-b91c-d85d778e439d",
+    "ref": "92afd22b-4232-4813-b362-52682f2313d4",
     "keyword": null,
-    "answer": "Horario de reserva inválido",
+    "answer": "✅ Borrado procesado la cédula: 52079281. Confirmado 😔",
     "options": {
       "media": null,
       "buttons": [],
       "capture": false,
       "delay": 0
     },
-    "from": "59899882323",
-    "refSerialize": "4bff28b5a6b58574c767722a5b15c4b5"
+    "from": "59899485333",
+    "refSerialize": "7eb40a1455f9a5e2bb7336153b6ddd48"
   },
   {
-    "ref": "ans_8d3be010-4b61-4c4e-914d-6dc3d23b2648",
-    "keyword": "key_405f9bdd-2422-4f10-b9e6-0e7553b2cf8c",
+    "ref": "084f4469-c7f8-42a1-ad91-e4947a59f0df",
+    "keyword": "3b15130c6785c2797dd85f781dfb9b17",
+    "answer": "Reserva 18:30 52079281",
+    "options": {},
+    "from": "59899485333",
+    "refSerialize": "bdd0b94b30ef91f21ef52776992678af"
+  },
+  {
+    "ref": "b0ad2e2a-6963-4010-b830-315555b6a8fa",
+    "keyword": "bdd0b94b30ef91f21ef52776992678af",
+    "answer": "Reserva 18:30 52079281",
+    "options": {},
+    "from": "59899485333",
+    "refSerialize": "bdd0b94b30ef91f21ef52776992678af"
+  },
+  {
+    "ref": "ans_df527ad6-b2de-4b3f-9e92-f0f9f4976128",
+    "keyword": "key_559fb0c1-f7c7-48e4-b350-275891380201",
     "answer": "Estamos procesando tu reserva ⏳",
     "options": {
       "media": null,
@@ -95,13 +111,214 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "176a11039874018cf8290b9fefebf7e5",
+    "refSerialize": "312ce38f4120458e74c0a381d1876336",
+    "from": "59899485333"
+  },
+  {
+    "ref": "3fd8653c-c4a3-465d-aca6-aab64b2d581d",
+    "keyword": null,
+    "answer": "No se puede hacer reservas previas a la hora actual, recuerda que los horarios de mañana se habilitan a partir de las 20:30",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899485333",
+    "refSerialize": "5dfbb592158f41c500595a838fe5836a"
+  },
+  {
+    "ref": "ans_df527ad6-b2de-4b3f-9e92-f0f9f4976128",
+    "keyword": "key_559fb0c1-f7c7-48e4-b350-275891380201",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "312ce38f4120458e74c0a381d1876336",
+    "from": "59899485333"
+  },
+  {
+    "ref": "f9dfb14f-5d12-40b9-870d-819d0baf1dbb",
+    "keyword": null,
+    "answer": "No se puede hacer reservas previas a la hora actual, recuerda que los horarios de mañana se habilitan a partir de las 20:30",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899485333",
+    "refSerialize": "5dfbb592158f41c500595a838fe5836a"
+  },
+  {
+    "ref": "ans_df527ad6-b2de-4b3f-9e92-f0f9f4976128",
+    "keyword": "key_559fb0c1-f7c7-48e4-b350-275891380201",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "312ce38f4120458e74c0a381d1876336",
+    "from": "59895408286"
+  },
+  {
+    "ref": "08c6c4ab-7e57-42bb-9fc7-4972b18ab9b2",
+    "keyword": null,
+    "answer": "❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678.",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59895408286",
+    "refSerialize": "2e63bb5eddb06cc960b5cacec793c4f1"
+  },
+  {
+    "ref": "f3346f30-fa61-47b8-85d9-8a84b38280ef",
+    "keyword": "312ce38f4120458e74c0a381d1876336",
+    "answer": "Reserva 17:30 54591657",
+    "options": {},
+    "from": "59895408286",
+    "refSerialize": "489b95634b00b19b35006d688164eefd"
+  },
+  {
+    "ref": "ans_df527ad6-b2de-4b3f-9e92-f0f9f4976128",
+    "keyword": "key_559fb0c1-f7c7-48e4-b350-275891380201",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "312ce38f4120458e74c0a381d1876336",
+    "from": "59895408286"
+  },
+  {
+    "ref": "52000dfa-6f0b-4c11-966e-9cd35f7d8a10",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 17:30. Cédula: 54591657. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59895408286",
+    "refSerialize": "d84cef4b42a89745bf1accae846d9fc5"
+  },
+  {
+    "ref": "ans_d5cf6c2e-2956-4c7e-8954-c90a6442e6c5",
+    "keyword": "key_4aa8329c-846c-4655-ac83-de1d1091d003",
+    "answer": "🙌 Hola! Mi nombre es Horacio 🕛. Enviando mensajes a este número puedes hacer una reserva, borrar una reserva o cambiar una reserva. Para más información envía la palabra: AYUDA",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "807f5613312f57000c6ccc5b3f8c3f25",
+    "from": "59894401994"
+  },
+  {
+    "ref": "54b57a59-7806-41fd-b812-8e408d22b6f8",
+    "keyword": "807f5613312f57000c6ccc5b3f8c3f25",
+    "answer": "Ayuda",
+    "options": {},
+    "from": "59894401994",
+    "refSerialize": "6f1c8ec9910afc8ad71c026ec0c69f3d"
+  },
+  {
+    "ref": "ans_0dc9be52-fc83-429d-b4bf-8a543433eef7",
+    "keyword": "key_67da0f1e-bce7-49cc-bf40-fa28a2756931",
+    "answer": "🕙 RESERVA\nEscribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678.\n\n🔁 CAMBIO DE RESERVA\nEscribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: CAMBIO 20:30 12345678.\n\n❌ BORRAR RESERVA\nEscribe BORRAR seguido de tu cédula (sin puntos ni guiones).\nEjemplo: BORRAR 12345678.\n\n📋 HORARIOS\nEscribe HORARIOS para ver la disponibilidad de los horarios del día.\n\n❓ CONSULTA\nEscribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678.",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "f00149e653eb5228c4fcbd4559564705",
+    "from": "59894401994"
+  },
+  {
+    "ref": "ans_d5cf6c2e-2956-4c7e-8954-c90a6442e6c5",
+    "keyword": "key_4aa8329c-846c-4655-ac83-de1d1091d003",
+    "answer": "🙌 Hola! Mi nombre es Horacio 🕛. Enviando mensajes a este número puedes hacer una reserva, borrar una reserva o cambiar una reserva. Para más información envía la palabra: AYUDA",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "807f5613312f57000c6ccc5b3f8c3f25",
+    "from": "59899578269"
+  },
+  {
+    "ref": "ans_df527ad6-b2de-4b3f-9e92-f0f9f4976128",
+    "keyword": "key_559fb0c1-f7c7-48e4-b350-275891380201",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "312ce38f4120458e74c0a381d1876336",
     "from": "59892427767"
   },
   {
-    "ref": "be4e7705-55ec-4253-bd52-4d1aca6ad93f",
+    "ref": "b990b390-2f52-4f87-a12f-02b75cc4cf9b",
     "keyword": null,
-    "answer": "Horario de reserva inválido",
+    "answer": "No se puede hacer reservas previas a la hora actual, recuerda que los horarios de mañana se habilitan a partir de las 20:30",
     "options": {
       "media": null,
       "buttons": [],
@@ -109,19 +326,185 @@
       "delay": 0
     },
     "from": "59892427767",
-    "refSerialize": "4bff28b5a6b58574c767722a5b15c4b5"
+    "refSerialize": "5dfbb592158f41c500595a838fe5836a"
   },
   {
-    "ref": "5d54a99e-84a1-4733-8e7a-ef903ed5071a",
-    "keyword": "176a11039874018cf8290b9fefebf7e5",
+    "ref": "d5b2370e-023c-48d1-8c29-dc8679ef8795",
+    "keyword": "312ce38f4120458e74c0a381d1876336",
+    "answer": "reserva 9:00 47570793",
+    "options": {},
+    "from": "59892427767",
+    "refSerialize": "70d8b63e0ae953b448287ade225edd3e"
+  },
+  {
+    "ref": "ans_df527ad6-b2de-4b3f-9e92-f0f9f4976128",
+    "keyword": "key_559fb0c1-f7c7-48e4-b350-275891380201",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "312ce38f4120458e74c0a381d1876336",
+    "from": "59892427767"
+  },
+  {
+    "ref": "a3720e55-7fa1-4cdb-9ce6-80d725d3bed3",
+    "keyword": null,
+    "answer": "No se puede hacer reservas previas a la hora actual, recuerda que los horarios de mañana se habilitan a partir de las 20:30",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59892427767",
+    "refSerialize": "5dfbb592158f41c500595a838fe5836a"
+  },
+  {
+    "ref": "da20ecee-c77e-441e-9c4f-a1b821b37f8e",
+    "keyword": "312ce38f4120458e74c0a381d1876336",
+    "answer": "reserva 10:00 47570793",
+    "options": {},
+    "from": "59892427767",
+    "refSerialize": "a04e701e4c2d1e605b7556ccd0c653db"
+  },
+  {
+    "ref": "ans_df527ad6-b2de-4b3f-9e92-f0f9f4976128",
+    "keyword": "key_559fb0c1-f7c7-48e4-b350-275891380201",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "312ce38f4120458e74c0a381d1876336",
+    "from": "59892427767"
+  },
+  {
+    "ref": "fb76b3ab-fcfc-4431-a117-c1b836f25a88",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 10:00. Cédula: 47570793. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59892427767",
+    "refSerialize": "b9a57446ae2f586c5b176bddef4a7236"
+  },
+  {
+    "ref": "ans_3fbf6ebb-3196-4267-bfaf-cf4aa4446814",
+    "keyword": "key_d88ec9be-a3d2-4917-87ea-f72d403c02e4",
+    "answer": "😬 No es posible procesar tu mensaje. Prueba con alguno de los siguientes:\n\n🕙 RESERVA\nEscribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678.\n\n🔁 CAMBIO DE RESERVA\nEscribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: CAMBIO 20:30 12345678.\n\n❌ BORRAR RESERVA\nEscribe BORRAR seguido de tu cédula (sin puntos ni guiones).\nEjemplo: BORRAR 12345678.\n\n📋 HORARIOS\nEscribe HORARIOS para ver la disponibilidad de los horarios del día.\n\n❓ CONSULTA\nEscribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678 ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "491fa5523ea6ace3ea2aac9241854eca",
+    "from": "59891634257"
+  },
+  {
+    "ref": "cec31a50-ec21-4f3f-b7fc-f02e95f2bce2",
+    "keyword": "807f5613312f57000c6ccc5b3f8c3f25",
+    "answer": "AYUDA",
+    "options": {},
+    "from": "59899578269",
+    "refSerialize": "3fab4dc030f31f77de99cdfdfd1a0d55"
+  },
+  {
+    "ref": "ans_0dc9be52-fc83-429d-b4bf-8a543433eef7",
+    "keyword": "key_67da0f1e-bce7-49cc-bf40-fa28a2756931",
+    "answer": "🕙 RESERVA\nEscribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678.\n\n🔁 CAMBIO DE RESERVA\nEscribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: CAMBIO 20:30 12345678.\n\n❌ BORRAR RESERVA\nEscribe BORRAR seguido de tu cédula (sin puntos ni guiones).\nEjemplo: BORRAR 12345678.\n\n📋 HORARIOS\nEscribe HORARIOS para ver la disponibilidad de los horarios del día.\n\n❓ CONSULTA\nEscribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678.",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "f00149e653eb5228c4fcbd4559564705",
+    "from": "59899578269"
+  },
+  {
+    "ref": "c6b290be-8a68-490d-9087-b78c4c0cab27",
+    "keyword": "f00149e653eb5228c4fcbd4559564705",
+    "answer": "RESERVA 10:00 44983163",
+    "options": {},
+    "from": "59899578269",
+    "refSerialize": "231dee8082c17eb890a6d6c385045f6d"
+  },
+  {
+    "ref": "ans_df527ad6-b2de-4b3f-9e92-f0f9f4976128",
+    "keyword": "key_559fb0c1-f7c7-48e4-b350-275891380201",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "312ce38f4120458e74c0a381d1876336",
+    "from": "59899578269"
+  },
+  {
+    "ref": "f78791d2-2893-491f-b0a0-c598365ea0f2",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 10:00. Cédula: 44983163. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899578269",
+    "refSerialize": "b4120c2ad2ba189ecc071f50e0ad7bdf"
+  },
+  {
+    "ref": "38b34b0d-b561-40f4-a650-b31821b4d19a",
+    "keyword": "f00149e653eb5228c4fcbd4559564705",
     "answer": "Horarios",
     "options": {},
-    "from": "59899882323",
+    "from": "59894401994",
     "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
   },
   {
-    "ref": "ans_a07995f7-3d3d-45ce-ac63-377e7fbe2f9f",
-    "keyword": "key_d2f3c836-9e73-48da-bd9c-1e0aa9ecdb73",
+    "ref": "ans_64a49d57-9a2d-4d9e-8861-f08245d04aa4",
+    "keyword": "key_cb5f086d-83e3-4d17-b098-ebeaaaeae531",
     "answer": "Verificando horarios...",
     "options": {
       "media": null,
@@ -135,33 +518,33 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "88a4962e6fbe5ec7f54836633c31b5b5",
-    "from": "59899882323"
+    "refSerialize": "87da33ce1695313c276fdf8d5f40e9d2",
+    "from": "59894401994"
   },
   {
-    "ref": "a6f09829-12fa-43d8-8db7-5dfc0e028aff",
+    "ref": "9c8dd9e2-584f-4877-ad20-2c6da8b6a922",
     "keyword": null,
-    "answer": "No hay horarios disponibles para hoy 😔",
+    "answer": "Los horarios disponibles para hoy son:\n🕒 - 7:00: ✅ Disponible\n🕒 - 8:00: ✅ Disponible\n🕒 - 9:00: ✅ Disponible\n🕒 - 10:00: ✅ Disponible\n🕒 - 16:30: ✅ Disponible\n🕒 - 17:30: ✅ Disponible\n🕒 - 18:30: ✅ Disponible\n🕒 - 19:30: ✅ Disponible\n🕒 - 20:30: ✅ Disponible",
     "options": {
       "media": null,
       "buttons": [],
       "capture": false,
       "delay": 0
     },
-    "from": "59899882323",
-    "refSerialize": "e8e46ff9599262b7ee282b36648aab8d"
+    "from": "59894401994",
+    "refSerialize": "a149770c801bf3ed1bc39fa81501c89e"
   },
   {
-    "ref": "289a77c2-91d6-4e17-8dfc-3d52e9d59919",
-    "keyword": "176a11039874018cf8290b9fefebf7e5",
-    "answer": "reserva 09:00 47570793",
+    "ref": "d22a891f-53ba-4a4d-a420-8dc4883c5248",
+    "keyword": "87da33ce1695313c276fdf8d5f40e9d2",
+    "answer": "reserva 19:30 14987018",
     "options": {},
-    "from": "59892427767",
-    "refSerialize": "b540235f6c72e5447ce7d49a392b1864"
+    "from": "59894401994",
+    "refSerialize": "23c2415dee3048ecf5a46900a06fd3bf"
   },
   {
-    "ref": "ans_8d3be010-4b61-4c4e-914d-6dc3d23b2648",
-    "keyword": "key_405f9bdd-2422-4f10-b9e6-0e7553b2cf8c",
+    "ref": "ans_df527ad6-b2de-4b3f-9e92-f0f9f4976128",
+    "keyword": "key_559fb0c1-f7c7-48e4-b350-275891380201",
     "answer": "Estamos procesando tu reserva ⏳",
     "options": {
       "media": null,
@@ -175,20 +558,20 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "176a11039874018cf8290b9fefebf7e5",
-    "from": "59892427767"
+    "refSerialize": "312ce38f4120458e74c0a381d1876336",
+    "from": "59894401994"
   },
   {
-    "ref": "a9ff774e-59d8-41f8-9cbe-3afa10addb41",
+    "ref": "94cb3a76-3fb8-455e-893a-322b03971949",
     "keyword": null,
-    "answer": "Horario de reserva inválido",
+    "answer": "No eres usuario prioritario. Debe esperar para reservar (4 horas antes o menos)",
     "options": {
       "media": null,
       "buttons": [],
       "capture": false,
       "delay": 0
     },
-    "from": "59892427767",
-    "refSerialize": "4bff28b5a6b58574c767722a5b15c4b5"
+    "from": "59894401994",
+    "refSerialize": "66f675ed88e71f2fa4604f1166496c81"
   }
 ]

@@ -187,7 +187,8 @@ Ejemplo: RESERVA 20:30 12345678.`);
 
             if (
                 errorMessage.includes('Este horario ya está lleno') ||
-                (errorMessage.includes('El horario') && errorMessage.includes('ya está lleno'))
+                (errorMessage.includes('El horario') && errorMessage.includes('ya está lleno')) ||
+		(errorMessage.includes('Horario de reserva inválido'))
             ) {
                 await flowDynamic(errorMessage);
 
@@ -209,7 +210,7 @@ Ejemplo: RESERVA 20:30 12345678.`);
 
 const flowCambio = addKeyword(['CAMBIO', 'Cambio']
 )
-    .addAnswer('Estamos procesando tu cambio de reserva ⏳.', null, async (ctx, { flowDynamic }) => {
+    .addAnswer('Estamos procesando tu cambio de reserva ⏳ prueba', null, async (ctx, { flowDynamic }) => {
         const userMessage = ctx.body;
 
         const validationError = validateReservaMessage(userMessage);
@@ -241,9 +242,9 @@ Ejemplo: CAMBIO 20:30 12345678.`);
             const errorMessage = extractErrorMessage(error);
 
             if (
-                errorMessage.includes('Este horario ya está lleno') ||
-                errorMessage.includes('El horario') && errorMessage.includes('ya está lleno') ||
-                errorMessage.includes('El horario de reserva es inválido')
+                (errorMessage.includes('Este horario ya está lleno')) ||
+                (errorMessage.includes('El horario') && errorMessage.includes('ya está lleno')) ||
+            (errorMessage.includes('Horario de reserva inválido'))
             ) {
                 await flowDynamic(errorMessage);
 
@@ -258,6 +259,7 @@ Ejemplo: CAMBIO 20:30 12345678.`);
                 }
                 return;
             }
+
 
             await flowDynamic(errorMessage);
         }
@@ -291,7 +293,7 @@ Ejemplo: BORRAR 12345678.`);
 
         try {
             const response = await apiClient.delete(`${process.env.BASE_URL}/reservas`, { data: { cedula } });
-            await flowDynamic(`✅ Borrado procesado la cédula: ${cedula}. Confirmado 😔`);
+            await flowDynamic(`✅ Borrado procesado para la cédula: ${cedula}. Confirmado 😔`);
         } catch (error) {
             console.log(error);
             const errorMessage = extractErrorMessage(error);
@@ -366,9 +368,7 @@ const extractErrorMessage = (error) => {
             typeof error.response.data.error === 'string' &&
             error.response.data.error.includes('El usuario ya tiene una reserva')
         ) {
-            return `Ya tienes una reserva hecha para hoy.
-                Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.
-                Ejemplo: CONSULTA 12345678.`;
+            return error.response.data.error.replace('El usuario ya tiene', 'Ya tienes');
         }
         if (typeof error.response.data.error === 'string') {
             return error.response.data.error;
