@@ -417,8 +417,8 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
         // Create transporter
         const transporter = nodemailer.createTransport({
             host: 'smtp.zoho.com',
-            port: 465, // Use 587 for TLS
-            secure: true, // Use true for SSL, false for TLS
+            port: 587, // Use 587 for TLS
+            secure: false, // Use true for SSL, false for TLS
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS,
