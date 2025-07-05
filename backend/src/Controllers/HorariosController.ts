@@ -26,11 +26,16 @@ export class HorariosController {
   static async getHorariosHoy(req: Request, res: Response) {
     try {
         const now = new Date();
-        // If it's 20:30 or later, use tomorrow's day
-        if (now.getHours() > 20 || (now.getHours() === 20 && now.getMinutes() >= 30)) {
+        let diaActual = new Intl.DateTimeFormat('es-ES', { weekday: 'long', day: '2-digit', month: '2-digit' }).format(now);
+        let isTomorrow = false;
+        // If it's Sunday and after 13:00, or any day after 20:30, use tomorrow's day
+        if ((now.getDay() === 0 && (now.getHours() > 13 || (now.getHours() === 13 && now.getMinutes() > 0))) ||
+            (now.getHours() > 20 || (now.getHours() === 20 && now.getMinutes() >= 30))) {
             now.setDate(now.getDate() + 1);
+            diaActual = new Intl.DateTimeFormat('es-ES', { weekday: 'long', day: '2-digit', month: '2-digit' }).format(now);
+            isTomorrow = true;
         }
-        const diaActual = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(now).toLowerCase();
+        const diaActualLower = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(now).toLowerCase();
 
         const data = await fs.readFile(HorariosController.DATA_PATH_HORARIOS, 'utf-8');
         const horarios: Horario[] = JSON.parse(data);
@@ -40,15 +45,17 @@ export class HorariosController {
         const backupReservas: Record<string, Reserva[]> = JSON.parse(backupData);
 
         const result = Object.keys(horarios)
-            .filter(key => key.toLowerCase().includes(diaActual))
+            .filter(key => key.toLowerCase().includes(diaActualLower))
             .map(key => {
                 const parts = key.split('-');
                 if (parts.length === 2) {
                     const hora = parts[1];
                     const reservas = backupReservas[hora] || [];
+                    const lugaresDisponibles = 6 - reservas.length;
                     return {
                         hora,
-                        disponibilidad: reservas.length <= 5
+                        disponible: reservas.length <= 5,
+                        lugaresDisponibles: lugaresDisponibles > 0 ? lugaresDisponibles : 0
                     };
                 }
                 return null;
@@ -60,7 +67,7 @@ export class HorariosController {
             return;
         }
 
-        res.status(201).json(result);
+        res.status(200).json({ dia: diaActual, horarios: result });
         return;
     } catch (error) {
         res.status(500).json({ error: 'Error al imprimir horarios de hoy' });
@@ -69,14 +76,13 @@ export class HorariosController {
   }
 
   static isTiempo(key: string): key is tiempo {
-    const dias: Dia[] = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    const dias: Dia[] = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
     return dias.some(dia => key.startsWith(`${dia}-`));
   }
 
   // Agregar horario
   static async addHorario(req: Request, res: Response) {
     try {
-
       const raw = req.body;
       const keys = Object.keys(raw);
 
@@ -93,6 +99,14 @@ export class HorariosController {
         return;
       }
 
+      // New validation: if key already exists, return error
+      const data = await fs.readFile(HorariosController.DATA_PATH_HORARIOS, 'utf-8');
+      const horarios: Horario = JSON.parse(data);
+      if (key in horarios) {
+        res.status(400).json({ error: 'Ese horario ya existe' });
+        return;
+      }
+
       if (usuarios.length != 0) {
         if (!Array.isArray(usuarios) || !usuarios.every(v => typeof v === "string")) {
           res.status(400).json({ error: 'Valor invalido de usuario' });
@@ -104,8 +118,6 @@ export class HorariosController {
         [key]: usuarios
       };
 
-      const data = await fs.readFile(HorariosController.DATA_PATH_HORARIOS, 'utf-8');
-      const horarios: Horario = JSON.parse(data);
       horarios[key] = usuarios;
 
       await fs.writeFile(HorariosController.DATA_PATH_HORARIOS, JSON.stringify(horarios, null, 2));

@@ -2,7 +2,7 @@ import styles from '../css/Horarios.module.css';
 import { DeleteHorarioPayload, HorarioJson, tiempo } from '../types/types';
 import Font from 'react-font';
 import { IconContext } from 'react-icons';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 import { fetchHorarios } from '../hooks/api';
@@ -13,6 +13,11 @@ import HorariosEditModal from '../components/HorariosEditModal';
 import List from '../components/List';
 import { useDeleteHorario } from '../hooks/useDeleteHorario';
 import ConfirmModal from '../components/ConfirmModal';
+import AddHorarioModal from '../components/AddHorarioModal';
+import { useAddHorario } from '../hooks/useAddHorario';
+import { useEditHorario } from '../hooks/useEditHorario';
+
+const daysOrder = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
 export default function Horarios() {
     const { data: horarios, isLoading, isError, error } = useQuery({
@@ -25,9 +30,11 @@ export default function Horarios() {
     const [selectedHorario, setSelectedHorario] = useState<string | null>(null); 
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [horarioToDelete, setHorarioToDelete] = useState<string | null>(null);
-
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
     const { mutate: deleteHorario } = useDeleteHorario();
+    const { mutateAsync: addHorario } = useAddHorario();
+    const { mutate: editHorario } = useEditHorario();
 
     function handleEditClick(horario: HorarioJson) {
         setModalData(horario);
@@ -49,8 +56,6 @@ export default function Horarios() {
         setIsConfirmModalOpen(false);
       };
 
-      
-
     const handleCancelDelete = () => {
         setIsConfirmModalOpen(false);
         setHorarioToDelete(null); 
@@ -60,11 +65,56 @@ export default function Horarios() {
         setSelectedHorario(hora === selectedHorario ? null : hora);
     };
 
+    const handleAddHorarioClick = () => {
+        setIsAddModalOpen(true);
+    };
+
+    const handleAddHorarioSubmit = async (diaHora: string, usuarios: string[]) => {
+        return addHorario({ diaHora, usuarios });
+    };
+
+    const handleEditHorarioSubmit = (diaHora: string, usuarios: string[]) => {
+        return new Promise<void>((resolve, reject) => {
+          editHorario(
+            { diaHora, usuarios },
+            {
+              onSuccess: () => resolve(),
+              onError: (error: any) => reject(error),
+            }
+          );
+        });
+      };
+
+    const sortedHorarios = (horarios ?? []).slice().sort((a, b) => {
+        const [dayA, hourA] = a.diaHora.split("-");
+        const [dayB, hourB] = b.diaHora.split("-");
+        const dayIndexA = daysOrder.indexOf(dayA);
+        const dayIndexB = daysOrder.indexOf(dayB);
+  
+        if (dayIndexA !== dayIndexB) {
+          return dayIndexA - dayIndexB;
+        }
+        const [hA, mA] = hourA.split(":").map(Number);
+        const [hB, mB] = hourB.split(":").map(Number);
+        return hA !== hB ? hA - hB : mA - mB;
+      });
+
     return (
         <div className={styles.fullPage}>
             <div className={styles.container}>
                 <Font family="Bungee Inline">
-                    <h2>Horarios</h2>
+                    <div className={styles.header}>
+                        <h2>Horarios</h2>
+                        <button
+                            className={styles.iconButtonAdd}
+                            title="Agregar Horario"
+                            onClick={handleAddHorarioClick}
+                        >
+                            <IconContext.Provider value={{ color: "green", size: "1.5em" }}>
+                                <FaPlus />
+                            </IconContext.Provider>
+                        </button>
+                    </div>
                 </Font>
                 <List<HorarioJson>
                     renderItem={(horario: HorarioJson) => (
@@ -115,7 +165,7 @@ export default function Horarios() {
                             </motion.div>
                         </div>
                     )}
-                    data={horarios!}
+                    data={sortedHorarios}
                 />
             </div>
 
@@ -124,6 +174,13 @@ export default function Horarios() {
                     data={modalData}
                     onSelect={() => {}}
                     onClose={() => setIsModalOpen(false)}
+                />
+            )}
+
+            {isAddModalOpen && (
+                <AddHorarioModal
+                    onClose={() => setIsAddModalOpen(false)}
+                    onSubmit={handleAddHorarioSubmit}
                 />
             )}
 

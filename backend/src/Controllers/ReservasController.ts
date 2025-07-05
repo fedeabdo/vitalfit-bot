@@ -151,10 +151,20 @@ export class ReservaController {
 
   // Borrar todas las reservas a las 20:30 CRON
   static configurarReseteoDiario() {
-    cron.schedule('30 20 * * *', () => {
+    const today = new Date();
+    const isSunday = today.getDay() === 0; // Domingo = 0
+    if (isSunday){
+      cron.schedule('0 13 * * 0', () => {
+        console.log('Reseteando reservas a las 13:00...');
+        ReservaController.inicializarHorariosDiarios();
+      });
+    } else {
+      cron.schedule('30 20 * * *', () => {
       console.log('Reseteando reservas a las 20:30...');
       ReservaController.inicializarHorariosDiarios();
     });
+    }
+
   }
 
   static async chequeoHorarioPrioritario(usuario: string, dia: string): Promise<boolean> {

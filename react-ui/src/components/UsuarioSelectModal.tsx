@@ -14,7 +14,7 @@ interface UsuarioSelectorModalProps {
 const UsuarioSelectorModal = ({
   onClose,
   onSelect,
-  existingUsuarios,
+  existingUsuarios = [],
 }: UsuarioSelectorModalProps) => {
   const { data: usuarios, isLoading, isError, error } = useQuery<Usuario[]>({
     queryKey: ["usuarios"],

@@ -18,6 +18,7 @@ const HorariosEditModal = ({ data, onClose, onSelect }: HorariosEditModalProps) 
   const [usuarios, setUsuarios] = useState<string[]>(data.usuarios);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { mutateAsync: updateHorario, isLoading: isMutating } = useEditHorario();
 
@@ -36,16 +37,17 @@ const HorariosEditModal = ({ data, onClose, onSelect }: HorariosEditModalProps) 
     setUsuarios((prev) => prev.filter((u) => u !== usuario));
   };
 
-  const handleSave = async () => {
+  const handleSubmit = async () => {
+    setErrorMsg(null);
+    setIsSubmitting(true);
     try {
-      const horario: UpdateHorarioPayload = {
-        [data.diaHora]: usuarios,
-      };
-      await updateHorario(horario);
+      await updateHorario({ [data.diaHora]: usuarios });
       onSelect(data.diaHora);
       onClose();
-    } catch (error) {
-      setErrorMsg((error as Error).message);
+    } catch (err: any) {
+      setErrorMsg(err.message || "Error al editar horario");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -91,9 +93,9 @@ const HorariosEditModal = ({ data, onClose, onSelect }: HorariosEditModalProps) 
                 <Font family="Lexend">Añadir Usuario</Font>
               </button>
               <button
-                onClick={handleSave}
+                onClick={handleSubmit}
                 className={styles.modalButtonEdit}
-                disabled={isMutating}
+                disabled={isMutating || isSubmitting}
               >
                 <Font family="Lexend">Guardar cambios</Font>
               </button>

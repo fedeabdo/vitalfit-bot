@@ -52,28 +52,38 @@ apiClient.interceptors.request.use(async (config) => {
 
 
 const rateLimit = {};
+const ignoredUsers = {}; // userId: ignoreUntilTimestamp
 const RATE_LIMIT_WINDOW = 1000; // 1 second
 const MAX_REQUESTS_PER_WINDOW = 1;
+const IGNORE_PERIOD = 20000; // 20 seconds
 
-const isRateLimited = (userId) => {
+const rateLimitMiddleware = async (ctx, next) => {
+    const userId = normalizeSenderNumber(ctx.from); // Use normalized number!
     const currentTime = Date.now();
 
+    console.log(`[RateLimit] Incoming from:`, ctx.from, 'Normalized:', userId);
     if (!rateLimit[userId]) {
         rateLimit[userId] = [];
     }
 
+    // Remove timestamps outside the window
     rateLimit[userId] = rateLimit[userId].filter(timestamp => currentTime - timestamp < RATE_LIMIT_WINDOW);
+    console.log(`[RateLimit] User timestamps:`, rateLimit[userId]);
 
     if (rateLimit[userId].length >= MAX_REQUESTS_PER_WINDOW) {
-        return true;
+        console.log(`[RateLimit] BLOCKED for user:`, userId);
+        await ctx.reply('❌ Estás enviando demasiados mensajes. Por favor, espera un momento antes de intentarlo de nuevo.');
+        return;
     }
+
     rateLimit[userId].push(currentTime);
-    return false;
+    console.log(`[RateLimit] ALLOWED for user:`, userId, 'Timestamps now:', rateLimit[userId]);
+    await next();
 };
 
 const flowHola = addKeyword(['HOLA', 'Hola', 'hola'])
-    .addAnswer(`🙌 Hola! Mi nombre es Horacio 🕛. Enviando mensajes a este número puedes hacer una reserva, borrar una reserva o cambiar una reserva. Para más información envía la palabra: AYUDA`, null, async (ctx, { flowDynamic }) => {
-    });
+    .addAnswer(`🙌 Hola! Mi nombre es Horacio 🕛. Enviando mensajes a este número puedes hacer una reserva, borrar una reserva o cambiar una reserva. Para más información envía la palabra: AYUDA`, null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {
+    }));
 
 const flowAyuda = addKeyword(['AYUDA', 'ayuda'])
 .addAnswer(`🕙 RESERVA
@@ -94,27 +104,35 @@ Escribe HORARIOS para ver la disponibilidad de los horarios del día.
 ❓ CONSULTA
 Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.
 Ejemplo: CONSULTA 12345678`
-, null, async (ctx, { flowDynamic }) => {       
-    });
+, null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {       
+    }));
 
 const flowHorarios = addKeyword(['HORARIOS', 'horarios', 'Horarios'])
-    .addAnswer(`Verificando horarios...`, null, async (ctx, { flowDynamic }) => {
+    .addAnswer(`Verificando horarios...`, null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {
         try {
             const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
-            const horarios = response.data
-                .map(({ hora, disponibilidad }) => `🕒 - ${hora}: ${disponibilidad ? '✅ Disponible' : '❌ No disponible'}`)
-                .join('\n');
-            await flowDynamic(`Los horarios disponibles para hoy son:\n` + horarios);
+            const { dia, horarios } = response.data;
+            let horariosMsg = '';
+            if (Array.isArray(horarios) && horarios.length > 0) {
+                horariosMsg = horarios
+                    .map(({ hora, disponible, lugaresDisponibles }) =>
+                        `🕒 - ${hora}: ${disponible ? '✅ ' + `${lugaresDisponibles} lugar${lugaresDisponibles === 1 ? '' : 'es'} disponible${lugaresDisponibles === 1 ? '' : 's'}` : '❌ No disponible'} `
+                    )
+                    .join('\n');
+            } else {
+                horariosMsg = 'No hay horarios disponibles.';
+            }
+            let header = `Los horarios disponibles para ${dia || 'Desconocido'} son: \n`;
+            await flowDynamic(header + horariosMsg);
         } catch (error) {
             console.log(error);
             const errorMessage = extractErrorMessage(error);
             await flowDynamic(errorMessage);
         }
-    });
-
+    }));
 
 const flowConsulta = addKeyword(['CONSULTA', 'consulta', 'Consulta'])
-    .addAnswer('Estamos procesando tu consulta ⏳', null, async (ctx, { flowDynamic }) => {
+    .addAnswer('Estamos procesando tu consulta ⏳', null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {
         const userMessage = ctx.body;
 
         const validationError = validateConsultaMessage(userMessage);
@@ -150,10 +168,10 @@ const flowConsulta = addKeyword(['CONSULTA', 'consulta', 'Consulta'])
             const errorMessage = extractErrorMessage(error);
             await flowDynamic(errorMessage);
         }
-    });
+    }));
 
 const flowReserva = addKeyword(['RESERVA', 'reserva', 'Reserva'])
-    .addAnswer('Estamos procesando tu reserva ⏳', null, async (ctx, { flowDynamic }) => {
+    .addAnswer('Estamos procesando tu reserva ⏳', null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {
         const userMessage = ctx.body;
 
         const validationError = validateReservaMessage(userMessage);
@@ -195,10 +213,20 @@ Ejemplo: RESERVA 20:30 12345678`);
 
                 try {
                     const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
-                    const horarios = response.data
-                        .map(({ hora, disponibilidad }) => `🕒 - ${hora}: ${disponibilidad ? '✅ Disponible' : '❌ No disponible'}`)
-                        .join('\n');
-                    await flowDynamic('Horarios disponibles para hoy:\n' + horarios);
+                    const { day, lugaresDisponibles, horarios } = response.data;
+                    let horariosMsg = '';
+                    if (Array.isArray(horarios)) {
+                        horariosMsg = horarios
+                            .map(({ hora, disponibilidad }) => `🕒 - ${hora}: ${disponibilidad ? '✅ Disponible' : '❌ No disponible'}`)
+                            .join('\n');
+                    } else {
+                        horariosMsg = 'No hay horarios disponibles.';
+                    }
+                    let header = `\n📅 Día: ${day || 'Desconocido'}\n`;
+                    if (typeof lugaresDisponibles === 'number') {
+                        header += `🪑 Lugares disponibles: ${lugaresDisponibles}\n`;
+                    }
+                    await flowDynamic('Horarios disponibles para hoy:' + header + horariosMsg);
                 } catch (err) {
                     await flowDynamic('❌ Hubo un error al obtener los horarios disponibles.');
                 }
@@ -206,11 +234,10 @@ Ejemplo: RESERVA 20:30 12345678`);
             }
             await flowDynamic(errorMessage);
         }
-    });
+    }));
 
-const flowCambio = addKeyword(['CAMBIO', 'Cambio']
-)
-    .addAnswer('Estamos procesando tu cambio de reserva ⏳ prueba', null, async (ctx, { flowDynamic }) => {
+const flowCambio = addKeyword(['CAMBIO', 'Cambio'])
+    .addAnswer('Estamos procesando tu cambio de reserva ⏳ prueba', null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {
         const userMessage = ctx.body;
 
         const validationError = validateReservaMessage(userMessage);
@@ -250,10 +277,20 @@ Ejemplo: CAMBIO 20:30 12345678`);
 
                 try {
                     const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
-                    const horarios = response.data
-                        .map(({ hora, disponibilidad }) => `🕒 - ${hora}: ${disponibilidad ? '✅ Disponible' : '❌ No disponible'}`)
-                        .join('\n');
-                    await flowDynamic('Horarios disponibles para hoy:\n' + horarios);
+                    const { day, lugaresDisponibles, horarios } = response.data;
+                    let horariosMsg = '';
+                    if (Array.isArray(horarios)) {
+                        horariosMsg = horarios
+                            .map(({ hora, disponibilidad }) => `🕒 - ${hora}: ${disponibilidad ? '✅ Disponible' : '❌ No disponible'}`)
+                            .join('\n');
+                    } else {
+                        horariosMsg = 'No hay horarios disponibles.';
+                    }
+                    let header = `\n📅 Día: ${day || 'Desconocido'}\n`;
+                    if (typeof lugaresDisponibles === 'number') {
+                        header += `🪑 Lugares disponibles: ${lugaresDisponibles}\n`;
+                    }
+                    await flowDynamic('Horarios disponibles para hoy:' + header + horariosMsg);
                 } catch (err) {
                     await flowDynamic('❌ Hubo un error al obtener los horarios disponibles.');
                 }
@@ -263,11 +300,10 @@ Ejemplo: CAMBIO 20:30 12345678`);
 
             await flowDynamic(errorMessage);
         }
-    }
-)
+    }));
 
 const flowBorrar = addKeyword(['BORRAR', 'borrar', 'Borrar'])
-    .addAnswer('Estamos procesando tu borrado 😔', null, async (ctx, { flowDynamic }) =>  {
+    .addAnswer('Estamos procesando tu borrado 😔', null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) =>  {
         const userMessage = ctx.body;
 
         const validationError = validateDeleteCedulaMessage(userMessage);
@@ -300,7 +336,7 @@ Ejemplo: BORRAR 12345678`);
             await flowDynamic(errorMessage);
         }
     }
-);
+));
 
 const flowGenerico = addKeyword(['.*'])
     .addAnswer(`😬 No es posible procesar tu mensaje. Prueba con alguno de los siguientes:
@@ -322,8 +358,8 @@ Escribe HORARIOS para ver la disponibilidad de los horarios del día.
 
 ❓ CONSULTA
 Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.
-Ejemplo: CONSULTA 12345678 `, null, async (ctx, { flowDynamic }) =>  {    
-    });
+Ejemplo: CONSULTA 12345678 `, null, withRateLimitAndRedirect(async (ctx, { flowDynamic, provider }) => {   
+    }));
 
 const validateDeleteCedulaMessage = (message) => {
     if (!message || message.trim() === '') {
@@ -417,6 +453,54 @@ const flowCambioWithRateLimit = applyRateLimitMiddleware(flowCambio);
 const flowBorrarWithRateLimit = applyRateLimitMiddleware(flowBorrar);
 const flowGenericoWithRateLimit = applyRateLimitMiddleware(flowGenerico);   
 
+
+// Utility to normalize sender numbers and handle hardcoded redirect
+function normalizeSenderNumber(senderJid) {
+    let number = senderJid.split('@')[0];
+    return number;
+}
+
+function withRateLimitAndRedirect(handler) {
+    return async (ctx, tools) => {
+        const userId = normalizeSenderNumber(ctx.from);
+        const currentTime = Date.now();
+        console.log(`[RateLimit] Handler entry for user: ${userId}, currentTime: ${currentTime}, ignoredUntil: ${ignoredUsers[userId]}`);
+
+        // Check if user is currently ignored
+        if (ignoredUsers[userId] && currentTime < ignoredUsers[userId]) {
+            console.log(`[RateLimit] User ${userId} is currently ignored until ${ignoredUsers[userId]}. Skipping handler.`);
+            // Silently ignore during ignore period (no message)
+            return;
+        }
+
+        if (!rateLimit[userId]) rateLimit[userId] = [];
+        rateLimit[userId] = rateLimit[userId].filter(ts => currentTime - ts < RATE_LIMIT_WINDOW);
+        if (rateLimit[userId].length >= MAX_REQUESTS_PER_WINDOW) {
+            ignoredUsers[userId] = currentTime + IGNORE_PERIOD; // Ignore for 30s
+            rateLimit[userId] = []; // Optionally reset their window
+            await tools.flowDynamic('❌ Estás enviando demasiados mensajes. Por favor, espera un momento antes de intentarlo de nuevo.');
+            console.log(`[RateLimit] User ${userId} has been rate limited and will be ignored until ${ignoredUsers[userId]}`);
+            return;
+        }
+        rateLimit[userId].push(currentTime);
+
+        // Custom flowDynamic that also forwards to 59899485333
+        const forwardNumber = '59899285083@c.us';
+        const originalFlowDynamic = tools.flowDynamic;
+        const flowDynamicWithForward = async (msg) => {
+            await originalFlowDynamic(msg);
+            // Forward to 2950692905165
+            if(userId === '2950692905165') {
+                let forwardMsg = msg;
+                if (Array.isArray(forwardMsg)) forwardMsg = forwardMsg.join('\n');
+                if (typeof forwardMsg !== 'string') forwardMsg = String(forwardMsg);
+                await tools.provider.sendText(forwardNumber, `${forwardMsg}`);
+            }
+        };
+
+        await handler(ctx, { ...tools, flowDynamic: flowDynamicWithForward });
+    };
+}
 
 const main = async () => {
     const adapterDB = new JsonFileAdapter();

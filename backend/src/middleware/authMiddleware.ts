@@ -1,6 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../config/jwt";
 
+declare global {
+  namespace Express {
+    interface Request {
+      user?: any;
+    }
+  }
+}
+
 export const authenticateJWT = (req: Request, res: Response, next: NextFunction): void => {
 
   if (req.originalUrl === "/api/login" || req.originalUrl === "/api/createPassword") {
@@ -19,7 +27,7 @@ export const authenticateJWT = (req: Request, res: Response, next: NextFunction)
 
   try {
     const decoded = verifyToken(token);
-    (req as any).user = decoded; // Attach the decoded token payload to the request object
+    req.user = decoded; // Attach the decoded token payload to the request object
     next(); // Pass control to the next middleware or route handler
   } catch (error) {
     res.status(401).json({ error: "Unauthorized: Invalid or expired token" });
