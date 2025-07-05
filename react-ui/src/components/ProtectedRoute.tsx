@@ -1,9 +1,13 @@
-// src/components/ProtectedRoute.tsx
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const { isAuthenticated, isLoading } = useAuth();
+interface ProtectedRouteProps {
+  children: JSX.Element;
+  allowedRoles?: string[];
+}
+
+export const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
+  const { isAuthenticated, isLoading, userRole } = useAuth();
   const location = useLocation();
 
   if (isLoading) {
@@ -12,6 +16,10 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  if (allowedRoles && (!userRole || !allowedRoles.includes(userRole))) {
+    return <Navigate to="/unauthorized" replace />;
   }
 
   return children;

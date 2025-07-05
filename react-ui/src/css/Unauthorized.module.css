@@ -1,0 +1,28 @@
+.unauthorizedContainer {
+  background: #181818;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.unauthorizedTitle {
+  color: #f5f6fa;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 8px #00000099;
+}
+
+.unauthorizedText {
+  color: #e0e0e0;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 1px 4px #00000066;
+}
+
+.sadEmoji {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1.5rem;
+}

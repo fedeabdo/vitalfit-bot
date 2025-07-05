@@ -38,6 +38,10 @@ export const useDeleteHorario = () => {
           throw new Error(errorMessage);
         }
 
+        // Handle 204 No Content (no body)
+        if (response.status === 204) {
+          return null;
+        }
         return await response.json();
       } catch (err: any) {
         if (err.name === "AbortError") {
@@ -47,7 +51,7 @@ export const useDeleteHorario = () => {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['horarios'] });
+      queryClient.invalidateQueries({ queryKey: ["horarios"] });
     },
     retry: false,
   });

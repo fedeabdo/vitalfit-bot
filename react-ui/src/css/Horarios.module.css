@@ -11,8 +11,30 @@
     border-radius: 12px;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
   }
+
+  .header {
+    display: flex;
+    align-items: center; /* Vertically align h2 and the icon */
+    justify-content: space-between; /* Push the icon to the right */
+    position: relative;
+    width: 100%; /* Ensure the header takes the full width */
+  }
+
+    .header h2 {
+    flex: 1;
+    text-align: center; 
+
+    font-size: 2rem;
+    font-weight: 900;
+    color: black;
+    text-transform: uppercase;
+    border-bottom: 2px solid #FBB900; /* Add underline */
+    padding-bottom: 0.5rem;
+  }
+
   
   .container h2 {
+    display: flex;
     text-align: center;
     margin-bottom: 1rem;
     font-size: 2rem;
@@ -21,6 +43,7 @@
     text-transform: uppercase;
     border-bottom: 2px solid #FBB900;
     padding-bottom: 0.5rem;
+    display: inline-block; /* Allow h2 to align with the icon */
   }
 
   .iconButton{
@@ -33,5 +56,12 @@
     transform: scale(1.2);
   }
 
+  .iconButtonAdd{
+    background-color: transparent;
+    border: none;
+    font-size: 1.0rem; 
+    cursor: pointer;
+    margin-left: 1rem; /* Add spacing between h2 and the icon */
+  }
 
   

@@ -1,5 +1,7 @@
 import express from "express";
-import { authenticateJWT } from "./middleware/authMiddleware";
+import { authenticateJWT } from './middleware/authMiddleware';
+import { authorizeRoles } from './middleware/roleMiddleware';
+
 import { AuthController } from "./Controllers/AuthController";
 import { UsuariosController } from "./Controllers/UsuariosController";
 import { HorariosController } from "./Controllers/HorariosController";
@@ -23,29 +25,30 @@ router.options(
   );
 router.get("/createPassword", AuthController.createPassword);
 
+
 // Protected routes (authentication required)
 router.use(authenticateJWT); // Apply middleware to all routes below
 
 // Usuarios routes
-router.get('/usuarios', UsuariosController.getUsuarios);
-router.post('/usuarios', UsuariosController.addUsuario);
-router.delete('/usuarios', UsuariosController.deleteUsuario);
+router.get('/usuarios', authorizeRoles('admin'), UsuariosController.getUsuarios);
+router.post('/usuarios', authorizeRoles('admin'), UsuariosController.addUsuario);
+router.delete('/usuarios', authorizeRoles('admin'), UsuariosController.deleteUsuario);
 // Development-only route
 router.get('/usuarios/removeDuplicates', UsuariosController.removeDuplicateUsuarios);
 
 // Horarios routes
-router.get('/horarios', HorariosController.getHorarios);
-router.get('/horariosHoy', HorariosController.getHorariosHoy);
-router.post('/horarios', HorariosController.addHorario);
-router.delete('/horarios', HorariosController.deleteHorario);
-router.put('/horarios', HorariosController.updateHorario);
+router.get('/horarios', authorizeRoles('admin'), HorariosController.getHorarios);
+router.get('/horariosHoy', authorizeRoles('admin'), HorariosController.getHorariosHoy);
+router.post('/horarios', authorizeRoles('admin'), HorariosController.addHorario);
+router.delete('/horarios', authorizeRoles('admin'), HorariosController.deleteHorario);
+router.put('/horarios', authorizeRoles('admin'), HorariosController.updateHorario);
 
 // Reservas routes
-router.get('/reservas', ReservaController.getReservas);
-router.post('/reservas', ReservaController.addReserva);
-router.put('/reservas', ReservaController.updateReserva);
-router.delete('/reservas', ReservaController.deleteReserva);
-router.get('/reservas/consulta/:cedula', ReservaController.buscarHoraPorCedula);
+router.get('/reservas', authorizeRoles('admin', 'user'), ReservaController.getReservas);
+router.post('/reservas', authorizeRoles('admin'), ReservaController.addReserva);
+router.put('/reservas', authorizeRoles('admin'), ReservaController.updateReserva);
+router.delete('/reservas', authorizeRoles('admin'), ReservaController.deleteReserva);
+router.get('/reservas/consulta/:cedula', authorizeRoles('admin'), ReservaController.buscarHoraPorCedula);
 // Development-only route
 router.get('/reservas/reset', ReservaController.resetReservas);
 

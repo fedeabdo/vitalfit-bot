@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Horarios from './pages/Horarios';
 import Usuarios from './pages/Usuarios';
 import {Login} from './pages/Login';
+import Unauthorized from './pages/Unauthorized';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,9 +34,13 @@ const router = createBrowserRouter([
         element: <Login />   
       },
       {
+        path: "unauthorized",
+        element: <Unauthorized />
+      },
+      {
         index: true,
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute allowedRoles={['admin', 'user']}>
             <Home />
           </ProtectedRoute>
         ),
@@ -43,7 +48,7 @@ const router = createBrowserRouter([
       {
         path: "horarios",
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute allowedRoles={['admin']}>
             <Horarios />
           </ProtectedRoute>
         ),
@@ -51,7 +56,7 @@ const router = createBrowserRouter([
       {
         path: "usuarios",
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute allowedRoles={['admin']}>
             <Usuarios />
           </ProtectedRoute>
         ),

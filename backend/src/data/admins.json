@@ -1,10 +1,17 @@
 [
   {
     "username": "admin",
-    "password": "$2b$12$LejLWivBZSUBjARCXNh/rOvRzIl3ei1M52BNdKNuDvDyWUIxdgjXW"
+    "password": "$2b$12$LejLWivBZSUBjARCXNh/rOvRzIl3ei1M52BNdKNuDvDyWUIxdgjXW",
+    "role": "admin"
+  },
+  {
+    "username": "nando",
+    "password": "$2b$12$2El1BfA06PC00kisY/HM4OMtRAO7cPJS6277hTOyz.hB61vyshdWG",
+    "role": "admin"
   },
   {
     "username": "Profesor",
-    "password": "$2b$12$2El1BfA06PC00kisY/HM4OMtRAO7cPJS6277hTOyz.hB61vyshdWG"
+    "password": "$2b$12$2El1BfA06PC00kisY/HM4OMtRAO7cPJS6277hTOyz.hB61vyshdWG",
+    "role": "user"
   }
 ]

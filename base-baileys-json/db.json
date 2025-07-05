@@ -1,16 +1,16 @@
 [
   {
-    "ref": "0da0e8b3-f3ca-4537-95c1-0386ac373b21",
-    "keyword": "006db9c9564a11c4cccac2bb54803d28",
-    "answer": "Hola",
+    "ref": "2013778c-3a2e-44de-a268-f4669489fe8d",
+    "keyword": "94dc771f8f919d171d2064ac2d841380",
+    "answer": "Horarios",
     "options": {},
-    "from": "59899485333",
-    "refSerialize": "c22e4066d61d81721def9b25d8a397e8"
+    "from": "59899680147",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
   },
   {
-    "ref": "ans_af2d5922-b9e7-40b9-8cfd-469d4e5c5fa3",
-    "keyword": "key_43387a30-c500-4f54-923a-e62eb9619f1f",
-    "answer": "🙌 Hola! Mi nombre es Horacio 🕛. Enviando mensajes a este número puedes hacer una reserva, borrar una reserva o cambiar una reserva. Para más información envía la palabra: AYUDA",
+    "ref": "ans_9f855c41-de1a-4883-8a23-3d02e23b9f53",
+    "keyword": "key_6b0d4db6-a8fa-4f08-a828-83084156c957",
+    "answer": "Verificando horarios...",
     "options": {
       "media": null,
       "buttons": [],
@@ -23,74 +23,20 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "e75217a213b716a1bf529eb87cf632fd",
-    "from": "59899485333"
+    "refSerialize": "ddfb9fb947b9ed7db99a7ec9d76fa072",
+    "from": "59899680147"
   },
   {
-    "ref": "c7db4372-838b-4ebb-a63b-d37555520b51",
-    "keyword": "e75217a213b716a1bf529eb87cf632fd",
-    "answer": "Ayuda",
-    "options": {},
-    "from": "59899485333",
-    "refSerialize": "6f1c8ec9910afc8ad71c026ec0c69f3d"
-  },
-  {
-    "ref": "ans_be9230f2-9a67-442c-84f4-8204f6ce8fdd",
-    "keyword": "key_5f044492-21b4-4a37-9238-5c94445c5813",
-    "answer": "🕙 RESERVA\nEscribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678\n\n🔁 CAMBIO DE RESERVA\nEscribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: CAMBIO 20:30 12345678\n\n❌ BORRAR RESERVA\nEscribe BORRAR seguido de tu cédula (sin puntos ni guiones).\nEjemplo: BORRAR 12345678\n\n📋 HORARIOS\nEscribe HORARIOS para ver la disponibilidad de los horarios del día.\n\n❓ CONSULTA\nEscribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678",
-    "options": {
-      "media": null,
-      "buttons": [],
-      "capture": false,
-      "child": null,
-      "delay": 0,
-      "idle": null,
-      "ref": null,
-      "nested": [],
-      "keyword": {},
-      "callback": true
-    },
-    "refSerialize": "5686f2d76f10df58add1c6eb154bc73c",
-    "from": "59899485333"
-  },
-  {
-    "ref": "86905692-5f1d-4d52-92bf-a50798c9fed6",
-    "keyword": "5686f2d76f10df58add1c6eb154bc73c",
-    "answer": "Reserva 52079281",
-    "options": {},
-    "from": "59899485333",
-    "refSerialize": "6973b82819c5459aa9c5eeeac9183351"
-  },
-  {
-    "ref": "ans_52bff030-4f6d-4cd8-91e2-8d01fa11a4f2",
-    "keyword": "key_caabf369-5736-42a9-9a30-f510ad7e8069",
-    "answer": "Estamos procesando tu reserva ⏳",
-    "options": {
-      "media": null,
-      "buttons": [],
-      "capture": false,
-      "child": null,
-      "delay": 0,
-      "idle": null,
-      "ref": null,
-      "nested": [],
-      "keyword": {},
-      "callback": true
-    },
-    "refSerialize": "a9a984d2d79d4906e28cb945403dfdc3",
-    "from": "59899485333"
-  },
-  {
-    "ref": "3bbb5609-864c-42ef-b7f4-564b25349ae0",
+    "ref": "7a78e817-f842-4fa2-a081-a3a5ec99d104",
     "keyword": null,
-    "answer": "❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678",
+    "answer": "Los horarios disponibles para sábado, 05/07 son: \n🕒 - 10:00: ✅ 6 lugares disponibles \n🕒 - 11:00: ✅ 6 lugares disponibles ",
     "options": {
       "media": null,
       "buttons": [],
       "capture": false,
       "delay": 0
     },
-    "from": "59899485333",
-    "refSerialize": "2ef07363c37bb8aebfec6235067e461d"
+    "from": "59899680147",
+    "refSerialize": "27e6583bc44fd4b9779ee63050c81c62"
   }
 ]
