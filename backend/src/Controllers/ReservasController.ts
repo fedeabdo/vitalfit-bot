@@ -465,8 +465,10 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
     const minutosActuales = now.getMinutes();
     const data = await fs.readFile(ReservaController.DATA_PATH_RESERVAS, 'utf-8');
     const backupReservas: Record<string, Reserva[]> = JSON.parse(data);
+    
+    const isSunday = now.getDay() === 0;
 
-    if (horaActual > 20 || (horaActual === 20 && minutosActuales >= 30)) {
+    if (horaActual > 20 || (horaActual === 20 && minutosActuales >= 30) || isSunday) {
         // Send backup email
         await this.sendBackupEmail(backupReservas);
         const horas: string[] = await this.getHorariosDispniblesMañana();
