@@ -211,30 +211,31 @@ Ejemplo: RESERVA 20:30 12345678`);
                 await flowDynamic(errorMessage);
 
 
-                try {
-                    const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
-                    const { day, lugaresDisponibles, horarios } = response.data;
-                    let horariosMsg = '';
-                    if (Array.isArray(horarios)) {
-                        horariosMsg = horarios
-                            .map(({ hora, disponibilidad }) => `🕒 - ${hora}: ${disponibilidad ? '✅ Disponible' : '❌ No disponible'}`)
-                            .join('\n');
-                    } else {
-                        horariosMsg = 'No hay horarios disponibles.';
-                    }
-                    let header = `\n📅 Día: ${day || 'Desconocido'}\n`;
-                    if (typeof lugaresDisponibles === 'number') {
-                        header += `🪑 Lugares disponibles: ${lugaresDisponibles}\n`;
-                    }
-                    await flowDynamic('Horarios disponibles para hoy:' + header + horariosMsg);
-                } catch (err) {
-                    await flowDynamic('❌ Hubo un error al obtener los horarios disponibles.');
-                }
-                return;
+        try {
+            const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
+            const { dia, horarios } = response.data;
+            let horariosMsg = '';
+            if (Array.isArray(horarios) && horarios.length > 0) {
+                horariosMsg = horarios
+                    .map(({ hora, disponible, lugaresDisponibles }) =>
+                        `🕒 - ${hora}: ${disponible ? '✅ ' + `${lugaresDisponibles} lugar${lugaresDisponibles === 1 ? '' : 'es'} disponible${lugaresDisponibles === 1 ? '' : 's'}` : '❌ No disponible'} `
+                    )
+                    .join('\n');
+            } else {
+                horariosMsg = 'No hay horarios disponibles.';
             }
+            let header = `Los horarios disponibles para ${dia || 'Desconocido'} son: \n`;
+            await flowDynamic(header + horariosMsg);
+        } catch (error) {
+            console.log(error);
+            const errorMessage = extractErrorMessage(error);
             await flowDynamic(errorMessage);
         }
-    }));
+        return;
+	    }    
+        await flowDynamic(errorMessage);
+	}
+    }}));
 
 const flowCambio = addKeyword(['CAMBIO', 'Cambio'])
     .addAnswer('Estamos procesando tu cambio de reserva ⏳ prueba', null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {

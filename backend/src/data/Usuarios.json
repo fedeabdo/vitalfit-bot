@@ -1,144 +1,506 @@
 [
-    { "nombre": "Óscar Gutiérrez", "ci": "15074141" },
-    { "nombre": "Adriana Longo", "ci": "30968002" },
-    { "nombre": "Agustín Da Silveira", "ci": "" },
-    { "nombre": "Agustín ibero", "ci": "34821888" },
-    { "nombre": "Agustín Rodríguez", "ci": "" },
-    { "nombre": "Alejandro González", "ci": "40899277" },
-    { "nombre": "Amparo Bengochea", "ci": "45326570" },
-    { "nombre": "Andrea Dominzain", "ci": "48904703" },
-    { "nombre": "Andrea Olariaga", "ci": "34599590" },
-    { "nombre": "Andres Delfino", "ci": "47965908" },
-    { "nombre": "Andrés Kent", "ci": "47621380" },
-    { "nombre": "Andres Saavedra", "ci": "28966452" },
-    { "nombre": "Antonella Sosa", "ci": "52328363" },
-    { "nombre": "Antonio Manzi", "ci": "44260832" },
-    { "nombre": "Augusto Deganello", "ci": "47786841" },
-    { "nombre": "Avril Pardo", "ci": "" },
-    { "nombre": "Braian Texeira", "ci": "50847545" },
-    { "nombre": "Bruno Dho", "ci": "49258563" },
-    { "nombre": "Camila Riesgo", "ci": "46775172" },
-    { "nombre": "Carina Pacheco", "ci": "44402018" },
-    { "nombre": "Carolina Urioste", "ci": "54068292" },
-    { "nombre": "Catalina Barceló", "ci": "49355789" },
-    { "nombre": "Cecilia Barate", "ci": "42383965" },
-    { "nombre": "Cecilia Ogara", "ci": "45310727" },
-    { "nombre": "Clara Gonzalez", "ci": "50515837" },
-    { "nombre": "Claudia Reyes", "ci": "47669889" },
-    { "nombre": "Claudia Rodríguez", "ci": "30830106" },
-    { "nombre": "Dana Paola Silva", "ci": "55302673" },
-    { "nombre": "Daniel Riesgo", "ci": "14848563" },
-    { "nombre": "Daniela González Biavaschi", "ci": "34753338" },
-    { "nombre": "Daniela Malleville", "ci": "43810935" },
-    { "nombre": "Darío García", "ci": "" },
-    { "nombre": "Diego Fuentes", "ci": "422262559" },
-    { "nombre": "Diego Pilosof", "ci": "" },
-    { "nombre": "Elsa Romero", "ci": "13241807" },
-    { "nombre": "Emanuel Barrera", "ci": "47570793" },
-    { "nombre": "Emanuel Berón", "ci": "52111697" },
-    { "nombre": "Emil Chichet", "ci": "" },
-    { "nombre": "Emilse Chá", "ci": "48929975" },
-    { "nombre": "Enzo de Nicola", "ci": "" },
-    { "nombre": "Fabian Leoni", "ci": "36846256" },
-    { "nombre": "Fabio Gatti", "ci": "51713000" },
-    { "nombre": "Facundo Andrioli", "ci": "46757077" },
-    { "nombre": "Federico Abdo", "ci": "48574007" },
-    { "nombre": "Federico Gomez", "ci": "51215923" },
-    { "nombre": "Federico Guridi", "ci": "34587721" },
-    { "nombre": "Federico Lemos", "ci": "49283120" },
-    { "nombre": "Federico Mello", "ci": "47091464" },
-    { "nombre": "Federico Prieto", "ci": "47560342" },
-    { "nombre": "Felipe Hein", "ci": "" },
-    { "nombre": "Fernando Mangold", "ci": "51010208" },
-    { "nombre": "Fernando Martínez", "ci": "49374850" },
-    { "nombre": "Francisco González", "ci": "49149653" },
-    { "nombre": "Francisco Pieri", "ci": "27796525" },
-    { "nombre": "Franco Alvarez", "ci": "54591657" },
-    { "nombre": "Franco Gargaglioni", "ci": "52079281" },
-    { "nombre": "Gabriel Ducer", "ci": "51068681" },
-    { "nombre": "Genaro Loprete", "ci": "56988947" },
-    { "nombre": "Gissel Martins da Silva", "ci": "" },
-    { "nombre": "Gonzalo Marmissolle", "ci": "45861174" },
-    { "nombre": "Gonzalo Vallarino", "ci": "18427854" },
-    { "nombre": "Guillermo González", "ci": "44153481" },
-    { "nombre": "Guillermo Suárez", "ci": "47397420" },
-    { "nombre": "Gustavo Ricci", "ci": "" },
-    { "nombre": "Hebenor Bermúdez", "ci": "27966031" },
-    { "nombre": "Higinio Duarte", "ci": "42311568" },
-    { "nombre": "Ignacio Marquez", "ci": "47826704" },
-    { "nombre": "Jessica Paez", "ci": "58728094" },
-    { "nombre": "Joaquín Sanabria", "ci": "45876387" },
-    { "nombre": "Joaquin Silva", "ci": "50320212" },
-    { "nombre": "John Pirez", "ci": "45640932" },
-    { "nombre": "Jonathan Sjostrand", "ci": "" },
-    { "nombre": "josefina barceló", "ci": "52246002" },
-    { "nombre": "Joselin Damian", "ci": "45261508" },
-    { "nombre": "Juan Pereyra", "ci": "43063839" },
-    { "nombre": "Juana de los santos", "ci": "49996674" },
-    { "nombre": "Karina Casavieja", "ci": "40401349" },
-    { "nombre": "Lia Lloveras", "ci": "54687810" },
-    { "nombre": "Lois Ferreira Carrera", "ci": "35589514" },
-    { "nombre": "Lorena Fleitas", "ci": "49866408" },
-    { "nombre": "Lorena Guardia", "ci": "48435637" },
-    { "nombre": "Lucas Fuente", "ci": "60448919" },
-    { "nombre": "Lucas guedes", "ci": "48756150" },
-    { "nombre": "Lucia Fornaroli", "ci": "38224127" },
-    { "nombre": "Lucía Prieto", "ci": "50504567" },
-    { "nombre": "Luciana Britos", "ci": "37244166" },
-    { "nombre": "Luis Abdo", "ci": "28518582" },
-    { "nombre": "Luis Chiappara", "ci": "18243402" },
-    { "nombre": "Luis Fernández", "ci": "28233065" },
-    { "nombre": "Magdalena Risvegliato", "ci": "47452248" },
-    { "nombre": "Marcel Barceló", "ci": "14987018" },
-    { "nombre": "Marcelo Lozano", "ci": "43828231" },
-    { "nombre": "Marco Bonino", "ci": "17724506" },
-    { "nombre": "Marcos Zinatto", "ci": "" },
-    { "nombre": "Marelen Cabrera", "ci": "44598992" },
-    { "nombre": "María Emilia Diaz", "ci": "51881685" },
-    { "nombre": "Maria Patricia Riesgo Blanco", "ci": "46775188" },
-    { "nombre": "Mariana pouso", "ci": "34515625" },
-    { "nombre": "Martín Riesgo", "ci": "52446909" },
-    { "nombre": "Martin Saavedra", "ci": "38487466" },
-    { "nombre": "Mauricio Chirino", "ci": "64044630" },
-    { "nombre": "Maximiliano Nogueira", "ci": "43774175" },
-    { "nombre": "Mercedes Méndez", "ci": "33464601" },
-    { "nombre": "Milena Cantero", "ci": "43103560" },
-    { "nombre": "Nahuel Granero", "ci": "57802556" },
-    { "nombre": "Nahuel Quiroga", "ci": "48391342" },
-    { "nombre": "Natalia Chiesa Silva", "ci": "40984436" },
-    { "nombre": "Natalia García", "ci": "48378275" },
-    { "nombre": "Nico Tolstoy", "ci": "49058707" },
-    { "nombre": "Nicolas Navascues", "ci": "52413851" },
-    { "nombre": "Nicolás Revello", "ci": "" },
-    { "nombre": "Nicolás Zinoveev", "ci": "54959837" },
-    { "nombre": "Pablo ferragut", "ci": "33712278" },
-    { "nombre": "Pablo Hernández", "ci": "" },
-    { "nombre": "Pablo Pinazzo", "ci": "46389866" },
-    { "nombre": "Paula Galíndez Borgia", "ci": "19799628" },
-    { "nombre": "Paula Pouso", "ci": "29509324" },
-    { "nombre": "Priscilla Suarez", "ci": "42742428" },
-    { "nombre": "Ramiro Hernandez", "ci": "47804465" },
-    { "nombre": "Regignaldo Gonzalez", "ci": "54195774" },
-    { "nombre": "Ricardo pla", "ci": "44367616" },
-    { "nombre": "Rodrigo Correa", "ci": "54070174" },
-    { "nombre": "Rodrigo Marote", "ci": "" },
-    { "nombre": "Rodrigo Sánchez", "ci": "" },
-    { "nombre": "Romina Dominzaín", "ci": "" },
-    { "nombre": "Romina Sosa", "ci": "49068584" },
-    { "nombre": "Roque Jorge Fuentes Gonzalez", "ci": "13260279" },
-    { "nombre": "Ruddy Moncada", "ci": "64055988" },
-    { "nombre": "Sabrina Elgart", "ci": "52626634" },
-    { "nombre": "Salomé Campot", "ci": "50941509" },
-    { "nombre": "Sandra Moreno", "ci": "18654849" },
-    { "nombre": "Santiago Sánchez", "ci": "49297527" },
-    { "nombre": "Sheila Crida", "ci": "45877381" },
-    { "nombre": "Silvina Vilches", "ci": "48326357" },
-    { "nombre": "Sofía Caballero", "ci": "50900296" },
-    { "nombre": "Sosa M", "ci": "27247427" },
-    { "nombre": "Tomás Garula", "ci": "56988969" },
-    { "nombre": "Valentín Pérez", "ci": "44709959" },
-    { "nombre": "Vanessa Astapenco", "ci": "44983163" },
-    { "nombre": "Verónica Pinazzo", "ci": "38858776" },
-    { "nombre": "Victor Estigarribia", "ci": "61747984" },
-    { "nombre": "Victoria sosa", "ci": "51298474" }
+  {
+    "nombre": "Óscar Gutiérrez",
+    "ci": "15074141"
+  },
+  {
+    "nombre": "Adriana Longo",
+    "ci": "30968002"
+  },
+  {
+    "nombre": "Agustín ibero",
+    "ci": "34821888"
+  },
+  {
+    "nombre": "Alejandro González",
+    "ci": "40899277"
+  },
+  {
+    "nombre": "Amparo Bengochea",
+    "ci": "45326570"
+  },
+  {
+    "nombre": "Andrea Dominzain",
+    "ci": "48904703"
+  },
+  {
+    "nombre": "Andrea Olariaga",
+    "ci": "34599590"
+  },
+  {
+    "nombre": "Andres Delfino",
+    "ci": "47965908"
+  },
+  {
+    "nombre": "Andrés Kent",
+    "ci": "47621380"
+  },
+  {
+    "nombre": "Andres Saavedra",
+    "ci": "28966452"
+  },
+  {
+    "nombre": "Antonella Sosa",
+    "ci": "52328363"
+  },
+  {
+    "nombre": "Antonio Manzi",
+    "ci": "44260832"
+  },
+  {
+    "nombre": "Augusto Deganello",
+    "ci": "47786841"
+  },
+  {
+    "nombre": "Braian Texeira",
+    "ci": "50847545"
+  },
+  {
+    "nombre": "Bruno Dho",
+    "ci": "49258563"
+  },
+  {
+    "nombre": "Carina Pacheco",
+    "ci": "44402018"
+  },
+  {
+    "nombre": "Carolina Urioste",
+    "ci": "54068292"
+  },
+  {
+    "nombre": "Cecilia Barate",
+    "ci": "42383965"
+  },
+  {
+    "nombre": "Cecilia Ogara",
+    "ci": "45310727"
+  },
+  {
+    "nombre": "Clara Gonzalez",
+    "ci": "50515837"
+  },
+  {
+    "nombre": "Claudia Reyes",
+    "ci": "47669889"
+  },
+  {
+    "nombre": "Claudia Rodríguez",
+    "ci": "30830106"
+  },
+  {
+    "nombre": "Dana Paola Silva",
+    "ci": "55302673"
+  },
+  {
+    "nombre": "Daniela González Biavaschi",
+    "ci": "34753338"
+  },
+  {
+    "nombre": "Emanuel Barrera",
+    "ci": "47570793"
+  },
+  {
+    "nombre": "Emanuel Berón",
+    "ci": "52111697"
+  },
+  {
+    "nombre": "Emilse Chá",
+    "ci": "48929975"
+  },
+  {
+    "nombre": "Fabian Leoni",
+    "ci": "36846256"
+  },
+  {
+    "nombre": "Fabio Gatti",
+    "ci": "51713000"
+  },
+  {
+    "nombre": "Facundo Andrioli",
+    "ci": "46757077"
+  },
+  {
+    "nombre": "Federico Abdo",
+    "ci": "48574007"
+  },
+  {
+    "nombre": "Federico Guridi",
+    "ci": "34587721"
+  },
+  {
+    "nombre": "Federico Mello",
+    "ci": "47091464"
+  },
+  {
+    "nombre": "Federico Prieto",
+    "ci": "47560342"
+  },
+  {
+    "nombre": "Fernando Mangold",
+    "ci": "51010208"
+  },
+  {
+    "nombre": "Fernando Martínez",
+    "ci": "49374850"
+  },
+  {
+    "nombre": "Francisco González",
+    "ci": "49149653"
+  },
+  {
+    "nombre": "Francisco Pieri",
+    "ci": "27796525"
+  },
+  {
+    "nombre": "Franco Alvarez",
+    "ci": "54591657"
+  },
+  {
+    "nombre": "Franco Gargaglioni",
+    "ci": "52079281"
+  },
+  {
+    "nombre": "Genaro Loprete",
+    "ci": "56988947"
+  },
+  {
+    "nombre": "Gonzalo Marmissolle",
+    "ci": "45861174"
+  },
+  {
+    "nombre": "Gonzalo Vallarino",
+    "ci": "18427854"
+  },
+  {
+    "nombre": "Guillermo González",
+    "ci": "44153481"
+  },
+  {
+    "nombre": "Guillermo Suárez",
+    "ci": "47397420"
+  },
+  {
+    "nombre": "Hebenor Bermúdez",
+    "ci": "27966031"
+  },
+  {
+    "nombre": "Higinio Duarte",
+    "ci": "42311568"
+  },
+  {
+    "nombre": "Ignacio Marquez",
+    "ci": "47826704"
+  },
+  {
+    "nombre": "Jessica Paez",
+    "ci": "58728094"
+  },
+  {
+    "nombre": "Joaquín Sanabria",
+    "ci": "45876387"
+  },
+  {
+    "nombre": "Joaquin Silva",
+    "ci": "50320212"
+  },
+  {
+    "nombre": "John Pirez",
+    "ci": "45640932"
+  },
+  {
+    "nombre": "josefina barceló",
+    "ci": "52246002"
+  },
+  {
+    "nombre": "Joselin Damian",
+    "ci": "45261508"
+  },
+  {
+    "nombre": "Juan Pereyra",
+    "ci": "43063839"
+  },
+  {
+    "nombre": "Juana de los santos",
+    "ci": "49996674"
+  },
+  {
+    "nombre": "Karina Casavieja",
+    "ci": "40401349"
+  },
+  {
+    "nombre": "Lia Lloveras",
+    "ci": "54687810"
+  },
+  {
+    "nombre": "Lois Ferreira Carrera",
+    "ci": "35589514"
+  },
+  {
+    "nombre": "Lorena Guardia",
+    "ci": "48435637"
+  },
+  {
+    "nombre": "Lucas Fuente",
+    "ci": "60448919"
+  },
+  {
+    "nombre": "Lucía Prieto",
+    "ci": "50504567"
+  },
+  {
+    "nombre": "Luciana Britos",
+    "ci": "37244166"
+  },
+  {
+    "nombre": "Luis Abdo",
+    "ci": "28518582"
+  },
+  {
+    "nombre": "Luis Chiappara",
+    "ci": "18243402"
+  },
+  {
+    "nombre": "Luis Fernández",
+    "ci": "28233065"
+  },
+  {
+    "nombre": "Magdalena Risvegliato",
+    "ci": "47452248"
+  },
+  {
+    "nombre": "Marcel Barceló",
+    "ci": "14987018"
+  },
+  {
+    "nombre": "Marcelo Lozano",
+    "ci": "43828231"
+  },
+  {
+    "nombre": "Marco Bonino",
+    "ci": "17724506"
+  },
+  {
+    "nombre": "Marelen Cabrera",
+    "ci": "44598992"
+  },
+  {
+    "nombre": "María Emilia Diaz",
+    "ci": "51881685"
+  },
+  {
+    "nombre": "Martín Riesgo",
+    "ci": "52446909"
+  },
+  {
+    "nombre": "Martin Saavedra",
+    "ci": "38487466"
+  },
+  {
+    "nombre": "Mauricio Chirino",
+    "ci": "64044630"
+  },
+  {
+    "nombre": "Maximiliano Nogueira",
+    "ci": "43774175"
+  },
+  {
+    "nombre": "Mercedes Méndez",
+    "ci": "33464601"
+  },
+  {
+    "nombre": "Milena Cantero",
+    "ci": "43103560"
+  },
+  {
+    "nombre": "Nahuel Granero",
+    "ci": "57802556"
+  },
+  {
+    "nombre": "Nahuel Quiroga",
+    "ci": "48391342"
+  },
+  {
+    "nombre": "Natalia Chiesa Silva",
+    "ci": "40984436"
+  },
+  {
+    "nombre": "Natalia García",
+    "ci": "48378275"
+  },
+  {
+    "nombre": "Nicolas Navascues",
+    "ci": "52413851"
+  },
+  {
+    "nombre": "Nicolás Zinoveev",
+    "ci": "54959837"
+  },
+  {
+    "nombre": "Pablo Pinazzo",
+    "ci": "46389866"
+  },
+  {
+    "nombre": "Paula Galíndez Borgia",
+    "ci": "19799628"
+  },
+  {
+    "nombre": "Paula Pouso",
+    "ci": "29509324"
+  },
+  {
+    "nombre": "Priscilla Suarez",
+    "ci": "42742428"
+  },
+  {
+    "nombre": "Ramiro Hernandez",
+    "ci": "47804465"
+  },
+  {
+    "nombre": "Ricardo pla",
+    "ci": "44367616"
+  },
+  {
+    "nombre": "Rodrigo Correa",
+    "ci": "54070174"
+  },
+  {
+    "nombre": "Rodrigo Sánchez",
+    "ci": ""
+  },
+  {
+    "nombre": "Romina Sosa",
+    "ci": "49068584"
+  },
+  {
+    "nombre": "Roque Jorge Fuentes Gonzalez",
+    "ci": "13260279"
+  },
+  {
+    "nombre": "Ruddy Moncada",
+    "ci": "64055988"
+  },
+  {
+    "nombre": "Sabrina Elgart",
+    "ci": "52626634"
+  },
+  {
+    "nombre": "Salomé Campot",
+    "ci": "50941509"
+  },
+  {
+    "nombre": "Sandra Moreno",
+    "ci": "18654849"
+  },
+  {
+    "nombre": "Sheila Crida",
+    "ci": "45877381"
+  },
+  {
+    "nombre": "Silvina Vilches",
+    "ci": "48326357"
+  },
+  {
+    "nombre": "Sofía Caballero",
+    "ci": "50900296"
+  },
+  {
+    "nombre": "Sosa M",
+    "ci": "27247427"
+  },
+  {
+    "nombre": "Tomás Garula",
+    "ci": "56988969"
+  },
+  {
+    "nombre": "Valentín Pérez",
+    "ci": "44709959"
+  },
+  {
+    "nombre": "Vanessa Astapenco",
+    "ci": "44983163"
+  },
+  {
+    "nombre": "Verónica Pinazzo",
+    "ci": "38858776"
+  },
+  {
+    "nombre": "Victor Estigarribia",
+    "ci": "61747984"
+  },
+  {
+    "nombre": "Victoria sosa",
+    "ci": "51298474"
+  },
+  {
+    "nombre": "José Abreu",
+    "ci": "46434578"
+  },
+  {
+    "nombre": "Allison Leoni",
+    "ci": "18118984"
+  },
+  {
+    "nombre": "Nicolás Suárez ",
+    "ci": "48828929"
+  },
+  {
+    "nombre": "Ana Bentancor ",
+    "ci": "28754673"
+  },
+  {
+    "nombre": "Virginia Pérez",
+    "ci": "36416685"
+  },
+  {
+    "nombre": "Agustín Hu",
+    "ci": "51083687"
+  },
+  {
+    "nombre": "Joshua Cardozo",
+    "ci": "43345702"
+  },
+  {
+    "nombre": "Michael Pla",
+    "ci": "58500440"
+  },
+  {
+    "nombre": "Pablo Pereyra",
+    "ci": "46554407"
+  },
+  {
+    "nombre": "Natalia Rodríguez ",
+    "ci": "43573923"
+  },
+  {
+    "nombre": "Marinele De Paula",
+    "ci": "45520859"
+  },
+  {
+    "nombre": "Helian Gómez",
+    "ci": "42759087"
+  },
+  {
+    "nombre": "Andrea Carbonell",
+    "ci": "46791348"
+  },
+  {
+    "nombre": "Victoria Goyret",
+    "ci": "48766200"
+  },
+  {
+    "nombre": "Sofía ferreira",
+    "ci": "50914483"
+  },
+  {
+    "nombre": "Sofía Draper",
+    "ci": "51351012"
+  },
+  {
+    "nombre": "Diego Fuentes",
+    "ci": "42262559"
+  },
+  {
+    "nombre": "Lorena Fleitas",
+    "ci": "40866408"
+  }
 ]
