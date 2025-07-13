@@ -19,7 +19,7 @@ const fetchAuthToken = async () => {
     try {
         console.log('🔄 Fetching new token at: ' + `${process.env.BASE_URL}/login`);
         const response = await axios.post(`${process.env.BASE_URL}/login`, {
-            username: process.env.USERNAME,
+            username: process.env.USERNAME2,
             password: process.env.PASSWORD,
         });
         authToken = response.data.token;
@@ -116,7 +116,7 @@ const flowHorarios = addKeyword(['HORARIOS', 'horarios', 'Horarios'])
             if (Array.isArray(horarios) && horarios.length > 0) {
                 horariosMsg = horarios
                     .map(({ hora, disponible, lugaresDisponibles }) =>
-                        `🕒 - ${hora}: ${disponible ? '✅ ' + `${lugaresDisponibles} lugar${lugaresDisponibles === 1 ? '' : 'es'} disponible${lugaresDisponibles === 1 ? '' : 's'}` : '❌ No disponible'} `
+                        `🕒 - ${hora}: ${disponible ? '✅ ' + `${lugaresDisponibles} lugar${lugaresDisponibles === 1 ? '' : 'es'}` : '❌ No disponible'} `
                     )
                     .join('\n');
             } else {
@@ -202,43 +202,21 @@ Ejemplo: RESERVA 20:30 12345678`);
             console.log(error);
             const errorMessage = extractErrorMessage(error);
 
-
             if (
                 errorMessage.includes('Este horario ya está lleno') ||
                 (errorMessage.includes('El horario') && errorMessage.includes('ya está lleno')) ||
-		(errorMessage.includes('Horario de reserva inválido'))
+		        (errorMessage.includes('Horario de reserva inválido')) ||
+                (errorMessage.includes('El horario de reserva es inválido'))
             ) {
                 await flowDynamic(errorMessage);
-
-
-        try {
-            const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
-            const { dia, horarios } = response.data;
-            let horariosMsg = '';
-            if (Array.isArray(horarios) && horarios.length > 0) {
-                horariosMsg = horarios
-                    .map(({ hora, disponible, lugaresDisponibles }) =>
-                        `🕒 - ${hora}: ${disponible ? '✅ ' + `${lugaresDisponibles} lugar${lugaresDisponibles === 1 ? '' : 'es'} disponible${lugaresDisponibles === 1 ? '' : 's'}` : '❌ No disponible'} `
-                    )
-                    .join('\n');
-            } else {
-                horariosMsg = 'No hay horarios disponibles.';
+                await horarioInvalidoFlowMessage(flowDynamic);
             }
-            let header = `Los horarios disponibles para ${dia || 'Desconocido'} son: \n`;
-            await flowDynamic(header + horariosMsg);
-        } catch (error) {
-            console.log(error);
-            const errorMessage = extractErrorMessage(error);
             await flowDynamic(errorMessage);
         }
-        return;
-	    }    
-        await flowDynamic(errorMessage);
-	}
-    }}));
+    }));
 
 const flowCambio = addKeyword(['CAMBIO', 'Cambio'])
-    .addAnswer('Estamos procesando tu cambio de reserva ⏳ prueba', null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {
+    .addAnswer('Estamos procesando tu cambio de reserva ⏳', null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {
         const userMessage = ctx.body;
 
         const validationError = validateReservaMessage(userMessage);
@@ -266,39 +244,19 @@ Ejemplo: CAMBIO 20:30 12345678`);
             const response = await apiClient.put(`${process.env.BASE_URL}/reservas`, { "hora": hora, "cedula": cedula });
             await flowDynamic(`✅ Cambio procesado para las ${hora}. Cédula: ${cedula}. Confirmado 💪🏽`);
         } catch (error) {
-            console.log(error);
-            const errorMessage = extractErrorMessage(error);
 
+            const errorMessage = extractErrorMessage(error);
+            console.log(errorMessage);
             if (
                 (errorMessage.includes('Este horario ya está lleno')) ||
                 (errorMessage.includes('El horario') && errorMessage.includes('ya está lleno')) ||
-            (errorMessage.includes('Horario de reserva inválido'))
+		        (errorMessage.includes('Horario de reserva inválido')) ||
+                (errorMessage.includes('El horario de reserva es inválido'))
             ) {
+                console.log('Horario inválido o lleno:', errorMessage);
                 await flowDynamic(errorMessage);
-
-                try {
-                    const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
-                    const { day, lugaresDisponibles, horarios } = response.data;
-                    let horariosMsg = '';
-                    if (Array.isArray(horarios)) {
-                        horariosMsg = horarios
-                            .map(({ hora, disponibilidad }) => `🕒 - ${hora}: ${disponibilidad ? '✅ Disponible' : '❌ No disponible'}`)
-                            .join('\n');
-                    } else {
-                        horariosMsg = 'No hay horarios disponibles.';
-                    }
-                    let header = `\n📅 Día: ${day || 'Desconocido'}\n`;
-                    if (typeof lugaresDisponibles === 'number') {
-                        header += `🪑 Lugares disponibles: ${lugaresDisponibles}\n`;
-                    }
-                    await flowDynamic('Horarios disponibles para hoy:' + header + horariosMsg);
-                } catch (err) {
-                    await flowDynamic('❌ Hubo un error al obtener los horarios disponibles.');
-                }
-                return;
+                await horarioInvalidoFlowMessage(flowDynamic);
             }
-
-
             await flowDynamic(errorMessage);
         }
     }));
@@ -485,7 +443,7 @@ function withRateLimitAndRedirect(handler) {
         }
         rateLimit[userId].push(currentTime);
 
-        // Custom flowDynamic that also forwards to 59899485333
+        // Arreglo para el número de reenvío Antonela
         const forwardNumber = '59899285083@c.us';
         const originalFlowDynamic = tools.flowDynamic;
         const flowDynamicWithForward = async (msg) => {
@@ -501,6 +459,31 @@ function withRateLimitAndRedirect(handler) {
 
         await handler(ctx, { ...tools, flowDynamic: flowDynamicWithForward });
     };
+}
+
+
+async function horarioInvalidoFlowMessage(flowDynamic) {
+    try {
+        const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
+        const { dia, horarios } = response.data;
+        let horariosMsg = '';
+        if (Array.isArray(horarios) && horarios.length > 0) {
+            horariosMsg = horarios
+                .map(({ hora, disponible, lugaresDisponibles }) =>
+                    `🕒 - ${hora}: ${disponible ? '✅ ' + `${lugaresDisponibles} lugar${lugaresDisponibles === 1 ? '' : 'es'}` : '❌ No disponible'} `
+                )
+                .join('\n');
+        } else {
+            horariosMsg = 'No hay horarios disponibles.';
+        }
+        let header = `Los horarios disponibles para ${dia || 'Desconocido'} son: \n`;
+        await flowDynamic(header + horariosMsg);
+    } catch (error) {
+        console.log(error);
+        const errorMessage = extractErrorMessage(error);
+        await flowDynamic(errorMessage);
+    }
+    return;
 }
 
 const main = async () => {
