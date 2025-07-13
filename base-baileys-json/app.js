@@ -201,18 +201,17 @@ Ejemplo: RESERVA 20:30 12345678`);
         } catch (error) {
             console.log(error);
             const errorMessage = extractErrorMessage(error);
-
+            await flowDynamic(errorMessage);
             if (
                 errorMessage.includes('Este horario ya está lleno') ||
                 (errorMessage.includes('El horario') && errorMessage.includes('ya está lleno')) ||
 		        (errorMessage.includes('Horario de reserva inválido')) ||
                 (errorMessage.includes('El horario de reserva es inválido'))
             ) {
-                await flowDynamic(errorMessage);
                 await horarioInvalidoFlowMessage(flowDynamic);
             }
-            await flowDynamic(errorMessage);
         }
+
     }));
 
 const flowCambio = addKeyword(['CAMBIO', 'Cambio'])
@@ -244,8 +243,8 @@ Ejemplo: CAMBIO 20:30 12345678`);
             const response = await apiClient.put(`${process.env.BASE_URL}/reservas`, { "hora": hora, "cedula": cedula });
             await flowDynamic(`✅ Cambio procesado para las ${hora}. Cédula: ${cedula}. Confirmado 💪🏽`);
         } catch (error) {
-
             const errorMessage = extractErrorMessage(error);
+            await flowDynamic(errorMessage);
             console.log(errorMessage);
             if (
                 (errorMessage.includes('Este horario ya está lleno')) ||
@@ -253,11 +252,8 @@ Ejemplo: CAMBIO 20:30 12345678`);
 		        (errorMessage.includes('Horario de reserva inválido')) ||
                 (errorMessage.includes('El horario de reserva es inválido'))
             ) {
-                console.log('Horario inválido o lleno:', errorMessage);
-                await flowDynamic(errorMessage);
                 await horarioInvalidoFlowMessage(flowDynamic);
             }
-            await flowDynamic(errorMessage);
         }
     }));
 

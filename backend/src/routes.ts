@@ -49,7 +49,6 @@ router.post('/reservas', authorizeRoles('admin'), ReservaController.addReserva);
 router.put('/reservas', authorizeRoles('admin'), ReservaController.updateReserva);
 router.delete('/reservas', authorizeRoles('admin'), ReservaController.deleteReserva);
 router.get('/reservas/consulta/:cedula', authorizeRoles('admin'), ReservaController.buscarHoraPorCedula);
-// Development-only route
-router.get('/reservas/reset', ReservaController.resetReservas);
+router.get('/reservas/reset', authorizeRoles('admin'), ReservaController.resetReservas);
 
 export default router;
