@@ -72,3 +72,20 @@
   .iconButtonAdd{
     margin-left: 0.5rem;
   }
+
+  .adminresetbtn {
+    margin-top: 0.5rem;
+    background-color: #fbb80052;
+    color: rgb(0, 0, 0);
+    border: 1.5px solid rgba(255, 0, 0, 0.445);
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .adminresetbtn:hover {
+    background-color: #FBB900;
+
+  }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { HoraUsuarios } from "../types/types";
 import styles from "../css/Home.module.css";
@@ -9,6 +9,7 @@ import Font from "react-font";
 
 import { useDeleteReserva } from "../hooks/useDeleteReserva";
 import { useAddReserva } from "../hooks/useAddReserva";
+import { useResetReserva } from "../hooks/useResetReserva";
 import List from "../components/List";
 import { fetchReservas } from "../hooks/api";
 import UserSelectModal from "../components/AgregarUsuarioReservaModal";
@@ -20,6 +21,10 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [usuarioToDelete, setUsuarioToDelete] = useState<string | null>(null);
+  const [showResetModal, setShowResetModal] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
+  const [resetError, setResetError] = useState('');
+  const [resetSuccess, setResetSuccess] = useState(false);
 
   const queryClient = useQueryClient();
   const {
@@ -82,6 +87,32 @@ export default function Home() {
       setIsModalOpen(false); 
     }
   };
+
+const handleCancelResetReservas = () => {
+  setShowResetModal(false);
+  setResetError("");
+  setResetSuccess(false);
+};
+
+const { mutate: resetReserva } = useResetReserva();
+
+const handleConfirmResetReservas = () => {
+  setResetLoading(true);
+  setResetError("");
+  resetReserva(undefined, {
+    onSuccess: () => {
+      setResetSuccess(true);
+      setShowResetModal(false);
+    },
+    onError: (error: any) => {
+      setResetError(error?.message || "Error desconocido");
+      setShowResetModal(false);
+    },
+    onSettled: () => {
+      setResetLoading(false);
+    },
+  });
+};
 
   if (isLoading) return <div className={styles.loading}>Loading...</div>;
   if (isError) return <div className={styles.error}>Error: {(error as Error).message}</div>;
@@ -180,6 +211,26 @@ export default function Home() {
                 onClose={handleCancelDelete}
                 value={usuarioToDelete}
             />
+            )}
+
+            <button className={styles.adminresetbtn} onClick={() => setShowResetModal(true)}>
+              <Font family="Bungee Inline">
+                Resetear
+              </Font>
+            </button>
+            {showResetModal && (
+              <ConfirmModal
+                textoAConfirmar={
+                  resetSuccess
+                    ? "Reservas reseteadas correctamente."
+                    : resetError
+                    ? `Error: ${resetError}`
+                    : "¿Seguro que quieres resetear todas las reservas? Esta acción no se puede deshacer."
+                }
+                onSelect={handleConfirmResetReservas}
+                onClose={handleCancelResetReservas}
+                value={null}
+              />
             )}
     </div>
   );

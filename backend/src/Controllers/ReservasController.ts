@@ -144,7 +144,7 @@ export class ReservaController {
 
   // Reset reservas manual sin backup
   static resetReservas(req: Request<{}, {}, Reserva>, res: Response){
-    ReservaController.inicializarHorariosDiariosNoBackup();
+    ReservaController.resetearHorariosDiarios();
     res.status(200).json({ message: 'Ok'});
     return;
   }
@@ -156,12 +156,12 @@ export class ReservaController {
     if (isSunday){
       cron.schedule('0 13 * * 0', () => {
         console.log('Reseteando reservas a las 13:00...');
-        ReservaController.inicializarHorariosDiarios();
+        ReservaController.resetearHorariosDiarios();
       });
     } else {
       cron.schedule('30 20 * * *', () => {
       console.log('Reseteando reservas a las 20:30...');
-      ReservaController.inicializarHorariosDiarios();
+      ReservaController.resetearHorariosDiarios();
     });
     }
   }
@@ -458,41 +458,54 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
     }
 }
 
-  static async inicializarHorariosDiarios(): Promise<void> {
+  static async resetearHorariosDiarios(): Promise<void> {
     console.log("INICIALIZANDO HORARIOS");
+    const data = await fs.readFile(ReservaController.DATA_PATH_RESERVAS, 'utf-8');
+    const backupReservas: Record<string, Reserva[]> = JSON.parse(data);
+    // Send backup email
+    await this.sendBackupEmail(backupReservas);
+    const horas: string[] = await this.getHorariosDispniblesMañana();
+    ReservaController.reservas = {};
+    horas.forEach(hour => {
+        ReservaController.reservas[hour] = [];
+    });
+    await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2))
+}
+
+  static async inicializarHorariosDiarios() {
 
     const now = new Date();
     const horaActual = now.getHours();
     const minutosActuales = now.getMinutes();
     const data = await fs.readFile(ReservaController.DATA_PATH_RESERVAS, 'utf-8');
     const backupReservas: Record<string, Reserva[]> = JSON.parse(data);
-
-    if (horaActual > 20 || (horaActual === 20 && minutosActuales >= 30) || 
-      (now.getDay() === 0 && (now.getHours() > 13 || (now.getHours() === 13 && now.getMinutes() > 0)))) {
-        // Send backup email
-        await this.sendBackupEmail(backupReservas);
-        const horas: string[] = await this.getHorariosDispniblesMañana();
+    
+    if (Object.keys(backupReservas).length === 0 && backupReservas.constructor === Object) {
+      // Si no hay backup, son mas de las 20:30 o es domingo y son mas de las 13:00 y reiniciaste el sv (FUA)
+      if (horaActual > 20 || (horaActual === 20 && minutosActuales >= 30) || 
+         (now.getDay() === 0 && (now.getHours() > 13 || (now.getHours() === 13 && now.getMinutes() > 0)))) {
+        const horas: string[] = await this.getHorariosDispniblesHoy();
         ReservaController.reservas = {};
         horas.forEach(hour => {
             ReservaController.reservas[hour] = [];
         });
         await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2))
+      } else {
+        const horas: string[] = await this.getHorariosDispniblesHoy();
+        ReservaController.reservas = {};
+        horas.forEach(hour => {
+            ReservaController.reservas[hour] = [];
+        });
+        await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2))
+      }
     } else {
-        if (Object.keys(backupReservas).length === 0 && backupReservas.constructor === Object) {
-            const horas: string[] = await this.getHorariosDispniblesHoy();
-            ReservaController.reservas = {};
-            horas.forEach(hour => {
-                ReservaController.reservas[hour] = [];
-            });
-            await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2))
-        } else {
-            ReservaController.reservas = backupReservas;
+        // Si reseteaste y hay backup
+        ReservaController.reservas = backupReservas;
 
-            // Send backup email
-            await this.sendBackupEmail(backupReservas);
-        }
+        // Send backup email
+        await this.sendBackupEmail(backupReservas);
     }
-  }
+}
 
   static async inicializarHorariosDiariosNoBackup(){
     console.log("INICIALIZANDO HORARIOS SIN BACKUP");
