@@ -7,3 +7,5 @@ backend/.vscode/
 .dockerignore
 docker-compose.yaml
 DockerFile
+key
+key.pub
