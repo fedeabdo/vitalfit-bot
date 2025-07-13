@@ -72,7 +72,7 @@ export class ReservaController {
     }
 
     if (ReservaController.reservas[hora].length >= ReservaController.MAX_RESERVAS_POR_HORARIO) {
-      res.status(403).json({ error: `Este horario ya está lleno (máximo ${ReservaController.MAX_RESERVAS_POR_HORARIO} reservas)` });
+      res.status(403).json({ error: `Este horario ya está lleno` });
       return;
     }
 
@@ -164,7 +164,6 @@ export class ReservaController {
       ReservaController.inicializarHorariosDiarios();
     });
     }
-
   }
 
   static async chequeoHorarioPrioritario(usuario: string, dia: string): Promise<boolean> {
@@ -201,7 +200,8 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
       let dia = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(now);
   
       // Si es mas de las 20:30 paso al dia siguiente
-      if (now.getHours() > 20 || (now.getHours() === 20 && now.getMinutes() >= 30)) {
+      if (now.getHours() > 20 || (now.getHours() === 20 && now.getMinutes() >= 30) || 
+       (now.getDay() === 0 && (now.getHours() > 13 || (now.getHours() === 13 && now.getMinutes() > 0)))) {
         now.setDate(now.getDate() + 1);
         dia = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(now);
       }
@@ -219,12 +219,12 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
       if (esPrioritario) {
         if (diffMin <= 240 && diffMin > 0) {
           if (reservasEnHora >= ReservaController.MAX_RESERVAS_POR_HORARIO - 3) {
-            return res.status(403).json({ error: `Este horario ya está lleno (máximo ${MAX_NO_PRIORITARIO} reservas)` });
+            return res.status(403).json({ error: `Este horario ya está lleno` });
           }
         } else {
           if (diffMin > 0 && diffMin > 240) {
             if (reservasEnHora >= ReservaController.MAX_RESERVAS_POR_HORARIO) {
-              return res.status(403).json({ error: `Este horario ya está lleno (máximo ${MAX_NO_PRIORITARIO} reservas)` });
+              return res.status(403).json({ error: `Este horario ya está lleno` });
             }
           }
         }
@@ -233,7 +233,7 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
       }
   
       if (reservasEnHora >= MAX_NO_PRIORITARIO) {
-          return res.status(403).json({ error: `Este horario ya está lleno (máximo ${MAX_NO_PRIORITARIO} reservas)` });
+          return res.status(403).json({ error: `Este horario ya está lleno` });
       }
   
       if (diffMin <= 240 && diffMin > 0) {
@@ -296,7 +296,8 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
       const now = new Date();
       let dia = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(now);
       let reservaDate = new Date(now);
-      if (now.getHours() > 20 || (now.getHours() === 20 && now.getMinutes() >= 30)) {
+      if (now.getHours() > 20 || (now.getHours() === 20 && now.getMinutes() >= 30) || 
+          (now.getDay() === 0 && (now.getHours() > 13 || (now.getHours() === 13 && now.getMinutes() > 0)))) {
           reservaDate.setDate(reservaDate.getDate() + 1);
           dia = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(reservaDate);
       }
@@ -307,7 +308,7 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
 
       if (esPrioritario) {
           if (reservasEnHora >= ReservaController.MAX_RESERVAS_POR_HORARIO) {
-              res.status(403).json({ error: `El horario ${hora} ya está lleno (máximo ${ReservaController.MAX_RESERVAS_POR_HORARIO} reservas)` });
+              res.status(403).json({ error: `El horario ${hora} ya está lleno` });
               return;
           }
           // All checks passed, now delete old and add new
@@ -325,7 +326,7 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
       const MAX_NO_PRIORITARIO = ReservaController.MAX_RESERVAS_POR_HORARIO - 3;
   
       if (reservasEnHora >= MAX_NO_PRIORITARIO) {
-          res.status(403).json({ error: `El horario ${hora} ya está lleno (máximo ${MAX_NO_PRIORITARIO} reservas)` });
+          res.status(403).json({ error: `El horario ${hora} ya está lleno` });
           return;
       }
   
@@ -465,10 +466,9 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
     const minutosActuales = now.getMinutes();
     const data = await fs.readFile(ReservaController.DATA_PATH_RESERVAS, 'utf-8');
     const backupReservas: Record<string, Reserva[]> = JSON.parse(data);
-    
-    const isSunday = now.getDay() === 0;
 
-    if (horaActual > 20 || (horaActual === 20 && minutosActuales >= 30) || isSunday) {
+    if (horaActual > 20 || (horaActual === 20 && minutosActuales >= 30) || 
+      (now.getDay() === 0 && (now.getHours() > 13 || (now.getHours() === 13 && now.getMinutes() > 0)))) {
         // Send backup email
         await this.sendBackupEmail(backupReservas);
         const horas: string[] = await this.getHorariosDispniblesMañana();
@@ -478,7 +478,6 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
         });
         await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2))
     } else {
-
         if (Object.keys(backupReservas).length === 0 && backupReservas.constructor === Object) {
             const horas: string[] = await this.getHorariosDispniblesHoy();
             ReservaController.reservas = {};
@@ -534,7 +533,6 @@ static async buscarHoraPorCedula(req: Request, res: Response) {
       res.status(404).json({ message: `No existe un usuario registrado con la cédula ${cedula}` });
       return;
     }
-    console.log("Usuario encontrado:", usuario);
 
     for (const [hora, reservas] of Object.entries(ReservaController.reservas)) {
         if (reservas.some(r => r.usuario === usuario)) {
