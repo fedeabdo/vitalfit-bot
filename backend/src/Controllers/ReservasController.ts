@@ -151,19 +151,16 @@ export class ReservaController {
 
   // Borrar todas las reservas a las 20:30 CRON
   static configurarReseteoDiario() {
-    const today = new Date();
-    const isSunday = today.getDay() === 0; // Domingo = 0
-    if (isSunday){
-      cron.schedule('0 13 * * 0', () => {
-        console.log('Reseteando reservas a las 13:00...');
-        ReservaController.resetearHorariosDiarios();
-      });
-    } else {
-      cron.schedule('30 20 * * *', () => {
-      console.log('Reseteando reservas a las 20:30...');
-      ReservaController.resetearHorariosDiarios();
+    // Reseteo Domingo
+    cron.schedule('0 13 * * 0', async () => {
+      console.log('Reseteando reservas a las 13:00 (domingo)...');
+      await ReservaController.resetearHorariosDiarios();
     });
-    }
+    // Reseteo Lunes a Sábado
+    cron.schedule('30 20 * * 1-6', async () => {
+      console.log('Reseteando reservas a las 20:30 (lunes a sábado)...');
+      await ReservaController.resetearHorariosDiarios();
+    });
   }
 
   static async chequeoHorarioPrioritario(usuario: string, dia: string): Promise<boolean> {
@@ -458,7 +455,7 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
     }
 }
 
-  static async resetearHorariosDiarios(): Promise<void> {
+  static async resetearHorariosDiarios() {
     console.log("INICIALIZANDO HORARIOS");
     const data = await fs.readFile(ReservaController.DATA_PATH_RESERVAS, 'utf-8');
     const backupReservas: Record<string, Reserva[]> = JSON.parse(data);
