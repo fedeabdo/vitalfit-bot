@@ -1,15 +1,64 @@
 {
-  "8:00": [],
-  "9:00": [],
-  "10:00": [],
-  "16:30": [],
-  "17:30": [],
-  "18:30": [],
-  "19:30": [],
+  "7:00": [
+    {
+      "hora": "7:00",
+      "usuario": "Bruno Dho"
+    }
+  ],
+  "8:00": [
+    {
+      "hora": "8:00",
+      "usuario": "Paula Pouso"
+    },
+    {
+      "hora": "8:00",
+      "usuario": "Sheila Crida"
+    }
+  ],
+  "9:00": [
+    {
+      "hora": "9:00",
+      "usuario": "Vanessa Astapenco"
+    }
+  ],
+  "10:00": [
+    {
+      "hora": "10:00",
+      "usuario": "Ricardo pla"
+    }
+  ],
+  "16:30": [
+    {
+      "hora": "16:30",
+      "usuario": "Roque Jorge Fuentes Gonzalez"
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Óscar Gutiérrez"
+    }
+  ],
+  "17:30": [
+    {
+      "hora": "17:30",
+      "usuario": "Franco Alvarez"
+    }
+  ],
+  "18:30": [
+    {
+      "hora": "18:30",
+      "usuario": "Helian Gómez"
+    }
+  ],
+  "19:30": [
+    {
+      "hora": "19:30",
+      "usuario": "Gonzalo Vallarino"
+    }
+  ],
   "20:30": [
     {
       "hora": "20:30",
-      "usuario": "Franco Gargaglioni"
+      "usuario": "Natalia García"
     }
   ]
 }
