@@ -19,7 +19,7 @@ const fetchAuthToken = async () => {
     try {
         console.log('🔄 Fetching new token at: ' + `${process.env.BASE_URL}/login`);
         const response = await axios.post(`${process.env.BASE_URL}/login`, {
-            username: process.env.USERNAME,
+            username: process.env.USERNAME2,
             password: process.env.PASSWORD,
         });
         authToken = response.data.token;
@@ -51,8 +51,8 @@ apiClient.interceptors.request.use(async (config) => {
 });
 
 
-const rateLimit = {};
-const ignoredUsers = {}; // userId: ignoreUntilTimestamp
+const rateLimit = new Map(); // userId: [timestamps]
+const ignoredUsers = new Map(); // userId: ignoreUntilTimestamp
 const RATE_LIMIT_WINDOW = 1000; // 1 second
 const MAX_REQUESTS_PER_WINDOW = 1;
 const IGNORE_PERIOD = 20000; // 20 seconds
@@ -62,22 +62,23 @@ const rateLimitMiddleware = async (ctx, next) => {
     const currentTime = Date.now();
 
     console.log(`[RateLimit] Incoming from:`, ctx.from, 'Normalized:', userId);
-    if (!rateLimit[userId]) {
-        rateLimit[userId] = [];
+    if (!rateLimit.has(userId)) {
+        rateLimit.set(userId, []);
     }
 
     // Remove timestamps outside the window
-    rateLimit[userId] = rateLimit[userId].filter(timestamp => currentTime - timestamp < RATE_LIMIT_WINDOW);
-    console.log(`[RateLimit] User timestamps:`, rateLimit[userId]);
+    const timestamps = rateLimit.get(userId).filter(timestamp => currentTime - timestamp < RATE_LIMIT_WINDOW);
+    rateLimit.set(userId, timestamps);
+    console.log(`[RateLimit] User timestamps:`, rateLimit.get(userId));
 
-    if (rateLimit[userId].length >= MAX_REQUESTS_PER_WINDOW) {
+    if (rateLimit.get(userId).length >= MAX_REQUESTS_PER_WINDOW) {
         console.log(`[RateLimit] BLOCKED for user:`, userId);
         await ctx.reply('❌ Estás enviando demasiados mensajes. Por favor, espera un momento antes de intentarlo de nuevo.');
         return;
     }
 
-    rateLimit[userId].push(currentTime);
-    console.log(`[RateLimit] ALLOWED for user:`, userId, 'Timestamps now:', rateLimit[userId]);
+    rateLimit.get(userId).push(currentTime);
+    console.log(`[RateLimit] ALLOWED for user:`, userId, 'Timestamps now:', rateLimit.get(userId));
     await next();
 };
 
@@ -430,26 +431,26 @@ function withRateLimitAndRedirect(handler) {
     return async (ctx, tools) => {
         const userId = normalizeSenderNumber(ctx.from);
         const currentTime = Date.now();
-        console.log(`[RateLimit] Handler entry for user: ${userId}, currentTime: ${currentTime}, ignoredUntil: ${ignoredUsers[userId]}`);
-        console.log("El tamanio de usuarios ignorados es: " +  Object.keys(ignoredUsers).length)
+        console.log(`[RateLimit] Handler entry for user: ${userId}, currentTime: ${currentTime}, ignoredUntil: ${ignoredUsers.get(userId)}`);
 
         // Check if user is currently ignored
-        if (ignoredUsers[userId] && currentTime < ignoredUsers[userId]) {
-            console.log(`[RateLimit] User ${userId} is currently ignored until ${ignoredUsers[userId]}. Skipping handler.`);
+        if (ignoredUsers.has(userId) && currentTime < ignoredUsers.get(userId)) {
+            console.log(`[RateLimit] User ${userId} is currently ignored until ${ignoredUsers.get(userId)}. Skipping handler.`);
             // Silently ignore during ignore period (no message)
             return;
         }
 
-        if (!rateLimit[userId]) rateLimit[userId] = [];
-        rateLimit[userId] = rateLimit[userId].filter(ts => currentTime - ts < RATE_LIMIT_WINDOW);
-        if (rateLimit[userId].length >= MAX_REQUESTS_PER_WINDOW) {
-            ignoredUsers[userId] = currentTime + IGNORE_PERIOD; // Ignore for 30s
-            rateLimit[userId] = []; // Optionally reset their window
+        if (!rateLimit.has(userId)) rateLimit.set(userId, []);
+        const timestamps = rateLimit.get(userId).filter(ts => currentTime - ts < RATE_LIMIT_WINDOW);
+        rateLimit.set(userId, timestamps);
+        if (rateLimit.get(userId).length >= MAX_REQUESTS_PER_WINDOW) {
+            ignoredUsers.set(userId, currentTime + IGNORE_PERIOD); // Ignore for 20s
+            rateLimit.set(userId, []); // Optionally reset their window
             await tools.flowDynamic('❌ Estás enviando demasiados mensajes. Por favor, espera un momento antes de intentarlo de nuevo.');
-            console.log(`[RateLimit] User ${userId} has been rate limited and will be ignored until ${ignoredUsers[userId]}`);
+            console.log(`[RateLimit] User ${userId} has been rate limited and will be ignored until ${ignoredUsers.get(userId)}`);
             return;
         }
-        rateLimit[userId].push(currentTime);
+        rateLimit.get(userId).push(currentTime);
 
         // Arreglo para el número de reenvío Antonela
         const forwardNumber = '59899285083@c.us';
