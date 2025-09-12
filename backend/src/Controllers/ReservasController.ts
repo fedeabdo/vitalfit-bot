@@ -378,6 +378,9 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
   }
 
   private static async borrarReserva(hora: string, usuario: string, index: number) {
+    if (this.esPrevioAHoraActual(hora)) {
+        throw new Error('Borrado rechazado');
+    }
     ReservaController.reservas[hora].splice(index, 1);
     await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2));
   }
