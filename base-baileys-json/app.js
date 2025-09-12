@@ -423,6 +423,7 @@ function withRateLimitAndRedirect(handler) {
 
         // Check if user is currently ignored
         if (ignoredUsers[userId] && currentTime < ignoredUsers[userId]) {
+            console.log("El tamanio de usuarios ignorados es: " +  Object.keys(ignoredUsers).length)
             console.log(`[RateLimit] User ${userId} is currently ignored until ${ignoredUsers[userId]}. Skipping handler.`);
             // Silently ignore during ignore period (no message)
             return;
