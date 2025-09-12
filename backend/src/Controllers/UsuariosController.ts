@@ -82,7 +82,6 @@ export class UsuariosController {
 const filteredUsuarios = usuarios.filter(u => u.nombre !== nombre);
       await fs.writeFile(UsuariosController.DATA_PATH, JSON.stringify(filteredUsuarios, null, 2));
 
-      // Remove user from HorariosPrioritarios
       await HorariosController.removeUserFromHorariosPrioritarios(usuarioToDelete.nombre);
 
       res.sendStatus(204);

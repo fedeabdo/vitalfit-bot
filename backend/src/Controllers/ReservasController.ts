@@ -5,6 +5,7 @@ import cron from 'node-cron';
 import { Reserva, Horario, ReservaRequest, ReservaRequestByName, Usuario } from '../types';
 import { UsuariosController } from './UsuariosController';
 import { HorariosController } from './HorariosController';
+import { esMasDeLas2030, esDomingoALas13 } from '../utils/timeUtils';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import { parse } from 'json2csv';
@@ -94,7 +95,6 @@ export class ReservaController {
 
     let usuario: string | undefined;
 
-    // Determine the user based on cedula or usuario
     if (cedula) {
       if (!(await UsuariosController.usuarioExiste(cedula))) {
         res.status(403).json({ error: `El usuario con cédula ${cedula} no existe` });
@@ -117,7 +117,6 @@ export class ReservaController {
       return;
     }
 
-    // Search for the reservation in all hours
     let found = false;
     let horaEncontrada = '';
     let index = -1;
@@ -136,7 +135,6 @@ export class ReservaController {
       return;
     }
 
-    // Delete the reservation
     await ReservaController.borrarReserva(horaEncontrada, usuario, index);
 
     res.status(200).json({ message: 'Reserva eliminada', hora: horaEncontrada, usuario });
@@ -180,8 +178,7 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
     const [hora, minuto] = tiempoStr.split(":").map(Number);
     const ahora = new Date();
 
-    // After 20:30, allow all reservations (for tomorrow)
-    if (ahora.getHours() > 20 || (ahora.getHours() === 20 && ahora.getMinutes() >= 30)) {
+    if (esDomingoALas13() || esMasDeLas2030()) {
         return false;
     }
 
@@ -197,8 +194,7 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
       let dia = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(now);
   
       // Si es mas de las 20:30 paso al dia siguiente
-      if (now.getHours() > 20 || (now.getHours() === 20 && now.getMinutes() >= 30) || 
-       (now.getDay() === 0 && (now.getHours() > 13 || (now.getHours() === 13 && now.getMinutes() > 0)))) {
+      if (esMasDeLas2030() || esDomingoALas13()) {
         now.setDate(now.getDate() + 1);
         dia = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(now);
       }
@@ -246,11 +242,9 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
     }
   }
 
-    // Actualizar reserva
     static async updateReserva(req: Request<{}, {}, { hora: string; cedula: string }>, res: Response) {
       const { hora, cedula } = req.body;
   
-      // Validate the user exists
       if (!(await UsuariosController.usuarioExiste(cedula))) {
           res.status(403).json({ error: `El usuario con cédula ${cedula} no existe` });
           return;
@@ -262,19 +256,16 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
           return;
       }
   
-      // Validate the hour
       if (!ReservaController.reservas[hora]) {
           res.status(400).json({ error: 'El horario de reserva es inválido' });
           return;
       }
   
-      // Check if the new time is prior to the current time
       if (ReservaController.esPrevioAHoraActual(hora)) {
           res.status(403).json({ error: 'No se puede cambiar la reserva a un horario previo a la hora actual' });
           return;
       }
   
-      // Check if the user already has a reservation
       let horaExistente: string | null = null;
       let index = -1;
       for (const [h, reservas] of Object.entries(ReservaController.reservas)) {
@@ -293,8 +284,7 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
       const now = new Date();
       let dia = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(now);
       let reservaDate = new Date(now);
-      if (now.getHours() > 20 || (now.getHours() === 20 && now.getMinutes() >= 30) || 
-          (now.getDay() === 0 && (now.getHours() > 13 || (now.getHours() === 13 && now.getMinutes() > 0)))) {
+      if (esMasDeLas2030() || esDomingoALas13()) {
           reservaDate.setDate(reservaDate.getDate() + 1);
           dia = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(reservaDate);
       }
@@ -308,14 +298,12 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
               res.status(403).json({ error: `El horario ${hora} ya está lleno` });
               return;
           }
-          // All checks passed, now delete old and add new
           await ReservaController.borrarReserva(horaExistente, usuario, index);
           await ReservaController.agregarReserva(hora, usuario);
           res.status(201).json({ message: 'Reserva actualizada (prioritario)', hora, usuario });
           return;
       }
   
-      // Non-priority: max 6, only within 4 hours
       const [reservaHora, reservaMinuto] = hora.split(":").map(Number);
       const reservaDateTime = new Date(reservaDate);
       reservaDateTime.setHours(reservaHora, reservaMinuto, 0, 0);
@@ -328,7 +316,6 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
       }
   
       if (diffMin <= 240 && diffMin > 0) {
-          // All checks passed, now delete old and add new
           await ReservaController.borrarReserva(horaExistente, usuario, index);
           await ReservaController.agregarReserva(hora, usuario);
           res.status(201).json({ message: 'Reserva actualizada', hora, usuario });
@@ -395,12 +382,9 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
     await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2));
   }
 
-  // Function to format backup data into a comprehensible CSV
   private static formatBackupDataToCSV(backupReservas: Record<string, Reserva[]>): string {
-    // Extract keys (time slots)
     const timeSlots = Object.keys(backupReservas);
 
-    // Create rows for the CSV
     const rows: Record<string, string>[] = [];
     const maxUsers = Math.max(...Object.values(backupReservas).map(users => users.length));
 
@@ -412,17 +396,13 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
         rows.push(row);
     }
 
-    // Convert rows to CSV
     return parse(rows, { fields: timeSlots });
 }
 
-  // Function to send email with backup data
   private static async sendBackupEmail(backupReservas: Record<string, Reserva[]>): Promise<void> {
     try {
-        // Format backup data into a comprehensible CSV
         const csvData = this.formatBackupDataToCSV(backupReservas);
 
-        // Create transporter
         const transporter = nodemailer.createTransport({
             host: 'smtp.zoho.com',
             port: 587, // Use 587 for TLS
@@ -433,7 +413,6 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
             },
         });
 
-        // Email options
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: process.env.EMAIL_RECIPIENT, // Recipient email from .env
@@ -447,7 +426,6 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
             ],
         };
 
-        // Send email
         await transporter.sendMail(mailOptions);
         console.log('✅ Backup email sent successfully');
     } catch (error) {
@@ -459,7 +437,6 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
     console.log("INICIALIZANDO HORARIOS");
     const data = await fs.readFile(ReservaController.DATA_PATH_RESERVAS, 'utf-8');
     const backupReservas: Record<string, Reserva[]> = JSON.parse(data);
-    // Send backup email
     await this.sendBackupEmail(backupReservas);
     const horas: string[] = await this.getHorariosDispniblesMañana();
     ReservaController.reservas = {};
@@ -479,8 +456,7 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
     
     if (Object.keys(backupReservas).length === 0 && backupReservas.constructor === Object) {
       // Si no hay backup, son mas de las 20:30 o es domingo y son mas de las 13:00 y reiniciaste el sv (FUA)
-      if (horaActual > 20 || (horaActual === 20 && minutosActuales >= 30) || 
-         (now.getDay() === 0 && (now.getHours() > 13 || (now.getHours() === 13 && now.getMinutes() > 0)))) {
+      if (esMasDeLas2030() || esDomingoALas13()) {
         const horas: string[] = await this.getHorariosDispniblesHoy();
         ReservaController.reservas = {};
         horas.forEach(hour => {
@@ -511,7 +487,7 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
     const horaActual = now.getHours();
     const minutosActuales = now.getMinutes();
   
-    if (horaActual > 20 || (horaActual === 20 && minutosActuales >= 30)) {
+    if (esMasDeLas2030()) {
       const horas: string[] = await this.getHorariosDispniblesMañana();
       ReservaController.reservas = {};
       horas.forEach(hour => {
@@ -537,7 +513,6 @@ static async buscarHoraPorCedula(req: Request, res: Response) {
         return;
     }
 
-    // Get usuario (name) from cedula
     const usuario = await UsuariosController.getNombreByCedula(cedula);
     if (!usuario) {
       res.status(404).json({ message: `No existe un usuario registrado con la cédula ${cedula}` });

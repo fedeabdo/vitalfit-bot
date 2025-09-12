@@ -4,7 +4,7 @@ import path from 'path';
 import { tiempo, Dia, Reserva } from '../types';
 import { Horario } from '../types'
 import { UsuariosController } from './UsuariosController';
-import { ReservaController } from './ReservasController';
+import { esMasDeLas2030, esDomingoALas13 } from '../utils/timeUtils';
 
 export class HorariosController {
   private static readonly DATA_PATH_HORARIOS = path.join(__dirname, '../data/HorariosPrioritarios.json');
@@ -29,8 +29,7 @@ export class HorariosController {
         let diaActual = new Intl.DateTimeFormat('es-ES', { weekday: 'long', day: '2-digit', month: '2-digit' }).format(now);
         let isTomorrow = false;
         // If it's Sunday and after 13:00, or any day after 20:30, use tomorrow's day
-        if ((now.getDay() === 0 && (now.getHours() > 13 || (now.getHours() === 13 && now.getMinutes() > 0))) ||
-            (now.getHours() > 20 || (now.getHours() === 20 && now.getMinutes() >= 30))) {
+        if (esDomingoALas13() || esMasDeLas2030()) {
             now.setDate(now.getDate() + 1);
             diaActual = new Intl.DateTimeFormat('es-ES', { weekday: 'long', day: '2-digit', month: '2-digit' }).format(now);
             isTomorrow = true;

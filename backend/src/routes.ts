@@ -23,7 +23,7 @@ router.options(
       res.sendStatus(200);
     }
   );
-router.get("/createPassword", AuthController.createPassword);
+//router.get("/createPassword", AuthController.createPassword);
 
 
 // Protected routes (authentication required)
