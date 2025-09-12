@@ -244,6 +244,11 @@ Ejemplo: CAMBIO 20:30 12345678`);
             await flowDynamic(`✅ Cambio procesado para las ${hora}. Cédula: ${cedula}. Confirmado 💪🏽`);
         } catch (error) {
             const errorMessage = extractErrorMessage(error);
+            if (errorMessage === 'Borrado rechazado') {
+                await flowDynamic(`La clase ya comenzó, y no es posible cambiar una vez iniciada.
+                Para que otra persona pueda aprovechar el lugar, las modificaciones tratemos de hacerlas con al menos 30 minutos de anticipación 🙏🏼`);
+                return;
+            }
             await flowDynamic(errorMessage);
             console.log(errorMessage);
             if (
@@ -288,6 +293,12 @@ Ejemplo: BORRAR 12345678`);
         } catch (error) {
             console.log(error);
             const errorMessage = extractErrorMessage(error);
+
+            if (errorMessage === 'Borrado rechazado') {
+                await flowDynamic(`La clase ya comenzó, y no es posible cancelar una vez iniciada.
+Para que otra persona pueda aprovechar el lugar, las cancelaciones tratemos de hacerlas con al menos 30 minutos de anticipación 🙏🏼`);
+                return;
+            }
             await flowDynamic(errorMessage);
         }
     }
@@ -420,10 +431,10 @@ function withRateLimitAndRedirect(handler) {
         const userId = normalizeSenderNumber(ctx.from);
         const currentTime = Date.now();
         console.log(`[RateLimit] Handler entry for user: ${userId}, currentTime: ${currentTime}, ignoredUntil: ${ignoredUsers[userId]}`);
+        console.log("El tamanio de usuarios ignorados es: " +  Object.keys(ignoredUsers).length)
 
         // Check if user is currently ignored
         if (ignoredUsers[userId] && currentTime < ignoredUsers[userId]) {
-            console.log("El tamanio de usuarios ignorados es: " +  Object.keys(ignoredUsers).length)
             console.log(`[RateLimit] User ${userId} is currently ignored until ${ignoredUsers[userId]}. Skipping handler.`);
             // Silently ignore during ignore period (no message)
             return;
