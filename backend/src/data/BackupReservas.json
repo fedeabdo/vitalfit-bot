@@ -1,5 +1,4 @@
 {
-<<<<<<< Updated upstream
   "8:00": [],
   "9:00": [],
   "10:00": [],
@@ -8,58 +7,4 @@
   "18:30": [],
   "19:30": [],
   "20:30": []
-=======
-  "10:00": [
-    {
-      "hora": "10:00",
-      "usuario": "Ricardo pla"
-    },
-    {
-      "hora": "10:00",
-      "usuario": "Paula Galíndez Borgia"
-    },
-    {
-      "hora": "10:00",
-      "usuario": "Daniela González Biavaschi"
-    },
-    {
-      "hora": "10:00",
-      "usuario": "Paula Pouso"
-    },
-    {
-      "hora": "10:00",
-      "usuario": "Mauricio Chirino"
-    },
-    {
-      "hora": "10:00",
-      "usuario": "Antonella Sosa"
-    }
-  ],
-  "11:00": [
-    {
-      "hora": "11:00",
-      "usuario": "Ismael González"
-    },
-    {
-      "hora": "11:00",
-      "usuario": "Pablo Pereyra"
-    },
-    {
-      "hora": "11:00",
-      "usuario": "Andrés Kent"
-    },
-    {
-      "hora": "11:00",
-      "usuario": "Victoria Goyret"
-    },
-    {
-      "hora": "11:00",
-      "usuario": "Romina Dominzaín"
-    },
-    {
-      "hora": "11:00",
-      "usuario": "Antonio Manzi"
-    }
-  ]
->>>>>>> Stashed changes
 }
