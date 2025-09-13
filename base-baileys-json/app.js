@@ -19,7 +19,7 @@ const fetchAuthToken = async () => {
     try {
         console.log('🔄 Fetching new token at: ' + `${process.env.BASE_URL}/login`);
         const response = await axios.post(`${process.env.BASE_URL}/login`, {
-            username: process.env.USERNAME2,
+            username: process.env.USERNAME,
             password: process.env.PASSWORD,
         });
         authToken = response.data.token;
