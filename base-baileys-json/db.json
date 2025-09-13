@@ -1,8 +1,16 @@
 [
   {
-    "ref": "ans_94ca2c6d-267e-40c5-8228-e80e60aeabea",
-    "keyword": "key_b346f3eb-1feb-4479-8b0b-2e8895d0eed9",
-    "answer": "Verificando horarios...",
+    "ref": "f9b75911-73fe-40fa-8ddf-47fb3fbf9633",
+    "keyword": "a0f136c129fc5147c42d60344755d05b",
+    "answer": "Cambio 20:30 52079281",
+    "options": {},
+    "from": "59898926360",
+    "refSerialize": "ce624f44e778fb98d03fa71b8f7375cc"
+  },
+  {
+    "ref": "ans_98d92adf-e409-4f20-bc94-86cc6e93f588",
+    "keyword": "key_1850e354-b30e-40f3-a03f-a860beeacc87",
+    "answer": "Estamos procesando tu cambio de reserva ⏳",
     "options": {
       "media": null,
       "buttons": [],
@@ -15,13 +23,13 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "224dfc7156a8c906747995128c3afdaf",
+    "refSerialize": "3b12ab0d94628896baa15b35ad7de54c",
     "from": "59898926360"
   },
   {
-    "ref": "90640477-a8ef-4bcb-b4d7-456e4761b548",
+    "ref": "62b4759d-d484-42da-aba2-9d6719ed5ab5",
     "keyword": null,
-    "answer": "Unauthorized: No token provided",
+    "answer": "La clase ya comenzó, y no es posible cambiar una vez iniciada.\nPara que otra persona pueda aprovechar el lugar, las modificaciones tratemos de hacerlas con al menos 30 minutos de anticipación 🙏🏼",
     "options": {
       "media": null,
       "buttons": [],
@@ -29,6 +37,6 @@
       "delay": 0
     },
     "from": "59898926360",
-    "refSerialize": "1890257b96585153ac458a5f7e7f92e7"
+    "refSerialize": "1f91e42416abe52ea01b6d1b98ce5308"
   }
 ]

@@ -247,7 +247,7 @@ Ejemplo: CAMBIO 20:30 12345678`);
             const errorMessage = extractErrorMessage(error);
             if (errorMessage === 'Borrado rechazado') {
                 await flowDynamic(`La clase ya comenzó, y no es posible cambiar una vez iniciada.
-                Para que otra persona pueda aprovechar el lugar, las modificaciones tratemos de hacerlas con al menos 30 minutos de anticipación 🙏🏼`);
+Para que otra persona pueda aprovechar el lugar, las modificaciones tratemos de hacerlas con al menos 30 minutos de anticipación 🙏🏼`);
                 return;
             }
             await flowDynamic(errorMessage);
