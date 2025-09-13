@@ -134,6 +134,13 @@ export class ReservaController {
       res.status(404).json({ error: 'El usuario no tiene una reserva para eliminar' });
       return;
     }
+	
+    if (found){
+     if (ReservaController.esPrevioAHoraActual(horaEncontrada)) {
+        res.status(403).json({ error: `Borrado rechazado` });
+        return;
+     }
+    }
 
     await ReservaController.borrarReserva(horaEncontrada, usuario, index);
 
@@ -292,6 +299,10 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
       const esPrioritario = await ReservaController.chequeoHorarioPrioritario(usuario, horarioAChequear);
 
       const reservasEnHora = ReservaController.reservas[hora].length;
+      if (ReservaController.esPrevioAHoraActual(horaExistente)){
+         res.status(403).json({ error: `Borrado rechazado` });
+         return;
+      }
 
       if (esPrioritario) {
           if (reservasEnHora >= ReservaController.MAX_RESERVAS_POR_HORARIO) {
@@ -378,9 +389,6 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
   }
 
   private static async borrarReserva(hora: string, usuario: string, index: number) {
-    if (this.esPrevioAHoraActual(hora)) {
-        throw new Error('Borrado rechazado');
-    }
     ReservaController.reservas[hora].splice(index, 1);
     await fs.writeFile(ReservaController.DATA_PATH_RESERVAS, JSON.stringify(ReservaController.reservas, null, 2));
   }
