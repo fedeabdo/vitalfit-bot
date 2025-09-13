@@ -1,15 +1,15 @@
 [
   {
-    "ref": "2013778c-3a2e-44de-a268-f4669489fe8d",
-    "keyword": "94dc771f8f919d171d2064ac2d841380",
+    "ref": "39986c82-bf9d-408c-bfe2-40c5dc2ba677",
+    "keyword": "1c0a6b2762cfa97b99caa985492ff13b",
     "answer": "Horarios",
     "options": {},
-    "from": "59899680147",
+    "from": "59898588641",
     "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
   },
   {
-    "ref": "ans_9f855c41-de1a-4883-8a23-3d02e23b9f53",
-    "keyword": "key_6b0d4db6-a8fa-4f08-a828-83084156c957",
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
     "answer": "Verificando horarios...",
     "options": {
       "media": null,
@@ -23,20 +23,3249 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "ddfb9fb947b9ed7db99a7ec9d76fa072",
-    "from": "59899680147"
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898588641"
   },
   {
-    "ref": "7a78e817-f842-4fa2-a081-a3a5ec99d104",
+    "ref": "6f4d7476-cfe9-4afa-b05c-1b99a6bc2e3e",
     "keyword": null,
-    "answer": "Los horarios disponibles para sábado, 05/07 son: \n🕒 - 10:00: ✅ 6 lugares disponibles \n🕒 - 11:00: ✅ 6 lugares disponibles ",
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ❌ No disponible \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ✅ 2 lugares ",
     "options": {
       "media": null,
       "buttons": [],
       "capture": false,
       "delay": 0
     },
-    "from": "59899680147",
-    "refSerialize": "27e6583bc44fd4b9779ee63050c81c62"
+    "from": "59898588641",
+    "refSerialize": "cebb94fc2abf00fe3056a3a03eb84fee"
+  },
+  {
+    "ref": "74bec84f-374d-4e1c-809e-517c5b7f7400",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Reserva 20:30 38858776",
+    "options": {},
+    "from": "59898588641",
+    "refSerialize": "f46686fe2bb29c7d8ced4707f2b97b82"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59898588641"
+  },
+  {
+    "ref": "2621c5b2-a44a-472f-bed2-4222297d5816",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 20:30. Cédula: 38858776. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898588641",
+    "refSerialize": "06349ebfa94395a7da53abfae238a898"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59897218152"
+  },
+  {
+    "ref": "5261d81b-a9d6-40b1-a834-31f4f8cd2c60",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ❌ No disponible \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ✅ 1 lugar ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59897218152",
+    "refSerialize": "9c3f9871b0b108a69e8b6a04b9b7e0a0"
+  },
+  {
+    "ref": "72e52c33-dea7-46e3-a8da-26eb14e66faf",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Reserva 20:30 48926804",
+    "options": {},
+    "from": "59897218152",
+    "refSerialize": "d366791fff525ac64c65fa43f52f5d56"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59897218152"
+  },
+  {
+    "ref": "d9cafd28-1fec-42db-8838-f2641ba7d9f5",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 20:30. Cédula: 48926804. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59897218152",
+    "refSerialize": "0de6147bba6141af4daad0d82e05de38"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59899881776"
+  },
+  {
+    "ref": "e5eda740-2aac-452d-885c-6f59766703c6",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ❌ No disponible \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899881776",
+    "refSerialize": "df0fccddc295b831ebbe41f50b860345"
+  },
+  {
+    "ref": "eb2b3f9e-e780-426b-b6bb-b397759bb465",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59899881776",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59899881776"
+  },
+  {
+    "ref": "0473e8d9-7b65-486f-9c23-6146152f32f3",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ❌ No disponible \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899881776",
+    "refSerialize": "df0fccddc295b831ebbe41f50b860345"
+  },
+  {
+    "ref": "ans_5c74a709-d42f-45f3-92c8-d1f5e5ce6afd",
+    "keyword": "key_447242e6-7fb5-4e3e-aa3d-e327c6e624a5",
+    "answer": "Estamos procesando tu borrado 😔",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "38542cfa8a8dd491a680043b8184e1d2",
+    "from": "59895417743"
+  },
+  {
+    "ref": "50f2a0c4-9710-4750-8a0b-226953b43f1b",
+    "keyword": null,
+    "answer": "✅ Borrado procesado para la cédula: 40899277. Confirmado 😔",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59895417743",
+    "refSerialize": "698f9812a179dc9122faab97535e50f6"
+  },
+  {
+    "ref": "cd315f91-9b00-4802-a670-f2c3e792d835",
+    "keyword": "38542cfa8a8dd491a680043b8184e1d2",
+    "answer": "Horario",
+    "options": {},
+    "from": "59895417743",
+    "refSerialize": "acf090d57e97a46ebd8b6322dc134969"
+  },
+  {
+    "ref": "ans_e892bd6f-b4fa-4ef8-8026-901bc346614d",
+    "keyword": "key_323b0b4e-d159-4782-94c5-5bd26acc83fb",
+    "answer": "😬 No es posible procesar tu mensaje. Prueba con alguno de los siguientes:\n\n🕙 RESERVA\nEscribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678\n\n🔁 CAMBIO DE RESERVA\nEscribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: CAMBIO 20:30 12345678\n\n❌ BORRAR RESERVA\nEscribe BORRAR seguido de tu cédula (sin puntos ni guiones).\nEjemplo: BORRAR 12345678\n\n📋 HORARIOS\nEscribe HORARIOS para ver la disponibilidad de los horarios del día.\n\n❓ CONSULTA\nEscribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678 ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "1c6b78ab1641a3aaa31f00444545cfcd",
+    "from": "59895417743"
+  },
+  {
+    "ref": "fa8003da-9345-47a2-96ff-b131ba435227",
+    "keyword": "1c6b78ab1641a3aaa31f00444545cfcd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59895417743",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59895417743"
+  },
+  {
+    "ref": "3818d1dd-4b2a-4789-87f6-65803a74ea2e",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ❌ No disponible \n🕒 - 19:30: ✅ 1 lugar \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59895417743",
+    "refSerialize": "b72d39b078fdac3bc51971b82402a61f"
+  },
+  {
+    "ref": "783d4d9f-5f31-4847-8e04-a73d45c5258a",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59899881776",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59899881776"
+  },
+  {
+    "ref": "745f34ca-b6dd-496b-b92f-247874965cf7",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ❌ No disponible \n🕒 - 19:30: ✅ 1 lugar \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899881776",
+    "refSerialize": "b72d39b078fdac3bc51971b82402a61f"
+  },
+  {
+    "ref": "ans_5c74a709-d42f-45f3-92c8-d1f5e5ce6afd",
+    "keyword": "key_447242e6-7fb5-4e3e-aa3d-e327c6e624a5",
+    "answer": "Estamos procesando tu borrado 😔",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "38542cfa8a8dd491a680043b8184e1d2",
+    "from": "59899054249"
+  },
+  {
+    "ref": "0ff5370d-14b0-4c52-9e2b-8fe7ac0bfb0a",
+    "keyword": null,
+    "answer": "✅ Borrado procesado para la cédula: 48820240. Confirmado 😔",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899054249",
+    "refSerialize": "243f3f4f279bed3487972239497d6f33"
+  },
+  {
+    "ref": "5536fca5-8cec-4ed2-aa36-84e62508222a",
+    "keyword": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898588641",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898588641"
+  },
+  {
+    "ref": "94dae52d-c5cf-4bdb-83fa-22d5913d39e6",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 1 lugar \n🕒 - 19:30: ✅ 1 lugar \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898588641",
+    "refSerialize": "ec254f09ab51f21781b46d24bd648174"
+  },
+  {
+    "ref": "e4820ed1-3cf5-42f8-8790-557b4147b06f",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Borrar 38858776",
+    "options": {},
+    "from": "59898588641",
+    "refSerialize": "3358dcdb1c4a5403dee21ebe87d73985"
+  },
+  {
+    "ref": "ans_5c74a709-d42f-45f3-92c8-d1f5e5ce6afd",
+    "keyword": "key_447242e6-7fb5-4e3e-aa3d-e327c6e624a5",
+    "answer": "Estamos procesando tu borrado 😔",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "38542cfa8a8dd491a680043b8184e1d2",
+    "from": "59898588641"
+  },
+  {
+    "ref": "c5d4b736-1017-44dd-b528-3261498bb272",
+    "keyword": null,
+    "answer": "✅ Borrado procesado para la cédula: 38858776. Confirmado 😔",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898588641",
+    "refSerialize": "8d03f130800b745d9151c0c444597dc3"
+  },
+  {
+    "ref": "74b389eb-82c5-4b4c-94e3-d1035d9e341a",
+    "keyword": "38542cfa8a8dd491a680043b8184e1d2",
+    "answer": "Reserva 19:30 38858776",
+    "options": {},
+    "from": "59898588641",
+    "refSerialize": "3e0998f6320d7df2761c2f401403e0b0"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59898588641"
+  },
+  {
+    "ref": "3a820f8e-5d7b-4849-ae84-565a0b4d8eef",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 19:30. Cédula: 38858776. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898588641",
+    "refSerialize": "c5a667fb839f3070f9a1a2682670221c"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59892558094"
+  },
+  {
+    "ref": "9b189db9-9010-46f2-bce2-3f723764a2dc",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 1 lugar \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ✅ 1 lugar ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59892558094",
+    "refSerialize": "b3cd7f348888d69214c6f42092ff7c73"
+  },
+  {
+    "ref": "2bc9b64a-587c-4650-8386-65643cbea1a4",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "RESERVA 20:30 52467959",
+    "options": {},
+    "from": "59892558094",
+    "refSerialize": "dc59eb6eb1386048fccb470148644978"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59892558094"
+  },
+  {
+    "ref": "b7f2a5f4-7a25-46b1-89fb-ffa32c637b79",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 20:30. Cédula: 52467959. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59892558094",
+    "refSerialize": "0e4ffc8fe3d63f0d8e528083a01ed9fc"
+  },
+  {
+    "ref": "ans_5c74a709-d42f-45f3-92c8-d1f5e5ce6afd",
+    "keyword": "key_447242e6-7fb5-4e3e-aa3d-e327c6e624a5",
+    "answer": "Estamos procesando tu borrado 😔",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "38542cfa8a8dd491a680043b8184e1d2",
+    "from": "59898167605"
+  },
+  {
+    "ref": "c99b8f2a-edf1-44ac-90a7-72e59c15b873",
+    "keyword": null,
+    "answer": "❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).\nEjemplo: BORRAR 12345678",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898167605",
+    "refSerialize": "63b5e23a6873d0a5cc767f18f16aee70"
+  },
+  {
+    "ref": "4c153e9f-936c-46fc-a919-98d1c2b90aec",
+    "keyword": "38542cfa8a8dd491a680043b8184e1d2",
+    "answer": "Borrar 50320212",
+    "options": {},
+    "from": "59898167605",
+    "refSerialize": "86a80e20c126f4a8b9555d4661aafa78"
+  },
+  {
+    "ref": "ans_5c74a709-d42f-45f3-92c8-d1f5e5ce6afd",
+    "keyword": "key_447242e6-7fb5-4e3e-aa3d-e327c6e624a5",
+    "answer": "Estamos procesando tu borrado 😔",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "38542cfa8a8dd491a680043b8184e1d2",
+    "from": "59898167605"
+  },
+  {
+    "ref": "24205e7f-a22f-4634-bc39-8cbbab460d36",
+    "keyword": null,
+    "answer": "✅ Borrado procesado para la cédula: 50320212. Confirmado 😔",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898167605",
+    "refSerialize": "fb866385260c7ba6e47924c1b54397f2"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898686868"
+  },
+  {
+    "ref": "e3c9424c-23d2-49d6-b0e4-df44864e26e9",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 1 lugar \n🕒 - 19:30: ✅ 1 lugar \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898686868",
+    "refSerialize": "ec254f09ab51f21781b46d24bd648174"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "3a52fd0d-93c4-4f48-a77f-01cbac8d5122",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 1 lugar \n🕒 - 19:30: ✅ 1 lugar \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "ec254f09ab51f21781b46d24bd648174"
+  },
+  {
+    "ref": "ans_cde7894d-529d-40da-ad30-47fbfe6a148c",
+    "keyword": "key_27322bec-9526-4ad3-9756-c62e00ad2598",
+    "answer": "Estamos procesando tu cambio de reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "1f97a457c3cbdbee827e01b95e0f3357",
+    "from": "59891845953"
+  },
+  {
+    "ref": "2d2d0ffb-f9f0-41d6-b972-75a735b0814b",
+    "keyword": null,
+    "answer": "✅ Cambio procesado para las 19:30. Cédula: 52111697. Confirmado 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59891845953",
+    "refSerialize": "ddb6df6547ecfc1d8adf9a64b409a0b1"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898158062"
+  },
+  {
+    "ref": "a61693a4-bda8-4f97-b49a-a11018a30daf",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 2 lugares \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898158062",
+    "refSerialize": "feab087d3139bf91592121796dd7150a"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898942607"
+  },
+  {
+    "ref": "6289b1fa-eae3-48e2-bc19-7b3540de8228",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 2 lugares \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898942607",
+    "refSerialize": "feab087d3139bf91592121796dd7150a"
+  },
+  {
+    "ref": "4942a0b5-d3ae-480d-af4f-30ca9b677a29",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898942607",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898942607"
+  },
+  {
+    "ref": "54cb3c6a-e61c-4c31-9fc3-b7b8313ab123",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 2 lugares \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898942607",
+    "refSerialize": "feab087d3139bf91592121796dd7150a"
+  },
+  {
+    "ref": "1633a85b-89d0-45da-b913-5fa1f36c74c4",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "RESERVA 19:30 50515837",
+    "options": {},
+    "from": "59898158062",
+    "refSerialize": "8d97d22569f29ee983c281e268ecc57c"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59898158062"
+  },
+  {
+    "ref": "47e7f65a-412d-44b3-b58e-6784d1297a80",
+    "keyword": null,
+    "answer": "Este horario ya está lleno",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898158062",
+    "refSerialize": "256b914ee28e48a72aa9cac838d6b0cd"
+  },
+  {
+    "ref": "e43dc3cd-8ac3-44f2-bbc0-9d728ddfbeaf",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 2 lugares \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898158062",
+    "refSerialize": "feab087d3139bf91592121796dd7150a"
+  },
+  {
+    "ref": "94083038-6741-41dc-a3d2-d85b2333bad7",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "53c3d32d-0e89-4dfb-824e-539d83c47017",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 2 lugares \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "feab087d3139bf91592121796dd7150a"
+  },
+  {
+    "ref": "4dfa4d20-903e-4c5f-bbde-8055712615f2",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898942607",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898942607"
+  },
+  {
+    "ref": "1f9775f7-7d8a-40bc-bc42-7569cecdfca3",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 2 lugares \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898942607",
+    "refSerialize": "feab087d3139bf91592121796dd7150a"
+  },
+  {
+    "ref": "27f8520b-8c97-43cd-a683-6edd20062304",
+    "keyword": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "answer": "HORARIOS",
+    "options": {},
+    "from": "59898158062",
+    "refSerialize": "4f90cdcf561556abcf595d266a049ba2"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898158062"
+  },
+  {
+    "ref": "31fd9751-1fd5-41c6-98d2-96e1143eaef2",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 2 lugares \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898158062",
+    "refSerialize": "feab087d3139bf91592121796dd7150a"
+  },
+  {
+    "ref": "d01f6832-de2d-452b-9c80-8095b5f01b12",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59899881776",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59899881776"
+  },
+  {
+    "ref": "e499eea6-68d2-496c-97e2-a837044c8589",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 2 lugares \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899881776",
+    "refSerialize": "feab087d3139bf91592121796dd7150a"
+  },
+  {
+    "ref": "1a14bfda-334d-4b8a-b2de-f7996f877fe3",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898686868",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898686868"
+  },
+  {
+    "ref": "2aa788ea-f91e-4388-8eb0-cfd7cff429eb",
+    "keyword": null,
+    "answer": "Los horarios disponibles para viernes, 12/09 son: \n🕒 - 8:00: ✅ 1 lugar \n🕒 - 9:00: ✅ 3 lugares \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 16:30: ❌ No disponible \n🕒 - 17:30: ✅ 3 lugares \n🕒 - 18:30: ✅ 2 lugares \n🕒 - 19:30: ❌ No disponible \n🕒 - 20:30: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898686868",
+    "refSerialize": "feab087d3139bf91592121796dd7150a"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59894700069"
+  },
+  {
+    "ref": "d0e86e5d-8eb8-41db-90da-14fbfd19f551",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 10:00. Cédula: 44367616. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59894700069",
+    "refSerialize": "5a83c094e674e1b8480d8b1aa4a356f9"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59892212189"
+  },
+  {
+    "ref": "24cfaa03-177c-4320-b834-3b256d50a549",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 11:00. Cédula: 56398459. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59892212189",
+    "refSerialize": "e17f3f5c0d70b1da32620a83a7a81919"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898786708"
+  },
+  {
+    "ref": "088a5db6-963d-4123-937a-ae3cc162a78a",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ✅ 5 lugares \n🕒 - 11:00: ✅ 5 lugares ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898786708",
+    "refSerialize": "0c00963ded54e822871623dfa21f77b2"
+  },
+  {
+    "ref": "9fd65b29-17b9-4660-a670-050633d212aa",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "RESERVA 11:00 46554407",
+    "options": {},
+    "from": "59898786708",
+    "refSerialize": "510495b0984b61521b2840a5595cda3a"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59898786708"
+  },
+  {
+    "ref": "34cb71aa-0554-4731-b566-8dd7243846ca",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 11:00. Cédula: 46554407. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898786708",
+    "refSerialize": "abfde7079b68af18aaf97cc175f5f08c"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59899180062"
+  },
+  {
+    "ref": "fa988ab2-0220-43f0-a49f-b55acb8bb028",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 10:00. Cédula: 19799628. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899180062",
+    "refSerialize": "982a562e0bb3d3dec6e79deae98917da"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59899917040"
+  },
+  {
+    "ref": "cce07ad4-1be7-4a20-b041-192d683a42b8",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 10:00. Cédula: 34753338. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899917040",
+    "refSerialize": "5ed211c5bb8533705bec5da56c2551db"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59899591203"
+  },
+  {
+    "ref": "380b17e5-ea5d-4d5f-9a65-25b882f8429e",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 10:00. Cédula: 29509324. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899591203",
+    "refSerialize": "1b8d985d26bb4a9ed5aefc0c14f17175"
+  },
+  {
+    "ref": "a7f0835a-21e2-49ed-aa20-053aa63aa2e8",
+    "keyword": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59899591203",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59899591203"
+  },
+  {
+    "ref": "309b9522-349a-47c9-8150-439bd9a64cb4",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ✅ 2 lugares \n🕒 - 11:00: ✅ 4 lugares ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899591203",
+    "refSerialize": "58e7358f789baa715b39bdfe389d9929"
+  },
+  {
+    "ref": "979f7509-4d3a-45ed-b1fa-92f60f5477c6",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Reserva 10:00 64044630",
+    "options": {},
+    "from": "59899881776",
+    "refSerialize": "2f4f0bb46299797217796996851d5e69"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59899881776"
+  },
+  {
+    "ref": "720715bf-c132-4cc4-885f-5e9993c0769f",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 10:00. Cédula: 64044630. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899881776",
+    "refSerialize": "ef26d3be6ce14378120a3699b4e30faa"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59898441160"
+  },
+  {
+    "ref": "958698a1-7053-45a3-b545-3682f6fda14a",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 11:00. Cédula: 47621380. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898441160",
+    "refSerialize": "e21f9e772cb65970ef35a3f77045eef3"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59898411053"
+  },
+  {
+    "ref": "b0dd7c1a-97b5-4ab5-8064-b4ffa19653e6",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 11:00. Cédula: 48766200. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898411053",
+    "refSerialize": "21acdcfad554ff5615d197a8d135396d"
+  },
+  {
+    "ref": "b8cca347-9420-421b-930e-6f1ef7c09696",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59899591203",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59899591203"
+  },
+  {
+    "ref": "1971a33f-fb6a-4a5a-ae1a-ada28f588bb1",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 11:00: ✅ 2 lugares ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899591203",
+    "refSerialize": "81346d1dd235b2d51907c6dc936e5cc9"
+  },
+  {
+    "ref": "fbdb0507-613b-49f2-b425-5ef8461f4787",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "92b790f1-b160-42a7-9057-2e0c528b4823",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 11:00: ✅ 2 lugares ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "81346d1dd235b2d51907c6dc936e5cc9"
+  },
+  {
+    "ref": "8a1a6320-ae5e-4835-b927-0960cb956f00",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "51ef6104-5854-4509-90d9-34f1406ccb39",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 11:00: ✅ 2 lugares ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "81346d1dd235b2d51907c6dc936e5cc9"
+  },
+  {
+    "ref": "3436c955-bbab-47f6-ba70-51a99c76b450",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59899591203",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59899591203"
+  },
+  {
+    "ref": "a06d3070-8bff-4ac4-bbd6-d3a37f1dc464",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ✅ 1 lugar \n🕒 - 11:00: ✅ 2 lugares ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899591203",
+    "refSerialize": "81346d1dd235b2d51907c6dc936e5cc9"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "2950692905165"
+  },
+  {
+    "ref": "c8b0e1fd-d862-44aa-9f4b-82b0c967570f",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 10:00. Cédula: 52328363. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "2950692905165",
+    "refSerialize": "683c438343fed14b087323fb4196a218"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59892677030"
+  },
+  {
+    "ref": "b523daa3-ba9c-4132-ba0f-52142e52685d",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ✅ 2 lugares ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59892677030",
+    "refSerialize": "558dd8ade705c491900f6e259071c809"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59899431010"
+  },
+  {
+    "ref": "0191132f-e1f5-4b48-b6c0-458387a26649",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 11:00. Cédula: 46774576. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899431010",
+    "refSerialize": "b2f277256e4f509efdf6afdea311c9f9"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898462728"
+  },
+  {
+    "ref": "c94ab2d3-6670-436b-ab3f-f67e1022ab06",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ✅ 1 lugar ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898462728",
+    "refSerialize": "75b27c673d7e82dbab9ed28bfb252b36"
+  },
+  {
+    "ref": "c8d1bac0-f956-4e72-ba54-31ad47ace125",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Reserva 11:00 44260832",
+    "options": {},
+    "from": "59898462728",
+    "refSerialize": "4bc510ad0e735de4448e539db19df124"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59898462728"
+  },
+  {
+    "ref": "72797271-389e-45b6-967d-ad8be196d628",
+    "keyword": null,
+    "answer": "✅ Reserva procesada para las 11:00. Cédula: 44260832. Confirmada! 💪🏽",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898462728",
+    "refSerialize": "7b436b56d8acfbb5b4643a4e0b6eafe9"
+  },
+  {
+    "ref": "cd8e8d53-d72c-4aff-8264-363e8ed89096",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59892677030",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59892677030"
+  },
+  {
+    "ref": "e4a50a60-7ea3-4387-9687-96063f5c4861",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59892677030",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "ec964186-7a35-4544-9459-f25f0be70047",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "14cb4597-ab0e-4332-831d-59060f507b6b",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "ans_7c1e78d8-0970-4767-9a69-e30782cc9fe2",
+    "keyword": "key_a6027176-1946-44a2-96d4-dd3cb0c756e5",
+    "answer": "Estamos procesando tu reserva ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "f8d91d9d-55e2-4110-a956-a426fa900bcc",
+    "keyword": null,
+    "answer": "Este horario ya está lleno",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "256b914ee28e48a72aa9cac838d6b0cd"
+  },
+  {
+    "ref": "461469d3-df7b-4446-8037-58b7d3810eaf",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "95bdc0bc-fe65-4cd4-b887-78e8ce291057",
+    "keyword": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "fceeeb4d-2485-4251-ad15-b7a396ae6369",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "40e3d65e-dd34-4e8f-850d-71f74fb294fd",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "47e85ebc-32a1-4bdf-ac66-106479ed83a4",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "7ea55e29-715c-4df6-90fa-571cca04d544",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "46d74e8b-441f-4312-8109-02b1e5a489c7",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "4cd0975f-ac7d-458b-b9e5-7e04e1ebdd93",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "061e8845-76be-4b3d-a7ff-8fca40e5b6e1",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "a3420eb6-ceb0-4bc0-93c9-bc0adf74c3f4",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "f94320d5-a6dd-4972-9afe-2c7caa64d8c0",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "f27c3eb9-9f2b-4e2e-8197-bf56534b815c",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "d2d501ea94a61594b08097e45fc37d8a"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "eed7f445-b8ac-4d69-97ed-b7e141c9238a",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "205d325c-8798-48ee-9689-0f9f1c1a8cc1",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "8cb7db07-381d-4523-948f-bae4133d23ad",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "4eb6bf3a-09d4-4e3e-908c-607ce66da172",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "d2d501ea94a61594b08097e45fc37d8a"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "2fb16fc5-c741-4663-afb2-128952d43dcf",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "b5e5d135-e1c9-4c21-83f4-c4656921293b",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "17875e5d-ac14-4d5e-b625-dbe1f282f91a",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "6cd2f9f9-3ba8-4d42-b0b5-389c1b8aa632",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "6bad8cbf-c4bb-46c2-b838-a053f5963f00",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "11667cdd-d243-41cd-b058-d41b18c3688d",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "20a49e29-2ec3-44df-8b4f-57d1e2ddbefb",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59891612423"
+  },
+  {
+    "ref": "088e6cd2-b5c7-4b84-98ab-5fba6234e80c",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59891612423",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "993129da-2784-4b02-98e0-09d21370825b",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "ffc4ebec-e478-4a5d-a057-88e627e8f93e",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "2ab3dae5-2580-433c-b9e8-f9a637acfc69",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59899591203",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59899591203"
+  },
+  {
+    "ref": "5523337a-78b9-48ce-b4cc-2702263838d9",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59899591203",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59895908811"
+  },
+  {
+    "ref": "9445282e-3855-4652-b338-20b63d20d1e4",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59895908811",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "e2c85023-6bbe-4899-a2b4-de7d196b6ecd",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "4794dcc8-10cc-462e-8fab-583781b2a189",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "c6526b91-ebbe-49f3-bbb2-cc40fd09b40c",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "d233d5ab-02ab-42b6-bdcf-a4a14ed06227",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "88121dc9-4eb5-4bf6-ad5e-82e1607ee9af",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "89c5ad27-a6a2-4454-97e5-52e6c2c6cc17",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "0ed535c6-b9c8-4497-b0a0-20823e54e8e1",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "a063b888-8f18-487e-8d24-16573028a515",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "c3c8fddf-6333-4ae9-b87a-7cad134bfa5c",
+    "keyword": "0cd1b7a71d8b0b783bbc06ac3a0046cd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "2950692905165",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "2950692905165"
+  },
+  {
+    "ref": "acab77d3-5dd5-422b-abc2-dd7bd74d4fe5",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "2950692905165",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898298084"
+  },
+  {
+    "ref": "45ff309c-f591-490f-81a1-1d723ea46d80",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898298084",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "3522e3e9-74b4-42b7-b1d7-12c4867042d1",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "2b5bb928-e2a7-481b-8042-a217df4af47f",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "109270ef-f895-4da6-9fda-9de30ca64a18",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "horarios",
+    "options": {},
+    "from": "59895908811",
+    "refSerialize": "d2d501ea94a61594b08097e45fc37d8a"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59895908811"
+  },
+  {
+    "ref": "98653835-7219-437e-a712-091cefefcb8a",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59895908811",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "2900a6d3-c7fc-46be-b36d-7ffa654d1e64",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "ae60d75b-f268-40e2-b69c-987cb558062a",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "b6ee7c6e-9c73-4740-8fd3-ae04c9db071d",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "84a8ac64-80f2-4ee9-894d-7e5b3a258294",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "4dfd3fa4-7cd7-40b4-baf6-6dc3758b208e",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "732ac80f-32a1-4bc0-abf3-e5e8bdc1a674",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "ans_391b1492-dfbc-4ff8-bbb9-34698a1a1b91",
+    "keyword": "key_c18e2579-5a11-4e12-a65a-9d764cdb0392",
+    "answer": "Estamos procesando tu consulta ⏳",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "351bf3bc74eff234de0a835582b325e2",
+    "from": "59891092802"
+  },
+  {
+    "ref": "cf1da80b-a96d-456a-96c5-8d8dd3f52fbd",
+    "keyword": null,
+    "answer": "No hay reservas registradas hoy para la cédula 44709959",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59891092802",
+    "refSerialize": "93d77e648b6b70bf1917eec92622ede4"
+  },
+  {
+    "ref": "287bfdea-8f7d-4a13-a930-cdc60da69dc6",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "d2d501ea94a61594b08097e45fc37d8a"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "70a7d533-f78e-4e75-a27b-df92d5db1386",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "6d3f0d17-f2fc-47a8-9d3c-e9fe4cd0e2bd",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "d2d501ea94a61594b08097e45fc37d8a"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "5b863b84-3962-489c-9e27-ab7e0394dbd4",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "3e8392b9-b9ac-45a0-b97a-7a64dc9c522b",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "531214db-b3b9-4b12-969c-f2aba1ae5339",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "13549f0b-22eb-4b08-a143-3e8f7e2a0569",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "1a6d9a5d-f071-45c7-84e4-cde33315bae4",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "e3169455-721a-4cab-b581-cdc9ea076acf",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "e50e760f-78f1-49f0-bd2d-135b6f280ec3",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "9a0faf70-6799-4279-b28e-0de241125e96",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59893831896",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59893831896"
+  },
+  {
+    "ref": "024f1741-dcdb-4fba-bd6c-9e355eed6347",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59893831896",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
+  },
+  {
+    "ref": "376bbde2-a220-49e6-a25e-9a13f699e063",
+    "keyword": "01854f9ab38d2d2225d81d675aded2bd",
+    "answer": "Horarios",
+    "options": {},
+    "from": "59898969635",
+    "refSerialize": "58b7540f7c4f7b1a2c37a1763b29f77b"
+  },
+  {
+    "ref": "ans_f04df377-a1f4-4dff-972a-07f3daeed22a",
+    "keyword": "key_18f57395-1f90-45ab-b609-2d2ae5a106fc",
+    "answer": "Verificando horarios...",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "01854f9ab38d2d2225d81d675aded2bd",
+    "from": "59898969635"
+  },
+  {
+    "ref": "a4789e04-c35e-49d4-8e1a-7ec97efabcd8",
+    "keyword": null,
+    "answer": "Los horarios disponibles para sábado, 13/09 son: \n🕒 - 10:00: ❌ No disponible \n🕒 - 11:00: ❌ No disponible ",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "59898969635",
+    "refSerialize": "d1f7b82a83f5e8cdea7a2279f8df7ded"
   }
 ]
