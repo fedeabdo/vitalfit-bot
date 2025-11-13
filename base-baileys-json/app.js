@@ -50,44 +50,205 @@ apiClient.interceptors.request.use(async (config) => {
     return Promise.reject(error);
 });
 
+// flowHola will be defined after handlers so handlerHola is available
 
-const rateLimit = new Map(); // userId: [timestamps]
-const ignoredUsers = new Map(); // userId: ignoreUntilTimestamp
-const RATE_LIMIT_WINDOW = 1000; // 1 second
-const MAX_REQUESTS_PER_WINDOW = 1;
-const IGNORE_PERIOD = 20000; // 20 seconds
+// Extracted handlers so tests can call them directly
+const handlerHola = async (ctx, { flowDynamic }) => {
+    // greeting handled by static addAnswer; no dynamic follow-up required
+};
 
-const rateLimitMiddleware = async (ctx, next) => {
-    const userId = normalizeSenderNumber(ctx.from); // Use normalized number!
-    const currentTime = Date.now();
+const handlerAyuda = async (ctx, { flowDynamic }) => {
+    // help text is served as the static answer; no dynamic follow-up
+};
 
-    console.log(`[RateLimit] Incoming from:`, ctx.from, 'Normalized:', userId);
-    if (!rateLimit.has(userId)) {
-        rateLimit.set(userId, []);
+const handlerHorarios = async (ctx, { flowDynamic }) => {
+    try {
+        const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
+        const { dia, horarios } = response.data;
+        let horariosMsg = '';
+        if (Array.isArray(horarios) && horarios.length > 0) {
+            horariosMsg = horarios
+                .map(({ hora, disponible, lugaresDisponibles }) =>
+                    `🕒 - ${hora}: ${disponible ? '✅ ' + `${lugaresDisponibles} lugar${lugaresDisponibles === 1 ? '' : 'es'}` : '❌ No disponible'} `
+                )
+                .join('\n');
+        } else {
+            horariosMsg = 'No hay horarios disponibles.';
+        }
+        let header = `Los horarios disponibles para ${dia || 'Desconocido'} son: \n`;
+        await flowDynamic(header + horariosMsg);
+    } catch (error) {
+        console.log(error);
+        const errorMessage = extractErrorMessage(error);
+        await flowDynamic(errorMessage);
     }
+};
 
-    // Remove timestamps outside the window
-    const timestamps = rateLimit.get(userId).filter(timestamp => currentTime - timestamp < RATE_LIMIT_WINDOW);
-    rateLimit.set(userId, timestamps);
-    console.log(`[RateLimit] User timestamps:`, rateLimit.get(userId));
+const handlerConsulta = async (ctx, { flowDynamic }) => {
+    const userMessage = ctx.body;
 
-    if (rateLimit.get(userId).length >= MAX_REQUESTS_PER_WINDOW) {
-        console.log(`[RateLimit] BLOCKED for user:`, userId);
-        await ctx.reply('❌ Estás enviando demasiados mensajes. Por favor, espera un momento antes de intentarlo de nuevo.');
+    const validationError = validateConsultaMessage(userMessage);
+    if (validationError) {
+        await flowDynamic(validationError);
         return;
     }
 
-    rateLimit.get(userId).push(currentTime);
-    console.log(`[RateLimit] ALLOWED for user:`, userId, 'Timestamps now:', rateLimit.get(userId));
-    await next();
+    const match = userMessage.match(/^consulta\s+(\d{6,})$/i);
+    if (!match) {
+        await flowDynamic('Mensaje incompleto. Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678');
+        return;
+    }
+
+    const [, cedula] = match;
+    if (!cedula) {
+        await flowDynamic('Mensaje incompleto. Escribí CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678');
+        return;
+    }
+
+    try {
+        const response = await apiClient.get(`${process.env.BASE_URL}/reservas/consulta/${cedula}`);
+        if (response.data && response.data.hora) {
+            await flowDynamic(`✅ Tienes una reserva registrada para el horario: ${response.data.hora}.`);
+        } else if (response.data && response.data.message) {
+            await flowDynamic(response.data.message);
+        } else {
+            await flowDynamic('No se encontró una reserva para esa cédula.');
+        }
+    } catch (error) {
+        console.log(error);
+        const errorMessage = extractErrorMessage(error);
+        await flowDynamic(errorMessage);
+    }
 };
 
+const handlerReserva = async (ctx, { flowDynamic }) => {
+    const userMessage = ctx.body;
+
+    const validationError = validateReservaMessage(userMessage);
+    if (validationError) {
+        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678`);
+        return;
+    }
+
+    const match = userMessage.match(/reserva\s+(\d{1,2}:\d{2})\s+(\d+)/i);
+    if (!match) {
+        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678`);
+        return;
+    }
+
+    const [_, hora, cedula] = match;
+    if (!hora || !cedula) {
+        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678`);
+        return;
+    }
+
+    try {
+        const response = await apiClient.post(`${process.env.BASE_URL}/reservas`, { "hora": hora, "cedula": cedula });
+        await flowDynamic(`✅ Reserva procesada para las ${hora}. Cédula: ${cedula}. Confirmada! 💪🏽`);
+    } catch (error) {
+        console.log(error);
+        const errorMessage = extractErrorMessage(error);
+        await flowDynamic(errorMessage);
+        if (
+            errorMessage.includes('Este horario ya está lleno') ||
+            (errorMessage.includes('El horario') && errorMessage.includes('ya está lleno')) ||
+            (errorMessage.includes('Horario de reserva inválido')) ||
+            (errorMessage.includes('El horario de reserva es inválido'))
+        ) {
+            await horarioInvalidoFlowMessage(flowDynamic);
+        }
+    }
+};
+
+const handlerCambio = async (ctx, { flowDynamic }) => {
+    const userMessage = ctx.body;
+
+    const validationError = validateReservaMessage(userMessage);
+    if (validationError) {
+        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: CAMBIO 20:30 12345678`);
+        return;
+    }
+
+    const match = userMessage.match(/cambio\s+(\d{1,2}:\d{2})\s+(\d+)/i);
+    if (!match) {
+        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: CAMBIO 20:30 12345678`);
+        return;
+    }
+
+    const [_, hora, cedula] = match;
+    if (!hora || !cedula) {
+        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: CAMBIO 20:30 12345678`);
+        return;
+    }
+
+    try {
+        const response = await apiClient.put(`${process.env.BASE_URL}/reservas`, { "hora": hora, "cedula": cedula });
+        await flowDynamic(`✅ Cambio procesado para las ${hora}. Cédula: ${cedula}. Confirmado 💪🏽`);
+    } catch (error) {
+        const errorMessage = extractErrorMessage(error);
+        if (errorMessage === 'Borrado rechazado') {
+            await flowDynamic(`La clase ya comenzó, y no es posible cambiar una vez iniciada.\nPara que otra persona pueda aprovechar el lugar, las modificaciones tratemos de hacerlas con al menos 30 minutos de anticipación 🙏🏼`);
+            return;
+        }
+        await flowDynamic(errorMessage);
+        console.log(errorMessage);
+        if (
+            (errorMessage.includes('Este horario ya está lleno')) ||
+            (errorMessage.includes('El horario') && errorMessage.includes('ya está lleno')) ||
+            (errorMessage.includes('Horario de reserva inválido')) ||
+            (errorMessage.includes('El horario de reserva es inválido'))
+        ) {
+            await horarioInvalidoFlowMessage(flowDynamic);
+        }
+    }
+};
+
+const handlerBorrar = async (ctx, { flowDynamic }) =>  {
+    const userMessage = ctx.body;
+
+    const validationError = validateDeleteCedulaMessage(userMessage);
+    if (validationError) {
+        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).\nEjemplo: BORRAR 12345678`);
+        return;
+    }
+
+    const match = userMessage.match(/^borrar\s+(\d{6,})$/i);
+    if (!match) {
+        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).\nEjemplo: BORRAR 12345678`);
+        return;
+    }
+
+    const [, cedula] = match;
+    if (!cedula) {
+        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).\nEjemplo: BORRAR 12345678`);
+        return;
+    }
+
+    try {
+        const response = await apiClient.delete(`${process.env.BASE_URL}/reservas`, { data: { cedula } });
+        await flowDynamic(`✅ Borrado procesado para la cédula: ${cedula}. Confirmado 😔`);
+    } catch (error) {
+        console.log(error);
+        const errorMessage = extractErrorMessage(error);
+
+        if (errorMessage === 'Borrado rechazado') {
+            await flowDynamic(`La clase ya comenzó, y no es posible cancelar una vez iniciada.\nPara que otra persona pueda aprovechar el lugar, las cancelaciones tratemos de hacerlas con al menos 30 minutos de anticipación 🙏🏼`);
+            return;
+        }
+        await flowDynamic(errorMessage);
+    }
+};
+
+const handlerGenerico = async (ctx, { flowDynamic, provider }) => {
+    // static generic answer is provided by addAnswer; no dynamic follow-up
+};
+
+// Define flows using the extracted handlers
 const flowHola = addKeyword(['HOLA', 'Hola', 'hola'])
-    .addAnswer(`🙌 Hola! Mi nombre es Horacio 🕛. Enviando mensajes a este número puedes hacer una reserva, borrar una reserva o cambiar una reserva. Para más información envía la palabra: AYUDA`, null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {
-    }));
+    .addAnswer(`🙌 Hola! Mi nombre es Horacio 🕛. Enviando mensajes a este número puedes hacer una reserva, borrar una reserva o cambiar una reserva. Para más información envía la palabra: AYUDA`, null, withRateLimitAndRedirect(handlerHola));
 
 const flowAyuda = addKeyword(['AYUDA', 'ayuda'])
-.addAnswer(`🕙 RESERVA
+    .addAnswer(`🕙 RESERVA
 Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).
 Ejemplo: RESERVA 20:30 12345678
 
@@ -104,206 +265,22 @@ Escribe HORARIOS para ver la disponibilidad de los horarios del día.
 
 ❓ CONSULTA
 Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.
-Ejemplo: CONSULTA 12345678`
-, null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {       
-    }));
+Ejemplo: CONSULTA 12345678`, null, withRateLimitAndRedirect(handlerAyuda));
 
 const flowHorarios = addKeyword(['HORARIOS', 'horarios', 'Horarios'])
-    .addAnswer(`Verificando horarios...`, null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {
-        try {
-            const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
-            const { dia, horarios } = response.data;
-            let horariosMsg = '';
-            if (Array.isArray(horarios) && horarios.length > 0) {
-                horariosMsg = horarios
-                    .map(({ hora, disponible, lugaresDisponibles }) =>
-                        `🕒 - ${hora}: ${disponible ? '✅ ' + `${lugaresDisponibles} lugar${lugaresDisponibles === 1 ? '' : 'es'}` : '❌ No disponible'} `
-                    )
-                    .join('\n');
-            } else {
-                horariosMsg = 'No hay horarios disponibles.';
-            }
-            let header = `Los horarios disponibles para ${dia || 'Desconocido'} son: \n`;
-            await flowDynamic(header + horariosMsg);
-        } catch (error) {
-            console.log(error);
-            const errorMessage = extractErrorMessage(error);
-            await flowDynamic(errorMessage);
-        }
-    }));
+    .addAnswer(`Verificando horarios...`, null, withRateLimitAndRedirect(handlerHorarios));
 
 const flowConsulta = addKeyword(['CONSULTA', 'consulta', 'Consulta'])
-    .addAnswer('Estamos procesando tu consulta ⏳', null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {
-        const userMessage = ctx.body;
-
-        const validationError = validateConsultaMessage(userMessage);
-        if (validationError) {
-            await flowDynamic(validationError);
-            return;
-        }
-
-        const match = userMessage.match(/^consulta\s+(\d{6,})$/i);
-        if (!match) {
-            await flowDynamic('Mensaje incompleto. Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678');
-            return;
-        }
-
-        const [, cedula] = match;
-        if (!cedula) {
-            await flowDynamic('Mensaje incompleto. Escribí CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678');
-            return;
-        }
-
-        try {
-            // Use cedula as a URL param
-            const response = await apiClient.get(`${process.env.BASE_URL}/reservas/consulta/${cedula}`);
-            if (response.data && response.data.hora) {
-                await flowDynamic(`✅ Tienes una reserva registrada para el horario: ${response.data.hora}.`);
-            } else if (response.data && response.data.message) {
-                await flowDynamic(response.data.message);
-            } else {
-                await flowDynamic('No se encontró una reserva para esa cédula.');
-            }
-        } catch (error) {
-            console.log(error);
-            const errorMessage = extractErrorMessage(error);
-            await flowDynamic(errorMessage);
-        }
-    }));
+    .addAnswer('Estamos procesando tu consulta ⏳', null, withRateLimitAndRedirect(handlerConsulta));
 
 const flowReserva = addKeyword(['RESERVA', 'reserva', 'Reserva'])
-    .addAnswer('Estamos procesando tu reserva ⏳', null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {
-        const userMessage = ctx.body;
-
-        const validationError = validateReservaMessage(userMessage);
-        if (validationError) {
-            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).
-Ejemplo: RESERVA 20:30 12345678`);
-            return;
-        }
-
-        const match = userMessage.match(/reserva\s+(\d{1,2}:\d{2})\s+(\d+)/i);
-        if (!match) {
-            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).
-Ejemplo: RESERVA 20:30 12345678`);
-            return;
-        }
-
-        const [_, hora, cedula] = match;
-        if (!hora || !cedula) {
-            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).
-Ejemplo: RESERVA 20:30 12345678`);
-            return;
-        }
-
-        try {
-            const response = await apiClient.post(`${process.env.BASE_URL}/reservas`, { "hora": hora, "cedula": cedula });
-            await flowDynamic(`✅ Reserva procesada para las ${hora}. Cédula: ${cedula}. Confirmada! 💪🏽`);
-        } catch (error) {
-            console.log(error);
-            const errorMessage = extractErrorMessage(error);
-            await flowDynamic(errorMessage);
-            if (
-                errorMessage.includes('Este horario ya está lleno') ||
-                (errorMessage.includes('El horario') && errorMessage.includes('ya está lleno')) ||
-		        (errorMessage.includes('Horario de reserva inválido')) ||
-                (errorMessage.includes('El horario de reserva es inválido'))
-            ) {
-                await horarioInvalidoFlowMessage(flowDynamic);
-            }
-        }
-
-    }));
+    .addAnswer('Estamos procesando tu reserva ⏳', null, withRateLimitAndRedirect(handlerReserva));
 
 const flowCambio = addKeyword(['CAMBIO', 'Cambio'])
-    .addAnswer('Estamos procesando tu cambio de reserva ⏳', null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) => {
-        const userMessage = ctx.body;
-
-        const validationError = validateReservaMessage(userMessage);
-        if (validationError) {
-            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).
-Ejemplo: CAMBIO 20:30 12345678`);
-            return;
-        }
-
-        const match = userMessage.match(/cambio\s+(\d{1,2}:\d{2})\s+(\d+)/i);
-        if (!match) {
-            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).
-Ejemplo: CAMBIO 20:30 12345678`);
-            return;
-        }
-
-        const [_, hora, cedula] = match;
-        if (!hora || !cedula) {
-            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).
-Ejemplo: CAMBIO 20:30 12345678`);
-            return;
-        }
-
-        try {
-            const response = await apiClient.put(`${process.env.BASE_URL}/reservas`, { "hora": hora, "cedula": cedula });
-            await flowDynamic(`✅ Cambio procesado para las ${hora}. Cédula: ${cedula}. Confirmado 💪🏽`);
-        } catch (error) {
-            const errorMessage = extractErrorMessage(error);
-            if (errorMessage === 'Borrado rechazado') {
-                await flowDynamic(`La clase ya comenzó, y no es posible cambiar una vez iniciada.
-Para que otra persona pueda aprovechar el lugar, las modificaciones tratemos de hacerlas con al menos 30 minutos de anticipación 🙏🏼`);
-                return;
-            }
-            await flowDynamic(errorMessage);
-            console.log(errorMessage);
-            if (
-                (errorMessage.includes('Este horario ya está lleno')) ||
-                (errorMessage.includes('El horario') && errorMessage.includes('ya está lleno')) ||
-		        (errorMessage.includes('Horario de reserva inválido')) ||
-                (errorMessage.includes('El horario de reserva es inválido'))
-            ) {
-                await horarioInvalidoFlowMessage(flowDynamic);
-            }
-        }
-    }));
+    .addAnswer('Estamos procesando tu cambio de reserva ⏳', null, withRateLimitAndRedirect(handlerCambio));
 
 const flowBorrar = addKeyword(['BORRAR', 'borrar', 'Borrar'])
-    .addAnswer('Estamos procesando tu borrado 😔', null, withRateLimitAndRedirect(async (ctx, { flowDynamic }) =>  {
-        const userMessage = ctx.body;
-
-        const validationError = validateDeleteCedulaMessage(userMessage);
-        if (validationError) {
-            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).
-Ejemplo: BORRAR 12345678`);
-            return;
-        }
-
-        const match = userMessage.match(/^borrar\s+(\d{6,})$/i);
-        if (!match) {
-            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).
-Ejemplo: BORRAR 12345678`);
-            return;
-        }
-
-        const [, cedula] = match;
-        if (!cedula) {
-            await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).
-Ejemplo: BORRAR 12345678`);
-            return;
-        }
-
-        try {
-            const response = await apiClient.delete(`${process.env.BASE_URL}/reservas`, { data: { cedula } });
-            await flowDynamic(`✅ Borrado procesado para la cédula: ${cedula}. Confirmado 😔`);
-        } catch (error) {
-            console.log(error);
-            const errorMessage = extractErrorMessage(error);
-
-            if (errorMessage === 'Borrado rechazado') {
-                await flowDynamic(`La clase ya comenzó, y no es posible cancelar una vez iniciada.
-Para que otra persona pueda aprovechar el lugar, las cancelaciones tratemos de hacerlas con al menos 30 minutos de anticipación 🙏🏼`);
-                return;
-            }
-            await flowDynamic(errorMessage);
-        }
-    }
-));
+    .addAnswer('Estamos procesando tu borrado 😔', null, withRateLimitAndRedirect(handlerBorrar));
 
 const flowGenerico = addKeyword(['.*'])
     .addAnswer(`😬 No es posible procesar tu mensaje. Prueba con alguno de los siguientes:
@@ -325,8 +302,7 @@ Escribe HORARIOS para ver la disponibilidad de los horarios del día.
 
 ❓ CONSULTA
 Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.
-Ejemplo: CONSULTA 12345678 `, null, withRateLimitAndRedirect(async (ctx, { flowDynamic, provider }) => {   
-    }));
+Ejemplo: CONSULTA 12345678 `, null, withRateLimitAndRedirect(handlerGenerico));
 
 const validateDeleteCedulaMessage = (message) => {
     if (!message || message.trim() === '') {
@@ -383,42 +359,6 @@ const extractErrorMessage = (error) => {
     return '❌ Ocurrió un error inesperado.';
 };
 
-const applyRateLimitMiddleware = (flow) => {
-    if (!flow || typeof flow.addAnswer !== 'function') {
-        console.error('❌ Invalid flow passed to applyRateLimitMiddleware:', flow);
-        throw new Error('Invalid flow object. The flow must have an addAnswer method.');
-    }
-
-    const originalAddAnswer = flow.addAnswer.bind(flow);
-    flow.addAnswer = (answer, options, callback) => {
-        const wrappedCallback = async (ctx, { flowDynamic }, next) => {
-            const userId = ctx.from;
-
-            if (isRateLimited(userId)) {
-                await flowDynamic('❌ Estás enviando demasiados mensajes. Por favor, espera un momento antes de intentarlo de nuevo.');
-                return;
-            }
-
-            if (callback) {
-                await callback(ctx, { flowDynamic }, next);
-            }
-        };
-
-        return originalAddAnswer(answer, options, wrappedCallback);
-    };
-
-    return flow;
-};
-
-// Wrap all flows with the rate limit middleware
-const flowHolaWithRateLimit = applyRateLimitMiddleware(flowHola);
-const flowConsultaWithRateLimit = applyRateLimitMiddleware(flowConsulta);
-const flowAyudaWithRateLimit = applyRateLimitMiddleware(flowAyuda);
-const flowHorariosWithRateLimit = applyRateLimitMiddleware(flowHorarios);
-const flowReservaWithRateLimit = applyRateLimitMiddleware(flowReserva);
-const flowCambioWithRateLimit = applyRateLimitMiddleware(flowCambio);
-const flowBorrarWithRateLimit = applyRateLimitMiddleware(flowBorrar);
-const flowGenericoWithRateLimit = applyRateLimitMiddleware(flowGenerico);   
 
 
 // Utility to normalize sender numbers and handle hardcoded redirect
@@ -430,27 +370,6 @@ function normalizeSenderNumber(senderJid) {
 function withRateLimitAndRedirect(handler) {
     return async (ctx, tools) => {
         const userId = normalizeSenderNumber(ctx.from);
-        const currentTime = Date.now();
-        console.log(`[RateLimit] Handler entry for user: ${userId}, currentTime: ${currentTime}, ignoredUntil: ${ignoredUsers.get(userId)}`);
-
-        // Check if user is currently ignored
-        if (ignoredUsers.has(userId) && currentTime < ignoredUsers.get(userId)) {
-            console.log(`[RateLimit] User ${userId} is currently ignored until ${ignoredUsers.get(userId)}. Skipping handler.`);
-            // Silently ignore during ignore period (no message)
-            return;
-        }
-
-        if (!rateLimit.has(userId)) rateLimit.set(userId, []);
-        const timestamps = rateLimit.get(userId).filter(ts => currentTime - ts < RATE_LIMIT_WINDOW);
-        rateLimit.set(userId, timestamps);
-        if (rateLimit.get(userId).length >= MAX_REQUESTS_PER_WINDOW) {
-            ignoredUsers.set(userId, currentTime + IGNORE_PERIOD); // Ignore for 20s
-            rateLimit.set(userId, []); // Optionally reset their window
-            await tools.flowDynamic('❌ Estás enviando demasiados mensajes. Por favor, espera un momento antes de intentarlo de nuevo.');
-            console.log(`[RateLimit] User ${userId} has been rate limited and will be ignored until ${ignoredUsers.get(userId)}`);
-            return;
-        }
-        rateLimit.get(userId).push(currentTime);
 
         // Arreglo para el número de reenvío Antonela
         const forwardNumber = '59899285083@c.us';
@@ -458,7 +377,7 @@ function withRateLimitAndRedirect(handler) {
         const flowDynamicWithForward = async (msg) => {
             await originalFlowDynamic(msg);
             // Forward to 2950692905165
-            if(userId === '2950692905165') {
+            if (userId === '2950692905165') {
                 let forwardMsg = msg;
                 if (Array.isArray(forwardMsg)) forwardMsg = forwardMsg.join('\n');
                 if (typeof forwardMsg !== 'string') forwardMsg = String(forwardMsg);
@@ -498,16 +417,18 @@ async function horarioInvalidoFlowMessage(flowDynamic) {
 const main = async () => {
     const adapterDB = new JsonFileAdapter();
     const adapterFlow = createFlow([
-        flowHolaWithRateLimit,
-        flowConsultaWithRateLimit,
-        flowAyudaWithRateLimit,
-        flowHorariosWithRateLimit,
-        flowReservaWithRateLimit,
-        flowCambioWithRateLimit,
-        flowBorrarWithRateLimit,
-        flowGenericoWithRateLimit
+        flowHola,
+        flowConsulta,
+        flowAyuda,
+        flowHorarios,
+        flowReserva,
+        flowCambio,
+        flowBorrar,
+        flowGenerico
     ]);
-    const adapterProvider = createProvider(BaileysProvider);
+    const adapterProvider = createProvider(BaileysProvider, {
+        pathSession: './bot_sessions',
+    });
 
     createBot({
         flow: adapterFlow,
@@ -517,11 +438,32 @@ const main = async () => {
     QRPortalWeb();
 };
 
-// Fetch the initial token when the bot starts
-fetchAuthToken().catch((err) => {
-    console.error('❌ Unhandled error in fetchAuthToken:', err);
-});
+// Export helpers for tests
+module.exports = {
+    normalizeSenderNumber,
+    withRateLimitAndRedirect,
+    fetchAuthToken,
+    main,
+    // exported for tests
+    apiClient,
+    handlerHola,
+    handlerAyuda,
+    handlerHorarios,
+    handlerConsulta,
+    handlerReserva,
+    handlerCambio,
+    handlerBorrar,
+    handlerGenerico
+};
 
-main().catch((err) => {
-    console.error('❌ Unhandled error in main:', err);
-});
+// If this file is executed directly, start the bot. When required (tests), do not auto-start.
+if (require.main === module) {
+    // Fetch the initial token when the bot starts
+    fetchAuthToken().catch((err) => {
+        console.error('❌ Unhandled error in fetchAuthToken:', err);
+    });
+
+    main().catch((err) => {
+        console.error('❌ Unhandled error in main:', err);
+    });
+}

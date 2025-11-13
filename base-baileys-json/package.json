@@ -3,11 +3,6 @@
     "version": "1.0.0",
     "description": "",
     "main": "app.js",
-    "scripts": {
-        "prestart": "npx eslint . --no-ignore",
-        "pre-copy": "cd .. && npm run  copy.lib base-baileys-json",
-        "start": "node app.js"
-    },
     "keywords": [],
     "dependencies": {
         "@bot-whatsapp/bot": "latest",
@@ -23,7 +18,14 @@
     },
     "devDependencies": {
         "eslint": "^8.52.0",
-        "eslint-plugin-bot-whatsapp": "latest"
+        "eslint-plugin-bot-whatsapp": "latest",
+        "jest": "^29.0.0"
+    },
+    "scripts": {
+        "prestart": "npx eslint . --no-ignore",
+        "pre-copy": "cd .. && npm run  copy.lib base-baileys-json",
+        "start": "node app.js",
+        "test": "jest --runInBand"
     },
     "author": "",
     "license": "ISC"
