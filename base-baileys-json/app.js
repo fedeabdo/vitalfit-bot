@@ -2,307 +2,27 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const { createBot, createProvider, createFlow, addKeyword } = require('@bot-whatsapp/bot')
+const { createBot, createProvider, createFlow } = require('@builderbot/bot')
+// Use the project's db re-export (src/db) which already falls back to MemoryDB
+const { adapterDB } = require('./src/db');
+// NOTE: We import the BaileysProvider dynamically inside `main()` with `import()` to
+// avoid ESM/CommonJS interop issues during tests. In production this will load the
+// real provider package (@builderbot/provider-baileys).
+// Use the shared api client factory in src/utils so token state is centralized
+const { createApiClient, fetchAuthToken } = require('./src/utils/apiClient');
+// Load helpers, normalizers and the flows factory from src
+const { normalizeSenderNumber } = require('./src/utils/normalize');
+const { withRateLimitAndRedirect } = require('./src/middleware/forwarder');
+const { createFlows } = require('./src/flows');
 
-const QRPortalWeb = require('@bot-whatsapp/portal')
-const BaileysProvider = require('@bot-whatsapp/provider/baileys')
-const JsonFileAdapter = require('@bot-whatsapp/database/json')
+
+const apiClient = createApiClient({ baseUrl: process.env.BASE_URL, username: process.env.USERNAME2, password: process.env.PASSWORD });
 
 
-const jwt = require('jsonwebtoken');
-const axios = require('axios');
 
-let authToken = null;
-let tokenExpiry = null;
 
-const fetchAuthToken = async () => {
-    try {
-        console.log('🔄 Fetching new token at: ' + `${process.env.BASE_URL}/login`);
-        const response = await axios.post(`${process.env.BASE_URL}/login`, {
-            username: process.env.USERNAME,
-            password: process.env.PASSWORD,
-        });
-        authToken = response.data.token;
-        const decodedToken = jwt.decode(authToken);
-        tokenExpiry = decodedToken.exp * 1000; 
-        console.log('✅ Token fetched successfully');
-    } catch (error) {
-        console.error('❌ Error fetching token:', error.message);
-    }
-};
+const PORT = process.env.PORT ?? 3008;
 
-const refreshAuthTokenIfNeeded = async () => {
-    const now = Date.now();
-    if (!authToken || !tokenExpiry || now >= tokenExpiry - 60000) { 
-        console.log('🔄 Refreshing token...');
-        await fetchAuthToken();
-    }
-};
-
-const apiClient = axios.create();
-apiClient.interceptors.request.use(async (config) => {
-    await refreshAuthTokenIfNeeded();
-    if (authToken) {
-        config.headers.Authorization = `Bearer ${authToken}`;
-    }
-    return config;
-}, (error) => {
-    return Promise.reject(error);
-});
-
-// flowHola will be defined after handlers so handlerHola is available
-
-// Extracted handlers so tests can call them directly
-const handlerHola = async (ctx, { flowDynamic }) => {
-    // greeting handled by static addAnswer; no dynamic follow-up required
-};
-
-const handlerAyuda = async (ctx, { flowDynamic }) => {
-    // help text is served as the static answer; no dynamic follow-up
-};
-
-const handlerHorarios = async (ctx, { flowDynamic }) => {
-    try {
-        const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
-        const { dia, horarios } = response.data;
-        let horariosMsg = '';
-        if (Array.isArray(horarios) && horarios.length > 0) {
-            horariosMsg = horarios
-                .map(({ hora, disponible, lugaresDisponibles }) =>
-                    `🕒 - ${hora}: ${disponible ? '✅ ' + `${lugaresDisponibles} lugar${lugaresDisponibles === 1 ? '' : 'es'}` : '❌ No disponible'} `
-                )
-                .join('\n');
-        } else {
-            horariosMsg = 'No hay horarios disponibles.';
-        }
-        let header = `Los horarios disponibles para ${dia || 'Desconocido'} son: \n`;
-        await flowDynamic(header + horariosMsg);
-    } catch (error) {
-        console.log(error);
-        const errorMessage = extractErrorMessage(error);
-        await flowDynamic(errorMessage);
-    }
-};
-
-const handlerConsulta = async (ctx, { flowDynamic }) => {
-    const userMessage = ctx.body;
-
-    const validationError = validateConsultaMessage(userMessage);
-    if (validationError) {
-        await flowDynamic(validationError);
-        return;
-    }
-
-    const match = userMessage.match(/^consulta\s+(\d{6,})$/i);
-    if (!match) {
-        await flowDynamic('Mensaje incompleto. Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678');
-        return;
-    }
-
-    const [, cedula] = match;
-    if (!cedula) {
-        await flowDynamic('Mensaje incompleto. Escribí CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.\nEjemplo: CONSULTA 12345678');
-        return;
-    }
-
-    try {
-        const response = await apiClient.get(`${process.env.BASE_URL}/reservas/consulta/${cedula}`);
-        if (response.data && response.data.hora) {
-            await flowDynamic(`✅ Tienes una reserva registrada para el horario: ${response.data.hora}.`);
-        } else if (response.data && response.data.message) {
-            await flowDynamic(response.data.message);
-        } else {
-            await flowDynamic('No se encontró una reserva para esa cédula.');
-        }
-    } catch (error) {
-        console.log(error);
-        const errorMessage = extractErrorMessage(error);
-        await flowDynamic(errorMessage);
-    }
-};
-
-const handlerReserva = async (ctx, { flowDynamic }) => {
-    const userMessage = ctx.body;
-
-    const validationError = validateReservaMessage(userMessage);
-    if (validationError) {
-        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678`);
-        return;
-    }
-
-    const match = userMessage.match(/reserva\s+(\d{1,2}:\d{2})\s+(\d+)/i);
-    if (!match) {
-        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678`);
-        return;
-    }
-
-    const [_, hora, cedula] = match;
-    if (!hora || !cedula) {
-        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: RESERVA 20:30 12345678`);
-        return;
-    }
-
-    try {
-        const response = await apiClient.post(`${process.env.BASE_URL}/reservas`, { "hora": hora, "cedula": cedula });
-        await flowDynamic(`✅ Reserva procesada para las ${hora}. Cédula: ${cedula}. Confirmada! 💪🏽`);
-    } catch (error) {
-        console.log(error);
-        const errorMessage = extractErrorMessage(error);
-        await flowDynamic(errorMessage);
-        if (
-            errorMessage.includes('Este horario ya está lleno') ||
-            (errorMessage.includes('El horario') && errorMessage.includes('ya está lleno')) ||
-            (errorMessage.includes('Horario de reserva inválido')) ||
-            (errorMessage.includes('El horario de reserva es inválido'))
-        ) {
-            await horarioInvalidoFlowMessage(flowDynamic);
-        }
-    }
-};
-
-const handlerCambio = async (ctx, { flowDynamic }) => {
-    const userMessage = ctx.body;
-
-    const validationError = validateReservaMessage(userMessage);
-    if (validationError) {
-        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: CAMBIO 20:30 12345678`);
-        return;
-    }
-
-    const match = userMessage.match(/cambio\s+(\d{1,2}:\d{2})\s+(\d+)/i);
-    if (!match) {
-        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: CAMBIO 20:30 12345678`);
-        return;
-    }
-
-    const [_, hora, cedula] = match;
-    if (!hora || !cedula) {
-        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).\nEjemplo: CAMBIO 20:30 12345678`);
-        return;
-    }
-
-    try {
-        const response = await apiClient.put(`${process.env.BASE_URL}/reservas`, { "hora": hora, "cedula": cedula });
-        await flowDynamic(`✅ Cambio procesado para las ${hora}. Cédula: ${cedula}. Confirmado 💪🏽`);
-    } catch (error) {
-        const errorMessage = extractErrorMessage(error);
-        if (errorMessage === 'Borrado rechazado') {
-            await flowDynamic(`La clase ya comenzó, y no es posible cambiar una vez iniciada.\nPara que otra persona pueda aprovechar el lugar, las modificaciones tratemos de hacerlas con al menos 30 minutos de anticipación 🙏🏼`);
-            return;
-        }
-        await flowDynamic(errorMessage);
-        console.log(errorMessage);
-        if (
-            (errorMessage.includes('Este horario ya está lleno')) ||
-            (errorMessage.includes('El horario') && errorMessage.includes('ya está lleno')) ||
-            (errorMessage.includes('Horario de reserva inválido')) ||
-            (errorMessage.includes('El horario de reserva es inválido'))
-        ) {
-            await horarioInvalidoFlowMessage(flowDynamic);
-        }
-    }
-};
-
-const handlerBorrar = async (ctx, { flowDynamic }) =>  {
-    const userMessage = ctx.body;
-
-    const validationError = validateDeleteCedulaMessage(userMessage);
-    if (validationError) {
-        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).\nEjemplo: BORRAR 12345678`);
-        return;
-    }
-
-    const match = userMessage.match(/^borrar\s+(\d{6,})$/i);
-    if (!match) {
-        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).\nEjemplo: BORRAR 12345678`);
-        return;
-    }
-
-    const [, cedula] = match;
-    if (!cedula) {
-        await flowDynamic(`❌ El mensaje no tiene el formato esperado. Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).\nEjemplo: BORRAR 12345678`);
-        return;
-    }
-
-    try {
-        const response = await apiClient.delete(`${process.env.BASE_URL}/reservas`, { data: { cedula } });
-        await flowDynamic(`✅ Borrado procesado para la cédula: ${cedula}. Confirmado 😔`);
-    } catch (error) {
-        console.log(error);
-        const errorMessage = extractErrorMessage(error);
-
-        if (errorMessage === 'Borrado rechazado') {
-            await flowDynamic(`La clase ya comenzó, y no es posible cancelar una vez iniciada.\nPara que otra persona pueda aprovechar el lugar, las cancelaciones tratemos de hacerlas con al menos 30 minutos de anticipación 🙏🏼`);
-            return;
-        }
-        await flowDynamic(errorMessage);
-    }
-};
-
-const handlerGenerico = async (ctx, { flowDynamic, provider }) => {
-    // static generic answer is provided by addAnswer; no dynamic follow-up
-};
-
-// Define flows using the extracted handlers
-const flowHola = addKeyword(['HOLA', 'Hola', 'hola'])
-    .addAnswer(`🙌 Hola! Mi nombre es Horacio 🕛. Enviando mensajes a este número puedes hacer una reserva, borrar una reserva o cambiar una reserva. Para más información envía la palabra: AYUDA`, null, withRateLimitAndRedirect(handlerHola));
-
-const flowAyuda = addKeyword(['AYUDA', 'ayuda'])
-    .addAnswer(`🕙 RESERVA
-Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).
-Ejemplo: RESERVA 20:30 12345678
-
-🔁 CAMBIO DE RESERVA
-Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).
-Ejemplo: CAMBIO 20:30 12345678
-
-❌ BORRAR RESERVA
-Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).
-Ejemplo: BORRAR 12345678
-
-📋 HORARIOS
-Escribe HORARIOS para ver la disponibilidad de los horarios del día.
-
-❓ CONSULTA
-Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.
-Ejemplo: CONSULTA 12345678`, null, withRateLimitAndRedirect(handlerAyuda));
-
-const flowHorarios = addKeyword(['HORARIOS', 'horarios', 'Horarios'])
-    .addAnswer(`Verificando horarios...`, null, withRateLimitAndRedirect(handlerHorarios));
-
-const flowConsulta = addKeyword(['CONSULTA', 'consulta', 'Consulta'])
-    .addAnswer('Estamos procesando tu consulta ⏳', null, withRateLimitAndRedirect(handlerConsulta));
-
-const flowReserva = addKeyword(['RESERVA', 'reserva', 'Reserva'])
-    .addAnswer('Estamos procesando tu reserva ⏳', null, withRateLimitAndRedirect(handlerReserva));
-
-const flowCambio = addKeyword(['CAMBIO', 'Cambio'])
-    .addAnswer('Estamos procesando tu cambio de reserva ⏳', null, withRateLimitAndRedirect(handlerCambio));
-
-const flowBorrar = addKeyword(['BORRAR', 'borrar', 'Borrar'])
-    .addAnswer('Estamos procesando tu borrado 😔', null, withRateLimitAndRedirect(handlerBorrar));
-
-const flowGenerico = addKeyword(['.*'])
-    .addAnswer(`😬 No es posible procesar tu mensaje. Prueba con alguno de los siguientes:
-
-🕙 RESERVA
-Escribe RESERVA seguido del horario (formato 24 horas) y tu cédula (sin puntos ni guiones).
-Ejemplo: RESERVA 20:30 12345678
-
-🔁 CAMBIO DE RESERVA
-Escribe CAMBIO seguido del horario al que quieres cambiar (formato 24 horas) y tu cédula (sin puntos ni guiones).
-Ejemplo: CAMBIO 20:30 12345678
-
-❌ BORRAR RESERVA
-Escribe BORRAR seguido de tu cédula (sin puntos ni guiones).
-Ejemplo: BORRAR 12345678
-
-📋 HORARIOS
-Escribe HORARIOS para ver la disponibilidad de los horarios del día.
-
-❓ CONSULTA
-Escribe CONSULTA seguido de tu cédula (sin puntos ni guiones) para ver si ya tienes una reserva.
-Ejemplo: CONSULTA 12345678 `, null, withRateLimitAndRedirect(handlerGenerico));
 
 const validateDeleteCedulaMessage = (message) => {
     if (!message || message.trim() === '') {
@@ -361,84 +81,133 @@ const extractErrorMessage = (error) => {
 
 
 
-// Utility to normalize sender numbers and handle hardcoded redirect
-function normalizeSenderNumber(senderJid) {
-    let number = senderJid.split('@')[0];
-    return number;
-}
-
-function withRateLimitAndRedirect(handler) {
-    return async (ctx, tools) => {
-        const userId = normalizeSenderNumber(ctx.from);
-
-        // Arreglo para el número de reenvío Antonela
-        const forwardNumber = '59899285083@c.us';
-        const originalFlowDynamic = tools.flowDynamic;
-        const flowDynamicWithForward = async (msg) => {
-            await originalFlowDynamic(msg);
-            // Forward to 2950692905165
-            if (userId === '2950692905165') {
-                let forwardMsg = msg;
-                if (Array.isArray(forwardMsg)) forwardMsg = forwardMsg.join('\n');
-                if (typeof forwardMsg !== 'string') forwardMsg = String(forwardMsg);
-                await tools.provider.sendText(forwardNumber, `${forwardMsg}`);
-            }
-        };
-
-        await handler(ctx, { ...tools, flowDynamic: flowDynamicWithForward });
-    };
-}
-
-
-async function horarioInvalidoFlowMessage(flowDynamic) {
-    try {
-        const response = await apiClient.get(`${process.env.BASE_URL}/horariosHoy`);
-        const { dia, horarios } = response.data;
-        let horariosMsg = '';
-        if (Array.isArray(horarios) && horarios.length > 0) {
-            horariosMsg = horarios
-                .map(({ hora, disponible, lugaresDisponibles }) =>
-                    `🕒 - ${hora}: ${disponible ? '✅ ' + `${lugaresDisponibles} lugar${lugaresDisponibles === 1 ? '' : 'es'}` : '❌ No disponible'} `
-                )
-                .join('\n');
-        } else {
-            horariosMsg = 'No hay horarios disponibles.';
-        }
-        let header = `Los horarios disponibles para ${dia || 'Desconocido'} son: \n`;
-        await flowDynamic(header + horariosMsg);
-    } catch (error) {
-        console.log(error);
-        const errorMessage = extractErrorMessage(error);
-        await flowDynamic(errorMessage);
-    }
-    return;
-}
+// (forwarding, normalization and flow helpers live in src/* now)
 
 const main = async () => {
-    const adapterDB = new JsonFileAdapter();
-    const adapterFlow = createFlow([
-        flowHola,
-        flowConsulta,
-        flowAyuda,
-        flowHorarios,
-        flowReserva,
-        flowCambio,
-        flowBorrar,
-        flowGenerico
-    ]);
+    const adapterDBInstance = adapterDB;
+
+    // Build flows, injecting apiClient and a tiny config object so handlers can
+    // make requests and read BASE_URL without depending on globals.
+    const flows = createFlows({ apiClient, config: { BASE_URL: process.env.BASE_URL } });
+    const adapterFlow = createFlow(flows);
+
+    // Dynamically import BaileysProvider to avoid loading ESM-only modules during tests.
+    const { BaileysProvider } = await import('@builderbot/provider-baileys').then(m => m.default ? m.default : m);
     const adapterProvider = createProvider(BaileysProvider, {
         pathSession: './bot_sessions',
     });
 
-    createBot({
+    const botResult = await createBot({
         flow: adapterFlow,
         provider: adapterProvider,
-        database: adapterDB,
+        database: adapterDBInstance
     });
-    QRPortalWeb();
+
+    // Defensive handling: different versions of createBot may return different
+    // shapes. Log the returned value and attempt to start any http server the
+    // library returns. This helps diagnose why the HTTP port might not be
+    // accepting connections.
+    try {
+        console.log('DEBUG: createBot returned:', botResult && typeof botResult === 'object' ? Object.keys(botResult) : typeof botResult);
+    } catch (e) { /* ignore */ }
+
+    const startPort = Number(PORT || 3008);
+
+    // Helper to log a server instance's bound address when possible
+    const logServerAddress = (maybeServer, fallbackPort) => {
+        try {
+            if (maybeServer && typeof maybeServer.address === 'function') {
+                const addr = maybeServer.address();
+                if (addr) {
+                    console.log(`✅ HTTP server listening on ${addr.address || '0.0.0.0'}:${addr.port || fallbackPort}`);
+                    return;
+                }
+            }
+        } catch (e) {
+            // ignore
+        }
+        console.log(`✅ HTTP server listening (port ${fallbackPort})`);
+    };
+
+    // Try binding the server across consecutive ports when the preferred
+    // port is already in use. startFn should be a function taking
+    // (port, host) and returning the server or throwing an error.
+    const tryPorts = async (startFn, initialPort, maxAttempts = 5) => {
+        let port = Number(initialPort || 3008);
+        for (let i = 0; i < maxAttempts; i++) {
+            try {
+                const maybe = await Promise.resolve(startFn(port, '0.0.0.0'));
+                logServerAddress(maybe, port);
+                return { port, maybe };
+            } catch (err) {
+                const code = err && (err.code || err.errno || (err.message && err.message.code));
+                if (err && (err.code === 'EADDRINUSE' || (typeof err.message === 'string' && err.message.includes('EADDRINUSE')))) {
+                    console.warn(`WARN: Port ${port} in use, trying ${port + 1}`);
+                    port = port + 1;
+                    continue;
+                }
+                // If it's a different error, rethrow.
+                throw err;
+            }
+        }
+        throw new Error(`Failed to bind to a port after ${maxAttempts} attempts starting at ${initialPort}`);
+    };
+
+    // If the library returned an object with httpServer
+    if (botResult && typeof botResult === 'object') {
+        // If httpServer is a function (some libs return a function to start)
+        if (typeof botResult.httpServer === 'function') {
+            console.log('DEBUG: calling botResult.httpServer(port, host) -> trying 0.0.0.0 (will retry on EADDRINUSE)');
+            try {
+                await tryPorts((p, h) => botResult.httpServer(p, h), startPort);
+            } catch (e) {
+                console.error('ERROR starting botResult.httpServer:', e && e.message);
+            }
+        } else if (botResult.httpServer && typeof botResult.httpServer.listen === 'function') {
+            console.log('DEBUG: calling botResult.httpServer.listen(port, host) -> trying 0.0.0.0 (will retry on EADDRINUSE)');
+            try {
+                await tryPorts((p, h) => botResult.httpServer.listen(p, h), startPort);
+            } catch (e) {
+                console.error('ERROR starting botResult.httpServer.listen:', e && e.message);
+            }
+        } else if (typeof botResult.listen === 'function') {
+            console.log('DEBUG: calling botResult.listen(port, host) -> trying 0.0.0.0 (will retry on EADDRINUSE)');
+            try {
+                await tryPorts((p, h) => botResult.listen(p, h), startPort);
+            } catch (e) {
+                console.error('ERROR starting botResult.listen:', e && e.message);
+            }
+        } else if (typeof botResult === 'function') {
+            // Some implementations return a function you call with (port)
+            console.log('DEBUG: calling createBot() result as function(port, host) -> trying 0.0.0.0 (will retry on EADDRINUSE)');
+            try {
+                await tryPorts((p, h) => botResult(p, h), startPort);
+            } catch (e) {
+                console.error('ERROR calling botResult as function:', e && e.message);
+            }
+        } else {
+            console.log('DEBUG: createBot returned object but no httpServer/listen function found; keys:', Object.keys(botResult));
+        }
+    } else if (typeof botResult === 'function') {
+        // if it returned a function directly
+        console.log('DEBUG: createBot returned a function, calling with port');
+        try { const maybe = botResult(startPort); logServerAddress(maybe, startPort); } catch (e) { console.error('ERROR calling createBot result:', e && e.message); }
+    } else {
+        console.log('DEBUG: createBot returned nothing useful; ensure the library starts any HTTP server itself.');
+    }
 };
 
 // Export helpers for tests
+// Re-export for compatibility with existing tests which import from the package
+const { handlerHola } = require('./src/flows/handlers/hola');
+const { handlerAyuda } = require('./src/flows/handlers/ayuda');
+const { handlerHorarios } = require('./src/flows/handlers/horarios');
+const { handlerConsulta } = require('./src/flows/handlers/consulta');
+const { handlerReserva } = require('./src/flows/handlers/reserva');
+const { handlerCambio } = require('./src/flows/handlers/cambio');
+const { handlerBorrar } = require('./src/flows/handlers/borrar');
+const { handlerGenerico } = require('./src/flows/handlers/generico');
+
 module.exports = {
     normalizeSenderNumber,
     withRateLimitAndRedirect,
@@ -459,7 +228,10 @@ module.exports = {
 // If this file is executed directly, start the bot. When required (tests), do not auto-start.
 if (require.main === module) {
     // Fetch the initial token when the bot starts
-    fetchAuthToken().catch((err) => {
+    // Pass the environment values to the auth helper so it can build the
+    // correct login URL and credentials. createApiClient already received the
+    // same values above.
+    fetchAuthToken(process.env.BASE_URL, process.env.USERNAME2, process.env.PASSWORD).catch((err) => {
         console.error('❌ Unhandled error in fetchAuthToken:', err);
     });
 
