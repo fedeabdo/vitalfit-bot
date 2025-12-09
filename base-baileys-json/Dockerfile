@@ -1,6 +1,9 @@
 # Use the official Node.js image as the base image
 FROM node:24.11.1-alpine
 
+# Install git (required for some npm packages)
+RUN apk add --no-cache git
+
 # Set the working directory inside the container
 WORKDIR /usr/src/app
 
