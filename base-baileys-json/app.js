@@ -259,6 +259,30 @@ const main = async () => {
         console.warn('WARN: provider deep-inspect failed:', e && e.message);
     }
 
+    // Attach generic instrumentation to emitters so we capture runtime events
+    try {
+        const maybeEmitter = botResult && (botResult.emitter || (botResult.provider && botResult.provider.emitter));
+        if (maybeEmitter && typeof maybeEmitter.emit === 'function') {
+            const origEmit = maybeEmitter.emit.bind(maybeEmitter);
+            maybeEmitter.emit = function (ev, ...args) {
+                try {
+                    console.log('EVENT EMIT:', ev, (args && args.length) ? args.map(a => (typeof a === 'object' ? (a && a.constructor ? a.constructor.name : typeof a) : typeof a)) : 'no-args');
+                } catch (e) {}
+                return origEmit(ev, ...args);
+            };
+            // also hook 'on' to log listener additions
+            if (typeof maybeEmitter.on === 'function') {
+                const origOn = maybeEmitter.on.bind(maybeEmitter);
+                maybeEmitter.on = function (ev, fn) {
+                    console.log('EVENT LISTEN:', ev);
+                    return origOn(ev, fn);
+                };
+            }
+        }
+    } catch (e) {
+        console.warn('WARN: emitter instrumentation failed:', e && e.message);
+    }
+
     // Inspect provider saveCreds* helpers (read-only diagnostics)
     try {
         const scNames = Object.keys(botResult.provider).filter(k => /saveCreds/i.test(k) || /saveCredsGlobal/i.test(k) || /saveCreds/i.test(k));
