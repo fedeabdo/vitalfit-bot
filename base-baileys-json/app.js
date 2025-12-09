@@ -2,6 +2,32 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+// Instrument console.error and process-level errors to capture stack traces
+// for unexpected error logs (helps locate origin of 'ERROR AUTH' messages).
+(() => {
+    const origErr = console.error.bind(console);
+    console.error = (...args) => {
+        try {
+            const stack = new Error().stack.split('\n').slice(2,8).map(s => s.trim()).join(' | ');
+            origErr('DEBUG_CONSOLE_ERROR_CALLER_STACK:', stack);
+            origErr.apply(console, args);
+        } catch (e) {
+            origErr('DEBUG_CONSOLE_ERROR_WRAPPER_FAIL', e && e.message);
+            origErr.apply(console, args);
+        }
+    };
+
+    process.on('uncaughtException', (err) => {
+        origErr('UNCAUGHT_EXCEPTION:', err && (err.stack || err));
+        // rethrow to keep default behavior
+        throw err;
+    });
+
+    process.on('unhandledRejection', (reason) => {
+        origErr('UNHANDLED_REJECTION:', reason && (reason.stack || reason));
+    });
+})();
+
 const { createBot, createProvider, createFlow } = require('@builderbot/bot')
 // Use the project's db re-export (src/db) which already falls back to MemoryDB
 const { adapterDB } = require('./src/db');
