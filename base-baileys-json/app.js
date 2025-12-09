@@ -189,6 +189,30 @@ const main = async () => {
     const flows = createFlows({ apiClient, config: { BASE_URL: process.env.BASE_URL } });
     const adapterFlow = createFlow(flows);
 
+    // Protect against provider installing an uncaughtException handler that
+    // force-exits the process. We override `process.on` briefly so any
+    // 'uncaughtException' listener registered by the provider is wrapped to
+    // suppress `process.exit` while it runs. This avoids editing files in
+    // `node_modules` and is safe to commit.
+    const _origProcessOn = process.on.bind(process);
+    const _wrappedListeners = [];
+    process.on = function (event, listener) {
+        if (event === 'uncaughtException' && typeof listener === 'function') {
+            const wrapped = function (err) {
+                const _origExit = process.exit;
+                try {
+                    process.exit = function (code) { console.log('DEBUG_SUPPRESSED_EXIT during provider uncaughtException:', code); };
+                    return listener(err);
+                } finally {
+                    try { process.exit = _origExit; } catch (e) { /* ignore */ }
+                }
+            };
+            _wrappedListeners.push({ orig: listener, wrapped });
+            return _origProcessOn(event, wrapped);
+        }
+        return _origProcessOn(event, listener);
+    };
+
     // Dynamically import BaileysProvider to avoid loading ESM-only modules during tests.
     const { BaileysProvider } = await import('@builderbot/provider-baileys').then(m => m.default ? m.default : m);
 
@@ -258,6 +282,12 @@ const main = async () => {
         // pass our shim as `auth` to the provider (best-effort; provider may ignore)
         auth: fileAuth
     });
+
+    // Restore original process.on now that the provider has registered its
+    // listeners (we intercepted and wrapped uncaughtException handlers).
+    try {
+        process.on = _origProcessOn;
+    } catch (e) { /* ignore */ }
 
     // Diagnostic: inspect adapterProvider shape
     try {
