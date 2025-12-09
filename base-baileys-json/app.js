@@ -97,11 +97,74 @@ const main = async () => {
         pathSession: './bot_sessions',
     });
 
-    const botResult = await createBot({
-        flow: adapterFlow,
-        provider: adapterProvider,
-        database: adapterDBInstance
-    });
+    // Diagnostic: print bot_sessions folder contents and attempt to read
+    // critical LID-related files so we can see whether files are present
+    // and contain valid JSON. This helps debug the 'Auth state missing'
+    // messages seen in logs.
+    try {
+        const fs = require('fs');
+        const sessionDir = require('path').resolve('./bot_sessions');
+        console.log('DEBUG: sessionDir ->', sessionDir);
+        if (fs.existsSync(sessionDir)) {
+            const files = fs.readdirSync(sessionDir);
+            console.log('DEBUG: bot_sessions files:', files);
+            const wanted = files.filter(f => /lid-mapping|device-index|creds|session-/.test(f));
+            for (const fname of wanted) {
+                try {
+                    const full = require('path').join(sessionDir, fname);
+                    const stat = fs.statSync(full);
+                    console.log(`DEBUG: ${fname} size=${stat.size} updated=${stat.mtime.toISOString()}`);
+                    // Try to parse small JSONs for diagnostic info (limit to 200KB)
+                    if (stat.size < 200 * 1024) {
+                        const txt = fs.readFileSync(full, 'utf8');
+                        try {
+                            const parsed = JSON.parse(txt);
+                            console.log(`DEBUG: ${fname} keys:`, Object.keys(parsed).slice(0,10));
+                        } catch (e) {
+                            console.warn(`WARN: ${fname} JSON parse failed:`, e && e.message);
+                        }
+                    } else {
+                        console.log(`DEBUG: ${fname} too large to print`);
+                    }
+                } catch (e) {
+                    console.warn('WARN: reading session file', fname, e && e.message);
+                }
+            }
+        } else {
+            console.warn('WARN: sessionDir does not exist:', sessionDir);
+        }
+    } catch (e) {
+        console.warn('WARN: session diagnostics failure:', e && e.message);
+    }
+
+    // Diagnostic: inspect provider auth object if exposed
+    try {
+        const authCandidate = adapterProvider && (adapterProvider.authState || adapterProvider.auth || adapterProvider.authStateProvider || adapterProvider.provider && adapterProvider.provider.authState);
+        console.log('DEBUG: adapterProvider authCandidate type:', typeof authCandidate);
+        if (authCandidate && typeof authCandidate === 'object') {
+            console.log('DEBUG: adapterProvider authCandidate keys:', Object.keys(authCandidate));
+            if (typeof authCandidate.get === 'function') console.log('DEBUG: auth.get exists');
+            if (typeof authCandidate.set === 'function') console.log('DEBUG: auth.set exists');
+            if (typeof authCandidate.multiFile === 'function') console.log('DEBUG: auth.multiFile exists');
+        }
+    } catch (e) {
+        console.warn('WARN: cannot inspect adapterProvider authCandidate:', e && e.message);
+    }
+
+    let botResult;
+    try {
+        botResult = await createBot({
+            flow: adapterFlow,
+            provider: adapterProvider,
+            database: adapterDBInstance
+        });
+    } catch (err) {
+        // Log full error with stack where available to help diagnose auth issues
+        console.error('❌ createBot failed:', err && (err.stack || err.message || err));
+        // If the error has nested properties, print them too
+        try { console.error('ERROR details:', JSON.stringify(err, Object.getOwnPropertyNames(err), 2)); } catch (e) {}
+        throw err;
+    }
 
     // Defensive handling: different versions of createBot may return different
     // shapes. Log the returned value and attempt to start any http server the
