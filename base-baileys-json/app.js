@@ -334,6 +334,45 @@ const main = async () => {
         console.warn('WARN: saveCreds inspect failed:', e && e.message);
     }
 
+    // Instrument provider save functions (best-effort): replace any function
+    // on saveCreds-like objects with a wrapper that logs a caller stack and
+    // argument summary before calling the original. This helps capture which
+    // module is emitting the undefined "ERROR AUTH" payload.
+    try {
+        const wrapSaveHelper = (obj, name) => {
+            if (!obj || typeof obj !== 'object') return;
+            const props = Object.getOwnPropertyNames(obj);
+            for (const k of props) {
+                try {
+                    if (typeof obj[k] === 'function') {
+                        const orig = obj[k].bind(obj);
+                        obj[k] = function wrappedSave(...args) {
+                            try {
+                                const stack = new Error().stack.split('\n').slice(2,8).map(s => s.trim()).join(' | ');
+                                console.log(`DEBUG_SAVE_WRAPPER: provider.${name}.${k} called, args:`, args && args.length ? args.map(a => (a === undefined ? 'undefined' : (typeof a))) : 'no-args');
+                                console.log('DEBUG_SAVE_WRAPPER_STACK:', stack);
+                            } catch (e) { console.warn('WARN: save wrapper logging failed', e && e.message); }
+                            return orig(...args);
+                        };
+                    }
+                } catch (e) {}
+            }
+        };
+
+        const scNames2 = Object.keys(botResult && botResult.provider || {}).filter(k => /saveCreds/i.test(k) || /saveCredsGlobal/i.test(k));
+        for (const name of scNames2) {
+            try {
+                wrapSaveHelper(botResult.provider[name], name);
+                // also wrap nested provider shapes
+                if (botResult.provider[name] && botResult.provider[name].provider) wrapSaveHelper(botResult.provider[name].provider, `${name}.provider`);
+            } catch (e) {
+                console.warn('WARN: failed to wrap provider save helper', name, e && e.message);
+            }
+        }
+    } catch (e) {
+        console.warn('WARN: saveCreds wrapper injection failed:', e && e.message);
+    }
+
     // Test our fileAuth shim reads creds
     try {
         const creds = await fileAuth.get('creds');
