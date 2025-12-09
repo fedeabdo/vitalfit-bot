@@ -269,6 +269,8 @@ const main = async () => {
                 console.log(`DEBUG: provider.${name} typeof ->`, typeof obj);
                 if (obj && typeof obj === 'object') {
                     try { console.log(`DEBUG: provider.${name} keys ->`, Object.keys(obj)); } catch (e) {}
+                    try { console.log(`DEBUG: provider.${name} ownProps ->`, Object.getOwnPropertyNames(obj)); } catch (e) {}
+                    try { console.log(`DEBUG: provider.${name} proto ->`, Object.getOwnPropertyNames(Object.getPrototypeOf(obj) || {})); } catch (e) {}
                     const candidateMethods = ['get','set','read','write','load','save','getItem','setItem'];
                     for (const m of candidateMethods) {
                         if (typeof obj[m] === 'function') console.log(`DEBUG: provider.${name}.${m} => function`);
@@ -280,6 +282,14 @@ const main = async () => {
         }
     } catch (e) {
         console.warn('WARN: saveCreds inspect failed:', e && e.message);
+    }
+
+    // Test our fileAuth shim reads creds
+    try {
+        const creds = await fileAuth.get('creds');
+        console.log('DEBUG: fileAuth.get("creds") ->', creds ? Object.keys(creds).slice(0,10) : null);
+    } catch (e) {
+        console.warn('WARN: fileAuth.get("creds") failed:', e && e.message);
     }
 
     // Defensive handling: different versions of createBot may return different
