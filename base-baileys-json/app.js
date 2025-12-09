@@ -97,6 +97,17 @@ const main = async () => {
         pathSession: './bot_sessions',
     });
 
+    // Diagnostic: inspect adapterProvider shape
+    try {
+        console.log('DEBUG: adapterProvider type:', typeof adapterProvider);
+        if (adapterProvider && typeof adapterProvider === 'object') {
+            try { console.log('DEBUG: adapterProvider keys:', Object.keys(adapterProvider)); } catch (e) {}
+        }
+        if (adapterProvider && adapterProvider.provider) {
+            try { console.log('DEBUG: adapterProvider.provider keys:', Object.keys(adapterProvider.provider)); } catch (e) {}
+        }
+    } catch (e) { /* ignore */ }
+
     // Diagnostic: print bot_sessions folder contents and attempt to read
     // critical LID-related files so we can see whether files are present
     // and contain valid JSON. This helps debug the 'Auth state missing'
