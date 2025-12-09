@@ -195,6 +195,29 @@ const main = async () => {
         console.warn('WARN: provider deep-inspect failed:', e && e.message);
     }
 
+    // Inspect provider saveCreds* helpers (read-only diagnostics)
+    try {
+        const scNames = Object.keys(botResult.provider).filter(k => /saveCreds/i.test(k) || /saveCredsGlobal/i.test(k) || /saveCreds/i.test(k));
+        console.log('DEBUG: detected saveCreds-like properties on provider:', scNames);
+        for (const name of scNames) {
+            try {
+                const obj = botResult.provider[name];
+                console.log(`DEBUG: provider.${name} typeof ->`, typeof obj);
+                if (obj && typeof obj === 'object') {
+                    try { console.log(`DEBUG: provider.${name} keys ->`, Object.keys(obj)); } catch (e) {}
+                    const candidateMethods = ['get','set','read','write','load','save','getItem','setItem'];
+                    for (const m of candidateMethods) {
+                        if (typeof obj[m] === 'function') console.log(`DEBUG: provider.${name}.${m} => function`);
+                    }
+                }
+            } catch (e) {
+                console.warn('WARN: inspecting provider saveCreds property', name, e && e.message);
+            }
+        }
+    } catch (e) {
+        console.warn('WARN: saveCreds inspect failed:', e && e.message);
+    }
+
     // Defensive handling: different versions of createBot may return different
     // shapes. Log the returned value and attempt to start any http server the
     // library returns. This helps diagnose why the HTTP port might not be
