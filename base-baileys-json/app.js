@@ -93,8 +93,72 @@ const main = async () => {
 
     // Dynamically import BaileysProvider to avoid loading ESM-only modules during tests.
     const { BaileysProvider } = await import('@builderbot/provider-baileys').then(m => m.default ? m.default : m);
+
+    // Build a lightweight file-backed auth wrapper that exposes async get/set
+    // for common keys. This helps Baileys v7 detect LID support even if the
+    // provider doesn't expose the multi-file auth helper directly. It's a
+    // best-effort shim that reads/writes JSON files under `./bot_sessions`.
+    const fs = require('fs');
+    const path = require('path');
+    const sessionsDir = path.resolve('./bot_sessions');
+    const readJson = (p) => { try { return JSON.parse(fs.readFileSync(p,'utf8')); } catch (e) { return null; } };
+    const writeJson = (p, v) => { try { fs.writeFileSync(p, JSON.stringify(v, null, 2), 'utf8'); return true; } catch (e) { return false; } };
+
+    const fileAuth = {
+        get: async (key) => {
+            try {
+                // map common keys to files
+                if (key === 'creds' || key === 'creds.json') {
+                    return readJson(path.join(sessionsDir, 'creds.json'));
+                }
+                if (key === 'device-index' || key === 'device-index.json') {
+                    // attempt to read an explicit file, otherwise synthesize from lid mappings
+                    const p = path.join(sessionsDir, 'device-index.json');
+                    const v = readJson(p);
+                    if (v) return v;
+                    // synthesize minimal device-index from available lid-mapping files
+                    const files = fs.existsSync(sessionsDir) ? fs.readdirSync(sessionsDir) : [];
+                    const lids = files.filter(f => f.startsWith('lid-mapping-') && f.endsWith('.json'));
+                    const idx = {};
+                    lids.forEach((f, i) => { idx[i] = f.replace(/lid-mapping-(.*)\.json$/, '$1'); });
+                    return Object.keys(idx).length ? idx : null;
+                }
+                if (key === 'lid-mapping' || key === 'lid-mapping.json') {
+                    // merge available lid-mapping files
+                    const files = fs.existsSync(sessionsDir) ? fs.readdirSync(sessionsDir) : [];
+                    const lids = files.filter(f => f.startsWith('lid-mapping') && f.endsWith('.json'));
+                    const out = {};
+                    for (const f of lids) {
+                        const parsed = readJson(path.join(sessionsDir, f));
+                        if (parsed && typeof parsed === 'object') {
+                            Object.assign(out, parsed);
+                        }
+                    }
+                    return Object.keys(out).length ? out : null;
+                }
+                // fallback: try reading `${key}.json`
+                const fallback = readJson(path.join(sessionsDir, `${key}.json`));
+                if (fallback) return fallback;
+                return null;
+            } catch (e) {
+                return null;
+            }
+        },
+        set: async (key, value) => {
+            try {
+                if (!fs.existsSync(sessionsDir)) fs.mkdirSync(sessionsDir, { recursive: true });
+                if (key === 'creds' || key === 'creds.json') return writeJson(path.join(sessionsDir,'creds.json'), value);
+                if (key === 'device-index' || key === 'device-index.json') return writeJson(path.join(sessionsDir,'device-index.json'), value);
+                if (key === 'lid-mapping' || key === 'lid-mapping.json') return writeJson(path.join(sessionsDir,'lid-mapping.json'), value);
+                return writeJson(path.join(sessionsDir, `${key}.json`), value);
+            } catch (e) { return false; }
+        }
+    };
+
     const adapterProvider = createProvider(BaileysProvider, {
         pathSession: './bot_sessions',
+        // pass our shim as `auth` to the provider (best-effort; provider may ignore)
+        auth: fileAuth
     });
 
     // Diagnostic: inspect adapterProvider shape
