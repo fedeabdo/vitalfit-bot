@@ -1,6 +1,27 @@
 const dotenv = require('dotenv');
 
 dotenv.config();
+// Low-level capture: wrap process.stderr.write to catch any direct writes
+// (some libs write directly to stderr, bypassing console.error). If a
+// message contains our auth error marker, we log a stack and a short
+// snippet so we can trace the origin.
+try {
+    const origStderrWrite = process.stderr.write.bind(process.stderr);
+    process.stderr.write = function (...args) {
+        try {
+            const chunk = args[0];
+            const s = typeof chunk === 'string' ? chunk : (chunk && chunk.toString && chunk.toString(args[1]) || '');
+            if (s && (s.includes('⚡⚡ ERROR AUTH ⚡⚡') || s.includes('ERROR AUTH'))) {
+                const stack = new Error().stack.split('\n').slice(2,10).map(s => s.trim()).join(' | ');
+                console.log('DEBUG_STDERR_CAPTURE: matched stderr chunk ->', s.trim().slice(0,300));
+                console.log('DEBUG_STDERR_CAPTURE_STACK:', stack);
+            }
+        } catch (e) { /* ignore */ }
+        return origStderrWrite(...args);
+    };
+} catch (e) {
+    console.warn('WARN: failed to wrap process.stderr.write', e && e.message);
+}
 
 // Instrument console.error and process-level errors to capture stack traces
 // for unexpected error logs (helps locate origin of 'ERROR AUTH' messages).
