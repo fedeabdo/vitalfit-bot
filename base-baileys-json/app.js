@@ -274,6 +274,45 @@ const main = async () => {
                 if (key === 'lid-mapping' || key === 'lid-mapping.json') return writeJson(path.join(sessionsDir, 'lid-mapping.json'), value);
                 return writeJson(path.join(sessionsDir, `${key}.json`), value);
             } catch (e) { return false; }
+        },
+        multiFile: {
+            get: async (key) => {
+                try {
+                    const filePath = path.join(sessionsDir, `${key}.json`);
+                    return readJson(filePath);
+                } catch (e) {
+                    return null;
+                }
+            },
+            set: async (key, value) => {
+                try {
+                    if (!fs.existsSync(sessionsDir)) fs.mkdirSync(sessionsDir, { recursive: true });
+                    return writeJson(path.join(sessionsDir, `${key}.json`), value);
+                } catch (e) {
+                    return false;
+                }
+            },
+            remove: async (key) => {
+                try {
+                    const filePath = path.join(sessionsDir, `${key}.json`);
+                    if (fs.existsSync(filePath)) {
+                        fs.unlinkSync(filePath);
+                        return true;
+                    }
+                    return false;
+                } catch (e) {
+                    return false;
+                }
+            },
+            list: async () => {
+                try {
+                    if (!fs.existsSync(sessionsDir)) return [];
+                    const files = fs.readdirSync(sessionsDir);
+                    return files.filter(f => f.endsWith('.json')).map(f => f.replace('.json', ''));
+                } catch (e) {
+                    return [];
+                }
+            }
         }
     };
 
