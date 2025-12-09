@@ -12,9 +12,9 @@ try {
             const chunk = args[0];
             const s = typeof chunk === 'string' ? chunk : (chunk && chunk.toString && chunk.toString(args[1]) || '');
             if (s && (s.includes('⚡⚡ ERROR AUTH ⚡⚡') || s.includes('ERROR AUTH'))) {
-                const stack = new Error().stack.split('\n').slice(2,10).map(s => s.trim()).join(' | ');
-                console.log('DEBUG_STDERR_CAPTURE: matched stderr chunk ->', s.trim().slice(0,300));
-                console.log('DEBUG_STDERR_CAPTURE_STACK:', stack);
+                const stack = new Error().stack.split('\n').slice(2, 10).map(s => s.trim()).join(' | ');
+                origStderrWrite('DEBUG_STDERR_CAPTURE: matched stderr chunk -> ' + s.trim().slice(0, 300) + '\n');
+                origStderrWrite('DEBUG_STDERR_CAPTURE_STACK: ' + stack + '\n');
             }
         } catch (e) { /* ignore */ }
         return origStderrWrite(...args);
@@ -29,7 +29,7 @@ try {
     const origErr = console.error.bind(console);
     console.error = (...args) => {
         try {
-            const stack = new Error().stack.split('\n').slice(2,8).map(s => s.trim()).join(' | ');
+            const stack = new Error().stack.split('\n').slice(2, 8).map(s => s.trim()).join(' | ');
             origErr('DEBUG_CONSOLE_ERROR_CALLER_STACK:', stack);
             origErr.apply(console, args);
         } catch (e) {
@@ -59,8 +59,8 @@ try {
             const first = args && args[0];
             const asStr = typeof first === 'string' ? first : (first && first.toString && first.toString()) || '';
             if (asStr && (asStr.includes('⚡⚡ ERROR AUTH ⚡⚡') || asStr.includes('ERROR AUTH') || args.some(a => a === undefined))) {
-                const stack = new Error().stack.split('\n').slice(2,8).map(s => s.trim()).join(' | ');
-                origErr2('DEBUG_CONSOLE_LOG_CAPTURE:', asStr && asStr.slice(0,300));
+                const stack = new Error().stack.split('\n').slice(2, 8).map(s => s.trim()).join(' | ');
+                origErr2('DEBUG_CONSOLE_LOG_CAPTURE:', asStr && asStr.slice(0, 300));
                 origErr2('DEBUG_CONSOLE_LOG_CAPTURE_STACK:', stack);
             }
         } catch (e) { /* ignore */ }
@@ -76,9 +76,9 @@ try {
             const chunk = args[0];
             const s = typeof chunk === 'string' ? chunk : (chunk && chunk.toString && chunk.toString(args[1]) || '');
             if (s && (s.includes('⚡⚡ ERROR AUTH ⚡⚡') || s.includes('ERROR AUTH') || s.includes('undefined'))) {
-                const stack = new Error().stack.split('\n').slice(2,10).map(s => s.trim()).join(' | ');
-                console.log('DEBUG_STDOUT_CAPTURE: matched stdout chunk ->', s.trim().slice(0,300));
-                console.log('DEBUG_STDOUT_CAPTURE_STACK:', stack);
+                const stack = new Error().stack.split('\n').slice(2, 10).map(s => s.trim()).join(' | ');
+                origStdoutWrite('DEBUG_STDOUT_CAPTURE: matched stdout chunk -> ' + s.trim().slice(0, 300) + '\n');
+                origStdoutWrite('DEBUG_STDOUT_CAPTURE_STACK: ' + stack + '\n');
             }
         } catch (e) { /* ignore */ }
         return origStdoutWrite(...args);
@@ -92,7 +92,7 @@ try {
     const origExit = process.exit.bind(process);
     process.exit = function (code) {
         try {
-            const stack = new Error().stack.split('\n').slice(2,10).map(s => s.trim()).join(' | ');
+            const stack = new Error().stack.split('\n').slice(2, 10).map(s => s.trim()).join(' | ');
             console.log('DEBUG_PROCESS_EXIT called with code:', code);
             console.log('DEBUG_PROCESS_EXIT_STACK:', stack);
         } catch (e) { /* ignore */ }
@@ -223,7 +223,7 @@ const main = async () => {
     const fs = require('fs');
     const path = require('path');
     const sessionsDir = path.resolve('./bot_sessions');
-    const readJson = (p) => { try { return JSON.parse(fs.readFileSync(p,'utf8')); } catch (e) { return null; } };
+    const readJson = (p) => { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) { return null; } };
     const writeJson = (p, v) => { try { fs.writeFileSync(p, JSON.stringify(v, null, 2), 'utf8'); return true; } catch (e) { return false; } };
 
     const fileAuth = {
@@ -269,9 +269,9 @@ const main = async () => {
         set: async (key, value) => {
             try {
                 if (!fs.existsSync(sessionsDir)) fs.mkdirSync(sessionsDir, { recursive: true });
-                if (key === 'creds' || key === 'creds.json') return writeJson(path.join(sessionsDir,'creds.json'), value);
-                if (key === 'device-index' || key === 'device-index.json') return writeJson(path.join(sessionsDir,'device-index.json'), value);
-                if (key === 'lid-mapping' || key === 'lid-mapping.json') return writeJson(path.join(sessionsDir,'lid-mapping.json'), value);
+                if (key === 'creds' || key === 'creds.json') return writeJson(path.join(sessionsDir, 'creds.json'), value);
+                if (key === 'device-index' || key === 'device-index.json') return writeJson(path.join(sessionsDir, 'device-index.json'), value);
+                if (key === 'lid-mapping' || key === 'lid-mapping.json') return writeJson(path.join(sessionsDir, 'lid-mapping.json'), value);
                 return writeJson(path.join(sessionsDir, `${key}.json`), value);
             } catch (e) { return false; }
         }
@@ -293,10 +293,10 @@ const main = async () => {
     try {
         console.log('DEBUG: adapterProvider type:', typeof adapterProvider);
         if (adapterProvider && typeof adapterProvider === 'object') {
-            try { console.log('DEBUG: adapterProvider keys:', Object.keys(adapterProvider)); } catch (e) {}
+            try { console.log('DEBUG: adapterProvider keys:', Object.keys(adapterProvider)); } catch (e) { }
         }
         if (adapterProvider && adapterProvider.provider) {
-            try { console.log('DEBUG: adapterProvider.provider keys:', Object.keys(adapterProvider.provider)); } catch (e) {}
+            try { console.log('DEBUG: adapterProvider.provider keys:', Object.keys(adapterProvider.provider)); } catch (e) { }
         }
     } catch (e) { /* ignore */ }
 
@@ -322,7 +322,7 @@ const main = async () => {
                         const txt = fs.readFileSync(full, 'utf8');
                         try {
                             const parsed = JSON.parse(txt);
-                            console.log(`DEBUG: ${fname} keys:`, Object.keys(parsed).slice(0,10));
+                            console.log(`DEBUG: ${fname} keys:`, Object.keys(parsed).slice(0, 10));
                         } catch (e) {
                             console.warn(`WARN: ${fname} JSON parse failed:`, e && e.message);
                         }
@@ -365,21 +365,21 @@ const main = async () => {
         // Log full error with stack where available to help diagnose auth issues
         console.error('❌ createBot failed:', err && (err.stack || err.message || err));
         // If the error has nested properties, print them too
-        try { console.error('ERROR details:', JSON.stringify(err, Object.getOwnPropertyNames(err), 2)); } catch (e) {}
+        try { console.error('ERROR details:', JSON.stringify(err, Object.getOwnPropertyNames(err), 2)); } catch (e) { }
         throw err;
     }
 
     // Deep-inspect botResult.provider to find where auth state lives
     try {
         if (botResult && botResult.provider) {
-            try { console.log('DEBUG: botResult.provider keys:', Object.keys(botResult.provider)); } catch (e) {}
+            try { console.log('DEBUG: botResult.provider keys:', Object.keys(botResult.provider)); } catch (e) { }
             const p = botResult.provider;
-            const authProps = ['auth','authState','creds','saveCreds','saveCredsGlobal','getAuth','getCreds','authStateProvider','saveState','read','write'];
+            const authProps = ['auth', 'authState', 'creds', 'saveCreds', 'saveCredsGlobal', 'getAuth', 'getCreds', 'authStateProvider', 'saveState', 'read', 'write'];
             for (const k of authProps) if (k in p) console.log(`DEBUG: provider has property '${k}'`);
             if (p.provider && typeof p.provider === 'object') {
-                try { console.log('DEBUG: botResult.provider.provider keys:', Object.keys(p.provider)); } catch (e) {}
+                try { console.log('DEBUG: botResult.provider.provider keys:', Object.keys(p.provider)); } catch (e) { }
             }
-            try { console.log('DEBUG: sample provider fields (first 20):', Object.keys(p).slice(0,20).map(k=>({k,type:typeof p[k]}))); } catch (e) {}
+            try { console.log('DEBUG: sample provider fields (first 20):', Object.keys(p).slice(0, 20).map(k => ({ k, type: typeof p[k] }))); } catch (e) { }
         } else {
             console.log('DEBUG: botResult.provider missing');
         }
@@ -395,7 +395,7 @@ const main = async () => {
             maybeEmitter.emit = function (ev, ...args) {
                 try {
                     console.log('EVENT EMIT:', ev, (args && args.length) ? args.map(a => (typeof a === 'object' ? (a && a.constructor ? a.constructor.name : typeof a) : typeof a)) : 'no-args');
-                } catch (e) {}
+                } catch (e) { }
                 return origEmit(ev, ...args);
             };
             // also hook 'on' to log listener additions
@@ -420,10 +420,10 @@ const main = async () => {
                 const obj = botResult.provider[name];
                 console.log(`DEBUG: provider.${name} typeof ->`, typeof obj);
                 if (obj && typeof obj === 'object') {
-                    try { console.log(`DEBUG: provider.${name} keys ->`, Object.keys(obj)); } catch (e) {}
-                    try { console.log(`DEBUG: provider.${name} ownProps ->`, Object.getOwnPropertyNames(obj)); } catch (e) {}
-                    try { console.log(`DEBUG: provider.${name} proto ->`, Object.getOwnPropertyNames(Object.getPrototypeOf(obj) || {})); } catch (e) {}
-                    const candidateMethods = ['get','set','read','write','load','save','getItem','setItem'];
+                    try { console.log(`DEBUG: provider.${name} keys ->`, Object.keys(obj)); } catch (e) { }
+                    try { console.log(`DEBUG: provider.${name} ownProps ->`, Object.getOwnPropertyNames(obj)); } catch (e) { }
+                    try { console.log(`DEBUG: provider.${name} proto ->`, Object.getOwnPropertyNames(Object.getPrototypeOf(obj) || {})); } catch (e) { }
+                    const candidateMethods = ['get', 'set', 'read', 'write', 'load', 'save', 'getItem', 'setItem'];
                     for (const m of candidateMethods) {
                         if (typeof obj[m] === 'function') console.log(`DEBUG: provider.${name}.${m} => function`);
                     }
@@ -450,14 +450,14 @@ const main = async () => {
                         const orig = obj[k].bind(obj);
                         obj[k] = function wrappedSave(...args) {
                             try {
-                                const stack = new Error().stack.split('\n').slice(2,8).map(s => s.trim()).join(' | ');
+                                const stack = new Error().stack.split('\n').slice(2, 8).map(s => s.trim()).join(' | ');
                                 console.log(`DEBUG_SAVE_WRAPPER: provider.${name}.${k} called, args:`, args && args.length ? args.map(a => (a === undefined ? 'undefined' : (typeof a))) : 'no-args');
                                 console.log('DEBUG_SAVE_WRAPPER_STACK:', stack);
                             } catch (e) { console.warn('WARN: save wrapper logging failed', e && e.message); }
                             return orig(...args);
                         };
                     }
-                } catch (e) {}
+                } catch (e) { }
             }
         };
 
@@ -478,7 +478,7 @@ const main = async () => {
     // Test our fileAuth shim reads creds
     try {
         const creds = await fileAuth.get('creds');
-        console.log('DEBUG: fileAuth.get("creds") ->', creds ? Object.keys(creds).slice(0,10) : null);
+        console.log('DEBUG: fileAuth.get("creds") ->', creds ? Object.keys(creds).slice(0, 10) : null);
     } catch (e) {
         console.warn('WARN: fileAuth.get("creds") failed:', e && e.message);
     }
