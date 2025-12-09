@@ -224,11 +224,22 @@ const main = async () => {
     // Use Baileys' built-in multi-file auth state handler
     const { state, saveCreds } = await useMultiFileAuthState(sessionsDir);
 
+    // Debug: log auth state structure
+    console.log('DEBUG: useMultiFileAuthState returned state type:', typeof state);
+    console.log('DEBUG: state keys:', state ? Object.keys(state).slice(0, 20) : 'null');
+    if (state && typeof state === 'object') {
+        console.log('DEBUG: state.creds exists:', 'creds' in state);
+        console.log('DEBUG: state.creds keys:', state.creds ? Object.keys(state.creds).slice(0, 10) : 'null');
+    }
+
     const adapterProvider = createProvider(BaileysProvider, {
         pathSession: './bot_sessions',
         // Pass the auth state directly from Baileys' useMultiFileAuthState
         auth: state
     });
+
+    // Debug: verify what the provider received
+    console.log('DEBUG: adapterProvider created with auth:', adapterProvider && adapterProvider.auth ? 'yes' : 'no');
 
     // Restore original process.on now that the provider has registered its
     // listeners (we intercepted and wrapped uncaughtException handlers).
