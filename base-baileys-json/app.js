@@ -232,14 +232,62 @@ const main = async () => {
         console.log('DEBUG: state.creds keys:', state.creds ? Object.keys(state.creds).slice(0, 10) : 'null');
     }
 
+    // Create provider with pathSession (required for provider initialization)
     const adapterProvider = createProvider(BaileysProvider, {
         pathSession: './bot_sessions',
-        // Pass the auth state directly from Baileys' useMultiFileAuthState
         auth: state
     });
 
     // Debug: verify what the provider received
     console.log('DEBUG: adapterProvider created with auth:', adapterProvider && adapterProvider.auth ? 'yes' : 'no');
+    console.log('DEBUG: adapterProvider keys:', adapterProvider ? Object.keys(adapterProvider).slice(0, 10) : 'null');
+
+    // Try to replace the auth state after provider creation
+    // The provider may have created its own auth, we need to replace it with ours
+    try {
+        // Deep search for auth state in the provider structure
+        const findAndReplaceAuth = (obj, depth = 0) => {
+            if (depth > 5) return false; // Prevent infinite recursion
+            if (!obj || typeof obj !== 'object') return false;
+
+            // Check if this object has an auth property that looks like Baileys auth state
+            if (obj.auth && typeof obj.auth === 'object' && ('creds' in obj.auth || 'keys' in obj.auth)) {
+                console.log('DEBUG: Found auth state at depth', depth, 'replacing with our state');
+                obj.auth = state;
+                return true;
+            }
+
+            // Check if this is a socket with auth
+            if (obj.socket && obj.socket.auth) {
+                console.log('DEBUG: Found socket.auth, replacing');
+                obj.socket.auth = state;
+                return true;
+            }
+
+            // Recursively search in nested objects
+            for (const key in obj) {
+                if (key !== 'auth' && typeof obj[key] === 'object' && obj[key] !== null) {
+                    if (findAndReplaceAuth(obj[key], depth + 1)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        };
+
+        if (adapterProvider) {
+            const replaced = findAndReplaceAuth(adapterProvider);
+            if (!replaced) {
+                console.warn('WARN: Could not find auth state to replace in adapterProvider');
+            }
+        }
+    } catch (e) {
+        console.warn('WARN: Failed to replace auth state:', e && e.message);
+    }
+
+    if (adapterProvider && adapterProvider.provider) {
+        console.log('DEBUG: adapterProvider.provider keys:', Object.keys(adapterProvider.provider).slice(0, 10));
+    }
 
     // Restore original process.on now that the provider has registered its
     // listeners (we intercepted and wrapped uncaughtException handlers).
