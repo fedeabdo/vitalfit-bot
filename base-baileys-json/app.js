@@ -177,6 +177,24 @@ const main = async () => {
         throw err;
     }
 
+    // Deep-inspect botResult.provider to find where auth state lives
+    try {
+        if (botResult && botResult.provider) {
+            try { console.log('DEBUG: botResult.provider keys:', Object.keys(botResult.provider)); } catch (e) {}
+            const p = botResult.provider;
+            const authProps = ['auth','authState','creds','saveCreds','saveCredsGlobal','getAuth','getCreds','authStateProvider','saveState','read','write'];
+            for (const k of authProps) if (k in p) console.log(`DEBUG: provider has property '${k}'`);
+            if (p.provider && typeof p.provider === 'object') {
+                try { console.log('DEBUG: botResult.provider.provider keys:', Object.keys(p.provider)); } catch (e) {}
+            }
+            try { console.log('DEBUG: sample provider fields (first 20):', Object.keys(p).slice(0,20).map(k=>({k,type:typeof p[k]}))); } catch (e) {}
+        } else {
+            console.log('DEBUG: botResult.provider missing');
+        }
+    } catch (e) {
+        console.warn('WARN: provider deep-inspect failed:', e && e.message);
+    }
+
     // Defensive handling: different versions of createBot may return different
     // shapes. Log the returned value and attempt to start any http server the
     // library returns. This helps diagnose why the HTTP port might not be
