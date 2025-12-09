@@ -49,6 +49,57 @@ try {
     });
 })();
 
+// Also wrap console.log to capture any direct 'ERROR AUTH' logs that use
+// console.log instead of console.error.
+try {
+    const origLog = console.log.bind(console);
+    const origErr2 = console.error.bind(console);
+    console.log = (...args) => {
+        try {
+            const first = args && args[0];
+            const asStr = typeof first === 'string' ? first : (first && first.toString && first.toString()) || '';
+            if (asStr && (asStr.includes('⚡⚡ ERROR AUTH ⚡⚡') || asStr.includes('ERROR AUTH') || args.some(a => a === undefined))) {
+                const stack = new Error().stack.split('\n').slice(2,8).map(s => s.trim()).join(' | ');
+                origErr2('DEBUG_CONSOLE_LOG_CAPTURE:', asStr && asStr.slice(0,300));
+                origErr2('DEBUG_CONSOLE_LOG_CAPTURE_STACK:', stack);
+            }
+        } catch (e) { /* ignore */ }
+        return origLog.apply(console, args);
+    };
+} catch (e) { console.warn('WARN: failed to wrap console.log', e && e.message); }
+
+// Wrap process.stdout.write too, similar to stderr
+try {
+    const origStdoutWrite = process.stdout.write.bind(process.stdout);
+    process.stdout.write = function (...args) {
+        try {
+            const chunk = args[0];
+            const s = typeof chunk === 'string' ? chunk : (chunk && chunk.toString && chunk.toString(args[1]) || '');
+            if (s && (s.includes('⚡⚡ ERROR AUTH ⚡⚡') || s.includes('ERROR AUTH') || s.includes('undefined'))) {
+                const stack = new Error().stack.split('\n').slice(2,10).map(s => s.trim()).join(' | ');
+                console.log('DEBUG_STDOUT_CAPTURE: matched stdout chunk ->', s.trim().slice(0,300));
+                console.log('DEBUG_STDOUT_CAPTURE_STACK:', stack);
+            }
+        } catch (e) { /* ignore */ }
+        return origStdoutWrite(...args);
+    };
+} catch (e) {
+    console.warn('WARN: failed to wrap process.stdout.write', e && e.message);
+}
+
+// Wrap process.exit to log a stack before exiting, in case provider calls it.
+try {
+    const origExit = process.exit.bind(process);
+    process.exit = function (code) {
+        try {
+            const stack = new Error().stack.split('\n').slice(2,10).map(s => s.trim()).join(' | ');
+            console.log('DEBUG_PROCESS_EXIT called with code:', code);
+            console.log('DEBUG_PROCESS_EXIT_STACK:', stack);
+        } catch (e) { /* ignore */ }
+        return origExit(code);
+    };
+} catch (e) { console.warn('WARN: failed to wrap process.exit', e && e.message); }
+
 const { createBot, createProvider, createFlow } = require('@builderbot/bot')
 // Use the project's db re-export (src/db) which already falls back to MemoryDB
 const { adapterDB } = require('./src/db');
