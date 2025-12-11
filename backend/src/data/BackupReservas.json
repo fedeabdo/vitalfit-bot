@@ -1,14 +1,144 @@
 {
+  "7:00": [
+    {
+      "hora": "7:00",
+      "usuario": "Laura Cabrera"
+    },
+    {
+      "hora": "7:00",
+      "usuario": "Hebenor Bermúdez"
+    }
+  ],
   "8:00": [
-{"hora": "8:00",
-"usuario": "Franco Gargaglioni"
-}
-],
-  "9:00": [],
-  "10:00": [],
-  "16:30": [],
-  "17:30": [],
-  "18:30": [],
-  "19:30": [],
-  "20:30": []
+    {
+      "hora": "8:00",
+      "usuario": "Emanuel Sosa"
+    },
+    {
+      "hora": "8:00",
+      "usuario": "Paula Pouso"
+    },
+    {
+      "hora": "8:00",
+      "usuario": "Alicia Martínez"
+    },
+    {
+      "hora": "8:00",
+      "usuario": "Sheila Crida"
+    },
+    {
+      "hora": "8:00",
+      "usuario": "Mariana Neves"
+    },
+    {
+      "hora": "8:00",
+      "usuario": "Mauricio Chirino"
+    }
+  ],
+  "9:00": [
+    {
+      "hora": "9:00",
+      "usuario": "Vanessa Astapenco"
+    },
+    {
+      "hora": "9:00",
+      "usuario": "Matilde Leites"
+    },
+    {
+      "hora": "9:00",
+      "usuario": "Amparo Bengochea"
+    },
+    {
+      "hora": "9:00",
+      "usuario": "Juan David"
+    }
+  ],
+  "10:00": [
+    {
+      "hora": "10:00",
+      "usuario": "Ricardo pla"
+    },
+    {
+      "hora": "10:00",
+      "usuario": "Marco Bonino"
+    },
+    {
+      "hora": "10:00",
+      "usuario": "María Emilia Diaz"
+    },
+    {
+      "hora": "10:00",
+      "usuario": "Paula Galíndez Borgia"
+    }
+  ],
+  "16:30": [
+    {
+      "hora": "16:30",
+      "usuario": "Pablo Pereyra"
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Roque Jorge Fuentes Gonzalez"
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Óscar Gutiérrez"
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Tomás Garula"
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Julieta Sosa"
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Natalia Rodríguez "
+    }
+  ],
+  "17:30": [
+    {
+      "hora": "17:30",
+      "usuario": "Pablo Pinazzo"
+    },
+    {
+      "hora": "17:30",
+      "usuario": "Lia Lloveras"
+    },
+    {
+      "hora": "17:30",
+      "usuario": "Virginia Pérez"
+    }
+  ],
+  "18:30": [
+    {
+      "hora": "18:30",
+      "usuario": "Francisco Pieri"
+    }
+  ],
+  "19:30": [
+    {
+      "hora": "19:30",
+      "usuario": "Gonzalo Vallarino"
+    },
+    {
+      "hora": "19:30",
+      "usuario": "Verónica Pinazzo"
+    }
+  ],
+  "20:30": [
+    {
+      "hora": "20:30",
+      "usuario": "Mauro Yiansens"
+    },
+    {
+      "hora": "20:30",
+      "usuario": "Valeria Bernasconi "
+    },
+    {
+      "hora": "20:30",
+      "usuario": "Gonzalo Paredes"
+    }
+  ]
 }

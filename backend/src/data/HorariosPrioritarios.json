@@ -7,16 +7,13 @@
     "Ruddy Moncada",
     "Marcel Barceló",
     "Diandra de Aguiar",
-    "Daniela González Biavaschi",
-    "Lucía Frizzi"
+    "Daniela González Biavaschi"
   ],
   "Lunes-9:00": [
     "Fernando Mangold",
-    "Federico Guridi",
     "Emanuel Barrera",
-    "Augusto Deganello",
-    "Juan David",
-    "Joaquín Pereira"
+    "Lucio Vera",
+    "Lucía Frizzi"
   ],
   "Lunes-10:00": [
     "Fabián Leoni",
@@ -33,7 +30,9 @@
     "Facundo Andrioli",
     "Maximiliano Nogueira",
     "Francisco González",
-    "Juan Pereyra"
+    "Juan Pereyra",
+    "Claudia Reyes",
+    "Alejo Gestal"
   ],
   "Lunes-17:30": [
     "Silvina Vilches",
@@ -42,7 +41,8 @@
     "Andrés Saavedra",
     "Joaquín Sanabria",
     "Ana Bentancor ",
-    "Virginia Pérez"
+    "Virginia Pérez",
+    "Florencia Ferreira "
   ],
   "Lunes-18:30": [
     "Guillermo Suárez",
@@ -51,16 +51,17 @@
     "Karina Casavieja",
     "Cristian Marrero",
     "Emilse Chá",
-    "Laura Conti"
+    "Marcos Zinnato ",
+    "Iván Ramírez"
   ],
   "Lunes-19:30": [
     "Guillermo González",
     "Ignacio Márquez",
-    "Alejandro González",
     "Nahuel Quiroga",
-    "Joaquín Silva",
     "Marelen Cabrera",
-    "Germán Giménez"
+    "Germán Giménez",
+    "Fabricio Fernández",
+    "Augusto Deganello"
   ],
   "Lunes-20:30": [
     "Franco Gargaglioni",
@@ -68,36 +69,37 @@
     "Valentín Pérez",
     "Agustín Ibero",
     "Lorena Fleitas",
-    "Chiara Inzaurralde"
+    "Lois Ferreira",
+    "Carolina Antúnez"
   ],
   "Martes-7:00": [
     "Hebenor Bermúdez",
     "Bruno Dho",
-    "Esmeralda Pieri",
-    "Laura Cabrera"
+    "Laura Cabrera",
+    "Gonzalo Esposto"
   ],
   "Martes-8:00": [
     "Sheila Crida",
     "Paula Pouso",
-    "Andrea Olariaga",
-    "Joaquín Pereira",
-    "Santiago Miguel",
-    "Claudia Rodríguez"
+    "Claudia Rodríguez",
+    "Higinio Duarte",
+    "Alicia Martínez",
+    "Emanuel Sosa",
+    "Mariana Neves",
+    "Gastón Aboal"
   ],
   "Martes-9:00": [
-    "Sandra Moreno",
     "Vanessa Astapenco",
     "Juan David",
     "Paula Galíndez Borgia",
     "Amparo Bengochea",
-    "Ana Duce"
+    "Franco Alvarez",
+    "Matilde Leites"
   ],
   "Martes-10:00": [
     "Marta Borelli",
     "Marco Bonino",
     "Ricardo Plá",
-    "Alicia Martínez",
-    "Carolina Antúnez",
     "Romina Dominzaín",
     "Sandra Moreno"
   ],
@@ -109,16 +111,15 @@
     "Diego Fuentes",
     "Roque Jorge Fuentes Gonzalez",
     "Julieta Sosa",
-    "Tomás Garula"
+    "Tomás Garula",
+    "Mario Nicolini"
   ],
   "Martes-17:30": [
     "Lia Lloverás",
-    "Franco Álvarez",
     "Pablo Pinazzo",
     "Dana Paola Silva",
     "Virginia Pérez",
-    "Marinele De Paula",
-    "Sofía Draper"
+    "Macarena Fernández"
   ],
   "Martes-18:30": [
     "Andrés Kent",
@@ -127,26 +128,22 @@
     "Andrea Carbonell",
     "Helian Gómez",
     "Mauricio Chirino",
-    "Rodrigo Silva"
+    "Lucia Olivera"
   ],
   "Martes-19:30": [
     "Gonzalo Vallarino",
     "Joselin Damián",
     "Verónica Pinazzo",
     "Victoria Goyret",
-    "Sofía ferreira",
     "Antonio Manzi",
-    "Cristian Marrero",
-    "Valentina Ramírez"
+    "Cristian Marrero"
   ],
   "Martes-20:30": [
-    "Natalia García",
-    "Verónica de Iñigo",
-    "Román Ferreira",
-    "Magdalena Risvegliato",
     "Nicolás Zinoveev",
-    "Cris Castro",
-    "Natalia Chiesa Silva"
+    "Natalia Chiesa Silva",
+    "Gonzalo Paredes",
+    "Mauro Yiansens",
+    "Valeria Bernasconi "
   ],
   "Miércoles-8:00": [
     "Sofía Caballero",
@@ -155,14 +152,13 @@
     "Mercedes Méndez",
     "Ruddy Moncada",
     "Marcel Barceló",
-    "Diandra de Aguiar",
-    "Lucía Frizzi"
+    "Diandra de Aguiar"
   ],
   "Miércoles-9:00": [
     "Fernando Mangold",
-    "Federico Guridi",
     "Emanuel Barrera",
-    "Augusto Deganello"
+    "Lucía Frizzi",
+    "Lucio Vera"
   ],
   "Miércoles-10:00": [
     "Fabián Leoni",
@@ -178,7 +174,9 @@
     "Andrea Dominzaín",
     "Facundo Andrioli",
     "Maximiliano Nogueira",
-    "Francisco González"
+    "Francisco González",
+    "Alejo Gestal",
+    "Higinio Duarte"
   ],
   "Miércoles-17:30": [
     "Silvina Vilches",
@@ -186,7 +184,8 @@
     "Nicolás Navascués",
     "Andrés Saavedra",
     "Ana Bentancor ",
-    "Joaquín Sanabria"
+    "Joaquín Sanabria",
+    "Florencia Ferreira "
   ],
   "Miércoles-18:30": [
     "Guillermo Suárez",
@@ -194,17 +193,17 @@
     "Marcelo Lozano",
     "Karina Casavieja",
     "Emilse Chá",
-    "Laura Conti"
+    "Marcos Zinnato ",
+    "Iván Ramírez"
   ],
   "Miércoles-19:30": [
     "Guillermo González",
     "Ignacio Márquez",
-    "Alejandro González",
     "Nahuel Quiroga",
-    "Joaquín Silva",
-    "Valentina Ramírez",
     "Marelen Cabrera",
-    "Germán Giménez"
+    "Germán Giménez",
+    "Augusto Deganello",
+    "Fabricio Fernández"
   ],
   "Miércoles-20:30": [
     "Franco Gargaglioni",
@@ -212,23 +211,24 @@
     "Valentín Pérez",
     "Agustín Ibero",
     "Lorena Fleitas",
-    "Chiara Inzaurralde",
-    "Ismael González"
+    "Ismael González",
+    "Lois Ferreira",
+    "Carolina Antúnez"
   ],
   "Jueves-7:00": [
     "Hebenor Bermúdez",
     "Bruno Dho",
-    "Esmeralda Pieri",
-    "Laura Cabrera"
+    "Laura Cabrera",
+    "Gonzalo Esposto"
   ],
   "Jueves-8:00": [
     "Sheila Crida",
     "Paula Pouso",
-    "Andrea Olariaga",
-    "Diandra de Aguiar",
-    "Amparo Bengochea",
-    "Santiago Miguel",
-    "Claudia Rodríguez"
+    "Claudia Rodríguez",
+    "Alicia Martínez",
+    "Emanuel Sosa",
+    "Mariana Neves",
+    "Gastón Aboal"
   ],
   "Jueves-9:00": [
     "Vanessa Astapenco",
@@ -236,14 +236,11 @@
     "Juan David",
     "Paula Galíndez Borgia",
     "Amparo Bengochea",
-    "Ana Duce",
-    "Joaquín Pereira"
+    "Franco Alvarez"
   ],
   "Jueves-10:00": [
     "Marta Borelli",
     "Ricardo Plá",
-    "Alicia Martínez",
-    "Carolina Antúnez",
     "Romina Dominzaín",
     "Sandra Moreno"
   ],
@@ -254,16 +251,16 @@
     "Natalia Rodríguez ",
     "Óscar Gutiérrez",
     "Diego Fuentes",
-    "Julieta Sosa"
+    "Julieta Sosa",
+    "Claudia Reyes",
+    "Mario Nicolini"
   ],
   "Jueves-17:30": [
     "Lia Lloverás",
-    "Franco Álvarez",
     "Pablo Pinazzo",
     "Dana Paola Silva",
-    "Marinele De Paula",
     "Virginia Pérez",
-    "Sofía Draper"
+    "Macarena Fernández"
   ],
   "Jueves-18:30": [
     "Andrés Kent",
@@ -271,7 +268,8 @@
     "Andrea Carbonell",
     "Helian Gómez",
     "Mauricio Chirino",
-    "Rodrigo Silva"
+    "Marcos Zinnato ",
+    "Lucia Olivera"
   ],
   "Jueves-19:30": [
     "Gonzalo Vallarino",
@@ -279,18 +277,15 @@
     "Verónica Pinazzo",
     "Victoria Goyret",
     "Antonio Manzi",
-    "Cristian Marrero",
-    "Sofía ferreira",
-    "Valentina Ramírez"
+    "Cristian Marrero"
   ],
   "Jueves-20:30": [
-    "Natalia García",
-    "Verónica de Iñigo",
-    "Román Ferreira",
-    "Magdalena Risvegliato",
     "Nicolás Zinoveev",
-    "Cris Castro",
-    "Natalia Chiesa Silva"
+    "Natalia Chiesa Silva",
+    "Gonzalo Paredes",
+    "Higinio Duarte",
+    "Mauro Yiansens",
+    "Valeria Bernasconi "
   ],
   "Viernes-8:00": [
     "Sofía Caballero",
@@ -299,16 +294,15 @@
     "Mercedes Méndez",
     "Ruddy Moncada",
     "Marcel Barceló",
-    "Sofía ferreira",
     "Diandra de Aguiar",
-    "Lucía Frizzi"
+    "Mariana Neves"
   ],
   "Viernes-9:00": [
     "Fernando Mangold",
-    "Federico Guridi",
     "Emanuel Barrera",
-    "Augusto Deganello",
-    "Joaquín Pereira"
+    "Lucía Frizzi",
+    "Juan David",
+    "Lucio Vera"
   ],
   "Viernes-10:00": [
     "Fabián Leoni",
@@ -318,7 +312,6 @@
     "María Emilia Diaz",
     "Nicolás Viera",
     "Germán Arén",
-    "Laura Conti",
     "Allison Leoni"
   ],
   "Viernes-16:30": [
@@ -327,7 +320,9 @@
     "Maximiliano Nogueira",
     "Roque Jorge Fuentes Gonzalez",
     "Francisco González",
-    "Francisco Pieri"
+    "Francisco Pieri",
+    "Alejo Gestal",
+    "Claudia Reyes"
   ],
   "Viernes-17:30": [
     "Silvina Vilches",
@@ -342,17 +337,18 @@
     "Emanuel Berón",
     "Marcelo Lozano",
     "Karina Casavieja",
+    "Emilse Chá",
     "Gonzalo Vallarino",
-    "Emilse Chá"
+    "Iván Ramírez"
   ],
   "Viernes-19:30": [
     "Guillermo González",
     "Ignacio Márquez",
-    "Alejandro González",
     "Nahuel Quiroga",
-    "Joaquín Silva",
     "Marelen Cabrera",
-    "Germán Giménez"
+    "Germán Giménez",
+    "Augusto Deganello",
+    "Fabricio Fernández"
   ],
   "Viernes-20:30": [
     "Franco Gargaglioni",
@@ -360,26 +356,23 @@
     "Valentín Pérez",
     "Agustín Ibero",
     "Lorena Fleitas",
-    "Chiara Inzaurralde"
+    "Lois Ferreira"
   ],
   "Sábado-10:00": [
     "Paula Pouso",
     "Ricardo pla",
     "Daniela González Biavaschi",
     "Paula Galíndez Borgia",
-    "Valentina Ramírez",
     "Pablo Pinazzo",
-    "Mauricio Chirino",
-    "Tomás Garula"
+    "Mauricio Chirino"
   ],
   "Sábado-11:00": [
-    "Carina Pacheco",
-    "Juan Pereyra",
     "Pablo Pereyra",
     "Victoria Goyret",
     "John Pirez",
     "Ismael González",
     "Carolina Antúnez",
-    "Andrés Kent"
+    "Andrés Kent",
+    "Romina Dominzaín"
   ]
 }
