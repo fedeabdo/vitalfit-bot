@@ -2,6 +2,21 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+// Global handler for unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('⚠️ Unhandled Promise Rejection:', reason);
+    console.error('Promise:', promise);
+    // Don't exit the process - let the bot continue running
+    // Log the error for debugging but don't crash
+});
+
+// Global handler for uncaught exceptions
+process.on('uncaughtException', (error) => {
+    console.error('❌ Uncaught Exception:', error);
+    // For uncaught exceptions, we might want to exit gracefully
+    // But for now, just log and continue
+});
+
 const { createBot, createProvider, createFlow, addKeyword } = require('@bot-whatsapp/bot')
 
 const QRPortalWeb = require('@bot-whatsapp/portal')
@@ -391,7 +406,13 @@ function withRateLimitAndRedirect(handler) {
                 }
             } catch (error) {
                 // Handle timeout and other errors from flowDynamic for ALL users
-                const isTimeout = error && (
+                // Check if error exists and has properties
+                if (!error) {
+                    console.error(`⚠️ Undefined error caught for user ${userId}`);
+                    return; // Silently fail
+                }
+
+                const isTimeout = (
                     error.message === 'Timed Out' ||
                     error.message?.includes('Timed Out') ||
                     error.output?.payload?.message === 'Timed Out' ||
@@ -400,13 +421,16 @@ function withRateLimitAndRedirect(handler) {
                 );
 
                 if (isTimeout) {
-                    console.error(`⚠️ Timeout error sending message to user ${userId}, but bot continues running:`, error.message);
+                    console.error(`⚠️ Timeout error sending message to user ${userId}, but bot continues running:`, error.message || 'Unknown timeout');
                     // Don't throw - let the bot continue running for other users
-                    // Log the error but don't try to send fallback (it might also timeout)
                     return; // Silently fail - the bot will continue processing other messages
                 } else {
-                    // Re-throw other errors so they can be handled by the handler's try-catch
-                    throw error;
+                    // Log the error but don't re-throw to prevent UnhandledPromiseRejection
+                    // The outer try-catch will handle it
+                    console.error(`⚠️ Error in flowDynamic for user ${userId}:`, error.message || error.toString() || 'Unknown error');
+                    // Don't throw - let the handler's try-catch handle it if needed
+                    // But since we're catching here, we won't let it propagate as unhandled
+                    return;
                 }
             }
         };
@@ -415,13 +439,20 @@ function withRateLimitAndRedirect(handler) {
             await handler(ctx, { ...tools, flowDynamic: flowDynamicWithForward });
         } catch (error) {
             // Catch any unhandled errors from the handler
-            console.error('❌ Error in handler:', error.message || error);
-            // Try to send error message to user if possible
+            const errorMessage = error?.message || error?.toString() || 'Unknown error';
+            console.error(`❌ Error in handler for user ${userId}:`, errorMessage);
+            console.error('Error details:', error);
+
+            // Try to send error message to user if possible, but don't let this fail the bot
             try {
                 await flowDynamicWithForward('❌ Ocurrió un error inesperado. Por favor intenta nuevamente más tarde.');
             } catch (sendError) {
-                console.error('❌ Failed to send error message to user:', sendError.message);
+                // Don't log as error if it's just a timeout - we already handled that
+                if (!sendError?.message?.includes('Timed Out') && !sendError?.message?.includes('timeout')) {
+                    console.error('❌ Failed to send error message to user:', sendError?.message || sendError);
+                }
             }
+            // Don't re-throw - let the bot continue processing other messages
         }
     };
 }
