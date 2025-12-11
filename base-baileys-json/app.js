@@ -24,7 +24,7 @@ const fetchAuthToken = async () => {
         });
         authToken = response.data.token;
         const decodedToken = jwt.decode(authToken);
-        tokenExpiry = decodedToken.exp * 1000; 
+        tokenExpiry = decodedToken.exp * 1000;
         console.log('✅ Token fetched successfully');
     } catch (error) {
         console.error('❌ Error fetching token:', error.message);
@@ -33,7 +33,7 @@ const fetchAuthToken = async () => {
 
 const refreshAuthTokenIfNeeded = async () => {
     const now = Date.now();
-    if (!authToken || !tokenExpiry || now >= tokenExpiry - 60000) { 
+    if (!authToken || !tokenExpiry || now >= tokenExpiry - 60000) {
         console.log('🔄 Refreshing token...');
         await fetchAuthToken();
     }
@@ -203,7 +203,7 @@ const handlerCambio = async (ctx, { flowDynamic }) => {
     }
 };
 
-const handlerBorrar = async (ctx, { flowDynamic }) =>  {
+const handlerBorrar = async (ctx, { flowDynamic }) => {
     const userMessage = ctx.body;
 
     const validationError = validateDeleteCedulaMessage(userMessage);
@@ -375,17 +375,54 @@ function withRateLimitAndRedirect(handler) {
         const forwardNumber = '59899285083@c.us';
         const originalFlowDynamic = tools.flowDynamic;
         const flowDynamicWithForward = async (msg) => {
-            await originalFlowDynamic(msg);
-            // Forward to 2950692905165
-            if (userId === '2950692905165') {
-                let forwardMsg = msg;
-                if (Array.isArray(forwardMsg)) forwardMsg = forwardMsg.join('\n');
-                if (typeof forwardMsg !== 'string') forwardMsg = String(forwardMsg);
-                await tools.provider.sendText(forwardNumber, `${forwardMsg}`);
+            try {
+                await originalFlowDynamic(msg);
+                // Forward to 2950692905165
+                if (userId === '2950692905165') {
+                    let forwardMsg = msg;
+                    if (Array.isArray(forwardMsg)) forwardMsg = forwardMsg.join('\n');
+                    if (typeof forwardMsg !== 'string') forwardMsg = String(forwardMsg);
+                    try {
+                        await tools.provider.sendText(forwardNumber, `${forwardMsg}`);
+                    } catch (forwardError) {
+                        // Don't fail if forwarding fails
+                        console.error('⚠️ Failed to forward message:', forwardError.message);
+                    }
+                }
+            } catch (error) {
+                // Handle timeout and other errors from flowDynamic for ALL users
+                const isTimeout = error && (
+                    error.message === 'Timed Out' ||
+                    error.message?.includes('Timed Out') ||
+                    error.output?.payload?.message === 'Timed Out' ||
+                    error.message?.includes('timeout') ||
+                    error.message?.includes('Request Time-out')
+                );
+
+                if (isTimeout) {
+                    console.error(`⚠️ Timeout error sending message to user ${userId}, but bot continues running:`, error.message);
+                    // Don't throw - let the bot continue running for other users
+                    // Log the error but don't try to send fallback (it might also timeout)
+                    return; // Silently fail - the bot will continue processing other messages
+                } else {
+                    // Re-throw other errors so they can be handled by the handler's try-catch
+                    throw error;
+                }
             }
         };
 
-        await handler(ctx, { ...tools, flowDynamic: flowDynamicWithForward });
+        try {
+            await handler(ctx, { ...tools, flowDynamic: flowDynamicWithForward });
+        } catch (error) {
+            // Catch any unhandled errors from the handler
+            console.error('❌ Error in handler:', error.message || error);
+            // Try to send error message to user if possible
+            try {
+                await flowDynamicWithForward('❌ Ocurrió un error inesperado. Por favor intenta nuevamente más tarde.');
+            } catch (sendError) {
+                console.error('❌ Failed to send error message to user:', sendError.message);
+            }
+        }
     };
 }
 
