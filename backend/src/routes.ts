@@ -17,13 +17,13 @@ router.get('/health', (req: Request, res: Response) => {
   res.sendStatus(200);
 });
 router.post('/login', AuthController.login);
+router.post('/createPassword', AuthController.createPassword);
 router.options(
     '/login', 
     (req: Request, res: Response) => {
       res.sendStatus(200);
     }
   );
-//router.get("/createPassword", AuthController.createPassword);
 
 
 // Protected routes (authentication required)
@@ -38,17 +38,17 @@ router.get('/usuarios/removeDuplicates', UsuariosController.removeDuplicateUsuar
 
 // Horarios routes
 router.get('/horarios', authorizeRoles('admin'), HorariosController.getHorarios);
-router.get('/horariosHoy', authorizeRoles('admin'), HorariosController.getHorariosHoy);
+router.get('/horariosHoy', authorizeRoles('admin', 'user'), HorariosController.getHorariosHoy);
 router.post('/horarios', authorizeRoles('admin'), HorariosController.addHorario);
 router.delete('/horarios', authorizeRoles('admin'), HorariosController.deleteHorario);
 router.put('/horarios', authorizeRoles('admin'), HorariosController.updateHorario);
 
 // Reservas routes
 router.get('/reservas', authorizeRoles('admin', 'user'), ReservaController.getReservas);
-router.post('/reservas', authorizeRoles('admin'), ReservaController.addReserva);
-router.put('/reservas', authorizeRoles('admin'), ReservaController.updateReserva);
-router.delete('/reservas', authorizeRoles('admin'), ReservaController.deleteReserva);
-router.get('/reservas/consulta/:cedula', authorizeRoles('admin'), ReservaController.buscarHoraPorCedula);
+router.post('/reservas', authorizeRoles('admin', 'user'), ReservaController.addReserva);
+router.put('/reservas', authorizeRoles('admin', 'user'), ReservaController.updateReserva);
+router.delete('/reservas', authorizeRoles('admin', 'user'), ReservaController.deleteReserva);
+router.get('/reservas/consulta/:cedula?', authorizeRoles('admin', 'user'), ReservaController.buscarHoraPorCedula);
 router.get('/reservas/reset', authorizeRoles('admin'), ReservaController.resetReservas);
 
 export default router;

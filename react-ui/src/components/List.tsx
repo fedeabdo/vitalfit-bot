@@ -5,24 +5,33 @@ import React from 'react';
 import styles from '../css/List.module.css';
 import Font from 'react-font';
 
+import  ListItem  from './ListItem';
+
 interface ListProps<T> {
   data: T[];
   renderItem: (item: T) => React.ReactNode;
+  getHora: (item: T) => string;
   onClick?: (item: T) => void;
 }
 
-function List<T>({ data, renderItem, onClick }: ListProps<T>) {
+function List<T>({ data, renderItem, getHora, onClick }: ListProps<T>) {
   if (!data || data.length === 0) {
     return <div className={styles.empty}>No data available.</div>;
   }
 
+  
+
   return (
-    <Font family='Lexend'>
+    <Font family="Lexend">
       <ul className={styles.list}>
         {data.map((item, index) => (
-          <li key={index} onClick={() => onClick?.(item)} className={styles.listItem}>
-            {renderItem(item)}
-          </li>
+          <ListItem
+            key={index}
+            item={item}
+            hora={getHora(item)}
+            renderItem={renderItem}
+            onClick={onClick}
+          />
         ))}
       </ul>
     </Font>
@@ -30,6 +39,7 @@ function List<T>({ data, renderItem, onClick }: ListProps<T>) {
 }
 
 export default List;
+
 
 // Update the reservasLoader to use fetchReservas.
 export const reservasLoader = (queryClient: QueryClient) => async () => {
@@ -58,3 +68,6 @@ export const horariosLoader = async (): Promise<HorarioJson[]> => {
     usuarios: usuarios.length > 0 ? usuarios : ["No hay usuarios"],
   }));
 };
+
+
+

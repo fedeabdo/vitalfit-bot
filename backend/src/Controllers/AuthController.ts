@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { generateToken } from "../config/jwt";
 import { verifyPassword } from "../utils/passwordUtils";
 import { hashPassword } from "../utils/passwordUtils";
 import admins from "../data/admins.json"; // Import the stored admin credentials
@@ -23,7 +22,7 @@ export class AuthController {
       }
 
       const token = jwt.sign(
-        { username: admin.username, role: admin.role },
+        { username: admin.username, role: admin.role, name: admin.name },
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );

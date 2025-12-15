@@ -189,6 +189,7 @@ const handleConfirmResetReservas = () => {
               </ul>
             </div>
           )}
+          getHora={(reserva: HoraUsuarios) => reserva.hora}
         />
 
       </div>

@@ -2,16 +2,931 @@
   {
     "username": "admin",
     "password": "$2b$12$LejLWivBZSUBjARCXNh/rOvRzIl3ei1M52BNdKNuDvDyWUIxdgjXW",
+    "name": "11111111",
     "role": "admin"
   },
   {
     "username": "nando",
     "password": "$2b$12$2El1BfA06PC00kisY/HM4OMtRAO7cPJS6277hTOyz.hB61vyshdWG",
+    "name": "11111111",
     "role": "admin"
   },
   {
     "username": "Profesor",
     "password": "$2b$12$2El1BfA06PC00kisY/HM4OMtRAO7cPJS6277hTOyz.hB61vyshdWG",
-    "role": "user"
+    "name": "11111111",
+    "role": "profesor"
+  },
+  {
+    "username": "ógutiérrez",
+    "password": "$2b$12$L2M0chBqgOtf4oAFHM8HUOpYClzAt.0NwC7wEK1/L931Iwt9clqoO",
+    "role": "user",
+    "name": "Óscar Gutiérrez"
+  },
+  {
+    "username": "alongo",
+    "password": "$2b$12$EpWApzECDxR96IsIi.zJdOJBVgcD32gqYEUtsGFmnameKu7We5evQai",
+    "role": "user",
+    "name": "Adriana Longo"
+  },
+  {
+    "username": "aibero",
+    "password": "$2b$12$nRZjtGyGMNhwLUwb1qZ.Gei7UktcLgcLXnQohcbh26H/qs6WpE.Tm",
+    "role": "user",
+    "name": "Agustín ibero"
+  },
+  {
+    "username": "agonzález",
+    "password": "$2b$12$Rb34IjpQrmosDgRTfinTfezrq6xk8UQR8fSGqSC93AMoyv.D8a11y",
+    "role": "user",
+    "name": "Alejandro González"
+  },
+  {
+    "username": "abengochea",
+    "password": "$2b$12$rlUQtxdbjs3yuEi.POlBoeZvheBzPlnz0edusQcoGdtOGvcWUK9jC",
+    "role": "user",
+    "name": "Amparo Bengochea"
+  },
+  {
+    "username": "adominzain",
+    "password": "$2b$12$gVa6q4qOGOPP68xs4SP3NuaVsMxXx4GK.XUiuMOgzdzWTdW00gwha",
+    "role": "user",
+    "name": "Andrea Dominzain"
+  },
+  {
+    "username": "aolariaga",
+    "password": "$2b$12$41ZU.oWkloXfUhV.u3O.2.tcTR/cpMWUrcoFzJSmVs3.hlyYfTgdS",
+    "role": "user",
+    "name": "Andrea Olariaga"
+  },
+  {
+    "username": "akent",
+    "password": "$2b$12$J7JEwt7uGtfyvYcfamRHBunk/VVUPxZ/OIM3k0clYufNzK0DwO4BW",
+    "role": "user",
+    "name": "Andrés Kent"
+  },
+  {
+    "username": "asaavedra",
+    "password": "$2b$12$.u4Ew8GxmLkDw4blSnHige0tIx96xnCcJc2dLm4owku2QlKdKcfRi",
+    "role": "user",
+    "name": "Andres Saavedra"
+  },
+  {
+    "username": "asosa",
+    "password": "$2b$12$XQJLx9q8F1trF1IBOSv8mum/TKjtGOHyFvg7SL61wIbHrUgV4XCam",
+    "role": "user",
+    "name": "Antonella Sosa"
+  },
+  {
+    "username": "amanzi",
+    "password": "$2b$12$DDIGzw4dhbU6HP6WF1NxqO8.hqQ9dnYqGB/e1ly5opju27s0Ogcta",
+    "role": "user",
+    "name": "Antonio Manzi"
+  },
+  {
+    "username": "adeganello",
+    "password": "$2b$12$QIkj2xUwXQ88ZoXRhyQM5.8vpEhMT7V/T4aPJzTrXaWsAjUI/MQkG",
+    "role": "user",
+    "name": "Augusto Deganello"
+  },
+  {
+    "username": "btexeira",
+    "password": "$2b$12$97mkdsfZi7iioFSbjOYimObaJ3WOIf6KZfWOObfraqmhFG3.nwEq2",
+    "role": "user",
+    "name": "Braian Texeira"
+  },
+  {
+    "username": "bdho",
+    "password": "$2b$12$TB1V8ePgiBiZe0hJyH067uGn/QSKTWXWFvt9.jYIPR4nQEIxJ0QSi",
+    "role": "user",
+    "name": "Bruno Dho"
+  },
+  {
+    "username": "cpacheco",
+    "password": "$2b$12$oCEGSX.D3LHdLYMiQhi9q.vVdxnMK9WeFXiBARFBK/wC2FPG0zCLa",
+    "role": "user",
+    "name": "Carina Pacheco"
+  },
+  {
+    "username": "curioste",
+    "password": "$2b$12$gtmlP3L7tZYoUZhmiH2D8eE4Xw.0RO2cdb0KB9nC0CFVPY0/oviE.",
+    "role": "user",
+    "name": "Carolina Urioste"
+  },
+  {
+    "username": "cogara",
+    "password": "$2b$12$espHc/6NpLvXbVbztBV.o.DchP5beeYRjioxvI92DsuhJDYiKnovy",
+    "role": "user",
+    "name": "Cecilia Ogara"
+  },
+  {
+    "username": "cgonzalez",
+    "password": "$2b$12$fo1aUOwpyspQkTi4hHbcr.KgU0.ITI04qAtiDhuBDOyq8Kvpsb116",
+    "role": "user",
+    "name": "Clara Gonzalez"
+  },
+  {
+    "username": "dsilva",
+    "password": "$2b$12$SG1HNrjM8n.tkH4uTyEIluj1DpCkFAWee723Jxj7ZuTtgSlZOzm7K",
+    "role": "user",
+    "name": "Dana Paola Silva"
+  },
+  {
+    "username": "dgonzález",
+    "password": "$2b$12$QxjZPYzRn8r7qUBrtQyh2eMXnnDqERklfwQ0/SlbDFODlkTz7.g3C",
+    "role": "user",
+    "name": "Daniela González Biavaschi"
+  },
+  {
+    "username": "ebarrera",
+    "password": "$2b$12$8K5kBgRS/I9MLaxBWjEM7.Nj.OyJLOwzQ1N6EdSraCjG8EzlZGDDe",
+    "role": "user",
+    "name": "Emanuel Barrera"
+  },
+  {
+    "username": "eberón",
+    "password": "$2b$12$k1DWUK6ZRd6FLio4BhJ5nejn64Wxe0ablP2cGVn3jVZmip2SBvXti",
+    "role": "user",
+    "name": "Emanuel Berón"
+  },
+  {
+    "username": "echá",
+    "password": "$2b$12$..VI0uVU/ErokydNnameNuHuHfwDgvYJYe3zi5nMUigMjprqlo/90.K",
+    "role": "user",
+    "name": "Emilse Chá"
+  },
+  {
+    "username": "fleoni",
+    "password": "$2b$12$NYTfvuuUhQg.TLUElPR2TeUQW07ZyDIDhCHMjNMbWH1DITgOxFVWS",
+    "role": "user",
+    "name": "Fabian Leoni"
+  },
+  {
+    "username": "fandrioli",
+    "password": "$2b$12$sZO8kW5FAcDxmStKJVMDEOt8UqUkG.TNSUz3llFMo0GyQs9W4bGRy",
+    "role": "user",
+    "name": "Facundo Andrioli"
+  },
+  {
+    "username": "fabdo",
+    "password": "$2b$12$BqN5BBgZnN94HUi.iq75Fu7MTFqjjlhWE3jjIA/ukv2LCLVit.7cC",
+    "role": "user",
+    "name": "Federico Abdo"
+  },
+  {
+    "username": "fguridi",
+    "password": "$2b$12$AEwWPcDpuZf6/JwrQ.B1Lue7zQ97VRluXgLPO1mqOEmGUDfXcWz/S",
+    "role": "user",
+    "name": "Federico Guridi"
+  },
+  {
+    "username": "fmello",
+    "password": "$2b$12$5EEU5H59yJw3LZUsgoHAFOiZgzLMo0SzZ8l0Qey6n.N11kOGmxKNK",
+    "role": "user",
+    "name": "Federico Mello"
+  },
+  {
+    "username": "fprieto",
+    "password": "$2b$12$oPEwJUJOeoGPPbAiD879aeVMKHI6hqXs3XQeKvMVi/fsgbWZe0oja",
+    "role": "user",
+    "name": "Federico Prieto"
+  },
+  {
+    "username": "fmangold",
+    "password": "$2b$12$UChvAAQnrNfQknnqvS5h0e6tMeBenKwwSeG9/vLGd/SSo8aCCc.Ma",
+    "role": "user",
+    "name": "Fernando Mangold"
+  },
+  {
+    "username": "fgonzález",
+    "password": "$2b$12$1GORSH25oHtHF84l8pNgJuuPz7tg8vKDGNJrQodIm2Sb5T0uY3rpO",
+    "role": "user",
+    "name": "Francisco González"
+  },
+  {
+    "username": "fpieri",
+    "password": "$2b$12$D8jhzelALYj1XQuy26Tr/O7wFTp0xZ8NX/qMFdFrTyVv7fKn.S9Di",
+    "role": "user",
+    "name": "Francisco Pieri"
+  },
+  {
+    "username": "falvarez",
+    "password": "$2b$12$G3cG/OGYPboguhNQxIg1zeqkOj6LPnHTvGHQYJNzJS51hSGOYDD3O",
+    "role": "user",
+    "name": "Franco Alvarez"
+  },
+  {
+    "username": "fgargaglioni",
+    "password": "$2b$12$VYb2q/BcjWIkmDi6Xyax1.2Xoe2nRa3ZeQ2KVL8jYyLN1fGXv9UYK",
+    "role": "user",
+    "name": "Franco Gargaglioni"
+  },
+  {
+    "username": "gloprete",
+    "password": "$2b$12$.c0jTNhHGPi9J5pDMCQjg.4Yh6zDj7ujr3.eQf4JofEw7UusWUVHO",
+    "role": "user",
+    "name": "Genaro Loprete"
+  },
+  {
+    "username": "gmarmissolle",
+    "password": "$2b$12$2E5ohB7vXVAPWYBzLakRJep01DgvZ/v4TR8e3pvaIBii/BLINV5dO",
+    "role": "user",
+    "name": "Gonzalo Marmissolle"
+  },
+  {
+    "username": "gvallarino",
+    "password": "$2b$12$m29WXhDiBumm5bbkONIOUenN.rnNWcBqMnZ/T10yd/xJzY6R5SGFS",
+    "role": "user",
+    "name": "Gonzalo Vallarino"
+  },
+  {
+    "username": "ggonzález",
+    "password": "$2b$12$jgMjz8equs0EpZfmNnJ0ieHKa6UkHHpL5Pm1U5BrRsB..8g2ZBt/W",
+    "role": "user",
+    "name": "Guillermo González"
+  },
+  {
+    "username": "gsuárez",
+    "password": "$2b$12$mabhvh7P42xjFysTIXdiEOvH4O2NthQYA8Po6wocG8/3BvbrGV7gS",
+    "role": "user",
+    "name": "Guillermo Suárez"
+  },
+  {
+    "username": "hbermúdez",
+    "password": "$2b$12$pOhgZNnqAJpD.QXYNCjWs.E8P.YSenrq7x1F4lWohfalhaJZfzC4K",
+    "role": "user",
+    "name": "Hebenor Bermúdez"
+  },
+  {
+    "username": "imarquez",
+    "password": "$2b$12$C.kRpfitDN5zPr6aSS637.q9XsREBj/dU8kbd3TuUnYtJhmlZXAC6",
+    "role": "user",
+    "name": "Ignacio Marquez"
+  },
+  {
+    "username": "jpaez",
+    "password": "$2b$12$0dsSHluCltlyO63RFH2H7eO7O.ArDsM5vGh0lZaxJfT9/pmC7ppWS",
+    "role": "user",
+    "name": "Jessica Paez"
+  },
+  {
+    "username": "jsanabria",
+    "password": "$2b$12$4Miur.jTbnutvYrWY1Fcre1CVH4foboLpQLgDhZboRrrJE8zff5zK",
+    "role": "user",
+    "name": "Joaquín Sanabria"
+  },
+  {
+    "username": "jsilva",
+    "password": "$2b$12$w13IP5/qgL.4JqGlXax8gusO1gkKJs.YM.fzjF58el5mby3kxKw1e",
+    "role": "user",
+    "name": "Joaquin Silva"
+  },
+  {
+    "username": "jpirez",
+    "password": "$2b$12$PzbhDPYrHGwb.9Bui8No/eF3KUhLkulmYQbGCxvuI6ElNWhRIrNaS",
+    "role": "user",
+    "name": "John Pirez"
+  },
+  {
+    "username": "jdamian",
+    "password": "$2b$12$n1JzKMVprqdesMu7WIKX5u20DKOYHYbq/n4B/rGvnHE73nH0hz5GK",
+    "role": "user",
+    "name": "Joselin Damian"
+  },
+  {
+    "username": "jpereyra",
+    "password": "$2b$12$h6GWzAQFeggzQNK2YRjbXuiOdpbEkIYHg/6GEuMqq1gMt0D7yY6ZK",
+    "role": "user",
+    "name": "Juan Pereyra"
+  },
+  {
+    "username": "kcasavieja",
+    "password": "$2b$12$ZxZa6PiHBZY1v6W2FTSZvepJ9l.eTbC8uwHlzAvA.g0pyE.ODhgXi",
+    "role": "user",
+    "name": "Karina Casavieja"
+  },
+  {
+    "username": "llloveras",
+    "password": "$2b$12$7n9PD3Plez5OYJyYm7s4B.Cbmok2zl/WyzUXHM7jBuuHe7J9uHvcG",
+    "role": "user",
+    "name": "Lia Lloveras"
+  },
+  {
+    "username": "lguardia",
+    "password": "$2b$12$AKNnJVJAnIS9X3FinG.ufOEVRTDVkas7IEAb9MbehRdJSgZFAAaEG",
+    "role": "user",
+    "name": "Lorena Guardia"
+  },
+  {
+    "username": "labdo",
+    "password": "$2b$12$Qo0qMuFsah4u1njHLrywLevFbbC36kurUXUO/rkxHrLM6Z0QnP0Ry",
+    "role": "user",
+    "name": "Luis Abdo"
+  },
+  {
+    "username": "mrisvegliato",
+    "password": "$2b$12$oZ2YZ5NwNvi5Dh0u19wqnupWyihvUE3InE5oqvcTUpuPETblnSNku",
+    "role": "user",
+    "name": "Magdalena Risvegliato"
+  },
+  {
+    "username": "mbarceló",
+    "password": "$2b$12$3zpnkgjaJPqY75Mqnr8BweY4bTMR2Def6g2h319wGIMnamejfiSQfd.",
+    "role": "user",
+    "name": "Marcel Barceló"
+  },
+  {
+    "username": "mlozano",
+    "password": "$2b$12$C7i5rfs2aFm04fHL6I3J1epTTyZEPYibX3WvXsOGfXazAPwqyJgXa",
+    "role": "user",
+    "name": "Marcelo Lozano"
+  },
+  {
+    "username": "mbonino",
+    "password": "$2b$12$XohAIhyvzjTRV.LYx139WOmCg.ednY9Wm2VrRdrD7ojCX.WsCGpNu",
+    "role": "user",
+    "name": "Marco Bonino"
+  },
+  {
+    "username": "ediaz",
+    "password": "$2b$12$9OacFHTVt/E6h9mzsTepFuD4mqluNl1/4nXdW0uo4/hbZV0QCbE4.",
+    "role": "user",
+    "name": "María Emilia Diaz"
+  },
+  {
+    "username": "mriesgo",
+    "password": "$2b$12$ELVI.4ZZBl0lNI6uviM.JuRyW07axKiIO/NPrCudwJAe/6/XQQZzm",
+    "role": "user",
+    "name": "Martín Riesgo"
+  },
+  {
+    "username": "msaavedra",
+    "password": "$2b$12$C.aa7xSh37JF3edSVt78Ded3rb.8a0YWFruOTKM86TWk6KsIRqqji",
+    "role": "user",
+    "name": "Martin Saavedra"
+  },
+  {
+    "username": "mchirino",
+    "password": "$2b$12$mb4DrBU2ys1VNWGkf06RDeBHJ4OdVekSd8/zy7XguDkPsc1vsiX6W",
+    "role": "user",
+    "name": "Mauricio Chirino"
+  },
+  {
+    "username": "mnogueira",
+    "password": "$2b$12$PrE.vRisR5wWG1CVp.UIl.jeEVZ5QsEkZ56sRFRLbXZ4XR9y3dckG",
+    "role": "user",
+    "name": "Maximiliano Nogueira"
+  },
+  {
+    "username": "mméndez",
+    "password": "$2b$12$VF850LTY6W67rDiL/zcqJ.tXdprLdAd3oeUyHqsK8ixjelxAa/QKe",
+    "role": "user",
+    "name": "Mercedes Méndez"
+  },
+  {
+    "username": "ngranero",
+    "password": "$2b$12$eMG03ejAYguBD/9sgH2fAuxDuwdVpfjNdeorLwXNCH5N1URg/yyUG",
+    "role": "user",
+    "name": "Nahuel Granero"
+  },
+  {
+    "username": "nquiroga",
+    "password": "$2b$12$O0jXhUw2TPtMhOcsm/zag.cHHLbUXvFzD.DrKFdKKFdoyWKIAeUxu",
+    "role": "user",
+    "name": "Nahuel Quiroga"
+  },
+  {
+    "username": "nchiesa",
+    "password": "$2b$12$YtpOhj9oykBHW6b5gnkMAuJAdHssbr.VyW/6Nv8uFe6Hf/jMkbt7u",
+    "role": "user",
+    "name": "Natalia Chiesa Silva"
+  },
+  {
+    "username": "ngarcía",
+    "password": "$2b$12$KeI4uhmzM0KrIPr0U6Na2.OxAqvv18Cm/SlgU.LXnCOJI24eJK9Gm",
+    "role": "user",
+    "name": "Natalia García"
+  },
+  {
+    "username": "nnavascues",
+    "password": "$2b$12$OeiBiq.sYkbP577ApOpqeOVLSuBNv7pBUTmyI0tbIL/79JekkBW7O",
+    "role": "user",
+    "name": "Nicolas Navascues"
+  },
+  {
+    "username": "nzinoveev",
+    "password": "$2b$12$1Tm1OHFCf4cjX7BujT9ZBeL.4xBs985CYW2h43LJwldIGW./I/Spi",
+    "role": "user",
+    "name": "Nicolás Zinoveev"
+  },
+  {
+    "username": "ppinazzo",
+    "password": "$2b$12$KzJqhJpXsa0FaYR1XcnbdeXCVG1NPVODYOKkP9Cm2J3IX5K86YLnC",
+    "role": "user",
+    "name": "Pablo Pinazzo"
+  },
+  {
+    "username": "pgalíndez",
+    "password": "$2b$12$BLHDPVvvYAP1wRT0KmqUP.4ugSId038wzp8zUlUlNw2IO3ZfCvNEC",
+    "role": "user",
+    "name": "Paula Galíndez Borgia"
+  },
+  {
+    "username": "ppouso",
+    "password": "$2b$12$kN7Wr1nFBEQjZzv/Yx6mdOhhnhw/5cw3lLaJzs7AuiKcJlHMX7fq.",
+    "role": "user",
+    "name": "Paula Pouso"
+  },
+  {
+    "username": "psuarez",
+    "password": "$2b$12$ebVC7la.NbkCe/doRX6w6.7iP3/3a4fXccnalPWM94lPyAe.MrNPK",
+    "role": "user",
+    "name": "Priscilla Suarez"
+  },
+  {
+    "username": "rhernandez",
+    "password": "$2b$12$l8s6niWt5cA.YW03q6nk2OGkev22JxTQ6HT0XRTrlDqm2AgscL03S",
+    "role": "user",
+    "name": "Ramiro Hernandez"
+  },
+  {
+    "username": "rpla",
+    "password": "$2b$12$ITVzjb4TaQoQ4v9PkHVFdOIZL9jm7IPPK0Vbo3bRYyGHJH1mrKiX6",
+    "role": "user",
+    "name": "Ricardo pla"
+  },
+  {
+    "username": "rcorrea",
+    "password": "$2b$12$ukzd3Zb3sEbEK2N5OZM82Ob2rlvbC4Rb4o7ikH0QGXamforhhRipm",
+    "role": "user",
+    "name": "Rodrigo Correa"
+  },
+  {
+    "username": "rsosa",
+    "password": "$2b$12$ghr6UjMXDeJZxbXlM4QhqubhXdRKTs5CK/U0snVeVLUDSurut39Z.",
+    "role": "user",
+    "name": "Romina Sosa"
+  },
+  {
+    "username": "jfuentes",
+    "password": "$2b$12$MXSCXztas0l14NIbvwIBtuMZqoDPwEFaUg0sQUSMbXZA/09xU.i42",
+    "role": "user",
+    "name": "Roque Jorge Fuentes Gonzalez"
+  },
+  {
+    "username": "rmoncada",
+    "password": "$2b$12$8wbiN2DDQVHSE4OiLy2PiuTuO4FGp9y6UprKwjHmOTILG72MCXtNq",
+    "role": "user",
+    "name": "Ruddy Moncada"
+  },
+  {
+    "username": "smoreno",
+    "password": "$2b$12$GinD8tM52e4QHoRLPdR.5e.e4p4mLHh.XXCPs2mf9OO.CmzqQ2pAe",
+    "role": "user",
+    "name": "Sandra Moreno"
+  },
+  {
+    "username": "scrida",
+    "password": "$2b$12$OeF/9UMfzFek6cH30kxEnueQ1SOMUEmFb6IQ9J0GNjQjT4FnlbY/S",
+    "role": "user",
+    "name": "Sheila Crida"
+  },
+  {
+    "username": "svilches",
+    "password": "$2b$12$BSNdEcHyVHaHRyh1Q9SjdeJnzrvk1CnIo2AWCRenPUDUxdAMA7oO6",
+    "role": "user",
+    "name": "Silvina Vilches"
+  },
+  {
+    "username": "scaballero",
+    "password": "$2b$12$Y/rAtuItQfIVDst0FjvMouLldPB7HndEVNUDsJqqYt5HVVMxSmE/q",
+    "role": "user",
+    "name": "Sofía Caballero"
+  },
+  {
+    "username": "msosa",
+    "password": "$2b$12$9qUetQ9hqXIM05THHwYLH.4cMdkMhSDwNNA3Mrs0Zsw6tteR0jbKG",
+    "role": "user",
+    "name": "Sosa M"
+  },
+  {
+    "username": "tgarula",
+    "password": "$2b$12$CcL4WXe5kWjskLMC3vPbG.11ixZxXWzKKU3aMvjrC/fAwqDRhSG/K",
+    "role": "user",
+    "name": "Tomás Garula"
+  },
+  {
+    "username": "vpérez",
+    "password": "$2b$12$b0ZdfLJ5jK3qP9FrvS5NB.ArCBiz7MfyVxr5KwGSYa4mgyztGg/QW",
+    "role": "user",
+    "name": "Valentín Pérez"
+  },
+  {
+    "username": "vastapenco",
+    "password": "$2b$12$S0BJXiIM4KB.LHPaQbmroO4CxxcnlI/Q5xU4PlxO8Tvva8SwNMxOe",
+    "role": "user",
+    "name": "Vanessa Astapenco"
+  },
+  {
+    "username": "vpinazzo",
+    "password": "$2b$12$q0BTUHEfCgP1sGtMCDRz.OTSZMJZhkNyqyp68t38I3ly/zLcZc7dy",
+    "role": "user",
+    "name": "Verónica Pinazzo"
+  },
+  {
+    "username": "vestigarribia",
+    "password": "$2b$12$irCsRinwhcgBj1z2dUQ21OyibrPD4kLIngF9iVjxoe55O9pDfkDTC",
+    "role": "user",
+    "name": "Victor Estigarribia"
+  },
+  {
+    "username": "aleoni",
+    "password": "$2b$12$LYmPjmfoXE5q5ttsxLsJ7.mqe0Gtv3L1mxkYtLrgfB41iWt8WQk3u",
+    "role": "user",
+    "name": "Allison Leoni"
+  },
+  {
+    "username": "abentancor",
+    "password": "$2b$12$leSkE0aEWSiXkPQ3Y.byr.ty741hEZay.vJ80llBV.5MOwJQGGlam",
+    "role": "user",
+    "name": "Ana Bentancor "
+  },
+  {
+    "username": "vpérez",
+    "password": "$2b$12$IRroOdQu5.ZJzpgjJc0obefdQQvQ1b1yhbXLZJfoRkUelyTpmGQGO",
+    "role": "user",
+    "name": "Virginia Pérez"
+  },
+  {
+    "username": "jcardozo",
+    "password": "$2b$12$n/kv/ivBCroYTCT7n.doXeB98yGrgmnVIrWeIaPTSfVmIAzuK2Kb.",
+    "role": "user",
+    "name": "Joshua Cardozo"
+  },
+  {
+    "username": "ppereyra",
+    "password": "$2b$12$.5W7lVSb.zX7LALepr7Wb.IOA97r4dy4fowjUr7i7U43hJUTDdF8C",
+    "role": "user",
+    "name": "Pablo Pereyra"
+  },
+  {
+    "username": "nrodríguez",
+    "password": "$2b$12$IJqs71W5oiA2a6wJC/F63OWb2.I3p.6DHvACeDxLtJCPEO/f4CjrW",
+    "role": "user",
+    "name": "Natalia Rodríguez "
+  },
+  {
+    "username": "mpaula",
+    "password": "$2b$12$gePqWwB1X6grLxGXYA.UIuz6UpQuhuKdhxsWYH2.QBU9hNPZg/FEO",
+    "role": "user",
+    "name": "Marinele De Paula"
+  },
+  {
+    "username": "hgómez",
+    "password": "$2b$12$2utzKdJx3av9atgOrS7U4e5AHcf0U2lLVOr8NdP8QGX3bP8x1ZcDu",
+    "role": "user",
+    "name": "Helian Gómez"
+  },
+  {
+    "username": "acarbonell",
+    "password": "$2b$12$eti2AtQ4GfEUsC0.5roi5.P3hQmUEQJFelIT/Sjj.Xh2ILcBNPTgS",
+    "role": "user",
+    "name": "Andrea Carbonell"
+  },
+  {
+    "username": "vgoyret",
+    "password": "$2b$12$MsP8.U0s4kh02S7VbOtKUOjPr5s/qhg836IMJh8ty7qZwMkOjRjJu",
+    "role": "user",
+    "name": "Victoria Goyret"
+  },
+  {
+    "username": "sferreira",
+    "password": "$2b$12$80oDowa6jobax6FXpMUEdu//B7izm2NWp6klq8MM4/HRxfjG5HJEK",
+    "role": "user",
+    "name": "Sofía ferreira"
+  },
+  {
+    "username": "sdraper",
+    "password": "$2b$12$Dn7pu1VM/BylyjcaiGjwYujtoK3bDbNA1OhcMkt6/f6bMSdWmlVGO",
+    "role": "user",
+    "name": "Sofía Draper"
+  },
+  {
+    "username": "42262559",
+    "password": "$2b$12$TIOoKN4zg/Jv7oAtqJ0pme7pL7deuuMb2Ond/W36LBxxQbU0P0V46",
+    "role": "user",
+    "name": "Diego Fuentes"
+  },
+  {
+    "username": "lfleitas",
+    "password": "$2b$12$GAIcCx3kalB1gbqu6HoT7.J2J6B73PGIz6zmx75vdkiVK0WHfIs6C",
+    "role": "user",
+    "name": "Lorena Fleitas"
+  },
+  {
+    "username": "jdavid",
+    "password": "$2b$12$h8geOqm3d2ddmgry795qKu5gce0bLHmMhQZgB44SflX7C9bR/lPZi",
+    "role": "user",
+    "name": "Juan David"
+  },
+  {
+    "username": "amartínez",
+    "password": "$2b$12$uF7Fu8XoH8qH25phxelz/OCjQoEXoMRat8yV61bwXqobZu9SOj4YW",
+    "role": "user",
+    "name": "Alicia Martínez"
+  },
+  {
+    "username": "daguiar",
+    "password": "$2b$12$aXRXe5eglx85FOjW0VwKcekZxlDDMrjOiU6g5gAlovPcqLww4lY6.",
+    "role": "user",
+    "name": "Diandra de Aguiar"
+  },
+  {
+    "username": "cantúnez",
+    "password": "$2b$12$E0lUJuM8gfN4O.H0nvFvz.3JNmkTVGw.1rbAHWoNAdsGCj7pSpYte",
+    "role": "user",
+    "name": "Carolina Antúnez"
+  },
+  {
+    "username": "mleites",
+    "password": "$2b$12$SeUilHdqep/uOqhKwZZWseBpg5zmNUOJDymeoJ/OP1IuUwS0pmGfi",
+    "role": "user",
+    "name": "Matilde Leites"
+  },
+  {
+    "username": "cmarrero",
+    "password": "$2b$12$XMKTOt54/tyEyrfH.0nxMujo5ROeIkuS5b6k5aB8uXvAqVRAuR6Iu",
+    "role": "user",
+    "name": "Cristian Marrero"
+  },
+  {
+    "username": "rferreira",
+    "password": "$2b$12$Sz5LovC1WNaKigSZ.hlNquO8cVDx.Hm6fZYvXjq2.CXfDmzzRfQp6",
+    "role": "user",
+    "name": "Román Ferreira"
+  },
+  {
+    "username": "rdominzain",
+    "password": "$2b$12$HN//tvgbvRdKfzIgk0NwZe/gxKHgUBsCNemHJI28BdKxy8c69.9q.",
+    "role": "user",
+    "name": "Romina Dominzaín"
+  },
+  {
+    "username": "mnavarrine",
+    "password": "$2b$12$4mnZafTuTO6Ddjdaet/nl.NPkIyS1mYJsVJFvzA9.OQKW1U84Z9aG",
+    "role": "user",
+    "name": "Mauro Navarrine"
+  },
+  {
+    "username": "nviera",
+    "password": "$2b$12$zwnlX5immPL7Ur6eeFNfmeoZc6gg22MtvfcSu9DMWRk8EUjekiMo.",
+    "role": "user",
+    "name": "Nicolás Viera"
+  },
+  {
+    "username": "epieri",
+    "password": "$2b$12$/Oj4bYpWCrNGYpChy.yp2exqbo/6jRgbYMDXOeq9780ecS3Kfd5Hi",
+    "role": "user",
+    "name": "Esmeralda Pieri"
+  },
+  {
+    "username": "namenzaurralde",
+    "password": "$2b$12$ot.v934Yspyf04ZlvmD45uK/70tBO5Dm/Biq6khWdDB/CRghd2Ez.",
+    "role": "user",
+    "name": "Chiara Inzaurralde"
+  },
+  {
+    "username": "aduce",
+    "password": "$2b$12$T2uscxH6sZ2OXrZ4vK3y9OxeTLvERu1JJrQDlIrKMCrzukzQ7ExkC",
+    "role": "user",
+    "name": "Ana Duce"
+  },
+  {
+    "username": "lfrizzi",
+    "password": "$2b$12$3ymqgIWuvptVFbEyl5/k2eg6GHzzwkiHqcaFcHv5/wvtlLrB5ovuq",
+    "role": "user",
+    "name": "Lucía Frizzi"
+  },
+  {
+    "username": "garén",
+    "password": "$2b$12$ENa4eESzWA0qnviagLLPCO/AhB50eCzQndsGHoAV/kyao2AGtxwfe",
+    "role": "user",
+    "name": "Germán Arén"
+  },
+  {
+    "username": "jsosa",
+    "password": "$2b$12$j1aMI0WWVmYgfvFInKswjuzaTAXvf7pz4JMZfQg/XGroHMU0xdfgW",
+    "role": "user",
+    "name": "Julieta Sosa"
+  },
+  {
+    "username": "jpereira",
+    "password": "$2b$12$t2Y7eAoT.PMW6qF8lafclOj/M6kvcn06Ys8QKhR7lFo1Rh/ZE4WBe",
+    "role": "user",
+    "name": "Joaquín Pereira"
+  },
+  {
+    "username": "smiguel",
+    "password": "$2b$12$PYaSmUFDU7qGl8LzTPiYJOnad2DxC8zCKmzX4.C3Zj2IqVHsSkghW",
+    "role": "user",
+    "name": "Santiago Miguel"
+  },
+  {
+    "username": "ccastro",
+    "password": "$2b$12$ptc2mFF2KVp3S8ss45tcuOykiBuC0HIlMkgHv7xsco5ir/AS8fIam",
+    "role": "user",
+    "name": "Cris Castro"
+  },
+  {
+    "username": "igonzález",
+    "password": "$2b$12$WHSC5o7HTiD/4fc8jPfLF.fXrGvato9MbPXN/kQBnkHvPmuny.PW6",
+    "role": "user",
+    "name": "Ismael González"
+  },
+  {
+    "username": "vramirez",
+    "password": "$2b$12$TpgNVMJgX3OQ1okgsYAA5ucFQN1KlceJoj6nSILd2KHnHqIyTEkBS",
+    "role": "user",
+    "name": "Valentina Ramírez"
+  },
+  {
+    "username": "crodríguez",
+    "password": "$2b$12$KDGX7B6uER7jbVqgCtovtuGzlRotE6ycpe91M9Wds8FYq9.xD335K",
+    "role": "user",
+    "name": "Claudia Rodríguez"
+  },
+  {
+    "username": "lcabrera",
+    "password": "$2b$12$BXuu/WBZi6jname9/t5GKumeg1IBuGrCSUxYEF0i1CpIQmlAG.co.7O",
+    "role": "user",
+    "name": "Laura Cabrera"
+  },
+  {
+    "username": "rsilva",
+    "password": "$2b$12$yhB0Y8XwNLeEFKQPuakTGulAp9pr2haTZsFTwhM.KuEG8hPWaqeJS",
+    "role": "user",
+    "name": "Rodrigo Silva"
+  },
+  {
+    "username": "lconti",
+    "password": "$2b$12$eYeEEcVRI4gmqsaLyYogeepkcnbRRHL.3hSMv5BMwDimUiYEwCOvq",
+    "role": "user",
+    "name": "Laura Conti"
+  },
+  {
+    "username": "mcabrera",
+    "password": "$2b$12$VZ3JP8zrCahWJ56J1xTeH.TJmwxG4I1sk.4cWZWcHxYlTR7bOg65u",
+    "role": "user",
+    "name": "Marelen Cabrera"
+  },
+  {
+    "username": "ggimenez",
+    "password": "$2b$12$X9hev6L9ajuJ/VhkbakZ2OVeFQLTHEE9UnAsjW5BtO2aQH2j77CnW",
+    "role": "user",
+    "name": "Germán Giménez"
+  },
+  {
+    "username": "lvera",
+    "password": "$2b$12$5ef9GZFEPi/Q/KvFPx1p2OpRfbU5ki4bjwtjM/vS/LURZQ9TPRDJe",
+    "role": "user",
+    "name": "Lucio Vera"
+  },
+  {
+    "username": "gparedes",
+    "password": "$2b$12$ba2Vgf7UyC5pc.a67XCTlO32G0scRx0DkWiMcSYzfNnAJqAfR/JOe",
+    "role": "user",
+    "name": "Gonzalo Paredes"
+  },
+  {
+    "username": "bsilvestri",
+    "password": "$2b$12$2T3yX5HeKNosYPmrieLvS.q6EJMBalxUanou/oCh89bPkPwIucvHG",
+    "role": "user",
+    "name": "Bruno Silvestri"
+  },
+  {
+    "username": "cdíaz",
+    "password": "$2b$12$oXGTp6S/SLuPQHSjvE7nR.2kywaG.2dyG6Dv//Tvyr7TLm.yIPSUi",
+    "role": "user",
+    "name": "Cristian Díaz"
+  },
+  {
+    "username": "esosa",
+    "password": "$2b$12$.r19UX3C3.GMHVpgrbGANef6HX9lHiVKnfmnrcnHbxV3FCCQzFKAC",
+    "role": "user",
+    "name": "Emanuel Sosa"
+  },
+  {
+    "username": "mneves",
+    "password": "$2b$12$1.E0YGlZajCEuH01wf4iZelawGdCWoWVi8RWf22pSdAWX4H0GxnXq",
+    "role": "user",
+    "name": "Mariana Neves"
+  },
+  {
+    "username": "gesposto",
+    "password": "$2b$12$FNF1e3OOVNZNK7c.ymYTvewghH61MTjJpgvXsaxDeDPwFsiT5lIdS",
+    "role": "user",
+    "name": "Gonzalo Esposto"
+  },
+  {
+    "username": "mzinnato",
+    "password": "$2b$12$DWAtpkdOrx0Qa49KdWZR7ehX7Ct7Kkz8uRtJjF7zh.O.4Sba1IlXy",
+    "role": "user",
+    "name": "Marcos Zinnato "
+  },
+  {
+    "username": "vbernasconi",
+    "password": "$2b$12$LMD6jJDBCpG.h20H0T7q7eyAiwnQLbJusPYFpF6DauQJlqE5GkNPW",
+    "role": "user",
+    "name": "Valeria Bernasconi "
+  },
+  {
+    "username": "myiansens",
+    "password": "$2b$12$/CeiPvgaoNQpxL7/Bgcu.Oti1/WExR1Ia/MFH3lYhv1.k99Q4MxKG",
+    "role": "user",
+    "name": "Mauro Yiansens"
+  },
+  {
+    "username": "mchocho",
+    "password": "$2b$12$yXa09jXtj24KY78Nbct/SO1Mevi2MTyBrR5voZkFB71dx3bfIR8Bq",
+    "role": "user",
+    "name": "Mariela Chocho"
+  },
+  {
+    "username": "aperdomo",
+    "password": "$2b$12$UPVhOLfpYaHKk0or/y9SG.x4el5R6Cg0Ej7f31P93ApPTlSkgQm.m",
+    "role": "user",
+    "name": "Abril Perdomo"
+  },
+  {
+    "username": "mnicolini",
+    "password": "$2b$12$dSc3HL0wOdNBRmOL51n2POXl5jMHF1IOrait96gAHKfQqOvHOjNd.",
+    "role": "user",
+    "name": "Mario Nicolini"
+  },
+  {
+    "username": "ffernández",
+    "password": "$2b$12$T5NTMd13jG4Lb8C85jApB.3EsJzo4cHZZ3NcwKblmfk/X0lh5XoOa",
+    "role": "user",
+    "name": "Fabricio Fernández"
+  },
+  {
+    "username": "fferreira",
+    "password": "$2b$12$eXwFd63i6NzQhlMsM2hcAesQvokNQRSzPXU6TcovpVIt8j06tHe/i",
+    "role": "user",
+    "name": "Florencia Ferreira "
+  },
+  {
+    "username": "mfernández",
+    "password": "$2b$12$s/RXUvwazqsd6kSlgAVCnevAKPd7qVHEH8.xDSfjgPituKSN/psj2",
+    "role": "user",
+    "name": "Macarena Fernández"
+  },
+  {
+    "username": "lolivera",
+    "password": "$2b$12$pEecswWApc.tVzpMfsLo5eGQA4U8wKhAu2gVwJEndYZi3zOPNAnuu",
+    "role": "user",
+    "name": "Lucia Olivera"
+  },
+  {
+    "username": "agestal",
+    "password": "$2b$12$atTFYdzdfQM5DLqSXKuDAuQ81Ll5jy3SEWZjL7MErj/UrKy7znD8S",
+    "role": "user",
+    "name": "Alejo Gestal"
+  },
+  {
+    "username": "creyes",
+    "password": "$2b$12$GWEeHSzF6hhEz7A6CkPxFe8wV39GuIY2kXIRdL/up/aRdUnc/KTfi",
+    "role": "user",
+    "name": "Claudia Reyes"
+  },
+  {
+    "username": "lferreira",
+    "password": "$2b$12$kr.MtpwSZRk7ZQ9kgHImou/Xj6qzzYLOKhzbOBs64zsfyt1CycfXq",
+    "role": "user",
+    "name": "Lois Ferreira"
+  },
+  {
+    "username": "hduarte",
+    "password": "$2b$12$zWgMnToCTgdalFwsQBRlsOxju7g98/dmG4A30EiCBmecUPwEz9zoi",
+    "role": "user",
+    "name": "Higinio Duarte"
+  },
+  {
+    "username": "gaboal",
+    "password": "$2b$12$u8YA/T.2.KC9yY51jAZGOO.D0oNozcQD.wmKdBFlbhtB9KKr.ixxO",
+    "role": "user",
+    "name": "Gastón Aboal"
+  },
+  {
+    "username": "xpáez",
+    "password": "$2b$12$cRqfG93LW.xRtvSMIIq7bOxJYF1nKkS/Rulz4BCgEa5fSi4RrJvhC",
+    "role": "user",
+    "name": "Ximena Misa"
+  },
+  {
+    "username": "iramirez",
+    "password": "$2b$12$qRf99wWgbIRoSWmgA1/kButg82F6yJtu1bob48MY2wwmCfl6vF4VW",
+    "role": "user",
+    "name": "Iván Ramírez"
   }
 ]

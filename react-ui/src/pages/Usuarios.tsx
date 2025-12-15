@@ -134,6 +134,7 @@ export default function Usuarios() {
               </motion.div>
             </div>
           )}
+          getHora={(usuario: Usuario) => ""}
         />
       </div>
       {isModalOpen && (
