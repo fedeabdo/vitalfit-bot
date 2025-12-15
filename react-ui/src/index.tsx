@@ -7,6 +7,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'; // Import Protecte
 
 import App from './App';
 import Home from './pages/Home';
+import MyReservas from './pages/MyReservas';
 import Horarios from './pages/Horarios';
 import Usuarios from './pages/Usuarios';
 import {Login} from './pages/Login';
@@ -40,8 +41,16 @@ const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <ProtectedRoute allowedRoles={['admin', 'user']}>
+          <ProtectedRoute allowedRoles={['admin', 'profesor']}>
             <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "mis-reservas",
+        element: (
+          <ProtectedRoute allowedRoles={['admin', 'user']}>
+            <MyReservas />
           </ProtectedRoute>
         ),
       },

@@ -1,14 +1,4 @@
 {
-  "7:00": [
-    {
-      "hora": "7:00",
-      "usuario": "Laura Cabrera"
-    },
-    {
-      "hora": "7:00",
-      "usuario": "Hebenor Bermúdez"
-    }
-  ],
   "8:00": [
     {
       "hora": "8:00",
@@ -60,10 +50,6 @@
     },
     {
       "hora": "10:00",
-      "usuario": "Marco Bonino"
-    },
-    {
-      "hora": "10:00",
       "usuario": "María Emilia Diaz"
     },
     {
@@ -95,6 +81,14 @@
     {
       "hora": "16:30",
       "usuario": "Natalia Rodríguez "
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Andrea Dominzain"
+    },
+    {
+      "hora": "16:30",
+      "usuario": "Marco Bonino"
     }
   ],
   "17:30": [
@@ -139,6 +133,10 @@
     {
       "hora": "20:30",
       "usuario": "Gonzalo Paredes"
+    },
+    {
+      "hora": "20:30",
+      "usuario": "Franco Gargaglioni"
     }
   ]
 }

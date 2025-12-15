@@ -1,5 +1,5 @@
 .container {
-    max-width: 900px;
+    max-width: 130vh;
     margin:   auto;
     padding: 24px;
     border-radius: 12px;
@@ -89,3 +89,27 @@
     background-color: #FBB900;
 
   }
+
+  .iconBtn {
+  width: 64px;
+  height: 64px;
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  background-color: transparent;
+  background-image: url('../../public/Horacio.png');
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+}
+.iconBtn:hover {
+  background-image: url('../../public/Horacio2.png');
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+}

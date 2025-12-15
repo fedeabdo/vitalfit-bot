@@ -518,25 +518,29 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
 
 static async buscarHoraPorCedula(req: Request, res: Response) {
     const cedula = req.params.cedula;
-    console.log("Buscando hora por cédula:", cedula);
-    if (!cedula) {
-        res.status(400).json({ error: "Debe proporcionar una cédula." });
+    const nombre = req.query.name as string;
+    if (!cedula && !nombre) {
+        res.status(400).json({ error: "Debe proporcionar una cédula o nombre." });
         return;
     }
-
-    const usuario = await UsuariosController.getNombreByCedula(cedula);
-    if (!usuario) {
+    let usuario: string | undefined = undefined;
+    if (cedula) {
+      usuario = await UsuariosController.getNombreByCedula(cedula);
+    }
+    if (!usuario && !nombre) {
       res.status(404).json({ message: `No existe un usuario registrado con la cédula ${cedula}` });
       return;
+    } else if (nombre) {
+      usuario = nombre;
     }
-
+    
     for (const [hora, reservas] of Object.entries(ReservaController.reservas)) {
         if (reservas.some(r => r.usuario === usuario)) {
           res.status(200).json({ hora });
           return;
         }
     }
-    res.status(404).json({ message: `No hay reservas registradas hoy para la cédula ${cedula}` });
+    res.status(404).json({ message: `No hay reservas registradas para ${cedula || nombre}` });
     return;
 }
 }

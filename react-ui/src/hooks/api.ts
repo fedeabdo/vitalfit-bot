@@ -4,7 +4,7 @@ import { fetchWithAuth } from "./fetchWithAuth";
 type ReservasAPIResponse = Record<string, Reserva[]>;
 
 export async function fetchReservas() {
-  const res = await fetchWithAuth('http://5.161.43.130:5100/api/reservas');
+  const res = await fetchWithAuth('http://localhost:5100/api/reservas');
   if (!res.ok) throw new Error('Failed to fetch');
   const data: ReservasAPIResponse = await res.json();
 
