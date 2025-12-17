@@ -24,7 +24,7 @@ const fetchAuthToken = async () => {
         });
         authToken = response.data.token;
         const decodedToken = jwt.decode(authToken);
-        tokenExpiry = decodedToken.exp * 1000; 
+        tokenExpiry = decodedToken.exp * 1000;
         console.log('✅ Token fetched successfully');
     } catch (error) {
         console.error('❌ Error fetching token:', error.message);
@@ -33,7 +33,7 @@ const fetchAuthToken = async () => {
 
 const refreshAuthTokenIfNeeded = async () => {
     const now = Date.now();
-    if (!authToken || !tokenExpiry || now >= tokenExpiry - 60000) { 
+    if (!authToken || !tokenExpiry || now >= tokenExpiry - 60000) {
         console.log('🔄 Refreshing token...');
         await fetchAuthToken();
     }
@@ -203,7 +203,7 @@ const handlerCambio = async (ctx, { flowDynamic }) => {
     }
 };
 
-const handlerBorrar = async (ctx, { flowDynamic }) =>  {
+const handlerBorrar = async (ctx, { flowDynamic }) => {
     const userMessage = ctx.body;
 
     const validationError = validateDeleteCedulaMessage(userMessage);
@@ -371,13 +371,35 @@ function withRateLimitAndRedirect(handler) {
     return async (ctx, tools) => {
         const userId = normalizeSenderNumber(ctx.from);
 
-        // Arreglo para el número de reenvío Antonela
-        const forwardNumber = '59899285083@c.us';
+        // Mapeo de número origen -> número destino para reenvío
+        const forwardMapping = {
+            // Agrega aquí más mapeos: 'numero_origen': 'numero_destino@c.us'
+            '2950692905165':    '59899285083@c.us', // Antonela
+            '230309182337032':  '59896000994@c.us', // Gonzalo Esposto
+            '239178155606053':  '59898969635@c.us', // Valentín Pérez
+            '138916640337920':  '59891277639@c.us', // Alejo Gestal
+            '251204181430519':  '59899261686@c.us', // Joselin Damián
+            '198706729066579':  '59898415622@c.us', // Augusto Deganello
+            '240024314462273':  '59899488060@c.us', // Jorge Fuentes
+            '94785700413461':   '59895620339@c.us', // Gastón Aboal
+            '232079282352':     '59899926056@c.us', // Óscar Gutiérrez
+            '227717214396':     '59899075706@c.us', // Claudia Reyes
+            '211999669645456':  '59898815405@c.us', // Estefanía Rosso
+            '175831699697889':  '59898588641@c.us', // Verónica Pinazzo
+            '87226658594862':   '59898462728@c.us', // Antonio Manzi
+            '87527239205066':   '59899578269@c.us', // Vanessa Astapenco
+            '264187834007800':  '59891069952@c.us', // Guille González
+            '129308714660089':  '59899757122@c.us', // Virginia Pérez
+            '124249276719227':  '59898155330@c.us', // Allison
+
+        };
+
         const originalFlowDynamic = tools.flowDynamic;
         const flowDynamicWithForward = async (msg) => {
             await originalFlowDynamic(msg);
-            // Forward to 2950692905165
-            if (userId === '2950692905165') {
+            // Forward si el usuario tiene un número de destino configurado
+            const forwardNumber = forwardMapping[userId];
+            if (forwardNumber) {
                 let forwardMsg = msg;
                 if (Array.isArray(forwardMsg)) forwardMsg = forwardMsg.join('\n');
                 if (typeof forwardMsg !== 'string') forwardMsg = String(forwardMsg);
