@@ -391,7 +391,7 @@ function withRateLimitAndRedirect(handler) {
             '264187834007800':  '59891069952@c.us', // Guille González
             '129308714660089':  '59899757122@c.us', // Virginia Pérez
             '124249276719227':  '59898155330@c.us', // Allison
-
+            '258256484204578':  '59899485333@c.us'  // Franco Gargaglioni
         };
 
         const originalFlowDynamic = tools.flowDynamic;
