@@ -23,7 +23,7 @@ function List<T>({ data, renderItem, getHora, onClick }: ListProps<T>) {
 
   return (
     <Font family="Lexend">
-      <ul className={styles.list}>
+      <ul className={`${styles.list} ${styles.scrollable}`}>
         {data.map((item, index) => (
           <ListItem
             key={index}

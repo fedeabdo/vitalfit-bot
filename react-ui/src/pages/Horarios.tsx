@@ -1,5 +1,5 @@
 import styles from '../css/Horarios.module.css';
-import { DeleteHorarioPayload, HorarioJson, tiempo } from '../types/types';
+import { DeleteHorarioPayload, HorarioJson, HoraUsuarios, tiempo } from '../types/types';
 import Font from 'react-font';
 import { IconContext } from 'react-icons';
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
@@ -102,9 +102,9 @@ export default function Horarios() {
     return (
         <div className={styles.fullPage}>
             <div className={styles.container}>
-                <Font family="Bungee Inline">
+                <Font family="Lilita One">
                     <div className={styles.header}>
-                        <h2>Horarios</h2>
+                        <h2>HORARIOS</h2>
                         <button
                             className={styles.iconButtonAdd}
                             title="Agregar Horario"
@@ -165,6 +165,7 @@ export default function Horarios() {
                             </motion.div>
                         </div>
                     )}
+                    getHora={(item: HoraUsuarios) => item.hora}
                     data={sortedHorarios}
                 />
             </div>

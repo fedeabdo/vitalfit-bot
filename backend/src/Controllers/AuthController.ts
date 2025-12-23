@@ -54,4 +54,5 @@ export class AuthController {
       res.status(500).json({ error: "Failed to generate password hash" });
     }
   }
+
 }

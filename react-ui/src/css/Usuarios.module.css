@@ -1,29 +1,44 @@
-.fullPage{
-    padding: 45px;
-    height: 100%;
-  }
+.container {
+  min-height: 70vh;
+  z-index: 1;
+  max-width: 780px;
+  margin: 40px auto;
+  padding: 28px;
+  border-radius: 12px;
 
-  .container {
-    max-width: 900px;
-    margin:   auto;
-    padding: 24px;
-    background-color: #8B9AA5;
-    border-radius: 12px;
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
-  }
+  background: #b7bfdc;
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  backdrop-filter: blur(10px);
+}
   
-  .container h2 {
-    display: flex;
-    text-align: center;
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    font-weight: 900;
-    color: black;
-    text-transform: uppercase;
-    border-bottom: 2px solid #FBB900;
-    padding-bottom: 0.5rem;
-    display: inline-block; /* Allow h2 to align with the icon */
-  }
+.container h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  color: #1f2f44;
+
+  border-bottom: none;
+  margin-top: 12px;
+  margin-bottom: 10px;
+  border-bottom: 7px solid #FBB900;
+}
+
+.fullPage{
+  z-index: 1;
+  padding: 45px;
+  height: 100%;
+  background: radial-gradient(
+    circle at top,
+    #2a4156,
+    #0b141c 70%
+  );
+  
+}
 
   .header {
     display: flex;
@@ -41,7 +56,7 @@
     font-weight: 900;
     color: black;
     text-transform: uppercase;
-    border-bottom: 2px solid #FBB900; /* Add underline */
+
     padding-bottom: 0.5rem;
   }
 
@@ -52,7 +67,6 @@
     left: 0;
     right: 0;
     height: 2px;
-    background-color: #FBB900; /* Underline color */
     z-index: -1;
   }
 
@@ -83,3 +97,66 @@
     cursor: pointer;
     margin-left: 1rem; /* Add spacing between h2 and the icon */
   }
+  .overlay {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    z-index: 1000;
+  }
+
+.syncButton {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  padding: 14px 22px;
+  border-radius: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+
+  background: linear-gradient(180deg, #fbb900, #f5a700);
+  color: #1f2f44;
+  border: none;
+
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  transition: all 0.2s ease;
+}
+
+.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.loading {
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.96); }
+  100% { transform: scale(1); }
+}
+
+.syncButton:disabled {
+  opacity: 0.6;
+}
+
+
+
+
+  @media (min-width: 1024px) {
+  .container {
+    max-width: 900px;
+  }
+}

@@ -49,6 +49,8 @@ export const useAddReserva = () => {
       }
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userReservation'] });
+      queryClient.invalidateQueries({ queryKey: ['availablePlacesToday'] });
       queryClient.invalidateQueries({ queryKey: ['reservas'] });
     },
     retry: false,

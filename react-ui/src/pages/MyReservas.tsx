@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "../context/AuthContext";
 import { HoraUsuarios } from "../types/types";
-import styles from "../css/Home.module.css";
+import styles from "../css/MyReservas.module.css";
 import { FaPlus, FaTrashAlt } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { motion } from "framer-motion";
@@ -11,11 +11,36 @@ import Font from "react-font";
 import { useDeleteReserva } from "../hooks/useDeleteReserva";
 import { useAddReserva } from "../hooks/useAddReserva";
 import { useUserReservation } from "../hooks/useUserReservation";
-import List from "../components/List";
 import { fetchReservas } from "../hooks/api";
+
+import List from "../components/List";
 import ConfirmModal from '../components/ConfirmModal';
+import DialogCloud from "../components/DialogCloud";
+
 
 export default function MyReservas() {
+
+
+  const dialogMessages = [
+    "¡Esperamos torta!",
+    "A mi tampoco me gustan las bulgaras :(",
+    "No vale anotarse y no ir!",
+    "Nando no me habilitó los días de licencia :(",
+    "Ya conociste a las rumanas?",
+    "Yo si tengo un alumno/a favorito...",
+    "20 + 20 = 60 no?",
+    "¿Sabías que Nando canta en la ducha?",
+    "5 series de anotarse al fallo",
+    "Nando me habilitó las cámaras para ver si realmente fuiste a entrenar O.O",
+    "Adivino... 18:30?",
+    "Que bueno verte acá denuevo!",
+    "Rocordá cancelar si no vas a ir :)",
+    "No se cancela por lluvia :D"
+  ];
+
+    const shuffle = (arr: string[]) =>
+  [...arr].sort(() => Math.random() - 0.5);
+
   const { name } = useAuth();
   const { data: userReservationHour } = useUserReservation();
   const [selectedUsuario, setSelectedUsuario] = useState<string | null>(null);
@@ -23,6 +48,42 @@ export default function MyReservas() {
   const [usuarioToDelete, setUsuarioToDelete] = useState<string | null>(null);
   const [addSuccess, setAddSuccess] = useState(false);
   const [addError, setAddError] = useState('');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [dialogText, setDialogText] = useState<string | null>(null);
+  const [queue, setQueue] = useState(() => shuffle(dialogMessages));
+  const [showHeartDialog, setShowHeartDialog] = useState(false);
+
+
+  const parseError = (errorMsg: string) => {
+    errorMsg = errorMsg.replace('{"error":"', '');
+    errorMsg = errorMsg.replace('"}', '');
+    return errorMsg;
+  }
+
+  const getRandomMessage = () => {
+    if (dialogMessages.length === 1) return dialogMessages[0];
+
+    let next;
+    do {
+      next =
+        dialogMessages[Math.floor(Math.random() * dialogMessages.length)];
+    } while (next === dialogText);
+
+    return next;
+  };
+
+
+  const getNextMessage = () => {
+    setQueue(prev => {
+      if (prev.length === 1) {
+        return shuffle(dialogMessages);
+      }
+      return prev.slice(1);
+    });
+
+    return queue[0];
+  };
+
 
   const queryClient = useQueryClient();
   const {
@@ -35,6 +96,23 @@ export default function MyReservas() {
     queryFn: fetchReservas,
     staleTime: 0,
   });
+
+
+  useEffect(() => {
+  if (!isDialogOpen) return;
+
+  const handleClickOutside = () => {
+    setIsDialogOpen(false);
+  };
+
+  document.addEventListener("click", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("click", handleClickOutside);
+  };
+}, [isDialogOpen]);
+
+
 
   const handleUsuarioClick = (usuario: string) => {
       setSelectedUsuario(usuario === name ? null : name);
@@ -60,11 +138,21 @@ export default function MyReservas() {
         },
         onError: (error) => {
           setAddError(error instanceof Error ? error.message : "Error al agregar reserva");
-          setTimeout(() => setAddError(''), 3000);
+          setTimeout(() => setAddError(''), 5000);
         },
       }
     );
   };
+
+
+  const isJosefina =
+    name?.toLowerCase().trim() === "josefina barceló";
+
+  const handleHeartClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowHeartDialog(prev => !prev);
+  };
+
 
   const handleCancelDelete = () => {
     setIsConfirmModalOpen(false);
@@ -94,143 +182,215 @@ export default function MyReservas() {
     setIsConfirmModalOpen(true);
   };
 
+const handleHeadClick = (e: React.MouseEvent) => {
+  e.stopPropagation();
+  (e.nativeEvent as MouseEvent).stopImmediatePropagation();
+
+  setIsDialogOpen(prev => !prev);
+
+  if (!isDialogOpen) {
+    setDialogText(getNextMessage());
+  } else {
+    setDialogText(getNextMessage());
+  }
+};
+
+
+
+
+
 
   if (isLoading) return <div className={styles.loading}>Loading...</div>;
   if (isError) return <div className={styles.error}>Error: {(error as Error).message}</div>;
 
   return (
-    <div className={styles.fullPage}>
-      <div className="leftColumn">
-        <button className={styles.iconBtn} ></button>
-      </div>
+    <>
+      <div className={styles.headWrapper}>
+            <button
+            className={styles.iconBtn}
+            onClick={handleHeadClick}
+            aria-label="Ayuda"
+          />
 
-      <div className={styles.container}>
-        <Font family="Bungee Inline">
-          <h2>Mis Reservas</h2>
-        </Font>
-        {name && (
-          <p style={{ marginBottom: '20px', textAlign: 'center', color: '#666' }}>
-            Usuario: <strong>{name}</strong>
-          </p>
-        )}
+          <span className={styles.mouthAnchor} >
 
-        {userReservationHour && (
-          <p style={{
-            marginBottom: '20px',
-            textAlign: 'center',
-            color: '#2e7d32',
-            fontWeight: 'bold',
-            fontSize: '1.1em',
-            padding: '10px',
-            backgroundColor: '#e8f5e9',
-            borderRadius: '4px'
-          }}>
-            Tu reserva: <span style={{ fontSize: '1.2em' }}>{userReservationHour}</span>
-          </p>
-        )}
+          {isDialogOpen && (
+              <div onClick={e => e.stopPropagation()}>
+                <DialogCloud isOpen text={dialogText ?? ""} />
+              </div>
+          )}
+          </span>
+        </div>
+    
+      <main className={styles.fullPage}>
+        <div className="leftColumn" style={{ position: "relative" }}>
 
-        {addSuccess && (
-          <div style={{
-            padding: '10px',
-            marginBottom: '10px',
-            backgroundColor: '#d4edda',
-            color: '#155724',
-            borderRadius: '4px',
-            textAlign: 'center'
-          }}>
-            ✓ Reserva agregada correctamente
-          </div>
-        )}
+        </div>
 
-        {addError && (
-          <div style={{
-            padding: '10px',
-            marginBottom: '10px',
-            backgroundColor: '#f8d7da',
-            color: '#721c24',
-            borderRadius: '4px',
-            textAlign: 'center'
-          }}>
-            ✗ {addError}
-          </div>
-        )}
 
-        
+        <div className={styles.container}>
+          <Font family="Lilita One"  >
+            <h2>MIS RESERVAS</h2>
+          </Font>
 
-        <List<HoraUsuarios>
-          data={reservas || []}
-          renderItem={(reserva: HoraUsuarios) => {
-            const isUserReserved = userReservationHour === reserva.hora;
-            return (
-            <div key={reserva.hora} style={{
-              backgroundColor: isUserReserved ? '#07ce3250' : 'transparent',
-              padding: isUserReserved ? '8px' : '0',
-              borderRadius: isUserReserved ? '4px' : '0',
-              border: isUserReserved ? '2px solid #254e01ff' : 'none',
-              width: '100%',
+          {userReservationHour && (
+            <p style={{
+              marginBottom: '20px',
+              textAlign: 'center',
+              color: '#2e7d32',
+              fontWeight: 'bold',
+              fontSize: '1.1em',
+              padding: '10px',
+              backgroundColor: '#e8f5e9',
+              borderRadius: '4px'
             }}>
-              <strong>{reserva.hora}</strong>
-              {isUserReserved && <span style={{ marginLeft: '10px', color: '#423838ff', fontWeight: 'bold' }}>✓ Reservado</span>}
-              <button
-                onClick={() => handleAddClick(reserva.hora)}
-                className={styles.iconButton}
-                title="Agregar mi reserva"
-              >
-                <IconContext.Provider value={{ color: "green" }}>
-                  <div>
-                    <FaPlus className={styles.iconButtonAdd} />
-                  </div>
-                </IconContext.Provider>
-              </button>
-              {/* Names list hidden - keep only add/delete functionality */}
-              {name && (
-                <motion.span
-                  className={styles.iconButtons}
-                  initial={false}
-                  animate={
-                    selectedUsuario === name
-                      ? { opacity: 1, scale: 1 }
-                      : { opacity: 0, scale: 0.5 }
-                  }
-                  transition={{
-                    duration: 0.25,
-                    ease: [0.175, 0.885, 0.32, 1.275],
-                  }}
+              Tu reserva: <span style={{ fontSize: '1.2em' }}>{userReservationHour}</span>
+            </p>
+          )}
+
+          {addSuccess && (
+            <div style={{
+              padding: '10px',
+              marginBottom: '10px',
+              backgroundColor: '#d4edda',
+              color: '#155724',
+              borderRadius: '4px',
+              textAlign: 'center'
+            }}>
+              ✓ Reserva agregada correctamente
+            </div>
+          )}
+
+          {addError && (
+            <div style={{
+              padding: '10px',
+              marginBottom: '10px',
+              backgroundColor: '#f8d7da',
+              color: '#721c24',
+              borderRadius: '4px',
+              textAlign: 'center'
+            }}>
+              ✗ {parseError(addError)}
+            </div>
+          )}
+      
+          <List<HoraUsuarios>
+            data={reservas || []}
+            renderItem={(reserva: HoraUsuarios) => {
+              const isUserReserved = userReservationHour === reserva.hora;
+
+              return (
+                <div
+                  key={reserva.hora}
                   style={{
-                    pointerEvents:
-                      selectedUsuario === name ? "auto" : "none",
+                    backgroundColor: isUserReserved ? '#07ce3250' : 'transparent',
+                    padding: '8px', // keep constant to avoid jump
+                    borderRadius: '4px',
+                    border: isUserReserved ? '2px solid #254e01ff' : '2px solid transparent',
+                    width: '100%',
                   }}
                 >
-                  <button
-                    onClick={() => handleDeleteClick(reserva.hora, name)}
-                    className={styles.iconButton}
-                    title="Eliminar mi reserva"
+                  {/* GRID ROW */}
+                  <div className={styles.listItemContent}>
+                    {/* LEFT */}
+                    <strong>{reserva.hora}</strong>
+
+                    {/* CENTER (always rendered, opacity animated) */}
+                    <motion.span
+                      initial={false}
+                      animate={{ opacity: isUserReserved ? 1 : 0 }}
+                      transition={{ duration: 0.2 }}
+                      className={styles.reservado}
+                    >
+                      ✓ Reservado
+                    </motion.span>
+
+                    {/* RIGHT ACTIONS */}
+                    <div className={styles.actions}>
+                      {!isUserReserved && (
+                        <button
+                          onClick={() => handleAddClick(reserva.hora)}
+                          className={styles.iconButton}
+                          title="Agregar mi reserva"
+                        >
+                          <IconContext.Provider value={{ color: 'green' }}>
+                            <FaPlus className={styles.iconButtonAdd} />
+                          </IconContext.Provider>
+                        </button>
+                      )}
+
+                      {isUserReserved && (
+                        <motion.button
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{
+                            duration: 0.2,
+                            ease: 'easeOut',
+                          }}
+                          onClick={() => handleDeleteClick(reserva.hora, name)}
+                          className={styles.iconButton}
+                          title="Eliminar mi reserva"
+                        >
+                          <IconContext.Provider value={{ color: 'red' }}>
+                            <FaTrashAlt />
+                          </IconContext.Provider>
+                        </motion.button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            }}
+            getHora={(reserva: HoraUsuarios) => reserva.hora}
+          />
+
+            {name && (
+              <p className={styles.username} style={{ position: "relative" }}>
+                {name}
+
+              {isJosefina && (
+                <>
+                  <span
+                    onClick={handleHeartClick}
+                    style={{
+                      marginLeft: "8px",
+                      cursor: "pointer",
+                      fontSize: "1.2em",
+                    }}
+                    title="Usuario especial"
                   >
-                    <IconContext.Provider value={{ color: "red" }}>
-                      <div>
-                        <FaTrashAlt />
-                      </div>
-                    </IconContext.Provider>
-                  </button>
-                </motion.span>
+                    <motion.span
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      ❤️
+                    </motion.span>
+                  </span>
+
+                  {showHeartDialog && (
+                    <div style={{ position: "absolute", left: "0%", bottom: "0%" }}>
+                      <DialogCloud
+                        isOpen
+                        text="⭐ Amiga del desarrollador"
+                      />
+                    </div>
+                  )}
+                </>
               )}
-            </div>
-            );
-          }}
-          getHora={(reserva: HoraUsuarios) => reserva.hora}
-        />
+            </p>
+          )}
+        </div>
 
-      </div>
+        {isConfirmModalOpen && (
+          <ConfirmModal
+            textoAConfirmar={`¿Está seguro de que desea eliminar la reserva ${usuarioToDelete}?`}
+            onSelect={handleConfirmDelete}
+            onClose={handleCancelDelete}
+            value={usuarioToDelete}
+          />
+        )}
 
-      {isConfirmModalOpen && (
-        <ConfirmModal
-          textoAConfirmar={`¿Está seguro de que desea eliminar la reserva ${usuarioToDelete}?`}
-          onSelect={handleConfirmDelete}
-          onClose={handleCancelDelete}
-          value={usuarioToDelete}
-        />
-      )}
-
-    </div>
+      </main>
+    </>
   );
 }

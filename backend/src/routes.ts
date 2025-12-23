@@ -33,6 +33,7 @@ router.use(authenticateJWT); // Apply middleware to all routes below
 router.get('/usuarios', authorizeRoles('admin'), UsuariosController.getUsuarios);
 router.post('/usuarios', authorizeRoles('admin'), UsuariosController.addUsuario);
 router.delete('/usuarios', authorizeRoles('admin'), UsuariosController.deleteUsuario);
+router.post('/usuarios/sync', authorizeRoles('admin'), UsuariosController.syncUsers);
 // Development-only route
 router.get('/usuarios/removeDuplicates', UsuariosController.removeDuplicateUsuarios);
 
