@@ -9,3 +9,4 @@ docker-compose.yaml
 DockerFile
 key
 key.pub
+backend/src/utils/google-sheets.json

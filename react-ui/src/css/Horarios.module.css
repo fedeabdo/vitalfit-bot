@@ -1,16 +1,44 @@
+.container {
+  min-height: 70vh;
+  z-index: 1;
+  max-width: 780px;
+  margin: 40px auto;
+  padding: 28px;
+  border-radius: 12px;
+
+  background: #b7bfdc;
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  backdrop-filter: blur(10px);
+}
+  
+.container h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  color: #1f2f44;
+
+  border-bottom: none;
+  margin-top: 12px;
+  margin-bottom: 10px;
+  border-bottom: 7px solid #FBB900;
+}
+
 .fullPage{
-    padding: 45px;
-
-  }
-
-  .container {
-    max-width: 900px;
-    margin:   auto;
-    padding: 24px;
-    background-color: #8B9AA5;
-    border-radius: 12px;
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
-  }
+  z-index: 1;
+  padding: 45px;
+  height: 100%;
+  background: radial-gradient(
+    circle at top,
+    #2a4156,
+    #0b141c 70%
+  );
+  
+}
 
   .header {
     display: flex;
@@ -28,22 +56,7 @@
     font-weight: 900;
     color: black;
     text-transform: uppercase;
-    border-bottom: 2px solid #FBB900; /* Add underline */
     padding-bottom: 0.5rem;
-  }
-
-  
-  .container h2 {
-    display: flex;
-    text-align: center;
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    font-weight: 900;
-    color: black;
-    text-transform: uppercase;
-    border-bottom: 2px solid #FBB900;
-    padding-bottom: 0.5rem;
-    display: inline-block; /* Allow h2 to align with the icon */
   }
 
   .iconButton{

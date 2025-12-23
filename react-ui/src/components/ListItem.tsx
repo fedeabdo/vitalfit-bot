@@ -16,14 +16,18 @@ export default function ListItem<T>({
 }: ListItemProps<T>) {
   const { data, isLoading } = useAvailablePlaces();
 
-  // Find the matching hour from the API response
-  const horario = data?.horarios.find(
-    (h) => h.hora.trim() === hora.trim()
-  );
+  const normalizedHora = hora?.trim();
+
+  const horario = data?.horarios.find((h) => {
+    if (!h?.hora || !normalizedHora) return false;
+    return h.hora.trim() === normalizedHora;
+  });
+
+
 
   const className = isLoading
     ? styles.listItem
-    : horario && horario.lugaresDisponibles > 0
+    : horario && horario.disponible
     ? `${styles.listItem} ${styles.notUsed}`
     : `${styles.listItem} ${styles.used}`;
 

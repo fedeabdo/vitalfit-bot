@@ -1,14 +1,18 @@
 :global(html, body, #root) {
   height: 100%;
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+background:
+    radial-gradient(
+      circle at center,
+      rgba(255,255,255,0.08),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #243949, #0f2027);
+  
 }
-
 .container {
   min-height: 100vh;
-  background: #050505;
-  background: radial-gradient(circle,rgba(5, 5, 5, 1) 0%, rgba(18, 18, 18, 1) 50%, rgba(59, 59, 59, 1) 100%);
   display: flex;
   flex-direction: column; 
+  
 }

@@ -34,6 +34,8 @@ export const useDeleteReserva = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['reservas'] });
+      queryClient.invalidateQueries({ queryKey: ['userReservation'] });
+      queryClient.invalidateQueries({ queryKey: ['availablePlacesToday'] });
     },
     onError: (error) => {
       console.error("❌ Mutation failed:", error);

@@ -1,28 +1,35 @@
-.list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border: 2px solid #FBB900;
-  border-radius: 12px;
-  overflow-y: scroll;
-  max-height: 60vh;
-}
+
 
 .listItem {
-  padding: 16px;
-  border-bottom: 1px solid #ddd;
-  background-color: white;
-  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
+  padding: 16px 20px;
+  margin: 8px 12px;
+
+  border-radius: 14px;
+  border: none;
+
+
+box-shadow:
+  0 6px 14px rgba(0,0,0,0.12);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   font-weight: 600;
-  color: #333;
-  transition: background-color 0.3s ease;
+  font-size: 1.05rem;
+  
+}
+
+.listItem small {
+  opacity: 0.7;
+  font-weight: 500;
 }
 
 .listItem:hover {
-  background-color: #fbe7d1;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
 .empty,
@@ -35,9 +42,25 @@
 }
 
 .used {
-  background-color: #ffcccc;
+  background: linear-gradient(
+    135deg,
+    #e6e9ef,
+    #fcd8d8
+  );
+  color: #8a96a8;
 }
 
 .notUsed {
-  background-color: #ccffcc;
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #cac9f9
+  );
+}
+
+
+@media (max-width: 768px) {
+  .listItem {
+    margin: 8px 0;
+  }
 }

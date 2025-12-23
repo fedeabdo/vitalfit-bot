@@ -4,6 +4,8 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { fetchUsuarios } from '../hooks/api';
 import { useDeleteUsuario } from '../hooks/useDeleteUsuario';
+import { useSyncUsuarios } from "../hooks/useSyncUsuarios";
+
 
 import styles from "../css/Usuarios.module.css";
 import Font from 'react-font';
@@ -16,6 +18,7 @@ import List from '../components/List';
 import AddUserModal from "../components/AddUserModal";
 import ConfirmModal from '../components/ConfirmModal';
 
+
 export default function Usuarios() {
   const queryClient = useQueryClient();
   const { data: usuarios, isLoading, isError, error } = useQuery({
@@ -25,6 +28,7 @@ export default function Usuarios() {
 
   const { mutate: deleteUsuario } = useDeleteUsuario();
   const {mutate: addUsuario} = useAddUsuario();
+  const { mutate: syncUsuarios, isPending: isSyncing } = useSyncUsuarios();
   const [selectedUsuario, setSelectedUsuario] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
@@ -85,9 +89,9 @@ export default function Usuarios() {
   return (
     <div className={styles.fullPage}>
       <div className={styles.container}>
-        <Font family="Bungee Inline">
+        <Font family="Lilita One">
           <div className={styles.header}>
-            <h2>Usuarios</h2>
+            <h2>USUARIOS</h2>
             <button
               className={styles.iconButtonAdd}
               title="Add User"
@@ -152,6 +156,21 @@ export default function Usuarios() {
           value={usuarioToDelete}
       />
       )}
+
+      <button
+        className={`${styles.syncButton} ${isSyncing ? styles.loading : ""}`}
+        onClick={() => syncUsuarios()}
+        disabled={isSyncing}
+      >
+        {isSyncing ? (
+          <span className={styles.spinner} />
+        ) : (
+          "Sincronizar usuarios"
+        )}
+      </button>
+      {isSyncing && <div className={styles.overlay}>Sincronizando usuarios…</div>}
+
+
     </div>
   );
 }
