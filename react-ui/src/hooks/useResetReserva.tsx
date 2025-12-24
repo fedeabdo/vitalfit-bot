@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { fetchWithAuth } from "./fetchWithAuth";
 
 const resetReserva = async () => {
-  const res = await fetchWithAuth("http://5.161.43.130:5100/api/reservas/reset", {
+  const res = await fetchWithAuth("https://vitalfit.uy/api/reservas/reset", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -14,7 +14,7 @@ export const useDeleteReserva = () => {
     mutationFn: async ({ hora, nombre }: DeleteReservaVars) => {
       const reserva: DeleteReserva = { usuario: nombre };
     
-      const response = await fetchWithAuth("http://localhost:5100/api/reservas", {
+      const response = await fetchWithAuth("https://vitalfit.uy/api/reservas", {
         method: "DELETE",
         body: JSON.stringify(reserva),
         headers: {

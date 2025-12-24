@@ -12,7 +12,7 @@ export const useEditHorario = () => {
       const timeout = setTimeout(() => controller.abort(), 5000);
 
       try {
-        const response = await fetchWithAuth("http://5.161.43.130:5100/api/horarios", {
+        const response = await fetchWithAuth("https://vitalfit.uy/api/horarios", {
           method: "PUT",
           body: JSON.stringify(horario),
           headers: {
