@@ -10,7 +10,7 @@ export const useDeleteUsuario = () => {
 
   return useMutation({
     mutationFn: async ({ nombre }: DeleteUsuarioPayload) => {
-      const response = await fetchWithAuth(`http://5.161.43.130:5100/api/usuarios`, {
+      const response = await fetchWithAuth(`https://vitalfit.uy/api/usuarios`, {
         method: 'DELETE',
         body: JSON.stringify({ nombre }),
         headers: {

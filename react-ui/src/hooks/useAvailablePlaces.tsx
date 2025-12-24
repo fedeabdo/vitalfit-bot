@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
 import { HorariosHoyResponse } from '../types/types';
 
-const API_URL = 'http://localhost:5100/api';
+const API_URL = 'https://vitalfit.uy/api';
 
 export const useAvailablePlaces = () => {
   const { isAuthenticated } = useAuth();

@@ -16,7 +16,7 @@ for (let i = 2; i < process.argv.length; i++) {
 }
 
 (async () => {
-  const baseUrl = process.env.BACKEND_URL || argv.url || 'http://localhost:5100';
+  const baseUrl = process.env.BACKEND_URL || argv.url || 'https://vitalfit.uy';
   const adminsPath = path.join(__dirname, '..', 'src', 'data', 'admins.json');
   const backupPath = adminsPath + '.bak-' + Date.now();
   const reportPath = argv.report || path.join(__dirname, 'fetch_and_update_admins.report.json');

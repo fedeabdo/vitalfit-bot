@@ -4,7 +4,7 @@ import { fetchWithAuth } from "./fetchWithAuth";
 type ReservasAPIResponse = Record<string, Reserva[]>;
 
 export async function fetchReservas() {
-  const res = await fetchWithAuth('http://localhost:5100/api/reservas');
+  const res = await fetchWithAuth('https://vitalfit.uy/api/reservas');
   if (!res.ok) throw new Error('Failed to fetch');
   const data: ReservasAPIResponse = await res.json();
 
@@ -15,12 +15,12 @@ export async function fetchReservas() {
 }
 
 export const fetchUsuarios = async () => {
-  const response = await fetchWithAuth("http://5.161.43.130:5100/api/usuarios");
+  const response = await fetchWithAuth("https://vitalfit.uy/api/usuarios");
 
   if (!response.ok) {
     throw new Error("Failed to fetch usuarios");
   }
-  
+
   const data = await response.json();
 
   if (Array.isArray(data) && typeof data[0] === 'object' && 'nombre' in data[0]) {
@@ -32,7 +32,7 @@ export const fetchUsuarios = async () => {
 };
 
 export const fetchHorarios = async (): Promise<HorarioJson[]> => {
-  const response = await fetchWithAuth('http://5.161.43.130:5100/api/horarios');
+  const response = await fetchWithAuth('https://vitalfit.uy/api/horarios');
   const data: Record<string, string[]> = await response.json();
 
   return Object.entries(data).map(([diaHora, usuarios]) => ({

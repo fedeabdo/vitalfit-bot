@@ -7,7 +7,7 @@ export const useSyncUsuarios = () => {
   return useMutation({
     mutationFn: async () => {
       const res = await fetchWithAuth(
-        "http://localhost:5100/api/usuarios/sync",
+        "https://vitalfit.uy/api/usuarios/sync",
         { method: "POST" }
       );
 
