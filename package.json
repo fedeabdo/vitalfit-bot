@@ -2,5 +2,8 @@
   "dependencies": {
     "node-cron": "^3.0.3",
     "nodemailer": "^7.0.3"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2"
   }
 }

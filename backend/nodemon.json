@@ -1,7 +1,7 @@
 {
-  "watch": ["dist"],
-  "ext": "js,json",
-  "exec": "node dist/index.js",
-  "ignore": ["dist/data/*.json"]
+  "watch": ["src"],
+  "ext": "ts,json",
+  "exec": "node --max-old-space-size=2048 -r ts-node/register src/index.ts",
+  "ignore": ["src/data/*.json"]
 }
 
