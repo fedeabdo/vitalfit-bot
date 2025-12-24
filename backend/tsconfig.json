@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
     "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "rootDir": "./src",
     "outDir": "./dist",
-    "rootDir": "./src"
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": false,
+    "sourceMap": false
   }
 }
+
