@@ -1,5 +1,7 @@
 {
-    "watch": ["src"],
-    "ext": "ts,js,json",
-    "ignore": ["***/data/*.json"]
-  }
+  "watch": ["dist"],
+  "ext": "js,json",
+  "exec": "node dist/index.js",
+  "ignore": ["dist/data/*.json"]
+}
+
