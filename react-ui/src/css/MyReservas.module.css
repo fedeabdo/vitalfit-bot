@@ -75,8 +75,8 @@
   }
   
   .iconButton {
-        margin-left: 0.5rem;
-    margin-right: 1rem;
+    margin-left: 0rem;
+    margin-right: 1.5rem;
     font-size: 2.5rem;
     background: none;
     border: none;
@@ -91,8 +91,8 @@
   }
 
   .iconButtonAdd{
-    margin-left: 0.5rem;
-    margin-right: 1rem;
+    margin-left: 0rem;
+    margin-right: 1.5rem;
     width: 36px;
     height: 36px;
     border-radius: 50%;
