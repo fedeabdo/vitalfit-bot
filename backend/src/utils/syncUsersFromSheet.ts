@@ -1,9 +1,13 @@
 import fs from "fs-extra";
 import { google } from "googleapis";
 import { hashPassword } from "./passwordUtils";
+import path from "path";
 
 const SHEET_ID = "1ynBQOKwZaaUYAIdOyjeHTxNhqb9tYc_vwrD1rN5NSpk";
 const RANGE = "Usuarios!A2:C";
+
+const adminsPath = path.join(__dirname, "../data/admins.json");
+const usersPath = path.join(__dirname, "../data/Usuarios.json");
 
 const auth = new google.auth.GoogleAuth({
   keyFile: "./src/utils/google-sheets.json",
@@ -79,18 +83,23 @@ export async function syncUsers() {
       console.error(`❌ Error processing row ${i + 2}`, row, err);
     }
   }
-
+try {
   await fs.writeJson(
-    "./src/data/admins.json",
+    adminsPath,
     [...FIXED_USERS, ...usersForAuth],
     { spaces: 2 }
   );
 
   await fs.writeJson(
-    "./src/data/Usuarios.json",
+    usersPath,
     usuarios,
     { spaces: 2 }
   );
+} catch (err) {
+  console.error("❌ Error writing JSON files:", err);
+  return;
+}
+
 
   console.log(
     `✅ Synced ${usersForAuth.length} users + ${FIXED_USERS.length} fixed users`

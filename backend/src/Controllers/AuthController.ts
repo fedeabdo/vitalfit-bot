@@ -1,13 +1,22 @@
 import { Request, Response } from "express";
 import { verifyPassword } from "../utils/passwordUtils";
 import { hashPassword } from "../utils/passwordUtils";
-import admins from "../data/admins.json"; // Import the stored admin credentials
+import fs from "fs-extra"; 
+import path from "path"; 
 import jwt from 'jsonwebtoken';
+
+
+const adminsPath = path.join(__dirname, "../data/admins.json");
+
 
 export class AuthController {
   static async login(req: Request, res: Response) {
     const { username, password } = req.body;
 
+    console.log("Looking for user in", adminsPath); 
+    console.log("Admins file size:", fs.statSync(adminsPath).size);
+
+    const admins = await fs.readJson(adminsPath); 
     const admin = admins.find((a) => a.username === username);
     if (!admin) {
       res.status(401).json({ error: "Credenciales Invalidas" });
