@@ -32,6 +32,7 @@ const FIXED_USERS = [
 ];
 
 export async function syncUsers() {
+  console.log("Empezando la sincronización de usuarios desde Google Sheets...");
   const sheets = google.sheets({ version: "v4", auth });
 
   const res = await sheets.spreadsheets.values.get({
@@ -73,7 +74,7 @@ export async function syncUsers() {
         nombre: nombre.trim(),
         ci: ci.trim(),
       });
-
+      console.log(`✅ Processed row ${i + 2}:`, row);
     } catch (err) {
       console.error(`❌ Error processing row ${i + 2}`, row, err);
     }

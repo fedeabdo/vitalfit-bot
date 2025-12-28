@@ -45,7 +45,7 @@ router.delete('/horarios', authorizeRoles('admin'), HorariosController.deleteHor
 router.put('/horarios', authorizeRoles('admin'), HorariosController.updateHorario);
 
 // Reservas routes
-router.get('/reservas', authorizeRoles('admin', 'user'), ReservaController.getReservas);
+router.get('/reservas', authorizeRoles('admin', 'profesor', 'user'), ReservaController.getReservas);
 router.post('/reservas', authorizeRoles('admin', 'user'), ReservaController.addReserva);
 router.put('/reservas', authorizeRoles('admin', 'user'), ReservaController.updateReserva);
 router.delete('/reservas', authorizeRoles('admin', 'user'), ReservaController.deleteReserva);
