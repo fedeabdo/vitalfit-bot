@@ -146,7 +146,7 @@ export default function MyReservas() {
 
 
   const isJosefina =
-    name?.toLowerCase().trim() === "josefina barceló";
+    name?.toLowerCase().trim() === "josefina barcelo";
 
   const handleHeartClick = (e: React.MouseEvent) => {
     e.stopPropagation();
