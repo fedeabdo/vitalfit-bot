@@ -249,20 +249,14 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
     }
   }
 
-    static async updateReserva(req: Request<{}, {}, { hora: string; cedula: string }>, res: Response) {
-      const { hora, cedula } = req.body;
+    static async updateReserva(req: Request<{}, {}, { hora: string; usuario: string }>, res: Response) {
+      const { hora, usuario } = req.body;
   
-      if (!(await UsuariosController.usuarioExiste(cedula))) {
-          res.status(403).json({ error: `El usuario con cédula ${cedula} no existe` });
-          return;
+      if (!(await UsuariosController.usuarioExisteByName(usuario))) {
+        res.status(403).json({ error: `El usuario con nombre ${usuario} no existe` });
+        return;
       }
-  
-      const usuario = await UsuariosController.getNombreByCedula(cedula);
-      if (!usuario) {
-          res.status(500).json({ error: `No se pudo encontrar el nombre del usuario con cédula ${cedula}` });
-          return;
-      }
-  
+      
       if (!ReservaController.reservas[hora]) {
           res.status(400).json({ error: 'El horario de reserva es inválido' });
           return;
