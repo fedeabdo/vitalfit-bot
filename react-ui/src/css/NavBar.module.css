@@ -8,8 +8,8 @@
   height: 200px;
   background-image: url("/Banner.png");
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center top;
+  background-size: cover;
+  background-position: center center;
   align-items: flex-end;
   padding-bottom: 1rem;
 }
