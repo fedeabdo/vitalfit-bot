@@ -1,11 +1,11 @@
 :root {
   --primary-accent: #FF6B00;
-  --bg-dark: #020509;
-  --bg-gradient: radial-gradient(circle at center top, #070d18 0%, #020509 100%);
-  --card-bg: rgba(8, 13, 24, 0.85);
-  --border-glow: rgba(255, 107, 0, 0.25);
+  --bg-dark: #0a1220;
+  --bg-gradient: radial-gradient(circle at center top, #162035 0%, #0a1220 100%);
+  --card-bg: rgba(22, 34, 58, 0.88);
+  --border-glow: rgba(255, 107, 0, 0.3);
   --text-main: #f0f0f0;
-  --text-muted: #8B9AA5;
+  --text-muted: #a0b0be;
   --transition-athletic: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

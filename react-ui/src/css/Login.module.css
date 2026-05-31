@@ -6,7 +6,7 @@
     margin: 2rem auto;
     padding: 2.5rem 2rem;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5), 0 24px 48px -12px rgba(255, 107, 0, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.35), 0 24px 48px -12px rgba(255, 107, 0, 0.1);
     
     /* Centering in viewport */
     position: absolute;
@@ -36,7 +36,7 @@
 .formgroup input {
     width: 100%; /* Full width of container */
     padding: 0.75rem;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(22, 34, 54, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     font-size: 1rem;
@@ -68,7 +68,7 @@ button[type="submit"] {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: all var(--transition-athletic);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
 button[type="submit"]:hover {
