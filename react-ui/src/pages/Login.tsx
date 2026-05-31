@@ -21,7 +21,7 @@ export const Login = () => {
     setError('');
   
     try {
-      const response = await fetchWithAuth('http://static.130.43.161.5.clients.your-server.de:5100/api/login', {
+      const response = await fetchWithAuth('https://vitalfit.uy/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export const Login = () => {
   
       const data = await response.json();
       login(data.token);
-      navigate('/');
+      navigate('/mis-reservas');
   
     } catch (err) {
       console.log('Login error:', err);

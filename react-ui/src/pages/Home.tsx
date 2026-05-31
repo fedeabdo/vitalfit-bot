@@ -120,8 +120,8 @@ const handleConfirmResetReservas = () => {
   return (
     <div className={styles.fullPage}>
       <div className={styles.container}>
-        <Font family="Bungee Inline">
-          <h2>Reservas</h2>
+        <Font family="Lilita One">
+          <h2>RESERVAS</h2>
         </Font>
 
         <List<HoraUsuarios>
@@ -189,6 +189,7 @@ const handleConfirmResetReservas = () => {
               </ul>
             </div>
           )}
+          getHora={(reserva: HoraUsuarios) => reserva.hora}
         />
 
       </div>

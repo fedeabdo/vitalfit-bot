@@ -4,7 +4,7 @@ import path from 'path';
 import { tiempo, Dia, Reserva } from '../types';
 import { Horario } from '../types'
 import { UsuariosController } from './UsuariosController';
-import { esMasDeLas2030, esDomingoALas13 } from '../utils/timeUtils';
+import { esMasDeLas2030, esDomingoALas13, faltanMasDe4Horas } from '../utils/timeUtils';
 
 export class HorariosController {
   private static readonly DATA_PATH_HORARIOS = path.join(__dirname, '../data/HorariosPrioritarios.json');
@@ -51,9 +51,10 @@ export class HorariosController {
                     const hora = parts[1];
                     const reservas = backupReservas[hora] || [];
                     const lugaresDisponibles = 6 - reservas.length;
+                    console.log(`Hora: ${hora}, Reservas: ${reservas.length}, Lugares Disponibles: ${lugaresDisponibles} faltanMasDe4Horas: ${faltanMasDe4Horas(hora)}`);
                     return {
                         hora,
-                        disponible: reservas.length <= 5,
+                        disponible: reservas.length <= 5 || faltanMasDe4Horas(hora),
                         lugaresDisponibles: lugaresDisponibles > 0 ? lugaresDisponibles : 0
                     };
                 }

@@ -8,6 +8,7 @@ export default defineConfig({
    hmr: { 
      clientPort: 5173,
    },
+   allowedHosts: ["vitalfit.uy", "www.vitalfit.uy"],
   },   
   plugins: [react()],
   css: {

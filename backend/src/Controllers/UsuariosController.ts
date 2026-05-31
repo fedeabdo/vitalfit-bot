@@ -1,12 +1,16 @@
 import { Request, Response } from 'express';
 import fs from 'fs/promises';
 import path from 'path';
+import { pathToFileURL } from "url";
 import { Usuario } from '../types';
 import { HorariosController } from './HorariosController';
+import { syncUsers } from '../utils/syncUsersFromSheet';
+
 
 export class UsuariosController {
   // Ruta para el archivo
   private static readonly DATA_PATH = path.join(__dirname, '../data/Usuarios.json');
+
 
   // Imprimir usuarios
   static async getUsuarios(req: Request, res: Response) {
@@ -128,5 +132,15 @@ const filteredUsuarios = usuarios.filter(u => u.nombre !== nombre);
     const data = await fs.readFile(UsuariosController.DATA_PATH, 'utf-8');
     const usuarios: Usuario[] = JSON.parse(data);
     return usuarios.some(u => u.nombre === nombre);
+  }
+
+  static async syncUsers(req: Request, res: Response) {
+    try {
+      await syncUsers();
+      res.status(200).json({ message: 'Users synchronized from sheet successfully.' });
+    } catch (error) {
+      console.error("Error syncing users from sheet:", error);
+      res.status(500).json({ error: 'Failed to sync users from sheet.' });
+    }
   }
 }

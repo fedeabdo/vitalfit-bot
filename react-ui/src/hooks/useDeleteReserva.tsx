@@ -14,7 +14,7 @@ export const useDeleteReserva = () => {
     mutationFn: async ({ hora, nombre }: DeleteReservaVars) => {
       const reserva: DeleteReserva = { usuario: nombre };
     
-      const response = await fetchWithAuth("http://5.161.43.130:5100/api/reservas", {
+      const response = await fetchWithAuth("https://vitalfit.uy/api/reservas", {
         method: "DELETE",
         body: JSON.stringify(reserva),
         headers: {
@@ -34,6 +34,8 @@ export const useDeleteReserva = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['reservas'] });
+      queryClient.invalidateQueries({ queryKey: ['userReservation'] });
+      queryClient.invalidateQueries({ queryKey: ['availablePlacesToday'] });
     },
     onError: (error) => {
       console.error("❌ Mutation failed:", error);

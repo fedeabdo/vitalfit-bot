@@ -1,7 +1,7 @@
 node_modules
 .env
 *.log
-*.png
+.png
 *_sessions
 backend/.vscode/
 .dockerignore
@@ -9,3 +9,4 @@ docker-compose.yaml
 DockerFile
 key
 key.pub
+backend/src/utils/google-sheets.json

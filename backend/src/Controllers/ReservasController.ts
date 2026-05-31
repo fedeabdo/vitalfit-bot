@@ -249,20 +249,14 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
     }
   }
 
-    static async updateReserva(req: Request<{}, {}, { hora: string; cedula: string }>, res: Response) {
-      const { hora, cedula } = req.body;
+    static async updateReserva(req: Request<{}, {}, { hora: string; usuario: string }>, res: Response) {
+      const { hora, usuario } = req.body;
   
-      if (!(await UsuariosController.usuarioExiste(cedula))) {
-          res.status(403).json({ error: `El usuario con cédula ${cedula} no existe` });
-          return;
+      if (!(await UsuariosController.usuarioExisteByName(usuario))) {
+        res.status(403).json({ error: `El usuario con nombre ${usuario} no existe` });
+        return;
       }
-  
-      const usuario = await UsuariosController.getNombreByCedula(cedula);
-      if (!usuario) {
-          res.status(500).json({ error: `No se pudo encontrar el nombre del usuario con cédula ${cedula}` });
-          return;
-      }
-  
+      
       if (!ReservaController.reservas[hora]) {
           res.status(400).json({ error: 'El horario de reserva es inválido' });
           return;
@@ -518,25 +512,29 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
 
 static async buscarHoraPorCedula(req: Request, res: Response) {
     const cedula = req.params.cedula;
-    console.log("Buscando hora por cédula:", cedula);
-    if (!cedula) {
-        res.status(400).json({ error: "Debe proporcionar una cédula." });
+    const nombre = req.query.name as string;
+    if (!cedula && !nombre) {
+        res.status(400).json({ error: "Debe proporcionar una cédula o nombre." });
         return;
     }
-
-    const usuario = await UsuariosController.getNombreByCedula(cedula);
-    if (!usuario) {
+    let usuario: string | undefined = undefined;
+    if (cedula) {
+      usuario = await UsuariosController.getNombreByCedula(cedula);
+    }
+    if (!usuario && !nombre) {
       res.status(404).json({ message: `No existe un usuario registrado con la cédula ${cedula}` });
       return;
+    } else if (nombre) {
+      usuario = nombre;
     }
-
+    
     for (const [hora, reservas] of Object.entries(ReservaController.reservas)) {
         if (reservas.some(r => r.usuario === usuario)) {
           res.status(200).json({ hora });
           return;
         }
     }
-    res.status(404).json({ message: `No hay reservas registradas hoy para la cédula ${cedula}` });
+    res.status(404).json({ message: `No hay reservas registradas para ${cedula || nombre}` });
     return;
 }
 }

@@ -56,3 +56,14 @@ export interface UpdateHorarioPayload {
 export interface DeleteHorarioPayload {
   horario : tiempo;
 }
+
+export interface HorarioDisponible {
+  hora: string;
+  disponible: boolean;
+  lugaresDisponibles: number;
+}
+
+export interface HorariosHoyResponse {
+  dia: string;
+  horarios: HorarioDisponible[];
+}
