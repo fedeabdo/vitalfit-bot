@@ -282,7 +282,7 @@ export default function MyReservas() {
 
 
         <div className={styles.container}>
-          <Font family="Lilita One"  >
+          <Font family="Bebas Neue"  >
             <h2>MIS RESERVAS</h2>
           </Font>
 
