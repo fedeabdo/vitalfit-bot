@@ -5,24 +5,29 @@
 
   .container {
     max-width: 900px;
-    margin:   auto;
-    padding: 24px;
-    background-color: #8B9AA5;
-    border-radius: 12px;
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    padding: 32px;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5), 0 24px 48px -12px rgba(251, 185, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
   }
   
   .container h2 {
     display: flex;
     text-align: center;
-    margin-bottom: 1rem;
-    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
     font-weight: 900;
-    color: black;
+    letter-spacing: -0.5px;
+    color: var(--text-main);
     text-transform: uppercase;
-    border-bottom: 2px solid #FBB900;
+    border-bottom: 2px solid var(--primary-accent);
     padding-bottom: 0.5rem;
     display: inline-block; /* Allow h2 to align with the icon */
+    box-shadow: 0 4px 0 -2px var(--border-glow);
   }
 
   .header {
@@ -37,12 +42,14 @@
     flex: 1;
     text-align: center; 
 
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 900;
-    color: black;
+    letter-spacing: -0.5px;
+    color: var(--text-main);
     text-transform: uppercase;
-    border-bottom: 2px solid #FBB900; /* Add underline */
+    border-bottom: 2px solid var(--primary-accent); /* Add underline */
     padding-bottom: 0.5rem;
+    box-shadow: 0 4px 0 -2px var(--border-glow);
   }
 
   .header::after {
@@ -59,11 +66,14 @@
   .iconButton{
     background-color: transparent;
     border: none;
+    color: var(--text-muted);
+    transition: all var(--transition-athletic);
   }
 
   .iconButton:hover {
     cursor: pointer;
-    transform: scale(1.2);
+    transform: scale(1.15) translateY(-2px);
+    color: var(--primary-accent);
   }
 
   .userItem {
@@ -74,12 +84,25 @@
     align-items: center;
     cursor: pointer; 
     background-color: transparent; 
+    color: var(--text-main);
+    transition: all var(--transition-athletic);
+  }
+
+  .userItem:hover {
+    color: var(--primary-accent);
   }
   
   .iconButtonAdd{
     background-color: transparent;
     border: none;
-    font-size: 1.0rem; 
+    color: var(--text-main);
+    font-size: 1.2rem; 
     cursor: pointer;
     margin-left: 1rem; /* Add spacing between h2 and the icon */
+    transition: all var(--transition-athletic);
+  }
+
+  .iconButtonAdd:hover {
+    transform: scale(1.15) translateY(-2px);
+    color: var(--primary-accent);
   }

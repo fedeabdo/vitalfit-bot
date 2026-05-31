@@ -1,12 +1,12 @@
 .logincontainer {
-    background-color: #8B9AA5;
-    border-radius: 5px;
+    background-color: var(--card-bg);
+    border-radius: 16px;
     width: min(90%, 400px); /* Responsive width with max of 400px */
     min-height: 300px; /* Minimum height */
     margin: 2rem auto;
-    padding: 2rem;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5), 0 24px 48px -12px rgba(251, 185, 0, 0.1);
     
     /* Centering in viewport */
     position: absolute;
@@ -29,52 +29,72 @@
     display: block;
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-main);
 }
 
 .formgroup input {
     width: 100%; /* Full width of container */
     padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
     font-size: 1rem;
+    color: var(--text-main);
     box-sizing: border-box; /* Include padding in width */
+    transition: all var(--transition-athletic);
+}
+
+.formgroup input:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 3px rgba(251, 185, 0, 0.15);
 }
 
 button[type="submit"] {
     display: flex;
     align-self: center;
     justify-content: center;
-    width: 60%; /* Slightly wider */
-    min-width: 120px; /* Prevent becoming too narrow */
-    max-width: 200px; /* Prevent becoming too wide */
-    padding: 0.75rem;
-    margin: 1rem auto; /* Center button */
-    background-color: black;
-    color: white;
+    width: 100%; 
+    padding: 1rem;
+    margin: 1.5rem auto 0; /* Center button */
+    background-color: var(--primary-accent);
+    color: #000;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
-    transition: transform 0.2s ease;
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all var(--transition-athletic);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
 button[type="submit"]:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--border-glow);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
 }
 
 button[type="submit"]:disabled {
-    background-color: #6c757d;
+    background-color: rgba(255,255,255,0.1);
+    color: var(--text-muted);
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
 }
 
 .errormessage {
-    color: #dc3545 !important;
-    margin-bottom: 1rem;
+    color: #fca5a5 !important;
+    margin-bottom: 1.5rem;
     padding: 0.75rem;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    border-radius: 4px;
+    background-color: rgba(220, 38, 38, 0.2);
+    border: 1px solid rgba(220, 38, 38, 0.4);
+    border-radius: 8px;
     font-size: 0.9rem;
     opacity: 1;
     transition: opacity 0.5s ease-out;
@@ -94,7 +114,7 @@ button[type="submit"]:disabled {
 @media (max-width: 480px) {
     .logincontainer {
         width: 90%;
-        padding: 1.5rem;
+        padding: 2rem 1.5rem;
         min-height: auto;
     }
     
@@ -103,7 +123,7 @@ button[type="submit"]:disabled {
     }
     
     button[type="submit"] {
-        width: 70%;
-        padding: 0.6rem;
+        width: 100%;
+        padding: 0.8rem;
     }
 }

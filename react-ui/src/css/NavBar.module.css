@@ -1,33 +1,43 @@
 .navbar {
-    display: flex;
-    gap: 0.5rem;
-    background-color: black;
-    padding: 0 1rem;
-    border-bottom: 4px solid rgb(1, 1, 0);
-    height: 200px;
-    background-image: url("/Banner.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    align-items: flex-end;
-  }
-  
-  .navbar button {
-    flex: 1;
-    height: 20%;
-    background-color: #fbb80052;
-    background-image: linear-gradient(to right, #fbb80052 50%, #FBB900 50%);
-    background-size: 200%;
-    transition: 1ms ease-in;
-    border: none;
-    color: black;
-    font-weight: bold;
-    font-size: 1.1rem;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: 0.2s ease;
-    text-transform: uppercase;
-  }
-  
-  .navbar button:hover {
-    background-position: right;
-  }
+  display: flex;
+  gap: 1rem;
+  background-color: var(--bg-dark);
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--border-glow);
+  box-shadow: 0 8px 32px -8px rgba(251, 185, 0, 0.15);
+  height: 200px;
+  background-image: url("/Banner.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center top;
+  align-items: flex-end;
+  padding-bottom: 1rem;
+}
+
+.navbar button {
+  flex: 1;
+  height: 48px;
+  background: rgba(20, 20, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all var(--transition-athletic);
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.navbar button:hover {
+  background: var(--primary-accent);
+  color: #000;
+  border-color: var(--primary-accent);
+  transform: translateY(-2px) scale(0.98);
+  box-shadow: 0 8px 24px var(--border-glow);
+}
+
+.navbar button:active {
+  transform: translateY(0) scale(0.96);
+}
