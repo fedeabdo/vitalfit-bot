@@ -1,9 +1,9 @@
 :root {
-  --primary-accent: #FBB900;
-  --bg-dark: #0a0a0a;
-  --bg-gradient: radial-gradient(circle at center top, #16181a 0%, #0a0a0a 100%);
-  --card-bg: rgba(20, 20, 20, 0.85);
-  --border-glow: rgba(251, 185, 0, 0.25);
+  --primary-accent: #FF6B00;
+  --bg-dark: #020509;
+  --bg-gradient: radial-gradient(circle at center top, #070d18 0%, #020509 100%);
+  --card-bg: rgba(8, 13, 24, 0.85);
+  --border-glow: rgba(255, 107, 0, 0.25);
   --text-main: #f0f0f0;
   --text-muted: #8B9AA5;
   --transition-athletic: 0.3s cubic-bezier(0.16, 1, 0.3, 1);

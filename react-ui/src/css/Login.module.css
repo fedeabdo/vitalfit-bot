@@ -6,7 +6,7 @@
     margin: 2rem auto;
     padding: 2.5rem 2rem;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5), 0 24px 48px -12px rgba(251, 185, 0, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5), 0 24px 48px -12px rgba(255, 107, 0, 0.1);
     
     /* Centering in viewport */
     position: absolute;
@@ -48,7 +48,7 @@
 .formgroup input:focus {
     outline: none;
     border-color: var(--primary-accent);
-    box-shadow: 0 0 0 3px rgba(251, 185, 0, 0.15);
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
 }
 
 button[type="submit"] {

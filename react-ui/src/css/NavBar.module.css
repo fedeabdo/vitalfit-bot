@@ -4,7 +4,7 @@
   background-color: var(--bg-dark);
   padding: 0 1rem;
   border-bottom: 1px solid var(--border-glow);
-  box-shadow: 0 8px 32px -8px rgba(251, 185, 0, 0.15);
+  box-shadow: 0 8px 32px -8px rgba(255, 107, 0, 0.15);
   height: 200px;
   background-image: url("/Banner.png");
   background-repeat: no-repeat;

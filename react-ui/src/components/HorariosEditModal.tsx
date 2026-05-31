@@ -71,7 +71,7 @@ const HorariosEditModal = ({ data, onClose, onSelect }: HorariosEditModalProps) 
                   title="Haz clic para eliminar"
                   whileHover={{
                     scale: 1.05,
-                    backgroundColor: "#FBB900",
+                    backgroundColor: "#FF6B00",
                   }}
                   transition={{
                     type: "spring",

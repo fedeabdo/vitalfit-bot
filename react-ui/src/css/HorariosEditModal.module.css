@@ -67,7 +67,7 @@ h2 {
     max-width: fit-content;
     margin: 0.5rem 0;
     padding: 0.25rem 0.5rem;
-    border: solid #FBB900 1px;
+    border: solid #FF6B00 1px;
     border-radius: 3px;
     background-color: #fbb80068;
     font-size: larger;
@@ -224,7 +224,7 @@ h2 {
 }
 
 .addUserButton {
-  background-color: #FBB900;
+  background-color: #FF6B00;
   
 }
 .addUserButton:hover {
