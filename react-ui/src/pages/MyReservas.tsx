@@ -336,11 +336,14 @@ export default function MyReservas() {
                 <div
                   key={reserva.hora}
                   style={{
-                    backgroundColor: isUserReserved ? '#07ce3250' : 'transparent',
+                    backgroundColor: isUserReserved ? '#07ce3250' : 'rgba(255,255,255,0.02)',
                     padding: '8px', // keep constant to avoid jump
-                    borderRadius: '4px',
-                    border: isUserReserved ? '2px solid #254e01ff' : '2px solid transparent',
+                    borderRadius: '8px',
+                    border: isUserReserved ? '2px solid #254e01ff' : '1px solid rgba(255,255,255,0.08)',
                     width: '100%',
+                    backdropFilter: 'blur(12px)',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+                    marginBottom: '10px'
                   }}
                 >
                   {/* GRID ROW */}
