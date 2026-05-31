@@ -61,8 +61,8 @@
     gap: 0.25rem;
     padding: 0 0.5rem;
     padding-bottom: 0.75rem;
-    background-size: contain;
-    background-position: center top;
-    background-color: var(--bg-dark);
+    background-image: url("/Banner_mobile.png");
+    background-size: cover;
+    background-position: center center;
   }
 }
