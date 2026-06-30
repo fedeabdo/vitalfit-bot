@@ -298,7 +298,19 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
          return;
       }
 
+      const [reservaHora, reservaMinuto] = hora.split(":").map(Number);
+      const reservaDateTime = new Date(reservaDate);
+      reservaDateTime.setHours(reservaHora, reservaMinuto, 0, 0);
+      const diffMin = Math.floor((reservaDateTime.getTime() - now.getTime()) / 60000);
+      const MAX_NO_PRIORITARIO = ReservaController.MAX_RESERVAS_POR_HORARIO - 3;
+
       if (esPrioritario) {
+          if (diffMin <= 240 && diffMin > 0) {
+              if (reservasEnHora >= MAX_NO_PRIORITARIO) {
+                  res.status(403).json({ error: `El horario ${hora} ya está lleno (límite de lugares por cercanía de horario)` });
+                  return;
+              }
+          }
           if (reservasEnHora >= ReservaController.MAX_RESERVAS_POR_HORARIO) {
               res.status(403).json({ error: `El horario ${hora} ya está lleno` });
               return;
@@ -308,12 +320,6 @@ static esPrevioAHoraActual(tiempoStr: string): boolean {
           res.status(201).json({ message: 'Reserva actualizada (prioritario)', hora, usuario });
           return;
       }
-  
-      const [reservaHora, reservaMinuto] = hora.split(":").map(Number);
-      const reservaDateTime = new Date(reservaDate);
-      reservaDateTime.setHours(reservaHora, reservaMinuto, 0, 0);
-      const diffMin = Math.floor((reservaDateTime.getTime() - now.getTime()) / 60000);
-      const MAX_NO_PRIORITARIO = ReservaController.MAX_RESERVAS_POR_HORARIO - 3;
   
       if (reservasEnHora >= MAX_NO_PRIORITARIO) {
           res.status(403).json({ error: `El horario ${hora} ya está lleno` });
